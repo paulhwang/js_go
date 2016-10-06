@@ -95,7 +95,7 @@ function AjaxObject(root_object_val) {
     };
 
     this.ajaxRoute = function () {
-        return "/go_ajax";
+        return "/django_go/go_ajax/";
     };
 
     this.jsonContext = function () {
