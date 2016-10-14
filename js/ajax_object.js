@@ -174,6 +174,7 @@ function AjaxObject(root_object_val) {
         var ajax = this.outputQueue.deQueue();
         var header = ajax.header;
         request_val.open("GET", this.ajaxRoute(), true);
+        request_val.setRequestHeader("X-Requested-With", "XMLHttpRequest");
         request_val.setRequestHeader("Content-Type", this.jsonContext());
         request_val.setRequestHeader("command", ajax.command);
         if ((ajax.command !== "keep_alive") && 
@@ -189,7 +190,6 @@ function AjaxObject(root_object_val) {
         }
         request_val.setRequestHeader("packet_id", this.packetId());
         this.incrementPacketId();
-
         request_val.send(null);
         this.incrementOustandingRequestCount();
     };
