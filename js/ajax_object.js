@@ -172,7 +172,10 @@ function AjaxObject(root_object_val) {
         }
 
         var ajax = this.outputQueue.deQueue();
-        var header = ajax.header;
+        if (!ajax) {
+            return;
+        }
+        //var header = ajax.header;
         request_val.open("GET", this.ajaxRoute(), true);
         request_val.setRequestHeader("X-Requested-With", "XMLHttpRequest");
         request_val.setRequestHeader("Content-Type", this.jsonContext());
@@ -183,11 +186,12 @@ function AjaxObject(root_object_val) {
             (ajax.command !== "get_session_data")) {
             this.debug(false, "ajaxJob", "command=" + ajax.command);
         }
-        var i = 0;
-        while (i < header.length) {
-            request_val.setRequestHeader(header[i].type, header[i].value);
-            i += 1;
-        }
+        //var i = 0;
+       // while (i < header.length) {
+        //    request_val.setRequestHeader(header[i].type, header[i].value);
+        //    i += 1;
+        //}
+        request_val.setRequestHeader("gorequest", ajax);
         request_val.setRequestHeader("GOPACKETID", this.packetId());
         this.incrementPacketId();
         request_val.send(null);
@@ -228,15 +232,8 @@ function AjaxObject(root_object_val) {
             ajax_id: ajax_id_val,
             my_name: this.rootObject().myName(),
         });
-
         this.logit("setupLink", this.rootObject().myName());
-        var ajax = {
-            command: this.ajaxSetupLinkCommand(),
-            header: [{type: "ajax_id", value: ajax_id_val},
-                     {type: "gorequest", value: s},
-                     {type: "my_name", value: this.rootObject().myName()}]
-            };
-        this.enqueueOutput(ajax);
+        this.enqueueOutput(s);
         this.startAjaxWork();
     };
 
@@ -247,15 +244,7 @@ function AjaxObject(root_object_val) {
             my_name: this.rootObject().myName(),
             link_id: this.rootObject().linkId(),
         });
-
-        var ajax = {
-            command: this.ajaxKeepAliveCommand(),
-            header: [{type: "ajax_id", value: ajax_id_val},
-                     {type: "gorequest", value: s},
-                     {type: "my_name", value: this.rootObject().myName()},
-                     {type: "link_id", value: this.rootObject().linkId()}]
-            };
-        this.enqueueOutput(ajax);
+        this.enqueueOutput(s);
     };
 
     this.getLinkData = function (ajax_id_val) {
@@ -265,16 +254,8 @@ function AjaxObject(root_object_val) {
             my_name: this.rootObject().myName(),
             link_id: this.rootObject().linkId(),
         });
-
         this.debug(false, "getLinkData", "ajax_id=" + ajax_id_val + " LinkId=" + this.rootObject().linkId());
-        var ajax = {
-            command: this.ajaxGetLinkDataCommand(),
-            header: [{type: "ajax_id", value: ajax_id_val},
-                     {type: "gorequest", value: s},
-                     {type: "my_name", value: this.rootObject().myName()},
-                     {type: "link_id", value: this.rootObject().linkId()}],
-            };
-        this.enqueueOutput(ajax);
+        this.enqueueOutput(s);
     };
 
     this.getNameList = function (ajax_id_val) {
@@ -284,15 +265,7 @@ function AjaxObject(root_object_val) {
             my_name: this.rootObject().myName(),
             link_id: this.rootObject().linkId(),
         });
-
-        var ajax = {
-            command: this.ajaxGetNameListCommand(),
-            header: [{type: "ajax_id", value: ajax_id_val},
-                     {type: "gorequest", value: s},
-                     {type: "my_name", value: this.rootObject().myName()},
-                     {type: "link_id", value: this.rootObject().linkId()}]
-            };
-        this.enqueueOutput(ajax);
+        this.enqueueOutput(s);
     };
 
     this.setupSession = function (ajax_id_val, session_val, data_val) {
@@ -305,17 +278,7 @@ function AjaxObject(root_object_val) {
             his_name: session_val.hisName(),
             data: data_val,
         });
-
-        var ajax = {
-            command: this.ajaxSetupSessionCommand(),
-            header: [{type: "ajax_id", value: ajax_id_val},
-                     {type: "gorequest", value: s},
-                     {type: "my_name", value: this.rootObject().myName()},
-                     {type: "link_id", value: this.rootObject().linkId()},
-                     {type: "his_name", value: session_val.hisName()},
-                     {type: "data", value: data_val}],
-            };
-        this.enqueueOutput(ajax);
+        this.enqueueOutput(s);
     };
 
     this.setupSessionReply = function (ajax_id_val, session_val, data_val) {
@@ -341,17 +304,7 @@ function AjaxObject(root_object_val) {
             session_id: session_val.sessionId(),
             his_name: session_val.hisName(),
         });
-
-        var ajax = {
-            command: this.ajaxGetSessionDataCommand(),
-            header: [{type: "ajax_id", value: ajax_id_val},
-                     {type: "gorequest", value: s},
-                     {type: "my_name", value: this.rootObject().myName()},
-                     {type: "link_id", value: this.rootObject().linkId()},
-                     {type: "session_id", value: session_val.sessionId()},
-                     {type: "his_name", value: session_val.hisName()}],
-            };
-        this.enqueueOutput(ajax);
+        this.enqueueOutput(s);
     };
 
     this.putSessionData = function (ajax_id_val, session_val, data_val) {
@@ -366,20 +319,8 @@ function AjaxObject(root_object_val) {
             xmt_seq: session_val.xmtSeq(),
             data: data_val,
         });
-
-        var ajax = {
-            command: this.ajaxPutSessionDataCommand(),
-            header: [{type: "ajax_id", value: ajax_id_val},
-                     {type: "gorequest", value: s},
-                     {type: "my_name", value: this.rootObject().myName()},
-                     {type: "link_id", value: this.rootObject().linkId()},
-                     {type: "session_id", value: session_val.sessionId()},
-                     {type: "his_name", value: session_val.hisName()},
-                     {type: "xmt_seq", value: session_val.xmtSeq()},
-                     {type: "data", value: data_val}],
-            };
         session_val.incrementXmtSeq();
-        this.enqueueOutput(ajax);
+        this.enqueueOutput(s);
     };
 
     this.postRequest___ = function (msg_val, session_val) {
