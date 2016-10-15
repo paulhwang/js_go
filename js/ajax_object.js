@@ -188,7 +188,7 @@ function AjaxObject(root_object_val) {
             request_val.setRequestHeader(header[i].type, header[i].value);
             i += 1;
         }
-        request_val.setRequestHeader("packet_id", this.packetId());
+        request_val.setRequestHeader("GOPACKETID", this.packetId());
         this.incrementPacketId();
         request_val.send(null);
         this.incrementOustandingRequestCount();
@@ -223,10 +223,17 @@ function AjaxObject(root_object_val) {
     };
 
     this.setupLink = function (ajax_id_val) {
+        var s = JSON.stringify({
+            command: this.ajaxSetupLinkCommand(),
+            ajax_id: ajax_id_val,
+            my_name: this.rootObject().myName(),
+        });
+
         this.logit("setupLink", this.rootObject().myName());
         var ajax = {
             command: this.ajaxSetupLinkCommand(),
             header: [{type: "ajax_id", value: ajax_id_val},
+                     {type: "gorequest", value: s},
                      {type: "my_name", value: this.rootObject().myName()}]
             };
         this.enqueueOutput(ajax);
@@ -234,9 +241,17 @@ function AjaxObject(root_object_val) {
     };
 
     this.keepAlive = function (ajax_id_val) {
+        var s = JSON.stringify({
+            command: this.ajaxKeepAliveCommand(),
+            ajax_id: ajax_id_val,
+            my_name: this.rootObject().myName(),
+            link_id: this.rootObject().linkId(),
+        });
+
         var ajax = {
             command: this.ajaxKeepAliveCommand(),
             header: [{type: "ajax_id", value: ajax_id_val},
+                     {type: "gorequest", value: s},
                      {type: "my_name", value: this.rootObject().myName()},
                      {type: "link_id", value: this.rootObject().linkId()}]
             };
@@ -244,10 +259,18 @@ function AjaxObject(root_object_val) {
     };
 
     this.getLinkData = function (ajax_id_val) {
+        var s = JSON.stringify({
+            command: this.ajaxGetLinkDataCommand(),
+            ajax_id: ajax_id_val,
+            my_name: this.rootObject().myName(),
+            link_id: this.rootObject().linkId(),
+        });
+
         this.debug(false, "getLinkData", "ajax_id=" + ajax_id_val + " LinkId=" + this.rootObject().linkId());
         var ajax = {
             command: this.ajaxGetLinkDataCommand(),
             header: [{type: "ajax_id", value: ajax_id_val},
+                     {type: "gorequest", value: s},
                      {type: "my_name", value: this.rootObject().myName()},
                      {type: "link_id", value: this.rootObject().linkId()}],
             };
@@ -255,9 +278,17 @@ function AjaxObject(root_object_val) {
     };
 
     this.getNameList = function (ajax_id_val) {
+        var s = JSON.stringify({
+            command: this.ajaxGetNameListCommand(),
+            ajax_id: ajax_id_val,
+            my_name: this.rootObject().myName(),
+            link_id: this.rootObject().linkId(),
+        });
+
         var ajax = {
             command: this.ajaxGetNameListCommand(),
             header: [{type: "ajax_id", value: ajax_id_val},
+                     {type: "gorequest", value: s},
                      {type: "my_name", value: this.rootObject().myName()},
                      {type: "link_id", value: this.rootObject().linkId()}]
             };
@@ -266,9 +297,19 @@ function AjaxObject(root_object_val) {
 
     this.setupSession = function (ajax_id_val, session_val, data_val) {
         this.logit("setupSession", session_val.myName());
+        var s = JSON.stringify({
+            command: this.ajaxSetupSessionCommand(),
+            ajax_id: ajax_id_val,
+            my_name: this.rootObject().myName(),
+            link_id: this.rootObject().linkId(),
+            his_name: session_val.hisName(),
+            data: data_val,
+        });
+
         var ajax = {
             command: this.ajaxSetupSessionCommand(),
             header: [{type: "ajax_id", value: ajax_id_val},
+                     {type: "gorequest", value: s},
                      {type: "my_name", value: this.rootObject().myName()},
                      {type: "link_id", value: this.rootObject().linkId()},
                      {type: "his_name", value: session_val.hisName()},
@@ -292,9 +333,19 @@ function AjaxObject(root_object_val) {
 
     this.getSessionData = function (ajax_id_val, session_val) {
         this.debug(false, "getSessionData", "ajax_id=" + ajax_id_val + " sessionId=" + session_val.sessionId());
+        var s = JSON.stringify({
+            command: this.ajaxGetSessionDataCommand(),
+            ajax_id: ajax_id_val,
+            my_name: this.rootObject().myName(),
+            link_id: this.rootObject().linkId(),
+            session_id: session_val.sessionId(),
+            his_name: session_val.hisName(),
+        });
+
         var ajax = {
             command: this.ajaxGetSessionDataCommand(),
             header: [{type: "ajax_id", value: ajax_id_val},
+                     {type: "gorequest", value: s},
                      {type: "my_name", value: this.rootObject().myName()},
                      {type: "link_id", value: this.rootObject().linkId()},
                      {type: "session_id", value: session_val.sessionId()},
@@ -305,9 +356,21 @@ function AjaxObject(root_object_val) {
 
     this.putSessionData = function (ajax_id_val, session_val, data_val) {
         this.logit("putSessionData", "ajax_id=" + ajax_id_val + " data=" + data_val);
+        var s = JSON.stringify({
+            command: this.ajaxPutSessionDataCommand(),
+            ajax_id: ajax_id_val,
+            my_name: this.rootObject().myName(),
+            link_id: this.rootObject().linkId(),
+            session_id: session_val.sessionId(),
+            his_name: session_val.hisName(),
+            xmt_seq: session_val.xmtSeq(),
+            data: data_val,
+        });
+
         var ajax = {
             command: this.ajaxPutSessionDataCommand(),
             header: [{type: "ajax_id", value: ajax_id_val},
+                     {type: "gorequest", value: s},
                      {type: "my_name", value: this.rootObject().myName()},
                      {type: "link_id", value: this.rootObject().linkId()},
                      {type: "session_id", value: session_val.sessionId()},
