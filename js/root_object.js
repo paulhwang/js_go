@@ -174,7 +174,7 @@ function RootObject() {
     this.runRoot();
 }
 
-function ajaxSetupLinkCallback(json_data_val, res_data_val, root_val) {
+function ajaxSetupLinkCallback(json_data_val, root_val) {
     "use strict";
     root_val.debug(true, "ajaxSetupLinkCallback", "data=" + json_data_val);
     var data = JSON.parse(json_data_val);
@@ -184,7 +184,7 @@ function ajaxSetupLinkCallback(json_data_val, res_data_val, root_val) {
     root_val.createGoSession(null);
 }
 
-function ajaxGetLinkDataCallback(json_data_val, res_data_val, root_val) {
+function ajaxGetLinkDataCallback(json_data_val, root_val) {
     "use strict";
     root_val.debug(true, "ajaxGetLinkDataCallback", "data=" + json_data_val);
     var data = JSON.parse(json_data_val);
@@ -194,7 +194,7 @@ function ajaxGetLinkDataCallback(json_data_val, res_data_val, root_val) {
     root_val.ajaxObject().getLinkData(root_val.ajaxId());
 }
 
-function ajaxGetNameListCallback(json_data_val, res_data_val, session_val) {
+function ajaxGetNameListCallback(json_data_val, session_val) {
     "use strict";
     var root_val = session_val.rootObject();
     root_val.debug(true, "ajaxGetNameListCallback", "name_list=" + json_data_val);

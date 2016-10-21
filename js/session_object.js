@@ -223,7 +223,7 @@ function SessionObject(root_object_val) {
     this.startUpdateNameListTimer();
 }
 
-function ajaxGetSessionDataCallback (json_data_val, res_data_val, session_val) {
+function ajaxGetSessionDataCallback (json_data_val, session_val) {
     if (json_data_val) {
         session_val.debug(true, "ajaxGetSessionDataCallback", "json_data_val=" + json_data_val);
         var data = JSON.parse(json_data_val);
@@ -234,7 +234,7 @@ function ajaxGetSessionDataCallback (json_data_val, res_data_val, session_val) {
     session_val.ajaxObject().getSessionData(session_val.ajaxId(), session_val);
 }
 
-function ajaxSetupSessionCallback (json_data_val, res_data_val, session_val) {
+function ajaxSetupSessionCallback (json_data_val, session_val) {
     //session_val.logit("ajaxSetupSessionCallback", "json_data_val=" + json_data_val);
     if (!json_data_val) {
         return;
