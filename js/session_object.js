@@ -231,13 +231,13 @@ function ajaxGetSessionDataCallback (data_val, res_data_val, session_val) {
     session_val.ajaxObject().getSessionData(session_val.ajaxId(), session_val);
 }
 
-function ajaxSetupSessionCallback (data_val, res_data_val, session_val) {
-    //session_val.logit("ajaxSetupSessionCallback", "data=" + data_val);
-    if (!data_val) {
+function ajaxSetupSessionCallback (json_data_val, res_data_val, session_val) {
+    //session_val.logit("ajaxSetupSessionCallback", "json_data_val=" + json_data_val);
+    if (!json_data_val) {
         return;
     }
-    var data = JSON.parse(data_val);
-    session_val.setSessionId(Number(data.session_id));
-    session_val.logit("ajaxSetupSessionCallback", "session_id=" + session_val.sessionId() + " extra=" + data.extra_data);
+    var data = JSON.parse(json_data_val);
+    session_val.setSessionId(data.session_id);
+    session_val.debug(false, "ajaxSetupSessionCallback", "session_id=" + session_val.sessionId() + " extra=" + data.extra_data);
     session_val.startGoGame();
 }
