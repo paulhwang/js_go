@@ -223,10 +223,13 @@ function SessionObject(root_object_val) {
     this.startUpdateNameListTimer();
 }
 
-function ajaxGetSessionDataCallback (data_val, res_data_val, session_val) {
-    if (res_data_val) {
-        session_val.debug(true, "ajaxGetSessionDataCallback", "res_data=" + res_data_val);
-        session_val.receiveData(res_data_val);
+function ajaxGetSessionDataCallback (json_data_val, res_data_val, session_val) {
+    if (json_data_val) {
+        session_val.debug(true, "ajaxGetSessionDataCallback", "json_data_val=" + json_data_val);
+        var data = JSON.parse(json_data_val);
+        if (data.res_data) {
+            session_val.receiveData(data.res_data);
+        }
     }
     session_val.ajaxObject().getSessionData(session_val.ajaxId(), session_val);
 }
