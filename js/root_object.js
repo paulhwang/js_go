@@ -135,7 +135,7 @@ function RootObject() {
         var session = new SessionObject(this);
         var container = new GoContainerObject(session);
         this.ajaxObject().setupCallback(this.ajaxObject().ajaxGetNameListCommand(), this.ajaxId(), ajaxGetNameListCallback, session);
-        this.ajaxObject().getNameList(this.ajaxId(), session);
+        //this.ajaxObject().getNameList(this.ajaxId(), session);
         if (json_config_val) {
             var config = JSON.parse(json_config_val);
             container.configObject().setBoardSize(config.board_size);
@@ -186,18 +186,28 @@ function ajaxSetupLinkCallback(json_data_val, root_val) {
 
 function ajaxGetLinkDataCallback(json_data_val, root_val) {
     "use strict";
-    root_val.debug(true, "ajaxGetLinkDataCallback", "data=" + json_data_val);
+    root_val.debug(false, "ajaxGetLinkDataCallback", "data=" + json_data_val);
     var data = JSON.parse(json_data_val);
     if (data) {
-        root_val.getLinkData(data);
+        if (data.data) {
+            root_val.debug(false, "ajaxGetLinkDataCallback", "data=" + data.data);
+            root_val.getLinkData(data.data);
+        }
+        if (data.name_list) {
+            root_val.debug(false, "ajaxGetLinkDataCallback", "name_list=" + data.name_list);
+            root_val.ajaxObject().getNameList(root_val.ajaxId(), root_val);
+        }
     }
-    root_val.ajaxObject().getLinkData(root_val.ajaxId());
+    setTimeout(function(root_val) {
+        root_val.debug(false, "ajaxGetLinkDataCallback", "setTimeout");
+        root_val.ajaxObject().getLinkData(root_val.ajaxId());
+    }, 2000, root_val);
 }
 
 function ajaxGetNameListCallback(json_data_val, session_val) {
     "use strict";
+    session_val.debug(false, "ajaxGetNameListCallback", "name_list=" + json_data_val);
     var root_val = session_val.rootObject();
-    root_val.debug(true, "ajaxGetNameListCallback", "name_list=" + json_data_val);
     if (root_val.lastJsonNameList() !== json_data_val) {
         root_val.setLastJsonNameList(json_data_val);
         root_val.setNameList(JSON.parse(json_data_val));

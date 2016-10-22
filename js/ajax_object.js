@@ -168,7 +168,8 @@ function AjaxObject(root_object_val) {
         }
 
         if (this.outputQueue.size() === 0) {
-            this.keepAlive();
+            //this.keepAlive();
+            return;
         }
 
         var ajax = this.outputQueue.deQueue();
@@ -199,7 +200,7 @@ function AjaxObject(root_object_val) {
                 var json = JSON.parse(request_val.responseText);
                 if ((json.command !== "keep_alive") &&
                     (json.command !== "get_link_data") &&
-                    (json.command !== "get_name_list") &&
+                    //(json.command !== "get_name_list") &&
                     (json.command !== "get_session_data")) {
                     this0.logit("waitOnreadyStateChange", "command=" + json.command + " ajax_id=" + json.ajax_id + " data=" + json.data);
                 }
@@ -249,6 +250,7 @@ function AjaxObject(root_object_val) {
         });
         this.debug(false, "getLinkData", "ajax_id=" + ajax_id_val + " LinkId=" + this.rootObject().linkId());
         this.enqueueOutput(s);
+        this.ajaxJob(this.httpGetRequest());
     };
 
     this.getNameList = function (ajax_id_val) {
