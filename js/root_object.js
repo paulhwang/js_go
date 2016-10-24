@@ -6,6 +6,7 @@
 
 function RootObject() {
     "use strict";
+    this.linkUpdataInterval = 2000;
 
     this.objectName = function () {
         return "RootObject";
@@ -25,6 +26,14 @@ function RootObject() {
 
     this.utilObject = function () {
         return this.theUtilObject;
+    };
+
+    this.linkUpdataInterval = function () {
+        return this.linkUpdataInterval;
+    };
+
+    this.setLinkUpdataInterval = function (val) {
+        this.linkUpdataInterval = val;
     };
 
     this.languageUsed = function () {
@@ -201,7 +210,7 @@ function ajaxGetLinkDataCallback(json_data_val, root_val) {
     setTimeout(function(root_val) {
         root_val.debug(false, "ajaxGetLinkDataCallback", "setTimeout");
         root_val.ajaxObject().getLinkData(root_val.ajaxId());
-    }, 2000, root_val);
+    }, root_val.linkUpdataInterval(), root_val);
 }
 
 function ajaxGetNameListCallback(json_data_val, session_val) {
