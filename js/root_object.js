@@ -29,11 +29,11 @@ function RootObject() {
     };
 
     this.linkUpdateInterval = function () {
-        return this.linkUpdateInterval;
+        return this.theLinkUpdateInterval;
     };
 
     this.setLinkUpdateInterval = function (val) {
-        this.linkUpdateInterval = val;
+        this.theLinkUpdateInterval = val;
     };
 
     this.languageUsed = function () {
@@ -208,8 +208,8 @@ function ajaxGetLinkDataCallback(json_data_val, root_val) {
         }
         if (data.pending_sessions) {
             root_val.debug(true, "ajaxGetLinkDataCallback", "pending_sessions=" + data.pending_sessions);
-
         }
+        root_val.setLinkUpdateInterval(data.interval);
     }
     setTimeout(function(root_val) {
         root_val.debug(false, "ajaxGetLinkDataCallback", "setTimeout");
