@@ -6,7 +6,6 @@
 
 function RootObject() {
     "use strict";
-    this.linkUpdateInterval = 2000;
 
     this.objectName = function () {
         return "RootObject";
