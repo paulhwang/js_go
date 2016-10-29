@@ -195,7 +195,7 @@ function ajaxSetupLinkCallback(json_data_val, root_val) {
 
 function ajaxGetLinkDataCallback(json_data_val, root_val) {
     "use strict";
-    root_val.debug(false, "ajaxGetLinkDataCallback", "data=" + json_data_val);
+    root_val.debug(true, "ajaxGetLinkDataCallback", "data=" + json_data_val);
     var data = JSON.parse(json_data_val);
     if (data) {
         if (data.data) {
@@ -205,6 +205,10 @@ function ajaxGetLinkDataCallback(json_data_val, root_val) {
         if (data.name_list) {
             root_val.debug(false, "ajaxGetLinkDataCallback", "name_list=" + data.name_list);
             root_val.ajaxObject().getNameList(root_val.ajaxId(), root_val);
+        }
+        if (data.pending_sessions) {
+            root_val.debug(true, "ajaxGetLinkDataCallback", "pending_sessions=" + data.pending_sessions);
+
         }
     }
     setTimeout(function(root_val) {
