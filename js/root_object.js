@@ -207,6 +207,12 @@ function ajaxGetLinkDataCallback(json_data_val, root_val) {
         }
         if (data.pending_sessions) {
             root_val.debug(true, "ajaxGetLinkDataCallback", "pending_sessions=" + data.pending_sessions);
+            var i = 0;
+            while (i >= 0) {
+                var session_id = data.pending_sessions[i];
+                root_val.ajaxObject().getSessionData1(session_id, session_id);
+                i -= 1;
+            }
         }
         root_val.setLinkUpdateInterval(data.interval);
     }

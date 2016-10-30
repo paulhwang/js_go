@@ -6,7 +6,17 @@
 
 function SessionObject(root_object_val) {
     "use strict";
-    this.theRootObject = root_object_val;
+
+    this.init__ = function (root_object_val) {
+        this.theRootObject = root_object_val;
+        this.theXmtSeq = 0;
+        this.theRcvSeq = 0;
+        this.theSessionId = 0;
+        this.sessionConnected = false;
+        this.theTransmitQueue = new QueueObject(this.utilObject());
+        this.rootObject().sessionMgrObject().enQueue(this);
+        this.startUpdateNameListTimer();
+    };
 
     this.objectName = function () {
         return "SessionObject";
@@ -82,6 +92,7 @@ function SessionObject(root_object_val) {
         }
         this.theSessionId = val;
         this.ajaxObject().setupCallback("get_session_data", this.ajaxId(), ajaxGetSessionDataCallback, this);
+        this.ajaxObject().setupCallback("put_session_data", this.ajaxId(), ajaxPutSessionDataCallback, this);
     };
 
     this.setContainerObject = function (val) {
@@ -213,14 +224,17 @@ function SessionObject(root_object_val) {
         return this.utilObject().utilLogit(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.theXmtSeq = 0;
-    this.theRcvSeq = 0;
-    this.theSessionId = 0;
-    this.sessionConnected = false;
-    //this.theReceiveQueue = new QueueObject(this.utilObject());
-    this.theTransmitQueue = new QueueObject(this.utilObject());
-    this.rootObject().sessionMgrObject().enQueue(this);
-    this.startUpdateNameListTimer();
+    this.init__(root_object_val);
+}
+
+function ajaxPutSessionDataCallback (json_data_val, session_val) {
+    if (json_data_val) {
+        session_val.debug(true, "ajaxPutSessionDataCallback", "json_data_val=" + json_data_val);
+        var data = JSON.parse(json_data_val);
+        if (data.res_data) {
+            session_val.receiveData(data.res_data);
+        }
+    }
 }
 
 function ajaxGetSessionDataCallback (json_data_val, session_val) {
@@ -231,7 +245,7 @@ function ajaxGetSessionDataCallback (json_data_val, session_val) {
             session_val.receiveData(data.res_data);
         }
     }
-    session_val.ajaxObject().getSessionData(session_val.ajaxId(), session_val);
+    //session_val.ajaxObject().getSessionData(session_val.ajaxId(), session_val);
 }
 
 function ajaxSetupSessionCallback (json_data_val, session_val) {
