@@ -201,7 +201,7 @@ function SessionObject(root_object_val) {
                                 handicap: config.handicapPoint(),
                         }),
                     });
-            this0.ajaxObject().setupSession(this0.rootObject().ajaxId(), this0, data);
+            this0.ajaxObject().setupSession(this0.rootObject().ajaxId(), this0, "GO_GAME", data);
         });
     };
 
