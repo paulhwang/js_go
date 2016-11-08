@@ -264,6 +264,10 @@ function AjaxObject(root_object_val) {
     };
 
     this.setupSession = function (ajax_id_val, session_val, data_val) {
+        data_val = JSON.stringify({
+            topic: "go",
+            data: data_val,
+        });
         this.logit("setupSession", session_val.myName());
         var s = JSON.stringify({
             command: this.ajaxSetupSessionCommand(),
@@ -271,7 +275,6 @@ function AjaxObject(root_object_val) {
             my_name: this.rootObject().myName(),
             link_id: this.rootObject().linkId(),
             his_name: session_val.hisName(),
-            topic: "go",
             data: data_val,
         });
         this.enqueueOutput(s);
