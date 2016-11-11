@@ -219,16 +219,16 @@ function AjaxObject(root_object_val) {
     };
 
     this.processResponse = function (response_val) {
-        var json = JSON.parse(response_val);
-        if ((json.command !== "keep_alive") &&
-            (json.command !== "get_link_data") &&
-            //(json.command !== "get_name_list") &&
-            (json.command !== "get_session_data")) {
-            this.logit("waitOnreadyStateChange", "command=" + json.command + " ajax_id=" + json.ajax_id + " data=" + json.data);
+        var response = JSON.parse(response_val);
+        if ((response.command !== "keep_alive") &&
+            (response.command !== "get_link_data") &&
+            //(response.command !== "get_name_list") &&
+            (response.command !== "get_session_data")) {
+            this.logit("waitOnreadyStateChange", "command=" + response.command + " ajax_id=" + response.ajax_id + " data=" + response.data);
         }
-        var callback_info = this.getCallbackInfo(json.command, json.ajax_id);
+        var callback_info = this.getCallbackInfo(response.command, response.ajax_id);
         if (callback_info) {
-            callback_info.func(json.data, callback_info.param1, callback_info.param2, callback_info.param3);
+            callback_info.func(response.data, callback_info.param1, callback_info.param2, callback_info.param3);
         }
     };
 
