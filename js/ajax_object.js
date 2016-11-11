@@ -299,19 +299,6 @@ function AjaxObject(root_object_val) {
         this.enqueueOutput(ajax);
     };
 
-    this.getSessionData1 = function (ajax_id_val, session_id_val) {
-        this.debug(false, "getSessionData", "ajax_id=" + ajax_id_val + " session_id_val=" + session_id_val);
-        var s = JSON.stringify({
-            command: this.ajaxGetSessionDataCommand(),
-            ajax_id: ajax_id_val,
-            my_name: this.rootObject().myName(),
-            link_id: this.rootObject().linkId(),
-            session_id: session_id_val,
-            //his_name: session_val.hisName(),
-        });
-        this.enqueueOutput(s);
-    };
-
     this.getSessionData = function (ajax_id_val, session_val) {
         this.debug(false, "getSessionData", "ajax_id=" + ajax_id_val + " sessionId=" + session_val.sessionId());
         var s = JSON.stringify({
@@ -340,15 +327,6 @@ function AjaxObject(root_object_val) {
         session_val.incrementXmtSeq();
         this.enqueueOutput(s);
         this.ajaxJob(this.httpGetRequest());
-    };
-
-    this.postRequest___ = function (msg_val, session_val) {
-        this.httpPostRequest().open("POST", this.ajaxRoute(), true);
-        this.httpPostRequest().setRequestHeader("Content-Type", this.jsonContext());
-
-        var json_str = this.formJsonString(msg_val, session_val);
-        this.logit("postMessage", "json=" + json_str);
-        this.httpPostRequest().send(json_str);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
