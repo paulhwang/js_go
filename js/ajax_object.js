@@ -211,21 +211,25 @@ function AjaxObject(root_object_val) {
         request_val.onreadystatechange = function() {
             if ((request_val.readyState === 4) && (request_val.status === 200)) {
                 this0.debug(false, "waitOnreadyStateChange", "json_str= " + request_val.responseText);
-                var json = JSON.parse(request_val.responseText);
-                if ((json.command !== "keep_alive") &&
-                    (json.command !== "get_link_data") &&
-                    //(json.command !== "get_name_list") &&
-                    (json.command !== "get_session_data")) {
-                    this0.logit("waitOnreadyStateChange", "command=" + json.command + " ajax_id=" + json.ajax_id + " data=" + json.data);
-                }
-                var callback_info = this0.getCallbackInfo(json.command, json.ajax_id);
-                if (callback_info) {
-                    callback_info.func(json.data, callback_info.param1, callback_info.param2, callback_info.param3);
-                }
+                this0.processResponse(request_val.responseText);
                 this0.decrementOustandingRequestCount();
                 this0.ajaxJob(request_val);
             }
         };
+    };
+
+    this.processResponse = function (response_val) {
+        var json = JSON.parse(response_val);
+        if ((json.command !== "keep_alive") &&
+            (json.command !== "get_link_data") &&
+            //(json.command !== "get_name_list") &&
+            (json.command !== "get_session_data")) {
+            this.logit("waitOnreadyStateChange", "command=" + json.command + " ajax_id=" + json.ajax_id + " data=" + json.data);
+        }
+        var callback_info = this.getCallbackInfo(json.command, json.ajax_id);
+        if (callback_info) {
+            callback_info.func(json.data, callback_info.param1, callback_info.param2, callback_info.param3);
+        }
     };
 
     this.setupLink = function (ajax_id_val) {
