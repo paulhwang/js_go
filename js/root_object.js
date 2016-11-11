@@ -7,6 +7,17 @@
 function RootObject() {
     "use strict";
 
+    this.init__ = function () {
+        this.theLinkId = 0;
+        this.theLastJsonNameList = null;
+        this.theUtilObject = new UtilObject();
+        this.theAjaxObject = new AjaxObject(this);
+        this.theSessionMgrObject = new SessionMgrObject(this);
+        this.theHtmlObject = new GoHtmlObject(this);
+        this.theNameList = [];
+        this.runRoot();
+    };
+
     this.objectName = function () {
         return "RootObject";
     };
@@ -172,14 +183,7 @@ function RootObject() {
         });
     };
 
-    this.theLinkId = 0;
-    this.theLastJsonNameList = null;
-    this.theUtilObject = new UtilObject();
-    this.theAjaxObject = new AjaxObject(this);
-    this.theSessionMgrObject = new SessionMgrObject(this);
-    this.theHtmlObject = new GoHtmlObject(this);
-    this.theNameList = [];
-    this.runRoot();
+    this.init__();
 }
 
 function ajaxSetupLinkCallback(json_data_val, root_val) {
