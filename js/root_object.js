@@ -153,7 +153,7 @@ function RootObject() {
     this.createGoSession = function (json_config_val) {
         var session = new SessionObject(this);
         var container = new GoContainerObject(session);
-        this.ajaxObject().setupCallback(this.ajaxObject().ajaxGetNameListCommand(), this.ajaxId(), ajaxGetNameListCallback, session);
+        this.ajaxObject().setupCallback(this.ajaxObject().ajaxGetNameListCommand(), this.ajaxId(), ajaxGetNameListCallback, this, session);
         //this.ajaxObject().getNameList(this.ajaxId(), session);
         if (json_config_val) {
             var config = JSON.parse(json_config_val);
@@ -184,55 +184,55 @@ function RootObject() {
     };
 
     this.init__();
-}
 
-function ajaxSetupLinkCallback(json_data_val, root_val) {
+function ajaxSetupLinkCallback(json_data_val) {
     "use strict";
-    root_val.debug(true, "ajaxSetupLinkCallback", "data=" + json_data_val);
+    this.debug(true, "ajaxSetupLinkCallback", "data=" + json_data_val);
     var data = JSON.parse(json_data_val);
-    root_val.setLinkId(data.link_id);
-    root_val.ajaxObject().setupCallback(root_val.ajaxObject().ajaxGetLinkDataCommand(), root_val.ajaxId(), ajaxGetLinkDataCallback, root_val);
-    root_val.ajaxObject().getLinkData(root_val.ajaxId());
-    root_val.createGoSession(null);
-}
+    this.setLinkId(data.link_id);
+    this.ajaxObject().setupCallback(this.ajaxObject().ajaxGetLinkDataCommand(), this.ajaxId(), ajaxGetLinkDataCallback, this);
+    this.ajaxObject().getLinkData(this.ajaxId());
+    this.createGoSession(null);
+};
 
-function ajaxGetLinkDataCallback(json_data_val, root_val) {
+function ajaxGetLinkDataCallback(json_data_val) {
     "use strict";
-    root_val.debug(true, "ajaxGetLinkDataCallback", "data=" + json_data_val);
+    this.debug(true, "ajaxGetLinkDataCallback", "data=" + json_data_val);
     var data = JSON.parse(json_data_val);
     if (data) {
         if (data.data) {
-            root_val.debug(false, "ajaxGetLinkDataCallback", "data=" + data.data);
-            root_val.getLinkData(data.data);
+            this.debug(false, "ajaxGetLinkDataCallback", "data=" + data.data);
+            this.getLinkData(data.data);
         }
         if (data.name_list) {
-            root_val.debug(false, "ajaxGetLinkDataCallback", "name_list=" + data.name_list);
-            root_val.ajaxObject().getNameList(root_val.ajaxId(), root_val);
+            this.debug(false, "ajaxGetLinkDataCallback", "name_list=" + data.name_list);
+            this.ajaxObject().getNameList(this.ajaxId(), this);
         }
         if (data.pending_sessions) {
-            root_val.debug(true, "ajaxGetLinkDataCallback", "pending_sessions=" + data.pending_sessions);
+            this.debug(true, "ajaxGetLinkDataCallback", "pending_sessions=" + data.pending_sessions);
             var i = 0;
             while (i >= 0) {
                 var session_id = data.pending_sessions[i];
-                root_val.ajaxObject().getSessionData1(session_id, session_id);
+                this.ajaxObject().getSessionData1(session_id, session_id);
                 i -= 1;
             }
         }
-        root_val.setLinkUpdateInterval(data.interval);
+        this.setLinkUpdateInterval(data.interval);
     }
     setTimeout(function(root_val) {
         root_val.debug(false, "ajaxGetLinkDataCallback", "setTimeout");
         root_val.ajaxObject().getLinkData(root_val.ajaxId());
-    }, root_val.linkUpdateInterval(), root_val);
-}
+    }, this.linkUpdateInterval(), this);
+};
 
 function ajaxGetNameListCallback(json_data_val, session_val) {
     "use strict";
     session_val.debug(false, "ajaxGetNameListCallback", "name_list=" + json_data_val);
-    var root_val = session_val.rootObject();
-    if (root_val.lastJsonNameList() !== json_data_val) {
-        root_val.setLastJsonNameList(json_data_val);
-        root_val.setNameList(JSON.parse(json_data_val));
+    if (this.lastJsonNameList() !== json_data_val) {
+        this.setLastJsonNameList(json_data_val);
+        this.setNameList(JSON.parse(json_data_val));
         session_val.runSession();
     }
+};
 }
+

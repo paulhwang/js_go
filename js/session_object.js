@@ -225,36 +225,36 @@ function SessionObject(root_object_val) {
     };
 
     this.init__(root_object_val);
-}
 
-function ajaxPutSessionDataCallback (json_data_val, session_val) {
+function ajaxPutSessionDataCallback (json_data_val) {
     if (json_data_val) {
-        session_val.debug(true, "ajaxPutSessionDataCallback", "json_data_val=" + json_data_val);
+        this.debug(true, "ajaxPutSessionDataCallback", "json_data_val=" + json_data_val);
         var data = JSON.parse(json_data_val);
         if (data.res_data) {
-            session_val.receiveData(data.res_data);
+            this.receiveData(data.res_data);
         }
     }
-}
+};
 
-function ajaxGetSessionDataCallback (json_data_val, session_val) {
+function ajaxGetSessionDataCallback (json_data_val) {
     if (json_data_val) {
-        session_val.debug(true, "ajaxGetSessionDataCallback", "json_data_val=" + json_data_val);
+        this.debug(true, "ajaxGetSessionDataCallback", "json_data_val=" + json_data_val);
         var data = JSON.parse(json_data_val);
         if (data.res_data) {
-            session_val.receiveData(data.res_data);
+            this.receiveData(data.res_data);
         }
     }
-    //session_val.ajaxObject().getSessionData(session_val.ajaxId(), session_val);
-}
+};
 
-function ajaxSetupSessionCallback (json_data_val, session_val) {
-    //session_val.logit("ajaxSetupSessionCallback", "json_data_val=" + json_data_val);
+function ajaxSetupSessionCallback (json_data_val) {
+    //this.logit("ajaxSetupSessionCallback", "json_data_val=" + json_data_val);
     if (!json_data_val) {
         return;
     }
     var data = JSON.parse(json_data_val);
-    session_val.setSessionId(data.session_id);
-    session_val.debug(false, "ajaxSetupSessionCallback", "session_id=" + session_val.sessionId() + " extra=" + data.extra_data);
-    session_val.startGoGame();
+    this.setSessionId(data.session_id);
+    this.debug(false, "ajaxSetupSessionCallback", "session_id=" + this.sessionId() + " extra=" + data.extra_data);
+    this.startGoGame();
+};
 }
+

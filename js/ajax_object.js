@@ -228,7 +228,7 @@ function AjaxObject(root_object_val) {
         }
         var callback_info = this.getCallbackInfo(response.command, response.ajax_id);
         if (callback_info) {
-            callback_info.func(response.data, callback_info.object, callback_info.param1, callback_info.param2);
+            callback_info.func.bind(callback_info.object)(response.data, callback_info.param1, callback_info.param2);
         }
     };
 
