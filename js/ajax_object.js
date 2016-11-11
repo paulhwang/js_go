@@ -145,14 +145,14 @@ function AjaxObject(root_object_val) {
         return s;
     };
 
-    this.setupCallback = function (command_val, id_val, func_val, param_val1, param_val2, param_val3) {
+    this.setupCallback = function (command_val, id_val, func_val, object_val, param_val1, param_val2) {
         this.setCallbackArrayElement(this.callbackIndex(),
                                      {command: command_val,
                                       id: id_val,
                                       func: func_val,
+                                      object: object_val,
                                       param1: param_val1,
-                                      param2: param_val2,
-                                      param3: param_val3});
+                                      param2: param_val2});
         this.incrementCallbackIndex();
     };
 
@@ -228,7 +228,7 @@ function AjaxObject(root_object_val) {
         }
         var callback_info = this.getCallbackInfo(response.command, response.ajax_id);
         if (callback_info) {
-            callback_info.func(response.data, callback_info.param1, callback_info.param2, callback_info.param3);
+            callback_info.func(response.data, callback_info.object, callback_info.param1, callback_info.param2);
         }
     };
 
