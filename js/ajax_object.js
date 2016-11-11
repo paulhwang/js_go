@@ -169,8 +169,11 @@ function AjaxObject(root_object_val) {
         }
     }
 
-    this.enqueueOutput = function (ajax_val) {
-        this.outputQueue.enQueue(ajax_val);
+    this.enqueueOutput = function (data_val, do_process_val) {
+        this.outputQueue.enQueue(data_val);
+        if (do_process_val) {
+            this.ajaxJob(this.httpGetRequest());
+        }
     };
 
     this.ajaxJob = function (request_val) {
@@ -232,8 +235,7 @@ function AjaxObject(root_object_val) {
             my_name: this.rootObject().myName(),
         });
         this.logit("setupLink", this.rootObject().myName());
-        this.enqueueOutput(s);
-        this.ajaxJob(this.httpGetRequest());
+        this.enqueueOutput(s, true);
     };
 
     this.keepAlive = function (ajax_id_val) {
@@ -243,7 +245,7 @@ function AjaxObject(root_object_val) {
             my_name: this.rootObject().myName(),
             link_id: this.rootObject().linkId(),
         });
-        this.enqueueOutput(s);
+        this.enqueueOutput(s, false);
     };
 
     this.getLinkData = function (ajax_id_val) {
@@ -265,7 +267,7 @@ function AjaxObject(root_object_val) {
             my_name: this.rootObject().myName(),
             link_id: this.rootObject().linkId(),
         });
-        this.enqueueOutput(s);
+        this.enqueueOutput(s, false);
     };
 
     this.setupSession = function (ajax_id_val, session_val, topic_val, data_val) {
@@ -283,10 +285,10 @@ function AjaxObject(root_object_val) {
             his_name: session_val.hisName(),
             data: data,
         });
-        this.enqueueOutput(s);
+        this.enqueueOutput(s, false);
     };
 
-    this.setupSessionReply = function (ajax_id_val, session_val, data_val) {
+    this.setupSessionReply_____ = function (ajax_id_val, session_val, data_val) {
         this.logit("setupSessionReply", session_val.myName());
         var ajax = {
             command: this.ajaxSetupSessionReplyCommand(),
@@ -296,7 +298,7 @@ function AjaxObject(root_object_val) {
                      {type: "his_name", value: session_val.hisName()},
                      {type: "data", value: data_val}],
             };
-        this.enqueueOutput(ajax);
+        this.enqueueOutput(ajax, false);
     };
 
     this.getSessionData = function (ajax_id_val, session_val) {
@@ -309,7 +311,7 @@ function AjaxObject(root_object_val) {
             session_id: session_val.sessionId(),
             his_name: session_val.hisName(),
         });
-        this.enqueueOutput(s);
+        this.enqueueOutput(s, false);
     };
 
     this.putSessionData = function (ajax_id_val, session_val, data_val) {
@@ -325,8 +327,7 @@ function AjaxObject(root_object_val) {
             data: data_val,
         });
         session_val.incrementXmtSeq();
-        this.enqueueOutput(s);
-        this.ajaxJob(this.httpGetRequest());
+        this.enqueueOutput(s, true);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
