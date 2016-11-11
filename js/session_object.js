@@ -83,7 +83,7 @@ function SessionObject(root_object_val) {
     };
 
     this.ajaxId = function () {
-        return "" + this.sessionId();
+        return this.rootObject().ajaxId() + ":" + this.sessionId();
     };
 
     this.setSessionId = function (val) {

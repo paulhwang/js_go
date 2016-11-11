@@ -14,6 +14,7 @@ function RootObject() {
         this.theAjaxObject = new AjaxObject(this);
         this.theSessionMgrObject = new SessionMgrObject(this);
         this.theHtmlObject = new GoHtmlObject(this);
+        this.theMyName = "";
         this.theNameList = [];
         this.runRoot();
     };
@@ -75,7 +76,7 @@ function RootObject() {
     };
 
     this.ajaxId = function () {
-        return "" + this.linkId();
+        return this.myName() + ":" + this.linkId();
     };
 
     this.setLinkId = function (val) {
@@ -177,7 +178,7 @@ function RootObject() {
             this0.setLanguageUsed($(".prelude_holder select").val());
             this0.logit("runRoot", "my_name=" + this0.myName() + " language=" + this0.languageUsed());
             if (this0.myName()) {
-                this0.ajaxObject().setupCallback(this0.ajaxObject().ajaxSetupLinkCommand(), this0.myName(), ajaxSetupLinkCallback, this0);
+                this0.ajaxObject().setupCallback(this0.ajaxObject().ajaxSetupLinkCommand(), this0.ajaxId(), ajaxSetupLinkCallback, this0);
                 this0.ajaxObject().setupLink(this0.myName(), this0);
             }
         });
