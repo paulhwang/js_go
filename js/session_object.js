@@ -205,8 +205,35 @@ function SessionObject(root_object_val) {
         });
     };
 
-    this.destructor = function () {
-        window.clearInterval(this.updateNameListTimer);
+    function ajaxPutSessionDataCallback (json_data_val) {
+        if (json_data_val) {
+            this.debug(true, "ajaxPutSessionDataCallback", "json_data_val=" + json_data_val);
+            var data = JSON.parse(json_data_val);
+            if (data.res_data) {
+                this.receiveData(data.res_data);
+            }
+        }
+    };
+
+    function ajaxGetSessionDataCallback (json_data_val) {
+        if (json_data_val) {
+            this.debug(true, "ajaxGetSessionDataCallback", "json_data_val=" + json_data_val);
+            var data = JSON.parse(json_data_val);
+            if (data.res_data) {
+                this.receiveData(data.res_data);
+            }
+        }
+    };
+
+    function ajaxSetupSessionCallback (json_data_val) {
+        //this.logit("ajaxSetupSessionCallback", "json_data_val=" + json_data_val);
+        if (!json_data_val) {
+            return;
+        }
+        var data = JSON.parse(json_data_val);
+        this.setSessionId(data.session_id);
+        this.debug(false, "ajaxSetupSessionCallback", "session_id=" + this.sessionId() + " extra=" + data.extra_data);
+        this.startGoGame();
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
@@ -224,37 +251,10 @@ function SessionObject(root_object_val) {
         return this.utilObject().utilLogit(this.objectName() + "." + str1_val, str2_val);
     };
 
+    this.destructor = function () {
+        window.clearInterval(this.updateNameListTimer);
+    };
+
     this.init__(root_object_val);
-
-function ajaxPutSessionDataCallback (json_data_val) {
-    if (json_data_val) {
-        this.debug(true, "ajaxPutSessionDataCallback", "json_data_val=" + json_data_val);
-        var data = JSON.parse(json_data_val);
-        if (data.res_data) {
-            this.receiveData(data.res_data);
-        }
-    }
-};
-
-function ajaxGetSessionDataCallback (json_data_val) {
-    if (json_data_val) {
-        this.debug(true, "ajaxGetSessionDataCallback", "json_data_val=" + json_data_val);
-        var data = JSON.parse(json_data_val);
-        if (data.res_data) {
-            this.receiveData(data.res_data);
-        }
-    }
-};
-
-function ajaxSetupSessionCallback (json_data_val) {
-    //this.logit("ajaxSetupSessionCallback", "json_data_val=" + json_data_val);
-    if (!json_data_val) {
-        return;
-    }
-    var data = JSON.parse(json_data_val);
-    this.setSessionId(data.session_id);
-    this.debug(false, "ajaxSetupSessionCallback", "session_id=" + this.sessionId() + " extra=" + data.extra_data);
-    this.startGoGame();
-};
 }
 

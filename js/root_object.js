@@ -183,56 +183,53 @@ function RootObject() {
         });
     };
 
-    this.init__();
+    function ajaxSetupLinkCallback(json_data_val) {
+        this.debug(true, "ajaxSetupLinkCallback", "data=" + json_data_val);
+        var data = JSON.parse(json_data_val);
+        this.setLinkId(data.link_id);
+        this.ajaxObject().setupCallback(this.ajaxObject().ajaxGetLinkDataCommand(), this.ajaxId(), ajaxGetLinkDataCallback, this);
+        this.ajaxObject().getLinkData(this.ajaxId());
+        this.createGoSession(null);
+    };
 
-function ajaxSetupLinkCallback(json_data_val) {
-    "use strict";
-    this.debug(true, "ajaxSetupLinkCallback", "data=" + json_data_val);
-    var data = JSON.parse(json_data_val);
-    this.setLinkId(data.link_id);
-    this.ajaxObject().setupCallback(this.ajaxObject().ajaxGetLinkDataCommand(), this.ajaxId(), ajaxGetLinkDataCallback, this);
-    this.ajaxObject().getLinkData(this.ajaxId());
-    this.createGoSession(null);
-};
-
-function ajaxGetLinkDataCallback(json_data_val) {
-    "use strict";
-    this.debug(true, "ajaxGetLinkDataCallback", "data=" + json_data_val);
-    var data = JSON.parse(json_data_val);
-    if (data) {
-        if (data.data) {
-            this.debug(false, "ajaxGetLinkDataCallback", "data=" + data.data);
-            this.getLinkData(data.data);
-        }
-        if (data.name_list) {
-            this.debug(false, "ajaxGetLinkDataCallback", "name_list=" + data.name_list);
-            this.ajaxObject().getNameList(this.ajaxId(), this);
-        }
-        if (data.pending_sessions) {
-            this.debug(true, "ajaxGetLinkDataCallback", "pending_sessions=" + data.pending_sessions);
-            var i = 0;
-            while (i >= 0) {
-                var session_id = data.pending_sessions[i];
-                this.ajaxObject().getSessionData1(session_id, session_id);
-                i -= 1;
+    function ajaxGetLinkDataCallback(json_data_val) {
+        this.debug(true, "ajaxGetLinkDataCallback", "data=" + json_data_val);
+        var data = JSON.parse(json_data_val);
+        if (data) {
+            if (data.data) {
+                this.debug(false, "ajaxGetLinkDataCallback", "data=" + data.data);
+                this.getLinkData(data.data);
             }
+            if (data.name_list) {
+                this.debug(false, "ajaxGetLinkDataCallback", "name_list=" + data.name_list);
+                this.ajaxObject().getNameList(this.ajaxId(), this);
+            }
+            if (data.pending_sessions) {
+                this.debug(true, "ajaxGetLinkDataCallback", "pending_sessions=" + data.pending_sessions);
+                var i = 0;
+                while (i >= 0) {
+                    var session_id = data.pending_sessions[i];
+                    this.ajaxObject().getSessionData1(session_id, session_id);
+                    i -= 1;
+                }
+            }
+            this.setLinkUpdateInterval(data.interval);
         }
-        this.setLinkUpdateInterval(data.interval);
-    }
-    setTimeout(function(root_val) {
-        root_val.debug(false, "ajaxGetLinkDataCallback", "setTimeout");
-        root_val.ajaxObject().getLinkData(root_val.ajaxId());
-    }, this.linkUpdateInterval(), this);
-};
+        setTimeout(function(root_val) {
+            root_val.debug(false, "ajaxGetLinkDataCallback", "setTimeout");
+            root_val.ajaxObject().getLinkData(root_val.ajaxId());
+        }, this.linkUpdateInterval(), this);
+    };
 
-function ajaxGetNameListCallback(json_data_val, session_val) {
-    "use strict";
-    session_val.debug(false, "ajaxGetNameListCallback", "name_list=" + json_data_val);
-    if (this.lastJsonNameList() !== json_data_val) {
-        this.setLastJsonNameList(json_data_val);
-        this.setNameList(JSON.parse(json_data_val));
-        session_val.runSession();
-    }
-};
+    function ajaxGetNameListCallback(json_data_val, session_val) {
+        session_val.debug(false, "ajaxGetNameListCallback", "name_list=" + json_data_val);
+        if (this.lastJsonNameList() !== json_data_val) {
+            this.setLastJsonNameList(json_data_val);
+            this.setNameList(JSON.parse(json_data_val));
+            session_val.runSession();
+        }
+    };
+
+    this.init__();
 }
 
