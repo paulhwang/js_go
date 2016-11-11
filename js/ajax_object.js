@@ -15,6 +15,8 @@ function AjaxObject(root_object_val) {
         this.theCallbackArray = [];
         this.outputQueue = new QueueObject(this.utilObject());
         this.theHttpPostRequest = new XMLHttpRequest();
+        this.theHttpGetRequest = new XMLHttpRequest();
+        this.waitOnreadyStateChange(this.httpGetRequest());
     };
 
     this.objectName = function () {
@@ -223,12 +225,6 @@ function AjaxObject(root_object_val) {
         };
     };
 
-    this.startAjaxWork = function () {
-        this.theHttpGetRequest = new XMLHttpRequest();
-        this.waitOnreadyStateChange(this.httpGetRequest());
-        this.ajaxJob(this.httpGetRequest());
-    };
-
     this.setupLink = function (ajax_id_val) {
         var s = JSON.stringify({
             command: this.ajaxSetupLinkCommand(),
@@ -237,7 +233,7 @@ function AjaxObject(root_object_val) {
         });
         this.logit("setupLink", this.rootObject().myName());
         this.enqueueOutput(s);
-        this.startAjaxWork();
+        this.ajaxJob(this.httpGetRequest());
     };
 
     this.keepAlive = function (ajax_id_val) {
