@@ -6,7 +6,16 @@
 
 function AjaxObject(root_object_val) {
     "use strict";
-    this.theRootObject = root_object_val;
+
+    this.init__ = function (root_object_val) {
+        this.theRootObject = root_object_val;
+        this.thePacketId = 1;
+        this.theOustandingRequestCount = 0;
+        this.theCallbackIndex = 0;
+        this.theCallbackArray = [];
+        this.outputQueue = new QueueObject(this.utilObject());
+        this.theHttpPostRequest = new XMLHttpRequest();
+    };
 
     this.objectName = function () {
         return "AjaxObject";
@@ -361,11 +370,6 @@ function AjaxObject(root_object_val) {
         return this.utilObject().utilLogit(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.thePacketId = 1;
-    this.theOustandingRequestCount = 0;
-    this.theCallbackIndex = 0;
-    this.theCallbackArray = [];
-    this.outputQueue = new QueueObject(this.utilObject());
-    this.theHttpPostRequest = new XMLHttpRequest();
+    this.init__(root_object_val);
 }
 
