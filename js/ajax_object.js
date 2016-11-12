@@ -292,17 +292,20 @@ function AjaxObject(root_object_val) {
         this.enqueueOutput(s, false);
     };
 
-    this.setupSessionReply_____ = function (ajax_id_val, session_val, data_val) {
-        this.logit("setupSessionReply", session_val.myName());
-        var ajax = {
+    this.setupSessionReply = function (ajax_id_val, data_val) {
+        this.debug(true, "setupSessionReply", "data_val=" + data_val);
+
+        var data = JSON.parse(data_val);
+        var s = JSON.stringify({
             command: this.ajaxSetupSessionReplyCommand(),
-            header: [{type: "ajax_id", value: ajax_id_val},
-                     {type: "my_name", value: this.rootObject().myName()},
-                     {type: "link_id", value: this.rootObject().linkId()},
-                     {type: "his_name", value: session_val.hisName()},
-                     {type: "data", value: data_val}],
-            };
-        this.enqueueOutput(ajax, false);
+            ajax_id: ajax_id_val,
+            my_name: this.rootObject().myName(),
+            link_id: this.rootObject().linkId(),
+            session_id: data.session_id,
+            data: data.data,
+        });
+        this.debug(true, "setupSessionReply", "s=" + s);
+        this.enqueueOutput(s, false);
     };
 
     this.getSessionData = function (ajax_id_val, session_val) {

@@ -155,6 +155,7 @@ function RootObject() {
         var session = new SessionObject(this);
         var container = new GoContainerObject(session);
         this.ajaxObject().setupCallback(this.ajaxObject().ajaxGetNameListCommand(), this.ajaxId(), ajaxGetNameListCallback, this, session);
+        this.ajaxObject().setupCallback(this.ajaxObject().ajaxSetupSessionReplyCommand(), this.ajaxId(), ajaxSetupSessionReplyCallback, this, session);
         //this.ajaxObject().getNameList(this.ajaxId(), session);
         if (json_config_val) {
             var config = JSON.parse(json_config_val);
@@ -201,10 +202,16 @@ function RootObject() {
                 this.debug(false, "ajaxGetLinkDataCallback", "data=" + data.data);
                 this.getLinkData(data.data);
             }
+
             if (data.name_list) {
                 this.debug(false, "ajaxGetLinkDataCallback", "name_list=" + data.name_list);
                 this.ajaxObject().getNameList(this.ajaxId(), this);
             }
+
+            if (data.pending_session_setup) {
+                this.ajaxObject().setupSessionReply(this.ajaxId(), data.pending_session_setup);
+            }
+
             if (data.pending_session_data) {
                 this.debug(true, "ajaxGetLinkDataCallback", "pending_session_data=" + data.pending_session_data);
                 var i = 0;
@@ -214,6 +221,7 @@ function RootObject() {
                     i -= 1;
                 }
             }
+
             this.setLinkUpdateInterval(data.interval);
         }
         setTimeout(function(root_val) {
@@ -229,6 +237,16 @@ function RootObject() {
             this.setNameList(JSON.parse(json_data_val));
             session_val.runSession();
         }
+    };
+
+    function ajaxSetupSessionReplyCallback (json_data_val, session_val) {
+        this.debug(true, "ajaxSetupSessionReplyCallback", "json_data_val=" + json_data_val);
+        if (!json_data_val) {
+            return;
+        }
+        var data = JSON.parse(json_data_val);
+        session_val.setSessionId(data.session_id);
+        session_val.startGoGame();
     };
 
     this.init__();
