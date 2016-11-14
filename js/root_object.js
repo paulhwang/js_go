@@ -246,6 +246,7 @@ function RootObject() {
         }
         var data = JSON.parse(json_data_val);
         session_val.setSessionId(data.session_id);
+        this.sessionMgrObject().insertSessionToList(session_val);
         session_val.startGoGame();
     };
 
