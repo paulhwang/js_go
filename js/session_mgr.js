@@ -39,6 +39,34 @@ function SessionMgrObject(root_object_val) {
         return this.sessionQueue().size();
     };
 
+    this.head = function () {
+        return this.theHead;
+    }
+
+    this.setHead = function (val) {
+        this.theHead = val;
+    }
+
+    this.tail = function () {
+        return this.theTail;
+    }
+
+    this.setTail = function (val) {
+        this.theTail = val;
+    }
+
+    this.size = function () {
+        return this.theSize;
+    }
+
+    this.incrementSize = function () {
+        this.theSize += 1;
+    }
+
+    this.decrementSize = function () {
+        this.theSize -= 1;
+    }
+
     this.enQueue = function (session_val) {
         if (!session_val) {
             this.abend("enQueue", "null input");
@@ -82,6 +110,28 @@ function SessionMgrObject(root_object_val) {
             this.setTail(session_val);
         }
         this.abendIt();
+    };
+
+    this.abendIt = function () {
+        var i = 0;
+        var session = this.head();
+        while (session) {
+            session = session.next();
+            i += 1;
+        }
+        if (i !== this.size()) {
+            this.abend("abendIt", "head: size=" + this.size() + " i=" + i);
+        }
+
+        i = 0;
+        session = this.tail();
+        while (session) {
+            session = session.prev();
+            i += 1;
+        }
+        if (i !== this.size()) {
+            this.abend("abendIt", "tail: size=" + this.size() + " i=" + i);
+        }
     };
 
     this.abend = function (str1_val, str2_val) {

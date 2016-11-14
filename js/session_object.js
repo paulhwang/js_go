@@ -16,6 +16,8 @@ function SessionObject(root_object_val) {
         this.theTransmitQueue = new QueueObject(this.utilObject());
         this.rootObject().sessionMgrObject().enQueue(this);
         this.startUpdateNameListTimer();
+        this.thePrev = null;
+        this.theNext = null;
     };
 
     this.objectName = function () {
@@ -28,6 +30,10 @@ function SessionObject(root_object_val) {
 
     this.rootObject = function () {
         return this.theRootObject;
+    };
+
+    this.sessionMgrObject = function () {
+        return this.rootObject().sessionMgrObject();
     };
 
     this.containerObject = function () {
@@ -44,6 +50,22 @@ function SessionObject(root_object_val) {
 
     this.clientObject = function () {
         return this.theClientObject;
+    };
+
+    this.prev = function () {
+        return this.thePrev;
+    };
+
+    this.setPrev = function (val) {
+        this.thePrev = val;
+    };
+
+    this.next = function () {
+        return this.theNext;
+    };
+
+    this.setNext = function (val) {
+        this.theNext = val;
     };
 
     this.myName = function () {
@@ -226,12 +248,13 @@ function SessionObject(root_object_val) {
     };
 
     function ajaxSetupSessionCallback (json_data_val) {
-        //this.logit("ajaxSetupSessionCallback", "json_data_val=" + json_data_val);
+        this.debug(true, "ajaxSetupSessionCallback", "json_data_val=" + json_data_val);
         if (!json_data_val) {
             return;
         }
         var data = JSON.parse(json_data_val);
         this.setSessionId(data.session_id);
+        this.sessionMgrObject().insertSessionToList(this);
         this.debug(false, "ajaxSetupSessionCallback", "session_id=" + this.sessionId() + " extra=" + data.extra_data);
         this.startGoGame();
     };
