@@ -6,7 +6,11 @@
 
 function SessionMgrObject(root_object_val) {
     "use strict";
-    this.theRootObject = root_object_val;
+
+    this.init__ = function (root_object_val) {
+        this.theRootObject = root_object_val;
+        this.theSessionQueue = new QueueObject(this.utilObject());
+    };
 
     this.objectName = function () {
         return "SessionMgrObject";
@@ -62,6 +66,6 @@ function SessionMgrObject(root_object_val) {
         return this.utilObject().utilLogit(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.theSessionQueue = new QueueObject(this.utilObject());
+    this.init__(root_object_val);
 }
 
