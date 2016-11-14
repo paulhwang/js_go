@@ -10,6 +10,9 @@ function SessionMgrObject(root_object_val) {
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
         this.theSessionQueue = new QueueObject(this.utilObject());
+        this.theHead = null;
+        this.theTail = null;
+        this.theSize = 0;
     };
 
     this.objectName = function () {
@@ -56,6 +59,29 @@ function SessionMgrObject(root_object_val) {
             session.transmitData();
             holder = holder.next();
         }
+    };
+
+    this.insertSessionToList = function (session_val) {
+        if (!session_val) {
+            this.abend("enQueue", "null session_val");
+            return;
+        }
+
+        this.abendIt();
+
+        this.incrementSize();
+        if (!this.head()) {
+            session_val.setPrev(null);
+            session_val.setNext(null);
+            this.setHead(session_val);
+            this.setTail(session_val);
+        } else {
+            this.tail().setNext(session_val);
+            session_val.setPrev(this.tail());
+            session_val.setNext(null);
+            this.setTail(session_val);
+        }
+        this.abendIt();
     };
 
     this.abend = function (str1_val, str2_val) {
