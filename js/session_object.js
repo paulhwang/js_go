@@ -14,7 +14,6 @@ function SessionObject(root_object_val) {
         this.theSessionId = 0;
         this.sessionConnected = false;
         this.theTransmitQueue = new QueueObject(this.utilObject());
-        this.rootObject().sessionMgrObject().enQueue(this);
         this.startUpdateNameListTimer();
         this.thePrev = null;
         this.theNext = null;
