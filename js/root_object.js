@@ -32,7 +32,7 @@ function RootObject() {
         return this.theAjaxObject;
     };
 
-    this.linMgrObject = function () {
+    this.linkMgrObject = function () {
         return this.theLinkMgrObject;
     };
 

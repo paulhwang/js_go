@@ -16,6 +16,7 @@ function AjaxObject(root_object_val) {
         this.outputQueue = new QueueObject(this.utilObject());
         this.theHttpPostRequest = new XMLHttpRequest();
         this.theHttpGetRequest = new XMLHttpRequest();
+        this.initSwitchTable();
         this.waitOnreadyStateChange(this.httpGetRequest());
     };
 
@@ -29,6 +30,10 @@ function AjaxObject(root_object_val) {
 
     this.utilObject = function () {
         return this.rootObject().utilObject();
+    };
+
+    this.linkMgrObject = function () {
+        return this.rootObject().linkMgrObject();
     };
 
     this.ajaxSetupLinkCommand = function () {
@@ -226,10 +231,30 @@ function AjaxObject(root_object_val) {
             (response.command !== "get_session_data")) {
             this.logit("waitOnreadyStateChange", "command=" + response.command + " ajax_id=" + response.ajax_id + " data=" + response.data);
         }
+
+        if (response.command === "setup_link") {
+            this.setupLinkResponse(response.data);
+            //return;
+        }
+
         var callback_info = this.getCallbackInfo(response.command, response.ajax_id);
         if (callback_info) {
             callback_info.func.bind(callback_info.object)(response.data, callback_info.param1, callback_info.param2);
         }
+    };
+
+    this.initSwitchTable = function () {
+        this.switch_table = {
+            "setup_link": this.setupLinkResponse,
+            "get_link_data": this.getLinkData,
+            "put_link_data": this.putLinkData,
+            "get_name_list": this.getNameList,
+            "setup_session": this.setupSession,
+            "setup_session_reply": this.setupSessionReply,
+            "get_session_data": this.getSessionData,
+            "put_session_data": this.putSessionData,
+            "keep_alive": this.keepAlive,
+        };
     };
 
     this.setupLink = function (ajax_id_val) {
@@ -240,6 +265,12 @@ function AjaxObject(root_object_val) {
         });
         this.logit("setupLink", this.rootObject().myName());
         this.enqueueOutput(s, true);
+    };
+
+    this.setupLinkResponse = function (json_data_val) {
+        this.debug(true, "setupLinkResponse", "json_data_val=" + json_data_val);
+        var data = JSON.parse(json_data_val);
+        this.linkMgrObject().mallocAndInsertLink(data.link_id);
     };
 
     this.keepAlive = function (ajax_id_val) {

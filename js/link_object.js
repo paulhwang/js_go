@@ -4,12 +4,12 @@
  * File name: LinkObject.js
  */
 
-function LinkObject(root_object_val) {
+function LinkObject(link_mgr_object_val, link_id_val) {
     "use strict";
 
-    this.init__ = function (root_object_val) {
-        this.theRootObject = root_object_val;
-        this.theLinkId = 0;
+    this.init__ = function (link_mgr_object_val, link_id_val) {
+        this.theLinkMgrObject = link_mgr_object_val;
+        this.theLinkId = link_id_val;
         this.thePrev = null;
         this.theNext = null;
     };
@@ -18,8 +18,12 @@ function LinkObject(root_object_val) {
         return "LinkObject";
     };
 
+    this.linkMgrObject = function () {
+        return this.theLinkMgrObject;
+    };
+
     this.rootObject = function () {
-        return this.theRootObject;
+        return this.linkMgrObject().rootObject();
     };
 
     this.ajaxObject = function () {
@@ -72,6 +76,6 @@ function LinkObject(root_object_val) {
         return this.utilObject().utilLogit(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(root_object_val);
+    this.init__(link_mgr_object_val, link_id_val);
 }
 

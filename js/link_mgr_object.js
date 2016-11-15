@@ -62,6 +62,14 @@ function LinkMgrObject(root_object_val) {
         }
     };
 
+    this.mallocAndInsertLink = function (link_id_val) {
+        var link = new LinkObject(this, link_id_val);
+        if (!link) {
+            return;
+        }
+        this.insertLinkToList(link);
+    };
+
     this.insertLinkToList = function (session_val) {
         if (!session_val) {
             this.abend("enQueue", "null session_val");
