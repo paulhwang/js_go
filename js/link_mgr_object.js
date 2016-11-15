@@ -62,8 +62,8 @@ function LinkMgrObject(root_object_val) {
         }
     };
 
-    this.mallocAndInsertLink = function (link_id_val) {
-        var link = new LinkObject(this, link_id_val);
+    this.mallocAndInsertLink = function (my_name_val, link_id_val) {
+        var link = new LinkObject(this, my_name_val, link_id_val);
         if (!link) {
             return;
         }

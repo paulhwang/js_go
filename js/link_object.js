@@ -4,14 +4,16 @@
  * File name: LinkObject.js
  */
 
-function LinkObject(link_mgr_object_val, link_id_val) {
+function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
     "use strict";
 
-    this.init__ = function (link_mgr_object_val, link_id_val) {
+    this.init__ = function (link_mgr_object_val, my_name_val, link_id_val) {
         this.theLinkMgrObject = link_mgr_object_val;
+        this.theMyName = my_name_val;
         this.theLinkId = link_id_val;
         this.thePrev = null;
         this.theNext = null;
+        this.ajaxObject().getLinkData(this.ajaxId(), this.myName(), this.linkId());
     };
 
     this.objectName = function () {
@@ -46,12 +48,16 @@ function LinkObject(link_mgr_object_val, link_id_val) {
         this.theNext = val;
     };
 
+    this.myName = function () {
+        return this.theMyName;
+    };
+
     this.linkId = function () {
         return this.theLinkId;
     };
 
     this.ajaxId = function () {
-        return this.rootObject().ajaxId() + ":" + this.sessionId();
+        return this.myName() + ":" + this.linkId();
     };
 
     this.setLinkId = function (val) {
@@ -76,6 +82,6 @@ function LinkObject(link_mgr_object_val, link_id_val) {
         return this.utilObject().utilLogit(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(link_mgr_object_val, link_id_val);
+    this.init__(link_mgr_object_val, my_name_val, link_id_val);
 }
 

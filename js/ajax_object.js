@@ -270,7 +270,7 @@ function AjaxObject(root_object_val) {
     this.setupLinkResponse = function (json_data_val) {
         this.debug(true, "setupLinkResponse", "json_data_val=" + json_data_val);
         var data = JSON.parse(json_data_val);
-        this.linkMgrObject().mallocAndInsertLink(data.link_id);
+        this.linkMgrObject().mallocAndInsertLink(data.my_name, data.link_id);
     };
 
     this.keepAlive = function (ajax_id_val) {
