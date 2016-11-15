@@ -115,11 +115,11 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
         this.debug(true, "getNameListResponse", "data=" + json_data_val);
         var data = JSON.parse(json_data_val);
         if (data) {
-            //if (this.lastJsonNameList() !== data.name_list) {
-                //this.setLastJsonNameList(data.name_list);
-                //this.setNameList(data.name_list);
+            if (this.rootObject().lastJsonNameList() !== data.name_list) {
+                //this.rootObject().setLastJsonNameList(data.name_list);
+                this.rootObject().setNameList(data.name_list);
                 //session_val.runSession();
-            //}
+            }
         }
     };
 

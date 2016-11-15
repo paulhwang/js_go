@@ -208,7 +208,7 @@ function RootObject() {
         if (data) {
             if (this.lastJsonNameList() !== data.name_list) {
                 this.setLastJsonNameList(data.name_list);
-                this.setNameList(data.name_list);
+                //this.setNameList(data.name_list);
                 session_val.runSession();
             }
         }
