@@ -132,7 +132,9 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
         this.debug(true, "setupSessionResponse", "data=" + json_data_val);
         var data = JSON.parse(json_data_val);
         if (data) {
-            var session = this.sessionMgrObject().mallocSessionAndInsert();
+            var session = this.sessionMgrObject().mallocSessionAndInsert(0);
+            //var container = new GoContainerObject(session);
+            //session.startGoGame();
         }
     };
 

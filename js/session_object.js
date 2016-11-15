@@ -4,14 +4,14 @@
  * File name: SessionObject.js
  */
 
-function SessionObject(root_object_val) {
+function SessionObject(root_object_val, session_id_val) {
     "use strict";
 
-    this.init__ = function (root_object_val) {
+    this.init__ = function (root_object_val, session_id_val) {
         this.theRootObject = root_object_val;
         this.theXmtSeq = 0;
         this.theRcvSeq = 0;
-        this.theSessionId = 0;
+        this.theSessionId = session_id_val;
         this.sessionConnected = false;
         this.theTransmitQueue = new QueueObject(this.utilObject());
         this.startUpdateNameListTimer();
@@ -277,6 +277,6 @@ function SessionObject(root_object_val) {
         window.clearInterval(this.updateNameListTimer);
     };
 
-    this.init__(root_object_val);
+    this.init__(root_object_val, session_id_val);
 }
 

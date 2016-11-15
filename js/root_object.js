@@ -149,7 +149,7 @@ function RootObject() {
     };
 
     this.createGoSession = function (json_config_val) {
-        var session = new SessionObject(this);
+        var session = new SessionObject(this, 0);
         var container = new GoContainerObject(session);
         this.ajaxObject().setupCallback(this.ajaxObject().ajaxGetNameListCommand(), this.ajaxId(), ajaxGetNameListCallback, this, session);
         this.ajaxObject().setupCallback(this.ajaxObject().ajaxSetupSessionReplyCommand(), this.ajaxId(), ajaxSetupSessionReplyCallback, this, session);
@@ -208,7 +208,6 @@ function RootObject() {
         if (data) {
             if (this.lastJsonNameList() !== data.name_list) {
                 this.setLastJsonNameList(data.name_list);
-                //this.setNameList(data.name_list);
                 session_val.runSession();
             }
         }
