@@ -69,10 +69,10 @@ function LinkMgrObject(root_object_val) {
             "get_link_data": this.getLinkDataResponse,
             //"put_link_data": this.putLinkData,
             "get_name_list": this.getNameListResponse,
-            //"setup_session": this.setupSession,
-            //"setup_session_reply": this.setupSessionReply,
-            //"get_session_data": this.getSessionData,
-            //"put_session_data": this.putSessionData,
+            "setup_session": this.setupSessionResponse,
+            "setup_session_reply": this.setupSessionReplyResponse,
+            "get_session_data": this.getSessionDataResponse,
+            "put_session_data": this.putSessionDataResponse,
             //"keep_alive": this.keepAlive,
         };
     };
@@ -115,6 +115,22 @@ function LinkMgrObject(root_object_val) {
                 link.getNameListResponse(json_data_val);
             }
         }
+    };
+
+    this.setupSessionResponse = function (json_data_val) {
+        this.debug(true, "setupSessionResponse", "json_data_val=" + json_data_val);
+    };
+
+    this.setupSessionReplyResponse = function (json_data_val) {
+        this.debug(true, "setupSessionReplyResponse", "json_data_val=" + json_data_val);
+    };
+
+    this.getSessionDataResponse = function (json_data_val) {
+        this.debug(true, "getSessionDataResponse", "json_data_val=" + json_data_val);
+    };
+
+    this.putSessionDataResponse = function (json_data_val) {
+        this.debug(true, "putSessionDataResponse", "json_data_val=" + json_data_val);
     };
 
     this.mallocAndInsertLink = function (my_name_val, link_id_val) {
