@@ -195,7 +195,7 @@ function RootObject() {
         var data = JSON.parse(json_data_val);
         this.setLinkId(data.link_id);
         this.ajaxObject().setupCallback(this.ajaxObject().ajaxGetLinkDataCommand(), this.ajaxId(), ajaxGetLinkDataCallback, this);
-        this.ajaxObject().getLinkData(this.ajaxId(), this.myName(), this.linkId());
+        //this.ajaxObject().getLinkData(this.ajaxId(), this.myName(), this.linkId());
         this.createGoSession(null);
     };
 
@@ -206,11 +206,6 @@ function RootObject() {
             if (data.data) {
                 this.debug(false, "ajaxGetLinkDataCallback", "data=" + data.data);
                 this.getLinkData(data.data);
-            }
-
-            if (data.name_list) {
-                this.debug(false, "ajaxGetLinkDataCallback", "name_list=" + data.name_list);
-                this.ajaxObject().getNameList(this.ajaxId(), this);
             }
 
             if (data.pending_session_setup) {

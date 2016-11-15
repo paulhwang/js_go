@@ -28,6 +28,10 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
         return this.linkMgrObject().rootObject();
     };
 
+    this.utilObject = function () {
+        return this.rootObject().utilObject();
+    };
+
     this.ajaxObject = function () {
         return this.rootObject().ajaxObject();
     };
@@ -65,6 +69,26 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
             this.abend("setLinkId", "already exist");
         }
         this.theLinkId = val;
+    };
+
+    this.linkUpdateInterval = function () {
+        return this.theLinkUpdateInterval;
+    };
+
+    this.setLinkUpdateInterval = function (val) {
+        this.theLinkUpdateInterval = val;
+    };
+
+    this.getLinkDataResponse = function (json_data_val) {
+        this.debug(true, "getLinkDataResponse", "json_data_val=" + json_data_val);
+        var data = JSON.parse(json_data_val);
+        if (data) {
+            this.setLinkUpdateInterval(data.interval);
+            if (data.name_list) {
+                this.debug(true, "getLinkDataResponse", "name_list=" + data.name_list);
+                this.ajaxObject().getNameList(this.ajaxId(), this.rootObject());
+            }
+        }
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

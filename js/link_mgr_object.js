@@ -96,8 +96,14 @@ function LinkMgrObject(root_object_val) {
     };
 
     this.getLinkDataResponse = function (json_data_val) {
-        this.debug(true, "getLinkDataResponse", "json_data_val=" + json_data_val);
+        this.debug(false, "getLinkDataResponse", "json_data_val=" + json_data_val);
         var data = JSON.parse(json_data_val);
+        if (data) {
+            var link = this.searchLinkByLinkId(data.link_id);
+            if (link) {
+                link.getLinkDataResponse(json_data_val);
+            }
+        }
     };
 
     this.mallocAndInsertLink = function (my_name_val, link_id_val) {
@@ -156,13 +162,13 @@ function LinkMgrObject(root_object_val) {
         this.abendIt();
     };
 
-    this.searchLinkByLinkId = function (session_id_val) {
-        var session = this.head();
-        while (session) {
-            if (session.sessionId() === session_id_val) {
-                return session;
+    this.searchLinkByLinkId = function (link_id_val) {
+        var link = this.head();
+        while (link) {
+            if (link.linkId() === link_id_val) {
+                return link;
             }
-            session = session.next();
+            link = link.next();
         }
         return null;
     };
