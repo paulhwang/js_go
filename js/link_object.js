@@ -84,11 +84,17 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
         var data = JSON.parse(json_data_val);
         if (data) {
             this.setLinkUpdateInterval(data.interval);
+
             if (data.name_list) {
                 this.debug(true, "getLinkDataResponse", "name_list=" + data.name_list);
                 this.ajaxObject().getNameList(this.ajaxId(), this.rootObject());
             }
         }
+
+        setTimeout(function(root_val) {
+            root_val.debug(false, "getLinkDataResponse", "setTimeout");
+            root_val.ajaxObject().getLinkData(root_val.ajaxId(), root_val.myName(), root_val.linkId());
+        }, this.linkUpdateInterval(), this.rootObject());
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

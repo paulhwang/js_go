@@ -44,14 +44,6 @@ function RootObject() {
         return this.theUtilObject;
     };
 
-    this.linkUpdateInterval = function () {
-        return this.theLinkUpdateInterval;
-    };
-
-    this.setLinkUpdateInterval = function (val) {
-        this.theLinkUpdateInterval = val;
-    };
-
     this.languageUsed = function () {
         return this.theLanguageUsed;
     };
@@ -221,13 +213,7 @@ function RootObject() {
                     i -= 1;
                 }
             }
-
-            this.setLinkUpdateInterval(data.interval);
         }
-        setTimeout(function(root_val) {
-            root_val.debug(false, "ajaxGetLinkDataCallback", "setTimeout");
-            root_val.ajaxObject().getLinkData(root_val.ajaxId(), root_val.myName(), root_val.linkId());
-        }, this.linkUpdateInterval(), this);
     };
 
     function ajaxGetNameListCallback(json_data_val, session_val) {
