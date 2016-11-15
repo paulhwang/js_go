@@ -62,6 +62,14 @@ function SessionMgrObject(root_object_val) {
         }
     };
 
+    this.mallocSessionAndInsert = function (session_id_val) {
+        var session = new LinkObject(this, session_id_val);
+        if (!session) {
+            return;
+        }
+        this.insertSessionToList(session);
+    };
+
     this.insertSessionToList = function (session_val) {
         if (!session_val) {
             this.abend("enQueue", "null session_val");

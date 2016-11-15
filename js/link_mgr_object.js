@@ -92,7 +92,7 @@ function LinkMgrObject(root_object_val) {
     this.setupLinkResponse = function (json_data_val) {
         this.debug(true, "setupLinkResponse", "json_data_val=" + json_data_val);
         var data = JSON.parse(json_data_val);
-        this.mallocAndInsertLink(data.my_name, data.link_id);
+        this.mallocLinkAndInsert(data.my_name, data.link_id);
     };
 
     this.getLinkDataResponse = function (json_data_val) {
@@ -161,7 +161,7 @@ function LinkMgrObject(root_object_val) {
         }
     };
 
-    this.mallocAndInsertLink = function (my_name_val, link_id_val) {
+    this.mallocLinkAndInsert = function (my_name_val, link_id_val) {
         var link = new LinkObject(this, my_name_val, link_id_val);
         if (!link) {
             return;
