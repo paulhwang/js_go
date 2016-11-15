@@ -12,6 +12,7 @@ function RootObject() {
         this.theLastJsonNameList = null;
         this.theUtilObject = new UtilObject();
         this.theAjaxObject = new AjaxObject(this);
+        this.theLinkMgrObject = new LinkMgrObject(this);
         this.theSessionMgrObject = new SessionMgrObject(this);
         this.theHtmlObject = new GoHtmlObject(this);
         this.theMyName = "";
@@ -29,6 +30,10 @@ function RootObject() {
 
     this.ajaxObject = function () {
         return this.theAjaxObject;
+    };
+
+    this.linMgrObject = function () {
+        return this.theLinkMgrObject;
     };
 
     this.sessionMgrObject = function () {
