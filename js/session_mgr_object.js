@@ -65,9 +65,10 @@ function SessionMgrObject(root_object_val) {
     this.mallocSessionAndInsert = function (session_id_val) {
         var session = new LinkObject(this, session_id_val);
         if (!session) {
-            return;
+            return null;
         }
         this.insertSessionToList(session);
+        return session;
     };
 
     this.insertSessionToList = function (session_val) {
