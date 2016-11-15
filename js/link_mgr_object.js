@@ -12,6 +12,7 @@ function LinkMgrObject(root_object_val) {
         this.theHead = null;
         this.theTail = null;
         this.theSize = 0;
+        this.initSwitchTable();
     };
 
     this.objectName = function () {
@@ -60,6 +61,43 @@ function LinkMgrObject(root_object_val) {
             session.transmitData();
             session = session.next();
         }
+    };
+
+    this.initSwitchTable = function () {
+        this.switch_table = {
+            "setup_link": this.setupLinkResponse,
+            "get_link_data": this.getLinkDataResponse,
+            //"put_link_data": this.putLinkData,
+            //"get_name_list": this.getNameList,
+            //"setup_session": this.setupSession,
+            //"setup_session_reply": this.setupSessionReply,
+            //"get_session_data": this.getSessionData,
+            //"put_session_data": this.putSessionData,
+            //"keep_alive": this.keepAlive,
+        };
+    };
+
+    this.switchResponse = function (response_val) {
+        var response = JSON.parse(response_val);
+        var func = this.switch_table[response.command];
+        if (func) {
+            func.bind(this)(response.data);
+        }
+        else {
+            //this.abend("switchRequest", "bad command=" + go_request.command);
+            //return null;
+        }
+    };
+
+    this.setupLinkResponse = function (json_data_val) {
+        this.debug(true, "setupLinkResponse", "json_data_val=" + json_data_val);
+        var data = JSON.parse(json_data_val);
+        this.mallocAndInsertLink(data.my_name, data.link_id);
+    };
+
+    this.getLinkDataResponse = function (json_data_val) {
+        this.debug(true, "getLinkDataResponse", "json_data_val=" + json_data_val);
+        var data = JSON.parse(json_data_val);
     };
 
     this.mallocAndInsertLink = function (my_name_val, link_id_val) {
@@ -151,12 +189,18 @@ function LinkMgrObject(root_object_val) {
         }
     };
 
-    this.abend = function (str1_val, str2_val) {
-        return this.utilObject().utilAbend(this.objectName() + "." + str1_val, str2_val);
+    this.debug = function (debug_val, str1_val, str2_val) {
+        if (debug_val) {
+            this.logit(str1_val, "==" + str2_val);
+        }
     };
 
     this.logit = function (str1_val, str2_val) {
         return this.utilObject().utilLogit(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.abend = function (str1_val, str2_val) {
+        return this.utilObject().utilAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.init__(root_object_val);

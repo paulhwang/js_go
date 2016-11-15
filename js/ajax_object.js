@@ -16,7 +16,6 @@ function AjaxObject(root_object_val) {
         this.outputQueue = new QueueObject(this.utilObject());
         this.theHttpPostRequest = new XMLHttpRequest();
         this.theHttpGetRequest = new XMLHttpRequest();
-        this.initSwitchTable();
         this.waitOnreadyStateChange(this.httpGetRequest());
     };
 
@@ -216,24 +215,11 @@ function AjaxObject(root_object_val) {
         request_val.onreadystatechange = function() {
             if ((request_val.readyState === 4) && (request_val.status === 200)) {
                 this0.debug(false, "waitOnreadyStateChange", "json_str= " + request_val.responseText);
+                this0.linkMgrObject().switchResponse(request_val.responseText);
                 this0.processResponse(request_val.responseText);
                 this0.decrementOustandingRequestCount();
                 this0.ajaxJob(request_val);
             }
-        };
-    };
-
-    this.initSwitchTable = function () {
-        this.switch_table = {
-            "setup_link": this.setupLinkResponse,
-            //"get_link_data": this.getLinkData,
-            //"put_link_data": this.putLinkData,
-            //"get_name_list": this.getNameList,
-            //"setup_session": this.setupSession,
-            //"setup_session_reply": this.setupSessionReply,
-            //"get_session_data": this.getSessionData,
-            //"put_session_data": this.putSessionData,
-            //"keep_alive": this.keepAlive,
         };
     };
 
@@ -243,21 +229,7 @@ function AjaxObject(root_object_val) {
             (response.command !== "get_link_data") &&
             //(response.command !== "get_name_list") &&
             (response.command !== "get_session_data")) {
-            this.logit("waitOnreadyStateChange", "command=" + response.command + " ajax_id=" + response.ajax_id + " data=" + response.data);
-        }
-
-        if (response.command === "setup_link") {
-            //this.setupLinkResponse(response.data);
-            //return;
-        }
-
-        var func = this.switch_table[response.command];
-        if (func) {
-            func.bind(this)(response.data);
-        }
-        else {
-            //this.abend("switchRequest", "bad command=" + go_request.command);
-            //return null;
+            this.logit("processResponse", "command=" + response.command + " ajax_id=" + response.ajax_id + " data=" + response.data);
         }
 
         var callback_info = this.getCallbackInfo(response.command, response.ajax_id);
@@ -274,12 +246,6 @@ function AjaxObject(root_object_val) {
         });
         this.logit("setupLink", this.rootObject().myName());
         this.enqueueOutput(s, true);
-    };
-
-    this.setupLinkResponse = function (json_data_val) {
-        this.debug(true, "setupLinkResponse", "json_data_val=" + json_data_val);
-        var data = JSON.parse(json_data_val);
-        this.linkMgrObject().mallocAndInsertLink(data.my_name, data.link_id);
     };
 
     this.keepAlive = function (ajax_id_val) {
