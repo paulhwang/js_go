@@ -11,7 +11,7 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
         this.theLinkMgrObject = link_mgr_object_val;
         this.theMyName = my_name_val;
         this.theLinkId = link_id_val;
-        this.theSessionMgrObject = new SessionMgrObject(this);
+        this.theSessionMgrObject = new SessionMgrObject(this.rootObject());
         this.thePrev = null;
         this.theNext = null;
         this.ajaxObject().getLinkData(this.ajaxId(), this.myName(), this.linkId());
@@ -133,7 +133,7 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
         var data = JSON.parse(json_data_val);
         if (data) {
             var session = this.sessionMgrObject().mallocSessionAndInsert(data.session_id + 1);
-            //var container = new GoContainerObject(session);
+            var container = new GoContainerObject(session);
             //session.startGoGame();
         }
     };
