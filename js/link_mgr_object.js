@@ -119,18 +119,46 @@ function LinkMgrObject(root_object_val) {
 
     this.setupSessionResponse = function (json_data_val) {
         this.debug(true, "setupSessionResponse", "json_data_val=" + json_data_val);
+        var data = JSON.parse(json_data_val);
+        if (data) {
+            var link = this.searchLinkByLinkId(data.link_id);
+            if (link) {
+                link.setupSessionResponse(json_data_val);
+            }
+        }
     };
 
     this.setupSessionReplyResponse = function (json_data_val) {
         this.debug(true, "setupSessionReplyResponse", "json_data_val=" + json_data_val);
-    };
-
-    this.getSessionDataResponse = function (json_data_val) {
-        this.debug(true, "getSessionDataResponse", "json_data_val=" + json_data_val);
+        var data = JSON.parse(json_data_val);
+        if (data) {
+            var link = this.searchLinkByLinkId(data.link_id);
+            if (link) {
+                link.setupSessionReplyResponse(json_data_val);
+            }
+        }
     };
 
     this.putSessionDataResponse = function (json_data_val) {
         this.debug(true, "putSessionDataResponse", "json_data_val=" + json_data_val);
+        var data = JSON.parse(json_data_val);
+        if (data) {
+            var link = this.searchLinkByLinkId(data.link_id);
+            if (link) {
+                link.putSessionDataResponse(json_data_val);
+            }
+        }
+    };
+
+    this.getSessionDataResponse = function (json_data_val) {
+        this.debug(true, "getSessionDataResponse", "json_data_val=" + json_data_val);
+        var data = JSON.parse(json_data_val);
+        if (data) {
+            var link = this.searchLinkByLinkId(data.link_id);
+            if (link) {
+                link.getSessionDataResponse(json_data_val);
+            }
+        }
     };
 
     this.mallocAndInsertLink = function (my_name_val, link_id_val) {

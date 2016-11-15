@@ -128,6 +128,34 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
         }
     };
 
+    this.setupSessionResponse = function (json_data_val) {
+        this.debug(true, "setupSessionResponse", "data=" + json_data_val);
+        var data = JSON.parse(json_data_val);
+        if (data) {
+        }
+    };
+
+    this.setupSessionReplyResponse = function (json_data_val) {
+        this.debug(true, "setupSessionReplyResponse", "data=" + json_data_val);
+        var data = JSON.parse(json_data_val);
+        if (data) {
+        }
+    };
+
+    this.putSessionDataResponse = function (json_data_val) {
+        this.debug(true, "putSessionDataResponse", "data=" + json_data_val);
+        var data = JSON.parse(json_data_val);
+        if (data) {
+        }
+    };
+
+    this.getSessionDataResponse = function (json_data_val) {
+        this.debug(true, "getSessionDataResponse", "data=" + json_data_val);
+        var data = JSON.parse(json_data_val);
+        if (data) {
+        }
+    };
+
     this.debug = function (debug_val, str1_val, str2_val) {
         if (!debug_val) {
             return;
