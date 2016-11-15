@@ -63,7 +63,7 @@ function SessionMgrObject(root_object_val) {
     };
 
     this.mallocSessionAndInsert = function (session_id_val) {
-        var session = new LinkObject(this, session_id_val);
+        var session = new LinkObject(this.rootObject(), session_id_val);
         if (!session) {
             return null;
         }
