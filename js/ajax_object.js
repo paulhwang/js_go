@@ -223,6 +223,20 @@ function AjaxObject(root_object_val) {
         };
     };
 
+    this.initSwitchTable = function () {
+        this.switch_table = {
+            "setup_link": this.setupLinkResponse,
+            //"get_link_data": this.getLinkData,
+            //"put_link_data": this.putLinkData,
+            //"get_name_list": this.getNameList,
+            //"setup_session": this.setupSession,
+            //"setup_session_reply": this.setupSessionReply,
+            //"get_session_data": this.getSessionData,
+            //"put_session_data": this.putSessionData,
+            //"keep_alive": this.keepAlive,
+        };
+    };
+
     this.processResponse = function (response_val) {
         var response = JSON.parse(response_val);
         if ((response.command !== "keep_alive") &&
@@ -233,28 +247,23 @@ function AjaxObject(root_object_val) {
         }
 
         if (response.command === "setup_link") {
-            this.setupLinkResponse(response.data);
+            //this.setupLinkResponse(response.data);
             //return;
+        }
+
+        var func = this.switch_table[response.command];
+        if (func) {
+            func.bind(this)(response.data);
+        }
+        else {
+            //this.abend("switchRequest", "bad command=" + go_request.command);
+            //return null;
         }
 
         var callback_info = this.getCallbackInfo(response.command, response.ajax_id);
         if (callback_info) {
             callback_info.func.bind(callback_info.object)(response.data, callback_info.param1, callback_info.param2);
         }
-    };
-
-    this.initSwitchTable = function () {
-        this.switch_table = {
-            "setup_link": this.setupLinkResponse,
-            "get_link_data": this.getLinkData,
-            "put_link_data": this.putLinkData,
-            "get_name_list": this.getNameList,
-            "setup_session": this.setupSession,
-            "setup_session_reply": this.setupSessionReply,
-            "get_session_data": this.getSessionData,
-            "put_session_data": this.putSessionData,
-            "keep_alive": this.keepAlive,
-        };
     };
 
     this.setupLink = function (ajax_id_val) {
