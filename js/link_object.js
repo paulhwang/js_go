@@ -89,6 +89,16 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
                 this.debug(true, "getLinkDataResponse", "name_list=" + data.name_list);
                 this.ajaxObject().getNameList(this.ajaxId(), this.rootObject());
             }
+
+            if (data.pending_session_data) {
+                this.debug(true, "getLinkDataResponse", "pending_session_data=" + data.pending_session_data);
+                var i = 0;
+                while (i >= 0) {
+                    var session_id = data.pending_session_data[i];
+                    this.ajaxObject().getSessionData111111111111(session_id, session_id);
+                    i -= 1;
+                }
+            }
         }
 
         setTimeout(function(root_val) {

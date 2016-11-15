@@ -203,16 +203,6 @@ function RootObject() {
             if (data.pending_session_setup) {
                 this.ajaxObject().setupSessionReply(this.ajaxId(), data.pending_session_setup);
             }
-
-            if (data.pending_session_data) {
-                this.debug(true, "ajaxGetLinkDataCallback", "pending_session_data=" + data.pending_session_data);
-                var i = 0;
-                while (i >= 0) {
-                    var session_id = data.pending_session_data[i];
-                    this.ajaxObject().getSessionData1(session_id, session_id);
-                    i -= 1;
-                }
-            }
         }
     };
 
