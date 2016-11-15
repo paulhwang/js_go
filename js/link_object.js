@@ -112,11 +112,14 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
     };
 
     this.getNameListResponse = function (json_data_val) {
-        session_val.debug(true, "getNameListResponse", "name_list=" + json_data_val);
-        if (this.rootObject().lastJsonNameList() !== json_data_val) {
-            //this.rootObject().setLastJsonNameList(json_data_val);
-            //this.rootObject().setNameList(JSON.parse(json_data_val));
-            //session_val.runSession();
+        this.debug(true, "getNameListResponse", "data=" + json_data_val);
+        var data = JSON.parse(json_data_val);
+        if (data) {
+            //if (this.lastJsonNameList() !== data.name_list) {
+                //this.setLastJsonNameList(data.name_list);
+                //this.setNameList(data.name_list);
+                //session_val.runSession();
+            //}
         }
     };
 

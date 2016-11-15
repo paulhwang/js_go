@@ -203,11 +203,14 @@ function RootObject() {
     };
 
     function ajaxGetNameListCallback(json_data_val, session_val) {
-        session_val.debug(false, "ajaxGetNameListCallback", "name_list=" + json_data_val);
-        if (this.lastJsonNameList() !== json_data_val) {
-            this.setLastJsonNameList(json_data_val);
-            this.setNameList(JSON.parse(json_data_val));
-            session_val.runSession();
+        session_val.debug(false, "ajaxGetNameListCallback", "getLinkData=" + json_data_val);
+        var data = JSON.parse(json_data_val);
+        if (data) {
+            if (this.lastJsonNameList() !== data.name_list) {
+                this.setLastJsonNameList(data.name_list);
+                this.setNameList(data.name_list);
+                session_val.runSession();
+            }
         }
     };
 
