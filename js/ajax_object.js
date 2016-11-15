@@ -283,12 +283,12 @@ function AjaxObject(root_object_val) {
         this.enqueueOutput(s, false);
     };
 
-    this.getLinkData = function (ajax_id_val) {
+    this.getLinkData = function (ajax_id_val, my_name_val, link_id_val) {
         var s = JSON.stringify({
             command: this.ajaxGetLinkDataCommand(),
             ajax_id: ajax_id_val,
-            my_name: this.rootObject().myName(),
-            link_id: this.rootObject().linkId(),
+            my_name: my_name_val,
+            link_id: link_id_val,
         });
         this.debug(false, "getLinkData", "ajax_id=" + ajax_id_val + " LinkId=" + this.rootObject().linkId());
         this.enqueueOutput(s);

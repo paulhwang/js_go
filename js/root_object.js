@@ -195,7 +195,7 @@ function RootObject() {
         var data = JSON.parse(json_data_val);
         this.setLinkId(data.link_id);
         this.ajaxObject().setupCallback(this.ajaxObject().ajaxGetLinkDataCommand(), this.ajaxId(), ajaxGetLinkDataCallback, this);
-        this.ajaxObject().getLinkData(this.ajaxId());
+        this.ajaxObject().getLinkData(this.ajaxId(), this.myName(), this.linkId());
         this.createGoSession(null);
     };
 
@@ -231,7 +231,7 @@ function RootObject() {
         }
         setTimeout(function(root_val) {
             root_val.debug(false, "ajaxGetLinkDataCallback", "setTimeout");
-            root_val.ajaxObject().getLinkData(root_val.ajaxId());
+            root_val.ajaxObject().getLinkData(root_val.ajaxId(), root_val.myName(), root_val.linkId());
         }, this.linkUpdateInterval(), this);
     };
 
