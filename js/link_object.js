@@ -146,6 +146,9 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
         this.debug(true, "putSessionDataResponse", "data=" + json_data_val);
         var data = JSON.parse(json_data_val);
         if (data) {
+            var session = this.sessionMgrObject().searchSessionBySessionId(data.session_id);
+            if (session) {
+            }
         }
     };
 
@@ -153,6 +156,9 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
         this.debug(true, "getSessionDataResponse", "data=" + json_data_val);
         var data = JSON.parse(json_data_val);
         if (data) {
+            var session = this.sessionMgrObject().searchSessionBySessionId(data.session_id);
+            if (session) {
+            }
         }
     };
 
