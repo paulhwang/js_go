@@ -214,6 +214,7 @@ function RootObject() {
     };
 
     function ajaxSetupSessionReplyCallback (json_data_val, session_val) {
+        return;
         this.debug(true, "ajaxSetupSessionReplyCallback", "json_data_val=" + json_data_val);
         if (!json_data_val) {
             return;

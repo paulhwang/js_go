@@ -132,7 +132,7 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
         this.debug(true, "setupSessionResponse", "data=" + json_data_val);
         var data = JSON.parse(json_data_val);
         if (data) {
-            var session = this.sessionMgrObject().mallocSessionAndInsert(data.session_id + 1);
+            var session = this.sessionMgrObject().mallocSessionAndInsert(data.session_id);
             var container = new GoContainerObject(session);
             this.debug(true, "setupSessionResponse", "extra_data=" + data.extra_data);
             var extra_data = JSON.parse(data.extra_data);
@@ -144,7 +144,7 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
             container.configObject().setMyColor_(config.color);
             container.configObject().setKomiPoint(config.komi);
             container.configObject().setHandicapPoint(config.handicap);
-            //session.startGoGame();
+            session.startGoGame();
         }
     };
 
