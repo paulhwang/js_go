@@ -99,6 +99,10 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
                     i -= 1;
                 }
             }
+
+            if (data.pending_session_setup) {
+                this.ajaxObject().setupSessionReply(this.ajaxId(), data.pending_session_setup);
+            }
         }
 
         setTimeout(function(root_val) {

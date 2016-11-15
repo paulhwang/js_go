@@ -199,10 +199,6 @@ function RootObject() {
                 this.debug(false, "ajaxGetLinkDataCallback", "data=" + data.data);
                 this.getLinkData(data.data);
             }
-
-            if (data.pending_session_setup) {
-                this.ajaxObject().setupSessionReply(this.ajaxId(), data.pending_session_setup);
-            }
         }
     };
 
