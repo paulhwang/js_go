@@ -111,6 +111,15 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
         }, this.linkUpdateInterval(), this.rootObject());
     };
 
+    this.getNameListResponse = function (json_data_val) {
+        session_val.debug(true, "getNameListResponse", "name_list=" + json_data_val);
+        if (this.rootObject().lastJsonNameList() !== json_data_val) {
+            //this.rootObject().setLastJsonNameList(json_data_val);
+            //this.rootObject().setNameList(JSON.parse(json_data_val));
+            //session_val.runSession();
+        }
+    };
+
     this.debug = function (debug_val, str1_val, str2_val) {
         if (!debug_val) {
             return;

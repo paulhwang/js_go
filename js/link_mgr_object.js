@@ -68,7 +68,7 @@ function LinkMgrObject(root_object_val) {
             "setup_link": this.setupLinkResponse,
             "get_link_data": this.getLinkDataResponse,
             //"put_link_data": this.putLinkData,
-            //"get_name_list": this.getNameList,
+            "get_name_list": this.getNameListResponse,
             //"setup_session": this.setupSession,
             //"setup_session_reply": this.setupSessionReply,
             //"get_session_data": this.getSessionData,
@@ -96,12 +96,23 @@ function LinkMgrObject(root_object_val) {
     };
 
     this.getLinkDataResponse = function (json_data_val) {
-        this.debug(false, "getLinkDataResponse", "json_data_val=" + json_data_val);
+        this.debug(true, "getLinkDataResponse", "json_data_val=" + json_data_val);
         var data = JSON.parse(json_data_val);
         if (data) {
             var link = this.searchLinkByLinkId(data.link_id);
             if (link) {
                 link.getLinkDataResponse(json_data_val);
+            }
+        }
+    };
+
+    this.getNameListResponse = function (json_data_val) {
+        this.debug(true, "getNameListResponse", "json_data_val=" + json_data_val);
+        var data = JSON.parse(json_data_val);
+        if (data) {
+            var link = this.searchLinkByLinkId(data.link_id);
+            if (link) {
+                link.getNameListResponse(json_data_val);
             }
         }
     };
