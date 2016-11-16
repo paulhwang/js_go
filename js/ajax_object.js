@@ -142,7 +142,7 @@ function AjaxObject(root_object_val) {
         request_val.onreadystatechange = function() {
             if ((request_val.readyState === 4) && (request_val.status === 200)) {
                 this0.debug(false, "waitOnreadyStateChange", "json_str= " + request_val.responseText);
-                this0.linkMgrObject().switchResponse(request_val.responseText);
+                this0.linkMgrObject().switchAjaxResponseData(request_val.responseText);
                 this0.decrementOustandingRequestCount();
                 this0.ajaxJob(request_val);
             }
@@ -152,22 +152,11 @@ function AjaxObject(root_object_val) {
     this.setupLink = function (root_val) {
         var output = JSON.stringify({
             command: "setup_link",
-            ajax_id: root_val.myName(),
+            ajax_id: root_val.ajaxId(),
             my_name: root_val.myName(),
         });
         this.debug(true, "setupLink", "output=" + output);
         this.enqueueOutput(output, true);
-    };
-
-    this.keepAlive = function (ajax_id_val) {
-        var output = JSON.stringify({
-            command: "keep_alive",
-            ajax_id: ajax_id_val,
-            my_name: this.rootObject().myName(),
-            link_id: this.rootObject().linkId(),
-        });
-        this.debug(true, "keepAlive", "output=" + output);
-        this.enqueueOutput(output, false);
     };
 
     this.getLinkData = function (link_val) {

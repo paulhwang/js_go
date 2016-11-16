@@ -67,25 +67,23 @@ function LinkMgrObject(root_object_val) {
         this.switch_table = {
             "setup_link": this.setupLinkResponse,
             "get_link_data": this.getLinkDataResponse,
-            //"put_link_data": this.putLinkData,
             "get_name_list": this.getNameListResponse,
             "setup_session": this.setupSessionResponse,
             "setup_session_reply": this.setupSessionReplyResponse,
             "get_session_data": this.getSessionDataResponse,
             "put_session_data": this.putSessionDataResponse,
-            //"keep_alive": this.keepAlive,
         };
     };
 
-    this.switchResponse = function (response_val) {
+    this.switchAjaxResponseData = function (response_val) {
         var response = JSON.parse(response_val);
         var func = this.switch_table[response.command];
         if (func) {
             func.bind(this)(response.data);
         }
         else {
-            //this.abend("switchRequest", "bad command=" + go_request.command);
-            //return null;
+            this.abend("switchAjaxResponseData", "bad command=" + response.command);
+            return;
         }
     };
 
