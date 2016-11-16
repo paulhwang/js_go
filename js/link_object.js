@@ -190,7 +190,7 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
                                 handicap: 0,
                         }),
                     });
-            this.ajaxObject().setupSession(this.rootObject().ajaxId(), this, "GO_GAME", data);
+            this.ajaxObject().setupSession(this, "GO_GAME", data);
         //});
     };
 
