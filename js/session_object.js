@@ -118,8 +118,6 @@ function SessionObject(session_mgr_val, session_id_val) {
             this.abend("setSessionId", "already exist");
         }
         this.theSessionId = val;
-        this.ajaxObject().setupCallback("get_session_data", this.ajaxId(), ajaxGetSessionDataCallback, this);
-        this.ajaxObject().setupCallback("put_session_data", this.ajaxId(), ajaxPutSessionDataCallback, this);
     };
 
     this.setContainerObject = function (val) {
