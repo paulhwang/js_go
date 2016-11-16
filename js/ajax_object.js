@@ -151,46 +151,41 @@ function AjaxObject(root_object_val) {
 
     this.setupLink = function (root_val) {
         var output = JSON.stringify({
-            command: "setup_link",
-            my_name: root_val.myName(),
-        });
+                        command: "setup_link",
+                        my_name: root_val.myName(),
+                        });
         this.debug(true, "setupLink", "output=" + output);
         this.enqueueOutput(output, true);
     };
 
     this.getLinkData = function (link_val) {
         var output = JSON.stringify({
-            command: "get_link_data",
-            my_name: link_val.myName(),
-            link_id: link_val.linkId(),
-        });
+                        command: "get_link_data",
+                        my_name: link_val.myName(),
+                        link_id: link_val.linkId(),
+                        });
         this.debug(false, "getLinkData", "output=" + output);
         this.enqueueOutput(output, true);
     };
 
     this.getNameList = function (link_val) {
         var output = JSON.stringify({
-            command: "get_name_list",
-            my_name: link_val.myName(),
-            link_id: link_val.linkId(),
-        });
+                        command: "get_name_list",
+                        my_name: link_val.myName(),
+                        link_id: link_val.linkId(),
+                        });
         this.debug(true, "getNameList", "output=" + output);
         this.enqueueOutput(output, false);
     };
 
-    this.setupSession = function (link_val, topic_val, data_val) {
-        var data = JSON.stringify({
-            topic: topic_val,
-            data: data_val,
-        });
-
+    this.setupSession = function (link_val, topic_data_val) {
         var output = JSON.stringify({
-            command: "setup_session",
-            my_name: link_val.myName(),
-            link_id: link_val.linkId(),
-            his_name: link_val.myName(),///////////////////////////////////////////session_val.hisName(),
-            topic_data: data,
-        });
+                        command: "setup_session",
+                        my_name: link_val.myName(),
+                        link_id: link_val.linkId(),
+                        his_name: link_val.myName(),///////////////////////////////////////////session_val.hisName(),
+                        topic_data: topic_data_val,
+                        });
         this.debug(true, "setupSession", "output=" + output);
         this.enqueueOutput(output, false);
     };
@@ -200,36 +195,36 @@ function AjaxObject(root_object_val) {
 
         var data = JSON.parse(data_val);
         var output = JSON.stringify({
-            command: "setup_session_reply",
-            my_name: this.rootObject().myName(),
-            link_id: this.rootObject().linkId(),
-            session_id: data.session_id,
-            data: data.data,
-        });
+                        command: "setup_session_reply",
+                        my_name: this.rootObject().myName(),
+                        link_id: this.rootObject().linkId(),
+                        session_id: data.session_id,
+                        data: data.data,
+                        });
         this.debug(true, "setupSessionReply", "output=" + output);
         this.enqueueOutput(output, false);
     };
 
     this.getSessionData = function (session_val) {
         var output = JSON.stringify({
-            command: "get_session_data",
-            link_id: session_val.linkObject().linkId(),
-            session_id: session_val.sessionId(),
-        });
+                        command: "get_session_data",
+                        link_id: session_val.linkObject().linkId(),
+                        session_id: session_val.sessionId(),
+                        });
         this.debug(true, "getSessionData", "output=" + output);
         this.enqueueOutput(output, false);
     };
 
     this.putSessionData = function (session_val, data_val) {
         var output = JSON.stringify({
-            command: "put_session_data",
-            my_name: session_val.linkObject().myName(),
-            link_id: session_val.linkObject().linkId(),
-            session_id: session_val.sessionId(),
-            his_name: session_val.hisName(),
-            xmt_seq: session_val.xmtSeq(),
-            data: data_val,
-        });
+                        command: "put_session_data",
+                        my_name: session_val.linkObject().myName(),
+                        link_id: session_val.linkObject().linkId(),
+                        session_id: session_val.sessionId(),
+                        his_name: session_val.hisName(),
+                        xmt_seq: session_val.xmtSeq(),
+                        data: data_val,
+                        });
         session_val.incrementXmtSeq();
         this.debug(true, "putSessionData", "output=" + output);
         this.enqueueOutput(output, true);
