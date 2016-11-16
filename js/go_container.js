@@ -7,7 +7,7 @@
 function GoContainerObject(session_object_val) {
     "use strict";
     this.theSessionObject = session_object_val;
-    this.theSessionObject.setContainerObject(this);
+    this.theSessionObject.setTopicObject(this);
 
     this.objectName = function () {
         return "GoContainerObject";

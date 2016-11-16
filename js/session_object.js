@@ -38,12 +38,16 @@ function SessionObject(session_mgr_val, session_id_val) {
         return this.rootObject().utilObject();
     };
 
-    this.containerObject = function () {
-        return this.theContainerObject;
-    };
-
     this.ajaxObject = function () {
         return this.rootObject().ajaxObject();
+    };
+
+    this.topicObject = function () {
+        return this.theTopicObject;
+    };
+
+    this.setTopicObject = function (val) {
+        this.theTopicObject = val;
     };
 
     this.clientReceiveCallbackFunc = function() {
@@ -121,10 +125,6 @@ function SessionObject(session_mgr_val, session_id_val) {
         this.theSessionId = val;
     };
 
-    this.setContainerObject = function (val) {
-        this.theContainerObject = val;
-    };
-
     this.transmitQueue = function () {
         return this.theTransmitQueue;
     };
@@ -182,13 +182,13 @@ function SessionObject(session_mgr_val, session_id_val) {
         topic.configObject().setHandicapPoint(config.handicap);
         this.setHisName("a");/////////////////////////////////////////////////////////////
 
-        this.containerObject().launchTopic();
+        this.topicObject().launchTopic();
         this.ajaxObject().getSessionData(this);
     };
 
     this.runSession_______________________________ = function () {
         var this0 = this;
-        var container = this.containerObject();
+        var container = this.topicObject();
         this.rootObject().htmlObject().createSessionHolders(this);
 
         $(".peer_game_paragraph button").on("click", function() {
