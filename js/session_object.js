@@ -161,12 +161,12 @@ function SessionObject(session_mgr_val, session_id_val) {
     };
 
     this.transmitData = function () {
-        this.debug(true, "transmitData", "size=" + this.transmitQueue().size());
+        this.debug(false, "transmitData", "size=" + this.transmitQueue().size());
         while (this.transmitQueue().size() > 0) {
             var data = this.transmitQueue().deQueue();
             if (data) {
-                this.debug(true, "transmitData", "data=" + data);
-                this.ajaxObject().putSessionData (this.ajaxId(), this, data);
+                this.debug(false, "transmitData", "data=" + data);
+                this.ajaxObject().putSessionData(this, data);
             }
             else {
                 this.abend("transmitData", "null data");

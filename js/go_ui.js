@@ -185,7 +185,7 @@ function GoUiObject(container_val) {
             return;
         }
 
-        this.debug(true, "uiClick", this.canvasId() + "(" + x + "," + y + ")");
+        this.debug(false, "uiClick", this.canvasId() + "(" + x + "," + y + ")");
         if (!this.gameObject().isMyTurn()) {
             this.debug(true, "uiClick", "not my turn");
             return;

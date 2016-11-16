@@ -176,7 +176,7 @@ function GoGameObject(container_val, str_val) {
     };
 
     this.enterGameFromUi = function (x_val, y_val) {
-        this.goLog("GoGameObject.enterGameFromUi", "(" + x_val + "," + y_val + ")");
+        this.debug(false, "enterGameFromUi", "(" + x_val + "," + y_val + ")");
 
         if (this.gameIsOver()) {
             var move = new GoMoveObject(null, x_val, y_val, GO.THE_MARK_DEAD_STONE_DIFF, this.totalMoves(), this.containerObject());
@@ -401,12 +401,18 @@ function GoGameObject(container_val, str_val) {
         return this.containerObject().goLog("GoGameObject." + str1_val, str2_val);
     };
 
-    this.abend = function (str1_val, str2_val) {
-        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
+    this.debug = function (debug_val, str1_val, str2_val) {
+        if (debug_val) {
+            this.logit(str1_val, str2_val);
+        }
     };
 
     this.logit = function (str1_val, str2_val) {
         return this.containerObject().goLog(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.abend = function (str1_val, str2_val) {
+        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.saveLastGame = function () {

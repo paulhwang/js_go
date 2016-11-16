@@ -65,15 +65,14 @@ function GoPortObject(container_val) {
     };
 
     this.transmitMoveData = function (move_val) {
-        //this.logit("transmitMoveData", "(" + move_val.xX_() + "," + move_val.yY_() + ") color=" +  move_val.myColor_() + " turn=" +  move_val.turnIndex_());
         var data = this.GO_PROTOCOL_CODE_MOVE_DATA + move_val.encodeMove();
-        this.debug(true, "transmitMoveData", "data=" + data);
+        this.debug(false, "transmitMoveData", "data=" + data);
         this.transmitStringData(data);
     };
 
     this.transmitSpecialMoveData = function (special_val) {
-        //this.goLog("transmitSpecialMoveData", special_val);
         var data = this.GO_PROTOCOL_CODE_SPECIAL_MOVE + special_val;
+        this.debug(false, "transmitSpecialMoveData", "data=" + data);
         this.transmitStringData(data);
     };
 

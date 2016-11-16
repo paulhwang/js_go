@@ -55,7 +55,6 @@ function SessionMgrObject(link_object_val) {
     }
 
     this.transmitData = function () {
-        this.debug(true, "transmitData", "size=" + this.size());
         var session = this.head();
         while (session) {
             session.transmitData();
