@@ -100,19 +100,6 @@ function AjaxObject(root_object_val) {
         this.thePacketId += 1;
     };
 
-    this.formJsonString = function (msg_val, session_val) {
-        var s = JSON.stringify({
-            his_name: session_val.hisName(),
-            my_name: session_val.myName(),
-            data: msg_val,
-            xmt_seq: session_val.xmtSeq(),
-            link_id: this.rootObject().linkId(),
-            session_id: session_val.sessionId(),
-        });
-        session_val.incrementXmtSeq();
-        return s;
-    };
-
     this.enqueueOutput = function (data_val, do_process_val) {
         this.outputQueue.enQueue(data_val);
         if (do_process_val) {
