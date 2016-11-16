@@ -215,7 +215,7 @@ function AjaxObject(root_object_val) {
         this.enqueueOutput(output, false);
     };
 
-    this.getSessionData = function (ajax_id_val, session_val) {
+    this.getSessionData = function (session_val) {
         var output = JSON.stringify({
             command: "get_session_data",
             ajax_id: session_val.ajaxId(),

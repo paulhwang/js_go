@@ -109,7 +109,7 @@ function GoContainerObject(session_object_val) {
         }, this);
     };
 
-    this.runGoGame = function () {
+    this.launchTopic = function () {
         var this0 = this;
         this.startGoGame();
         this.rootObject().htmlObject().createPlayHolders();

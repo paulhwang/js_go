@@ -170,12 +170,6 @@ function SessionObject(session_mgr_val, session_id_val) {
         }
     };
 
-    this.startGoGame = function () {
-        this.sessionConnected = true;
-        this.ajaxObject().getSessionData(this.ajaxId(), this);
-        this.containerObject().runGoGame();
-    };
-
     this.processSessionSetupAjaxRequest = function (session_data_val) {
         var container = new GoContainerObject(this);
         this.debug(false, "processSessionSetupAjaxRequest", "session_data_val=" + session_data_val);
@@ -189,7 +183,10 @@ function SessionObject(session_mgr_val, session_id_val) {
         container.configObject().setKomiPoint(config.komi);
         container.configObject().setHandicapPoint(config.handicap);
         this.setHisName("a");/////////////////////////////////////////////////////////////
-        this.startGoGame();
+
+        this.sessionConnected = true;
+        this.containerObject().launchTopic();
+        this.ajaxObject().getSessionData(this);
     };
 
     this.runSession_______________________________ = function () {

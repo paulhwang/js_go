@@ -122,7 +122,7 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
                     var session_id = data.pending_session_data[i];
                     var session = this.sessionMgr().searchSessionBySessionId();
                     if (session) {
-                        this.ajaxObject().getSessionData(session_id, session);
+                        this.ajaxObject().getSessionData(session);
                     }
                     i -= 1;
                 }
