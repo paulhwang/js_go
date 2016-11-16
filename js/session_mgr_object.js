@@ -23,7 +23,7 @@ function SessionMgrObject(link_object_val) {
     };
 
     this.utilObject = function () {
-        return this.rootObject().utilObject();
+        return this.linkObject().utilObject();
     };
 
     this.head = function () {
@@ -55,6 +55,7 @@ function SessionMgrObject(link_object_val) {
     }
 
     this.transmitData = function () {
+        this.debug(true, "transmitData", "size=" + this.size());
         var session = this.head();
         while (session) {
             session.transmitData();
@@ -149,6 +150,12 @@ function SessionMgrObject(link_object_val) {
         }
         if (i !== this.size()) {
             this.abend("abendIt", "tail: size=" + this.size() + " i=" + i);
+        }
+    };
+
+    this.debug = function (debug_val, str1_val, str2_val) {
+        if (debug_val) {
+            this.logit(str1_val, str2_val);
         }
     };
 

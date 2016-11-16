@@ -36,10 +36,6 @@ function GoPortObject(container_val) {
         return this.rootObject().ajxObject();
     };
 
-    this.sessionMgrObject = function () {
-        return this.rootObject().sessionMgrObject();
-    };
-
     this.configObject = function () {
         return this.containerObject().configObject();
     };
@@ -50,6 +46,10 @@ function GoPortObject(container_val) {
 
     this.sessionObject = function () {
         return this.containerObject().sessionObject();
+    };
+
+    this.sessionMgrObject = function () {
+        return this.sessionObject().sessionMgrObject();
     };
 
     this.GoHandlerObject = function () {
@@ -67,7 +67,7 @@ function GoPortObject(container_val) {
     this.transmitMoveData = function (move_val) {
         //this.logit("transmitMoveData", "(" + move_val.xX_() + "," + move_val.yY_() + ") color=" +  move_val.myColor_() + " turn=" +  move_val.turnIndex_());
         var data = this.GO_PROTOCOL_CODE_MOVE_DATA + move_val.encodeMove();
-        this.logit("transmitMoveData", "data=" + data);
+        this.debug(true, "transmitMoveData", "data=" + data);
         this.transmitStringData(data);
     };
 
@@ -83,7 +83,7 @@ function GoPortObject(container_val) {
     };
 
     this.receiveStringData = function (res_json_val) {
-        this.logit("receiveStringData", "res_json_data=" + res_json_val);
+        this.debug(false, "receiveStringData", "res_json_data=" + res_json_val);
 
         if (res_json_val == null) {
             this.abend("receiveStringData", "null res_json_val");
@@ -134,6 +134,12 @@ function GoPortObject(container_val) {
 
         if (res_data.final_score !== null) {
             this.gameObject().setFinalScoreString(res_data.final_score);
+        }
+    };
+
+    this.debug = function (debug_val, str1_val, str2_val) {
+        if (debug_val) {
+            this.logit(str1_val, str2_val);
         }
     };
 

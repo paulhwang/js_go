@@ -161,14 +161,12 @@ function SessionObject(session_mgr_val, session_id_val) {
     };
 
     this.transmitData = function () {
-        var str;
+        this.debug(true, "transmitData", "size=" + this.transmitQueue().size());
         while (this.transmitQueue().size() > 0) {
-            str = this.transmitQueue().deQueue();
-            if (str) {
-                //this.logit("transmitData", str);
-                this.ajaxObject().putSessionData (this.ajaxId(), this, str);
-                //this.ajaxObject().postRequest(str, this);
-                //this.ajaxObject().sendDataToPeer(this, this);
+            var data = this.transmitQueue().deQueue();
+            if (data) {
+                this.debug(true, "transmitData", "data=" + data);
+                this.ajaxObject().putSessionData (this.ajaxId(), this, data);
             }
             else {
                 this.abend("transmitData", "null data");
@@ -245,10 +243,9 @@ function SessionObject(session_mgr_val, session_id_val) {
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
-        if (!debug_val) {
-            return;
+        if (debug_val) {
+            this.logit(str1_val, str2_val);
         }
-        return this.utilObject().utilLogit(this.objectName() + "." + str1_val + "==", str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
