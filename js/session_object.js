@@ -15,6 +15,7 @@ function SessionObject(session_mgr_val, session_id_val) {
         this.theTransmitQueue = new QueueObject(this.utilObject());
         this.thePrev = null;
         this.theNext = null;
+        this.initSwitchTable();
     };
 
     this.objectName = function () {
@@ -52,6 +53,10 @@ function SessionObject(session_mgr_val, session_id_val) {
     this.clientObject = function () {
         return this.theClientObject;
     };
+
+    this.switchTable = function () {
+        return this.theSwitchTable;
+    }
 
     this.prev = function () {
         return this.thePrev;
@@ -147,8 +152,18 @@ function SessionObject(session_mgr_val, session_id_val) {
         }
     };
 
+    this.initSwitchTable = function () {
+        this.theSwitchTable = {
+            "go": this.setupLinkResponse,
+        };
+    };
+
+    this.createGoObject = function () {
+        return new GoContainerObject(this);
+    };
+
     this.appendTopicToSession = function (topic_data_val) {
-        var topic = new GoContainerObject(this);
+        var topic = this.createGoObject();
 
         this.debug(true, "processSessionSetupAjaxRequest", "topic_data_val=" + topic_data_val);
         var topic_data = JSON.parse(topic_data_val);

@@ -27,6 +27,10 @@ function LinkMgrObject(root_object_val) {
         return this.rootObject().utilObject();
     };
 
+    this.switchTable = function () {
+        return this.theSwitchTable;
+    }
+
     this.head = function () {
         return this.theHead;
     }
@@ -64,7 +68,7 @@ function LinkMgrObject(root_object_val) {
     };
 
     this.initSwitchTable = function () {
-        this.switch_table = {
+        this.theSwitchTable = {
             "setup_link": this.setupLinkResponse,
             "get_link_data": this.getLinkDataResponse,
             "get_name_list": this.getNameListResponse,
@@ -77,7 +81,7 @@ function LinkMgrObject(root_object_val) {
 
     this.switchAjaxResponseData = function (response_val) {
         var response = JSON.parse(response_val);
-        var func = this.switch_table[response.command];
+        var func = this.switchTable()[response.command];
         if (func) {
             func.bind(this)(response.data);
         }
