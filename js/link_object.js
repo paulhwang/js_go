@@ -191,6 +191,7 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
             container.configObject().setMyColor_(config.color);
             container.configObject().setKomiPoint(config.komi);
             container.configObject().setHandicapPoint(config.handicap);
+            session.setHisName("a");/////////////////////////////////////////////////////////////
             session.startGoGame();
         }
     };

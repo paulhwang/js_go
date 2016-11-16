@@ -6,7 +6,13 @@
 
 function GoUiObject(container_val) {
     "use strict";
-    this.theContainerObject = container_val;
+
+    this.init__ = function (container_val) {
+        this.theContainerObject = container_val;
+        this.theLastMouseX = 9;
+        this.theLastMouseY = 9;
+        this.theEncodedMoveList = null;
+    };
 
     this.objectName = function () {
         return "GoUiObject";
@@ -179,9 +185,9 @@ function GoUiObject(container_val) {
             return;
         }
 
-        this.logit("uiClick", this.canvasId() + "(" + x + "," + y + ")");
+        this.debug(true, "uiClick", this.canvasId() + "(" + x + "," + y + ")");
         if (!this.gameObject().isMyTurn()) {
-            this.logit("uiClick", "not my turn");
+            this.debug(true, "uiClick", "not my turn");
             return;
         }
 
@@ -557,17 +563,19 @@ function GoUiObject(container_val) {
         //this.finalScoreElement().textContent = this.gameObject().finalScoreString();
     };
 
-    this.abend = function (str1_val, str2_val) {
-        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
+    this.debug = function (debug_val, str1_val, str2_val) {
+        if (debug_val) {
+            this.logit(str1_val, str2_val);
+        }
     };
 
     this.logit = function (str1_val, str2_val) {
         return this.containerObject().goLog(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.theLastMouseX = 9;
-    this.theLastMouseY = 9;
-    this.theEncodedMoveList = null;
+    this.abend = function (str1_val, str2_val) {
+        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
+    };
 
     this.initElements = function () {
         this.theCanvasElement = window.document.getElementById(this.canvasId());
@@ -594,4 +602,6 @@ function GoUiObject(container_val) {
             return;
         }
     };
+
+    this.init__(container_val);
 }
