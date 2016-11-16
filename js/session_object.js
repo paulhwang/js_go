@@ -149,12 +149,13 @@ function SessionObject(session_mgr_val, session_id_val) {
 
     this.appendTopicToSession = function (topic_data_val) {
         var topic = new GoContainerObject(this);
-        this.debug(false, "processSessionSetupAjaxRequest", "topic_data_val=" + topic_data_val);
+
+        this.debug(true, "processSessionSetupAjaxRequest", "topic_data_val=" + topic_data_val);
         var topic_data = JSON.parse(topic_data_val);
-        this.debug(false, "processSessionSetupAjaxRequest", "data=" + topic_data.data);
-        var data = JSON.parse(topic_data.data)
-        this.debug(false, "processSessionSetupAjaxRequest", "config=" + data.data);
-        var config = JSON.parse(data.data);
+
+        this.debug(true, "processSessionSetupAjaxRequest", "config=" + topic_data.config);
+        var config = JSON.parse(topic_data.config);
+
         topic.configObject().setBoardSize(config.board_size);
         topic.configObject().setMyColor_(config.color);
         topic.configObject().setKomiPoint(config.komi);

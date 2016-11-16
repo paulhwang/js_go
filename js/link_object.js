@@ -176,20 +176,16 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
             this0.ajaxObject().setupCallback(this0.ajaxObject().ajaxSetupSessionCommand(), this0.rootObject().ajaxId(), ajaxSetupSessionCallback, this0);
             */
 
-            var data = JSON.stringify({
-                        target: "Go",
-                        command: "config",
-                        data: JSON.stringify({
-                                board_size: 19,
-                                color: 1,
-                                komi: 5,
-                                handicap: 0,
-                        }),
-                    });
+            var config = JSON.stringify({
+                            board_size: 19,
+                            color: 1,
+                            komi: 5,
+                            handicap: 0,
+                            });
             var topic_data = JSON.stringify({
-                topic: "GO_GAME",
-                data: data,
-            });
+                            title: "go",
+                            config: config,
+                            });
             this.ajaxObject().setupSession(this, topic_data);
         //});
     };
