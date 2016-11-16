@@ -65,10 +65,6 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
         return this.theLinkId;
     };
 
-    this.ajaxId = function () {
-        return this.myName() + ":" + this.linkId();
-    };
-
     this.setLinkId = function (val) {
         if (this.linkId()) {
             this.abend("setLinkId", "already exist");

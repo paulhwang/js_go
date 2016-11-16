@@ -61,10 +61,6 @@ function RootObject() {
         this.theLanguageUsed = val;
     };
 
-    this.ajaxId = function () {
-        return this.myName();
-    };
-
     this.runRoot = function () {
         var this0 = this;
         this.htmlObject().createPreludeHolder();

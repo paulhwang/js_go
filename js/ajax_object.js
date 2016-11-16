@@ -152,7 +152,6 @@ function AjaxObject(root_object_val) {
     this.setupLink = function (root_val) {
         var output = JSON.stringify({
             command: "setup_link",
-            ajax_id: root_val.ajaxId(),
             my_name: root_val.myName(),
         });
         this.debug(true, "setupLink", "output=" + output);
@@ -162,7 +161,6 @@ function AjaxObject(root_object_val) {
     this.getLinkData = function (link_val) {
         var output = JSON.stringify({
             command: "get_link_data",
-            ajax_id: link_val.ajaxId(),
             my_name: link_val.myName(),
             link_id: link_val.linkId(),
         });
@@ -173,7 +171,6 @@ function AjaxObject(root_object_val) {
     this.getNameList = function (link_val) {
         var output = JSON.stringify({
             command: "get_name_list",
-            ajax_id: link_val.ajaxId(),
             my_name: link_val.myName(),
             link_id: link_val.linkId(),
         });
@@ -189,7 +186,6 @@ function AjaxObject(root_object_val) {
 
         var output = JSON.stringify({
             command: "setup_session",
-            ajax_id: link_val.ajaxId(),
             my_name: link_val.myName(),
             link_id: link_val.linkId(),
             his_name: link_val.myName(),///////////////////////////////////////////session_val.hisName(),
@@ -205,7 +201,6 @@ function AjaxObject(root_object_val) {
         var data = JSON.parse(data_val);
         var output = JSON.stringify({
             command: "setup_session_reply",
-            ajax_id: ajax_id_val,
             my_name: this.rootObject().myName(),
             link_id: this.rootObject().linkId(),
             session_id: data.session_id,
@@ -218,7 +213,6 @@ function AjaxObject(root_object_val) {
     this.getSessionData = function (session_val) {
         var output = JSON.stringify({
             command: "get_session_data",
-            ajax_id: session_val.ajaxId(),
             link_id: session_val.linkObject().linkId(),
             session_id: session_val.sessionId(),
         });
@@ -229,7 +223,6 @@ function AjaxObject(root_object_val) {
     this.putSessionData = function (session_val, data_val) {
         var output = JSON.stringify({
             command: "put_session_data",
-            ajax_id: session_val.ajaxId(),
             my_name: session_val.linkObject().myName(),
             link_id: session_val.linkObject().linkId(),
             session_id: session_val.sessionId(),

@@ -109,10 +109,6 @@ function SessionObject(session_mgr_val, session_id_val) {
         return this.theSessionId;
     };
 
-    this.ajaxId = function () {
-        return this.linkObject().ajaxId() + ":" + this.sessionId();
-    };
-
     this.setSessionId = function (val) {
         if (this.sessionId()) {
             this.abend("setSessionId", "already exist");
