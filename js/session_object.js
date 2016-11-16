@@ -9,12 +9,10 @@ function SessionObject(session_mgr_val, session_id_val) {
 
     this.init__ = function (session_mgr_val, session_id_val) {
         this.theSessionMgrObject = session_mgr_val;
+        this.theSessionId = session_id_val;
         this.theXmtSeq = 0;
         this.theRcvSeq = 0;
-        this.theSessionId = session_id_val;
-        this.sessionConnected = false;
         this.theTransmitQueue = new QueueObject(this.utilObject());
-        this.startUpdateNameListTimer();
         this.thePrev = null;
         this.theNext = null;
     };
@@ -132,21 +130,6 @@ function SessionObject(session_mgr_val, session_id_val) {
         return this.theTransmitQueue;
     };
 
-    this.startUpdateNameListTimer = function () {
-        var this0 = this;
-        this.updateNameListTimer = window.setInterval(function (ajax_id_val, session_val) {
-            if (!session_val.sessionConnected) {
-                //session_val.ajaxObject().getNameList(this0.rootObject().ajaxId(), session_val);
-            } else {
-                //session_val.ajaxObject().getSessionData(ajax_id_val, session_val);
-            }
-        }, 500, this.ajaxId(), this);
-    };
-
-    this.stopUpdateNameListTimer = function () {
-        window.clearInterval(this.updateNameListTimer);
-    };
-
     this.setupClientReceiveCallback = function (callback_func_val, client_val) {
         this.theClientReceiveCallbackFunc = callback_func_val;
         this.theClientObject = client_val;
@@ -184,7 +167,6 @@ function SessionObject(session_mgr_val, session_id_val) {
         container.configObject().setHandicapPoint(config.handicap);
         this.setHisName("a");/////////////////////////////////////////////////////////////
 
-        this.sessionConnected = true;
         this.containerObject().launchTopic();
         this.ajaxObject().getSessionData(this);
     };
