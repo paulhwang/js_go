@@ -84,6 +84,26 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
         this.theLinkUpdateInterval = val;
     };
 
+    this.nameList = function () {
+        return this.theNameList;
+    };
+
+    this.setNameList = function (data_val) {
+        this.theNameList = data_val;
+    };
+
+    this.nameListLength = function () {
+        return this.nameList().length;
+    };
+
+    this.nameListElement = function (index_val) {
+        return this.nameList()[index_val];
+    };
+
+    this.setNameListElement = function (index_val, data_val) {
+        this.nameList()[index_val] = data_val;
+    };
+
     this.getLinkDataResponse = function (input_val) {
         this.debug(false, "getLinkDataResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
@@ -124,9 +144,8 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
         this.debug(false, "getNameListResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         if (data) {
-            if (this.rootObject().lastJsonNameList() !== data.name_list) {
-                this.rootObject().setLastJsonNameList(data.name_list);
-                this.rootObject().setNameList(data.name_list);
+            if (data.name_list) {
+                this.setNameList(data.name_list);
                 this.runSession111();
             }
         }

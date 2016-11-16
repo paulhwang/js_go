@@ -8,7 +8,6 @@ function RootObject() {
     "use strict";
 
     this.init__ = function () {
-        this.theLastJsonNameList = null;
         this.theUtilObject = new UtilObject();
         this.theAjaxObject = new AjaxObject(this);
         this.theLinkMgrObject = new LinkMgrObject(this);
@@ -64,30 +63,6 @@ function RootObject() {
 
     this.ajaxId = function () {
         return this.myName();
-    };
-
-    this.lastJsonNameList = function () {
-        return this.theLastJsonNameList;
-    };
-
-    this.setLastJsonNameList = function (val) {
-        this.theLastJsonNameList = val;
-    };
-
-    this.nameListLength = function () {
-        return this.theNameList.length;
-    };
-
-    this.nameListElement = function (index_val) {
-        return this.theNameList[index_val];
-    };
-
-    this.setNameListElement = function (index_val, data_val) {
-        this.theNameList[index_val] = data_val;
-    };
-
-    this.setNameList = function (data_val) {
-        this.theNameList = data_val;
     };
 
     this.runRoot = function () {
