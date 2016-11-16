@@ -171,17 +171,9 @@ function SessionObject(session_mgr_val, session_id_val) {
             this.abend("appendTopicToSession", "bad title=" + topic_data_val.title);
             return;
         }
-        var topic = func.bind(this)();
-
-        this.debug(true, "processSessionSetupAjaxRequest", "config=" + topic_data.config);
-        var config = JSON.parse(topic_data.config);
-
-        topic.configObject().setBoardSize(config.board_size);
-        topic.configObject().setMyColor_(config.color);
-        topic.configObject().setKomiPoint(config.komi);
-        topic.configObject().setHandicapPoint(config.handicap);
+        this.setTopicObject(func.bind(this)());
+        this.topicObject().configObject().setupConfiguration(topic_data.config);
         this.setHisName("a");/////////////////////////////////////////////////////////////
-
         this.topicObject().launchTopic();
         this.ajaxObject().getSessionData(this);
     };

@@ -129,11 +129,26 @@ function GoConfigObject(container_val) {
         return (0 <= coordinate_val) && (coordinate_val < this.boardSize());
     };
 
-    this.abend = function (str1_val, str2_val) {
-        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
+    this.setupConfiguration = function (config_val) {
+        this.debug(true, "setupConfiguration", "config=" + config_val);
+        var config = JSON.parse(config_val);
+        this.setBoardSize(config.board_size);
+        this.setMyColor_(config.color);
+        this.setKomiPoint(config.komi);
+        this.setHandicapPoint(config.handicap);
+    };
+
+    this.debug = function (debug_val, str1_val, str2_val) {
+        if (debug_val) {
+            this.logit(str1_val, str2_val);
+        }
     };
 
     this.logit = function (str1_val, str2_val) {
         return this.containerObject().goLog(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.abend = function (str1_val, str2_val) {
+        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
     };
 }
