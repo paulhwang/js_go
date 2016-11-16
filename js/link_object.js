@@ -199,19 +199,9 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
         var data = JSON.parse(input_val);
         if (data) {
             var session = this.sessionMgrObject().mallocSessionAndInsert(data.session_id);
-            var container = new GoContainerObject(session);
-            this.debug(false, "setupSessionResponse", "extra_data=" + data.extra_data);
-            var extra_data = JSON.parse(data.extra_data);
-            this.debug(false, "setupSessionResponse", "data=" + extra_data.data);
-            var data = JSON.parse(extra_data.data)
-            this.debug(false, "setupSessionResponse", "config=" + data.data);
-            var config = JSON.parse(data.data);
-            container.configObject().setBoardSize(config.board_size);
-            container.configObject().setMyColor_(config.color);
-            container.configObject().setKomiPoint(config.komi);
-            container.configObject().setHandicapPoint(config.handicap);
-            session.setHisName("a");/////////////////////////////////////////////////////////////
-            session.startGoGame();
+            if (data.extra_data) {
+                session.processSessionSetupAjaxRequest(data.extra_data);
+            }
         }
     };
 

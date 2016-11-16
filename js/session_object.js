@@ -128,10 +128,6 @@ function SessionObject(session_mgr_val, session_id_val) {
         this.theContainerObject = val;
     };
 
-    //this.receiveQueue = function () {
-    //    return this.theReceiveQueue;
-    //};
-
     this.transmitQueue = function () {
         return this.theTransmitQueue;
     };
@@ -180,7 +176,23 @@ function SessionObject(session_mgr_val, session_id_val) {
         this.containerObject().runGoGame();
     };
 
-    this.runSession = function () {
+    this.processSessionSetupAjaxRequest = function (session_data_val) {
+        var container = new GoContainerObject(this);
+        this.debug(false, "processSessionSetupAjaxRequest", "session_data_val=" + session_data_val);
+        var session_data = JSON.parse(session_data_val);
+        this.debug(false, "processSessionSetupAjaxRequest", "data=" + session_data.data);
+        var data = JSON.parse(session_data.data)
+        this.debug(false, "processSessionSetupAjaxRequest", "config=" + data.data);
+        var config = JSON.parse(data.data);
+        container.configObject().setBoardSize(config.board_size);
+        container.configObject().setMyColor_(config.color);
+        container.configObject().setKomiPoint(config.komi);
+        container.configObject().setHandicapPoint(config.handicap);
+        this.setHisName("a");/////////////////////////////////////////////////////////////
+        this.startGoGame();
+    };
+
+    this.runSession_______________________________ = function () {
         var this0 = this;
         var container = this.containerObject();
         this.rootObject().htmlObject().createSessionHolders(this);
@@ -218,28 +230,6 @@ function SessionObject(session_mgr_val, session_id_val) {
                     });
             this0.ajaxObject().setupSession(this0.rootObject().ajaxId(), this0, "GO_GAME", data);
         });
-    };
-
-    function ajaxPutSessionDataCallback (json_data_val) {
-        return;
-        if (json_data_val) {
-            this.debug(true, "ajaxPutSessionDataCallback", "json_data_val=" + json_data_val);
-            var data = JSON.parse(json_data_val);
-            if (data.res_data) {
-                this.receiveData(data.res_data);
-            }
-        }
-    };
-
-    function ajaxGetSessionDataCallback (json_data_val) {
-        return;
-        if (json_data_val) {
-            this.debug(true, "ajaxGetSessionDataCallback", "json_data_val=" + json_data_val);
-            var data = JSON.parse(json_data_val);
-            if (data.res_data) {
-                this.receiveData(data.res_data);
-            }
-        }
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
