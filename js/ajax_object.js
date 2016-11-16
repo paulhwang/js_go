@@ -167,8 +167,7 @@ function AjaxObject(root_object_val) {
             link_id: link_val.linkId(),
         });
         this.debug(false, "getLinkData", "output=" + output);
-        this.enqueueOutput(output);
-        this.ajaxJob(this.httpGetRequest());
+        this.enqueueOutput(output, true);
     };
 
     this.getNameList = function (link_val) {
