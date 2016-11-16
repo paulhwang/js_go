@@ -154,7 +154,7 @@ function SessionObject(session_mgr_val, session_id_val) {
 
     this.initSwitchTable = function () {
         this.theSwitchTable = {
-            "go": this.setupLinkResponse,
+            "go": this.createGoObject,
         };
     };
 
@@ -163,10 +163,15 @@ function SessionObject(session_mgr_val, session_id_val) {
     };
 
     this.appendTopicToSession = function (topic_data_val) {
-        var topic = this.createGoObject();
-
         this.debug(true, "processSessionSetupAjaxRequest", "topic_data_val=" + topic_data_val);
         var topic_data = JSON.parse(topic_data_val);
+
+        var func = this.switchTable()[topic_data.title];
+        if (!func) {
+            this.abend("appendTopicToSession", "bad title=" + topic_data_val.title);
+            return;
+        }
+        var topic = func.bind(this)();
 
         this.debug(true, "processSessionSetupAjaxRequest", "config=" + topic_data.config);
         var config = JSON.parse(topic_data.config);
