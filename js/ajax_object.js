@@ -35,42 +35,6 @@ function AjaxObject(root_object_val) {
         return this.rootObject().linkMgrObject();
     };
 
-    this.ajaxSetupLinkCommand = function () {
-        return "setup_link";
-    };
-
-    this.ajaxGetLinkDataCommand = function () {
-        return "get_link_data";
-    };
-
-    this.ajaxPutLinkDataCommand = function () {
-        return "put_link_data";
-    };
-
-    this.ajaxKeepAliveCommand = function () {
-        return "keep_alive";
-    };
-
-    this.ajaxGetNameListCommand = function () {
-        return "get_name_list";
-    };
-
-    this.ajaxSetupSessionCommand = function () {
-        return "setup_session";
-    };
-
-    this.ajaxSetupSessionReplyCommand = function () {
-        return "setup_session_reply";
-    };
-
-    this.ajaxGetSessionDataCommand = function () {
-        return "get_session_data";
-    };
-
-    this.ajaxPutSessionDataCommand = function () {
-        return "put_session_data";
-    };
-
     this.callbackIndex = function () {
         return this.theCallbackIndex;
     };
@@ -149,30 +113,6 @@ function AjaxObject(root_object_val) {
         return s;
     };
 
-    this.setupCallback = function (command_val, id_val, func_val, object_val, param_val1, param_val2) {
-        this.setCallbackArrayElement(this.callbackIndex(),
-                                     {command: command_val,
-                                      id: id_val,
-                                      func: func_val,
-                                      object: object_val,
-                                      param1: param_val1,
-                                      param2: param_val2});
-        this.incrementCallbackIndex();
-    };
-
-    this.getCallbackInfo = function (command_val, ajax_id_val) {
-        var i = 0;
-        while (i < this.callbackArray().length) {
-            if (this.callbackArrayElement(i).command === command_val) {
-                //this.logit("getCallbackInfo", ajax_id_val + " " + this.callbackArrayElement(i).id);
-                //if (!this.callbackArrayElement(i).id || this.callbackArrayElement(i).id === ajax_id_val) {
-                    return this.callbackArrayElement(i);
-                //}
-            }
-            i += 1;
-        }
-    }
-
     this.enqueueOutput = function (data_val, do_process_val) {
         this.outputQueue.enQueue(data_val);
         if (do_process_val) {
@@ -216,146 +156,130 @@ function AjaxObject(root_object_val) {
             if ((request_val.readyState === 4) && (request_val.status === 200)) {
                 this0.debug(false, "waitOnreadyStateChange", "json_str= " + request_val.responseText);
                 this0.linkMgrObject().switchResponse(request_val.responseText);
-                this0.processResponse(request_val.responseText);
                 this0.decrementOustandingRequestCount();
                 this0.ajaxJob(request_val);
             }
         };
     };
 
-    this.processResponse = function (response_val) {
-        var response = JSON.parse(response_val);
-        if ((response.command !== "keep_alive") &&
-            (response.command !== "get_link_data") &&
-            //(response.command !== "get_name_list") &&
-            (response.command !== "get_session_data")) {
-            this.logit("processResponse", "command=" + response.command + " ajax_id=" + response.ajax_id + " data=" + response.data);
-        }
-
-        var callback_info = this.getCallbackInfo(response.command, response.ajax_id);
-        if (callback_info) {
-            callback_info.func.bind(callback_info.object)(response.data, callback_info.param1, callback_info.param2);
-        }
-    };
-
-    this.setupLink = function (ajax_id_val) {
-        var s = JSON.stringify({
-            command: this.ajaxSetupLinkCommand(),
-            ajax_id: ajax_id_val,
-            my_name: this.rootObject().myName(),
+    this.setupLink = function (root_val) {
+        var output = JSON.stringify({
+            command: "setup_link",
+            ajax_id: root_val.myName(),
+            my_name: root_val.myName(),
         });
-        this.logit("setupLink", this.rootObject().myName());
-        this.enqueueOutput(s, true);
+        this.debug(true, "setupLink", "output=" + output);
+        this.enqueueOutput(output, true);
     };
 
     this.keepAlive = function (ajax_id_val) {
-        var s = JSON.stringify({
-            command: this.ajaxKeepAliveCommand(),
+        var output = JSON.stringify({
+            command: "keep_alive",
             ajax_id: ajax_id_val,
             my_name: this.rootObject().myName(),
             link_id: this.rootObject().linkId(),
         });
-        this.enqueueOutput(s, false);
+        this.debug(true, "keepAlive", "output=" + output);
+        this.enqueueOutput(output, false);
     };
 
-    this.getLinkData = function (ajax_id_val, my_name_val, link_id_val) {
-        var s = JSON.stringify({
-            command: this.ajaxGetLinkDataCommand(),
-            ajax_id: ajax_id_val,
-            my_name: my_name_val,
-            link_id: link_id_val,
+    this.getLinkData = function (link_val) {
+        var output = JSON.stringify({
+            command: "get_link_data",
+            ajax_id: link_val.ajaxId(),
+            my_name: link_val.myName(),
+            link_id: link_val.linkId(),
         });
-        this.debug(false, "getLinkData", "ajax_id=" + ajax_id_val + " LinkId=" + this.rootObject().linkId());
-        this.enqueueOutput(s);
+        this.debug(false, "getLinkData", "output=" + output);
+        this.enqueueOutput(output);
         this.ajaxJob(this.httpGetRequest());
     };
 
-    this.getNameList = function (ajax_id_val) {
-        var s = JSON.stringify({
-            command: this.ajaxGetNameListCommand(),
-            ajax_id: ajax_id_val,
-            my_name: this.rootObject().myName(),
-            link_id: this.rootObject().linkId(),
+    this.getNameList = function (link_val) {
+        var output = JSON.stringify({
+            command: "get_name_list",
+            ajax_id: link_val.ajaxId(),
+            my_name: link_val.myName(),
+            link_id: link_val.linkId(),
         });
-        this.enqueueOutput(s, false);
+        this.debug(true, "getNameList", "output=" + output);
+        this.enqueueOutput(output, false);
     };
 
-    this.setupSession = function (ajax_id_val, session_val, topic_val, data_val) {
+    this.setupSession = function (ajax_id_val, link_val, topic_val, data_val) {
         var data = JSON.stringify({
             topic: topic_val,
             data: data_val,
         });
         this.debug(false, "setupSession", data);
 
-        var s = JSON.stringify({
-            command: this.ajaxSetupSessionCommand(),
+        var output = JSON.stringify({
+            command: "setup_session",
             ajax_id: ajax_id_val,
-            my_name: this.rootObject().myName(),
-            link_id: this.rootObject().linkId(),
-            his_name: session_val.hisName(),
+            my_name: link_val.myName(),
+            link_id: link_val.linkId(),
+            his_name: link_val.myName(),///////////////////////////////////////////session_val.hisName(),
             data: data,
         });
-        this.enqueueOutput(s, false);
+        this.debug(true, "setupSession", "output=" + output);
+        this.enqueueOutput(output, false);
     };
 
     this.setupSessionReply = function (ajax_id_val, data_val) {
         this.debug(true, "setupSessionReply", "data_val=" + data_val);
 
         var data = JSON.parse(data_val);
-        var s = JSON.stringify({
-            command: this.ajaxSetupSessionReplyCommand(),
+        var output = JSON.stringify({
+            command: "setup_session_reply",
             ajax_id: ajax_id_val,
             my_name: this.rootObject().myName(),
             link_id: this.rootObject().linkId(),
             session_id: data.session_id,
             data: data.data,
         });
-        this.debug(true, "setupSessionReply", "s=" + s);
-        this.enqueueOutput(s, false);
+        this.debug(true, "setupSessionReply", "output=" + output);
+        this.enqueueOutput(output, false);
     };
 
     this.getSessionData = function (ajax_id_val, session_val) {
-        this.debug(false, "getSessionData", "ajax_id=" + ajax_id_val + " sessionId=" + session_val.sessionId());
-        var s = JSON.stringify({
-            command: this.ajaxGetSessionDataCommand(),
-            ajax_id: ajax_id_val,
-            my_name: this.rootObject().myName(),
-            link_id: this.rootObject().linkId(),
+        var output = JSON.stringify({
+            command: "get_session_data",
+            ajax_id: session_val.ajaxId(),
+            link_id: session_val.linkObject().linkId(),
             session_id: session_val.sessionId(),
-            his_name: session_val.hisName(),
         });
-        this.enqueueOutput(s, false);
+        this.debug(true, "getSessionData", "output=" + output);
+        this.enqueueOutput(output, false);
     };
 
     this.putSessionData = function (ajax_id_val, session_val, data_val) {
-        this.logit("putSessionData", "ajax_id=" + ajax_id_val + " data=" + data_val);
-        var s = JSON.stringify({
-            command: this.ajaxPutSessionDataCommand(),
-            ajax_id: ajax_id_val,
-            my_name: this.rootObject().myName(),
-            link_id: this.rootObject().linkId(),
+        var output = JSON.stringify({
+            command: "put_session_data",
+            ajax_id: session_val.ajaxId(),
+            my_name: session_val.linkObject().myName(),
+            link_id: session_val.linkObject().linkId(),
             session_id: session_val.sessionId(),
             his_name: session_val.hisName(),
             xmt_seq: session_val.xmtSeq(),
             data: data_val,
         });
         session_val.incrementXmtSeq();
-        this.enqueueOutput(s, true);
+        this.debug(true, "putSessionData", "output=" + output);
+        this.enqueueOutput(output, true);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
-        if (!debug_val) {
-            return;
+        if (debug_val) {
+            this.logit(str1_val, str2_val);
         }
-        return this.utilObject().utilLogit(this.objectName() + "." + str1_val, "==" + str2_val);
-    };
-
-    this.abend = function (str1_val, str2_val) {
-        return this.utilObject().utilAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.logit = function (str1_val, str2_val) {
         return this.utilObject().utilLogit(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.abend = function (str1_val, str2_val) {
+        return this.utilObject().utilAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.init__(root_object_val);

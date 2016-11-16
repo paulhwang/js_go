@@ -176,53 +176,9 @@ function RootObject() {
             this0.setLanguageUsed($(".prelude_holder select").val());
             this0.logit("runRoot", "my_name=" + this0.myName() + " language=" + this0.languageUsed());
             if (this0.myName()) {
-                this0.ajaxObject().setupCallback(this0.ajaxObject().ajaxSetupLinkCommand(), this0.ajaxId(), ajaxSetupLinkCallback, this0);
-                this0.ajaxObject().setupLink(this0.myName(), this0);
+                this0.ajaxObject().setupLink(this0);
             }
         });
-    };
-
-    function ajaxSetupLinkCallback(json_data_val) {
-        this.debug(true, "ajaxSetupLinkCallback", "data=" + json_data_val);
-        var data = JSON.parse(json_data_val);
-        this.setLinkId(data.link_id);
-        this.ajaxObject().setupCallback(this.ajaxObject().ajaxGetLinkDataCommand(), this.ajaxId(), ajaxGetLinkDataCallback, this);
-        //this.ajaxObject().getLinkData(this.ajaxId(), this.myName(), this.linkId());
-        this.createGoSession(null);
-    };
-
-    function ajaxGetLinkDataCallback(json_data_val) {
-        this.debug(true, "ajaxGetLinkDataCallback", "data=" + json_data_val);
-        var data = JSON.parse(json_data_val);
-        if (data) {
-            if (data.data) {
-                this.debug(false, "ajaxGetLinkDataCallback", "data=" + data.data);
-                this.getLinkData(data.data);
-            }
-        }
-    };
-
-    function ajaxGetNameListCallback(json_data_val, session_val) {
-        session_val.debug(false, "ajaxGetNameListCallback", "getLinkData=" + json_data_val);
-        var data = JSON.parse(json_data_val);
-        if (data) {
-            if (this.lastJsonNameList() !== data.name_list) {
-                this.setLastJsonNameList(data.name_list);
-                session_val.runSession();
-            }
-        }
-    };
-
-    function ajaxSetupSessionReplyCallback (json_data_val, session_val) {
-        return;
-        this.debug(true, "ajaxSetupSessionReplyCallback", "json_data_val=" + json_data_val);
-        if (!json_data_val) {
-            return;
-        }
-        var data = JSON.parse(json_data_val);
-        session_val.setSessionId(data.session_id);
-        this.sessionMgrObject().insertSessionToList(session_val);
-        session_val.startGoGame();
     };
 
     this.init__();

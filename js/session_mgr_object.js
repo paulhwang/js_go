@@ -4,11 +4,11 @@
  * File name: SessionMgrObject.js
  */
 
-function SessionMgrObject(root_object_val) {
+function SessionMgrObject(link_object_val) {
     "use strict";
 
-    this.init__ = function (root_object_val) {
-        this.theRootObject = root_object_val;
+    this.init__ = function (link_object_val) {
+        this.theLinkObject = link_object_val;
         this.theHead = null;
         this.theTail = null;
         this.theSize = 0;
@@ -18,8 +18,8 @@ function SessionMgrObject(root_object_val) {
         return "SessionMgrObject";
     };
 
-    this.rootObject = function () {
-        return this.theRootObject;
+    this.linkObject = function () {
+        return this.theLinkObject;
     };
 
     this.utilObject = function () {
@@ -63,7 +63,7 @@ function SessionMgrObject(root_object_val) {
     };
 
     this.mallocSessionAndInsert = function (session_id_val) {
-        var session = new SessionObject(this.rootObject(), session_id_val);
+        var session = new SessionObject(this, session_id_val);
         if (!session) {
             return null;
         }
@@ -160,6 +160,6 @@ function SessionMgrObject(root_object_val) {
         return this.utilObject().utilLogit(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(root_object_val);
+    this.init__(link_object_val);
 }
 

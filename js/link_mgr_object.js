@@ -89,74 +89,78 @@ function LinkMgrObject(root_object_val) {
         }
     };
 
-    this.setupLinkResponse = function (json_data_val) {
-        this.debug(true, "setupLinkResponse", "json_data_val=" + json_data_val);
-        var data = JSON.parse(json_data_val);
+    this.setupLinkResponse = function (input_val) {
+        this.debug(true, "setupLinkResponse", "input_val=" + input_val);
+        var data = JSON.parse(input_val);
         this.mallocLinkAndInsert(data.my_name, data.link_id);
     };
 
-    this.getLinkDataResponse = function (json_data_val) {
-        this.debug(true, "getLinkDataResponse", "json_data_val=" + json_data_val);
-        var data = JSON.parse(json_data_val);
+    this.getLinkDataResponse = function (input_val) {
+        this.debug(false, "getLinkDataResponse", "input_val=" + input_val);
+        var data = JSON.parse(input_val);
         if (data) {
             var link = this.searchLinkByLinkId(data.link_id);
             if (link) {
-                link.getLinkDataResponse(json_data_val);
+                link.getLinkDataResponse(input_val);
             }
         }
     };
 
-    this.getNameListResponse = function (json_data_val) {
-        this.debug(true, "getNameListResponse", "json_data_val=" + json_data_val);
-        var data = JSON.parse(json_data_val);
+    this.getNameListResponse = function (input_val) {
+        this.debug(true, "getNameListResponse", "input_val=" + input_val);
+        var data = JSON.parse(input_val);
         if (data) {
             var link = this.searchLinkByLinkId(data.link_id);
             if (link) {
-                link.getNameListResponse(json_data_val);
+                link.getNameListResponse(input_val);
             }
         }
     };
 
-    this.setupSessionResponse = function (json_data_val) {
-        this.debug(true, "setupSessionResponse", "json_data_val=" + json_data_val);
-        var data = JSON.parse(json_data_val);
+    this.setupSessionResponse = function (input_val) {
+        this.debug(true, "setupSessionResponse", "input_val=" + input_val);
+        var data = JSON.parse(input_val);
         if (data) {
             var link = this.searchLinkByLinkId(data.link_id);
             if (link) {
-                link.setupSessionResponse(json_data_val);
+                link.setupSessionResponse(input_val);
             }
         }
     };
 
-    this.setupSessionReplyResponse = function (json_data_val) {
-        this.debug(true, "setupSessionReplyResponse", "json_data_val=" + json_data_val);
-        var data = JSON.parse(json_data_val);
+    this.setupSessionReplyResponse = function (input_val) {
+        this.debug(true, "setupSessionReplyResponse", "input_val=" + input_val);
+        var data = JSON.parse(input_val);
         if (data) {
             var link = this.searchLinkByLinkId(data.link_id);
             if (link) {
-                link.setupSessionReplyResponse(json_data_val);
+                link.setupSessionReplyResponse(input_val);
             }
         }
     };
 
-    this.putSessionDataResponse = function (json_data_val) {
-        this.debug(true, "putSessionDataResponse", "json_data_val=" + json_data_val);
-        var data = JSON.parse(json_data_val);
+    this.putSessionDataResponse = function (input_val) {
+        this.debug(true, "putSessionDataResponse", "input_val=" + input_val);
+        var data = JSON.parse(input_val);
         if (data) {
             var link = this.searchLinkByLinkId(data.link_id);
             if (link) {
-                link.putSessionDataResponse(json_data_val);
+                link.putSessionDataResponse(input_val);
             }
         }
     };
 
-    this.getSessionDataResponse = function (json_data_val) {
-        this.debug(true, "getSessionDataResponse", "json_data_val=" + json_data_val);
-        var data = JSON.parse(json_data_val);
+    this.getSessionDataResponse = function (input_val) {
+        this.debug(true, "getSessionDataResponse", "input_val=" + input_val);
+        if (!input_val) {
+            return;
+        }
+
+        var data = JSON.parse(input_val);
         if (data) {
             var link = this.searchLinkByLinkId(data.link_id);
             if (link) {
-                link.getSessionDataResponse(json_data_val);
+                link.getSessionDataResponse(input_val);
             }
         }
     };
@@ -253,7 +257,7 @@ function LinkMgrObject(root_object_val) {
 
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
-            this.logit(str1_val, "==" + str2_val);
+            this.logit(str1_val, str2_val);
         }
     };
 
