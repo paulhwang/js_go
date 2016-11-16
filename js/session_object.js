@@ -154,17 +154,17 @@ function SessionObject(session_mgr_val, session_id_val) {
     };
 
     this.appendTopicToSession = function (topic_data_val) {
-        var container = new GoContainerObject(this);
+        var topic = new GoContainerObject(this);
         this.debug(false, "processSessionSetupAjaxRequest", "topic_data_val=" + topic_data_val);
         var topic_data = JSON.parse(topic_data_val);
         this.debug(false, "processSessionSetupAjaxRequest", "data=" + topic_data.data);
         var data = JSON.parse(topic_data.data)
         this.debug(false, "processSessionSetupAjaxRequest", "config=" + data.data);
         var config = JSON.parse(data.data);
-        container.configObject().setBoardSize(config.board_size);
-        container.configObject().setMyColor_(config.color);
-        container.configObject().setKomiPoint(config.komi);
-        container.configObject().setHandicapPoint(config.handicap);
+        topic.configObject().setBoardSize(config.board_size);
+        topic.configObject().setMyColor_(config.color);
+        topic.configObject().setKomiPoint(config.komi);
+        topic.configObject().setHandicapPoint(config.handicap);
         this.setHisName("a");/////////////////////////////////////////////////////////////
 
         this.containerObject().launchTopic();
