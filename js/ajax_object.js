@@ -189,7 +189,7 @@ function AjaxObject(root_object_val) {
             my_name: link_val.myName(),
             link_id: link_val.linkId(),
             his_name: link_val.myName(),///////////////////////////////////////////session_val.hisName(),
-            data: data,
+            topic_data: data,
         });
         this.debug(true, "setupSession", "output=" + output);
         this.enqueueOutput(output, false);

@@ -195,8 +195,8 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
         var data = JSON.parse(input_val);
         if (data) {
             var session = this.sessionMgrObject().mallocSessionAndInsert(data.session_id);
-            if (data.extra_data) {
-                session.appendTopicToSession(data.extra_data);
+            if (data.topic_data) {
+                session.appendTopicToSession(data.topic_data);
             }
         }
     };
