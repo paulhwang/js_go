@@ -153,12 +153,12 @@ function SessionObject(session_mgr_val, session_id_val) {
         }
     };
 
-    this.processSessionSetupAjaxRequest = function (session_data_val) {
+    this.appendTopicToSession = function (topic_data_val) {
         var container = new GoContainerObject(this);
-        this.debug(false, "processSessionSetupAjaxRequest", "session_data_val=" + session_data_val);
-        var session_data = JSON.parse(session_data_val);
-        this.debug(false, "processSessionSetupAjaxRequest", "data=" + session_data.data);
-        var data = JSON.parse(session_data.data)
+        this.debug(false, "processSessionSetupAjaxRequest", "topic_data_val=" + topic_data_val);
+        var topic_data = JSON.parse(topic_data_val);
+        this.debug(false, "processSessionSetupAjaxRequest", "data=" + topic_data.data);
+        var data = JSON.parse(topic_data.data)
         this.debug(false, "processSessionSetupAjaxRequest", "config=" + data.data);
         var config = JSON.parse(data.data);
         container.configObject().setBoardSize(config.board_size);
