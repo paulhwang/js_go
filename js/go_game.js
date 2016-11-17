@@ -4,7 +4,7 @@
  * File name: go_game.js
  */
 
-function GoGameObject(container_val, str_val) {
+function GoGameObject(container_val) {
     "use strict";
 
     this.init__ = function (container_val) {
