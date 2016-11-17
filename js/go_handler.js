@@ -4,11 +4,16 @@
  * File name: go_handler.js
  */
 
-"use strict";
 
 function GoHandlerObject(container_val) {
+    "use strict";
+
+    this.init__ = function (container_val) {
+        this.theContainerObject = container_val;
+    };
+
     this.objectName = function () {
-        return this.theObjectName;
+        return "GoHandlerObject";
     };
 
     this.containerObject = function () {
@@ -52,15 +57,20 @@ function GoHandlerObject(container_val) {
         this.uiObject().drawBoard();
     };
 
-    this.goAbend = function (str1_val, str2_val) {
+    this.debug = function (debug_val, str1_val, str2_val) {
+        if (debug_val) {
+            this.logit(str1_val, str2_val);
+        }
+    };
+
+    this.logit = function (str1_val, str2_val) {
+        return this.containerObject().goLogit(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.abend = function (str1_val, str2_val) {
         return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.goLog = function (str1_val, str2_val) {
-        return this.containerObject().goLog(this.objectName() + "." + str1_val, str2_val);
-    };
-
-    this.theObjectName = "GoHandlerObject";
-    this.theContainerObject = container_val;
+    this.init__(container_val);
 }
 
