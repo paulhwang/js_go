@@ -6,14 +6,17 @@
 
 function GoHtmlObject(prelude_val) {
     "use strict";
-    this.thePreludeObject = prelude_val;
-    this.theCanvasWidth = 432;
 
-    this.thePreludeHolderOn = false;
-    this.theTitleHolderOn = false;
-    this.theConfigHolderOn = false;
-    this.theCanvasHolderOn = false;
-    this.theScoreHolderOn = false;
+    this.init__ = function (prelude_val) {
+        this.thePreludeObject = prelude_val;
+        this.theCanvasWidth = 432;
+
+        this.thePreludeHolderOn = false;
+        this.theTitleHolderOn = false;
+        this.theConfigHolderOn = false;
+        this.theCanvasHolderOn = false;
+        this.theScoreHolderOn = false;
+    };
 
     this.objectName = function () {
         return "GoHtmlObject";
@@ -695,4 +698,5 @@ function GoHtmlObject(prelude_val) {
     };
 
     //this.createTitleHolder();
+    this.init__(prelude_val);
 }
