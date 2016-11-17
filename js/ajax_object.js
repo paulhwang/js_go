@@ -178,12 +178,12 @@ function AjaxObject(root_object_val) {
         this.enqueueOutput(output, false);
     };
 
-    this.setupSession = function (link_val, topic_data_val) {
+    this.setupSession = function (link_val, topic_data_val, his_name_val) {
         var output = JSON.stringify({
                         command: "setup_session",
                         my_name: link_val.myName(),
                         link_id: link_val.linkId(),
-                        his_name: link_val.myName(),///////////////////////////////////////////session_val.hisName(),
+                        his_name: his_name_val,
                         topic_data: topic_data_val,
                         });
         this.debug(true, "setupSession", "output=" + output);
