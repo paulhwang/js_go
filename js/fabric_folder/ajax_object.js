@@ -172,7 +172,7 @@ function AjaxObject(root_object_val) {
                         link_id: link_val.linkId(),
                         session_id: data.session_id,
                         accept: "yes",
-                        data: data.data,
+                        topic_data: data.topic_data,
                         });
         this.debug(true, "setupSessionReply", "output=" + output);
         this.enqueueOutput(output, false);
