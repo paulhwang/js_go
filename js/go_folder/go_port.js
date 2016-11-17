@@ -54,8 +54,12 @@ function GoPortObject(container_val) {
         return this.sessionObject().sessionMgrObject();
     };
 
-    this.GoHandlerObject = function () {
-        return this.containerObject().handlerObject();
+    this.boardObject = function () {
+        return this.containerObject().boardObject();
+    };
+
+    this.uiObject = function () {
+        return this.containerObject().uiObject();
     };
 
     this.receiveQueue = function () {
@@ -83,19 +87,20 @@ function GoPortObject(container_val) {
         this.sessionMgrObject().transmitData();
     };
 
-    this.receiveData = function (res_json_val) {
-        this.debug(false, "receiveData", "res_json_data=" + res_json_val);
-
-        if (res_json_val == null) {
-            this.abend("receiveData", "null res_json_val");
+    this.receiveData = function (res_data_val) {
+        this.debug(false, "receiveData", "res_data_val=" + res_data_val);
+        if (res_data_val === null) {
+            this.abend("receiveData", "null res_data_val");
             return;
         }
 
-        var res_data = JSON.parse(res_json_val);
+        var res_data = JSON.parse(res_data_val);
 
         if (res_data.board_data !== null) {
             var board_data = res_data.board_data.slice(this.GO_PROTOCOL_CODE_SIZE);
-            this.GoHandlerObject().updataBoard(board_data);
+            ///////////////this.GoHandlerObject().updataBoard(board_data);
+            this.boardObject().decodeBoard(board_data);
+            this.uiObject().drawBoard();
         }
 
         if (res_data.next_color !== null) {

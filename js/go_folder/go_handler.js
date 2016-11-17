@@ -40,17 +40,6 @@ function GoHandlerObject(container_val) {
         this.uiObject().drawBoard(this.engineObject());
     };
 
-    this.updataBoard = function (str_val) {
-        //this.goLog("updataBoard", str_val);
-        this.boardObject().decodeBoard(str_val);
-        this.uiObject().drawBoard();
-    };
-
-    this.boardUpdate = function (str_val) {
-        this.goLog("boardUpdate", str_val);
-
-    };
-
     this.aSpecialMoveIsPlayed = function (special_str) {
         //GO.goLog("GoHandlerObject.aSpecialMoveIsPlayed", special_str);
         this.gameObject().receiveSpecialMoveFromOpponent(special_str);
