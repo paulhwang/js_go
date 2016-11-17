@@ -31,6 +31,10 @@ function AjaxObject(root_object_val) {
         return this.rootObject().utilObject();
     };
 
+    this.switchObject = function () {
+        return this.rootObject().switchObject();
+    };
+
     this.linkMgrObject = function () {
         return this.rootObject().linkMgrObject();
     };
@@ -142,7 +146,7 @@ function AjaxObject(root_object_val) {
         request_val.onreadystatechange = function() {
             if ((request_val.readyState === 4) && (request_val.status === 200)) {
                 this0.debug(false, "waitOnreadyStateChange", "json_str= " + request_val.responseText);
-                this0.linkMgrObject().switchAjaxResponseData(request_val.responseText);
+                this0.switchObject().switchAjaxResponseData(request_val.responseText);
                 this0.decrementOustandingRequestCount();
                 this0.ajaxJob(request_val);
             }
