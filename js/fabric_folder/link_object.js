@@ -138,7 +138,7 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
 
             if (data.pending_session_setup) {
                 this.debug(true, "getLinkDataResponse", "pending_session_setup=" + data.pending_session_setup);
-                this.ajaxObject().setupSessionReply(this.ajaxId(), data.pending_session_setup);
+                this.ajaxObject().setupSessionReply(this, data.pending_session_setup);
             }
         }
 
@@ -154,7 +154,9 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
         if (data) {
             if (data.name_list) {
                 this.setNameList(data.name_list);
-                this.getConfigAndSetupSession();
+                if (this.myName() !== "z") {
+                    this.getConfigAndSetupSession();
+                }
             }
         }
     };

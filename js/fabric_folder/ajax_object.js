@@ -164,15 +164,14 @@ function AjaxObject(root_object_val) {
         this.enqueueOutput(output, false);
     };
 
-    this.setupSessionReply = function (ajax_id_val, data_val) {
-        this.debug(true, "setupSessionReply", "data_val=" + data_val);
-
+    this.setupSessionReply = function (link_val, data_val) {
         var data = JSON.parse(data_val);
         var output = JSON.stringify({
                         command: "setup_session_reply",
-                        my_name: this.rootObject().myName(),
-                        link_id: this.rootObject().linkId(),
+                        my_name: link_val.myName(),
+                        link_id: link_val.linkId(),
                         session_id: data.session_id,
+                        accept: "yes",
                         data: data.data,
                         });
         this.debug(true, "setupSessionReply", "output=" + output);
