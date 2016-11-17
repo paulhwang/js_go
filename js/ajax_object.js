@@ -104,12 +104,6 @@ function AjaxObject(root_object_val) {
         request_val.open("GET", this.ajaxRoute(), true);
         request_val.setRequestHeader("X-Requested-With", "XMLHttpRequest");
         request_val.setRequestHeader("Content-Type", this.jsonContext());
-        if ((ajax.command !== "keep_alive") && 
-            (ajax.command !== "get_link_data") &&
-            (ajax.command !== "get_name_list") &&
-            (ajax.command !== "get_session_data")) {
-            this.debug(false, "ajaxJob", "command=" + ajax.command);
-        }
         request_val.setRequestHeader("gorequest", ajax);
         request_val.setRequestHeader("GOPACKETID", this.packetId());
         this.incrementPacketId();

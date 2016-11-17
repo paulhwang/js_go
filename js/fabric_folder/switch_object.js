@@ -1,7 +1,7 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: LinkMgrObject.js
+ * File name: SwitchObject.js
  */
 
 function SwitchObject(root_object_val) {
