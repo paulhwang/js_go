@@ -98,7 +98,6 @@ function GoPortObject(container_val) {
 
         if (res_data.board_data !== null) {
             var board_data = res_data.board_data.slice(this.GO_PROTOCOL_CODE_SIZE);
-            ///////////////this.GoHandlerObject().updataBoard(board_data);
             this.boardObject().decodeBoard(board_data);
             this.uiObject().drawBoard();
         }

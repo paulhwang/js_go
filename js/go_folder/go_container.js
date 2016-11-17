@@ -13,7 +13,6 @@ function GoContainerObject(session_object_val) {
         this.theUiObject = new GoUiObject(this);
         this.theBoardObject = new GoBoardObject(this);
         this.theGameObject = new GoGameObject(this);
-        this.theHandlerObject = new GoHandlerObject(this);
         this.thePortObject = new GoPortObject(this);
     };
 
@@ -61,20 +60,8 @@ function GoContainerObject(session_object_val) {
         return this.theGameObject;
     };
 
-    this.handlerObject = function () {
-        return this.theHandlerObject;
-    };
-
     this.portObject = function () {
         return this.thePortObject;
-    };
-
-    this.containerObject2 = function () {
-        return this.theConfigObject2;
-    };
-
-    this.setHisContainerObject = function (container2_val) {
-        this.theConfigObject2 = container2_val;
     };
 
     this.resetContainerObjectForNewGame = function () {
