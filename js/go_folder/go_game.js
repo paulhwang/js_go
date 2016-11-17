@@ -400,7 +400,7 @@ function GoGameObject(container_val) {
             return true;
         }
 
-        //this.goLog("isMyTurn", "nextColor=" + this.nextColor_() + ", myColor=" + this.configObject().myColor_());
+        this.debug(false, "isMyTurn", "nextColor=" + this.nextColor() + ", myColor=" + this.configObject().myColor());
         if (this.nextColor() === this.configObject().myColor()) {
             return true;
         } else {

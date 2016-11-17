@@ -136,7 +136,7 @@ function GoConfigObject(container_val) {
         this.debug(true, "setupConfiguration", "config=" + config_val);
         var config = JSON.parse(config_val);
         this.setBoardSize(config.board_size);
-        this.setMyColor_(config.color);
+        this.setMyColor(config.color);
         this.setKomiPoint(config.komi);
         this.setHandicapPoint(config.handicap);
     };
