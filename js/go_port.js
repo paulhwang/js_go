@@ -6,8 +6,6 @@
 
 function GoPortObject(container_val) {
     "use strict";
-    this.theObjectName = "GoPortObject";
-    this.theContainerObject = container_val;
     this.GO_PROTOCOL_CODE_SIZE = 7;
     this.GO_PROTOCOL_CODE_PROPOSE = "Propose";
     this.GO_PROTOCOL_CODE_ACCEPT = "Accept ";
@@ -16,8 +14,12 @@ function GoPortObject(container_val) {
     this.GO_PROTOCOL_CODE_SPECIAL_MOVE = "Special";
     this.GO_PROTOCOL_CODE_BOARD_DATA = "Board  ";
 
+    this.init__ = function (container_val) {
+        this.theContainerObject = container_val;
+    };
+
     this.objectName = function () {
-        return this.theObjectName;
+        return "GoPortObject";
     };
 
     this.containerObject = function () {
@@ -142,12 +144,14 @@ function GoPortObject(container_val) {
         }
     };
 
+    this.logit = function (str1_val, str2_val) {
+        return this.containerObject().goLogit(this.objectName() + "." + str1_val, str2_val);
+    };
+
     this.abend = function (str1_val, str2_val) {
         return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.logit = function (str1_val, str2_val) {
-        return this.containerObject().goLog(this.objectName() + "." + str1_val, str2_val);
-    };
+    this.init__(container_val);
 }
 

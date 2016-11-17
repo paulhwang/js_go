@@ -6,7 +6,10 @@
 
 function GoConfigObject(container_val) {
     "use strict";
-    this.theContainerObject = container_val;
+
+    this.init__ = function (container_val) {
+        this.theContainerObject = container_val;
+    };
 
     this.objectName = function () {
         return "GoConfigObject";
@@ -145,10 +148,12 @@ function GoConfigObject(container_val) {
     };
 
     this.logit = function (str1_val, str2_val) {
-        return this.containerObject().goLog(this.objectName() + "." + str1_val, str2_val);
+        return this.containerObject().goLogit(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
         return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
     };
+
+    this.init__(container_val);
 }

@@ -6,7 +6,22 @@
 
 function GoGameObject(container_val, str_val) {
     "use strict";
-    this.theContainerObject = container_val;
+
+    this.init__ = function (container_val) {
+        this.theContainerObject = container_val;
+
+        this.resetGameObjectData();
+
+        this.theBlackCaptureStones = 0;
+        this.theWhiteCaptureStones = 0;
+
+        this.theLastDeadX = 0;
+        this.theLastDeadY = 0;
+        this.theValidLastDeadInfo = false;
+        this.theBlackScoreString = null;
+        this.theWhiteScoreString = null;
+        this.theFinalScoreString = null;
+    };
 
     this.objectName = function () {
         return "GoGameObject";
@@ -393,28 +408,6 @@ function GoGameObject(container_val, str_val) {
         }
     };
 
-    this.goAbend = function (str1_val, str2_val) {
-        return this.containerObject().goAbend("GoGameObject." + str1_val, str2_val);
-    };
-
-    this.goLog = function (str1_val, str2_val) {
-        return this.containerObject().goLog("GoGameObject." + str1_val, str2_val);
-    };
-
-    this.debug = function (debug_val, str1_val, str2_val) {
-        if (debug_val) {
-            this.logit(str1_val, str2_val);
-        }
-    };
-
-    this.logit = function (str1_val, str2_val) {
-        return this.containerObject().goLog(this.objectName() + "." + str1_val, str2_val);
-    };
-
-    this.abend = function (str1_val, str2_val) {
-        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
-    };
-
     this.saveLastGame = function () {
         this.containerObject().setLastGame(this.encodeMoveList());
     }
@@ -442,15 +435,19 @@ function GoGameObject(container_val, str_val) {
         return true;
     };
 
-    this.resetGameObjectData();
+    this.debug = function (debug_val, str1_val, str2_val) {
+        if (debug_val) {
+            this.logit(str1_val, str2_val);
+        }
+    };
 
-    this.theBlackCaptureStones = 0;
-    this.theWhiteCaptureStones = 0;
+    this.logit = function (str1_val, str2_val) {
+        return this.containerObject().goLogit(this.objectName() + "." + str1_val, str2_val);
+    };
 
-    this.theLastDeadX = 0;
-    this.theLastDeadY = 0;
-    this.theValidLastDeadInfo = false;
-    this.theBlackScoreString = null;
-    this.theWhiteScoreString = null;
-    this.theFinalScoreString = null;
+    this.abend = function (str1_val, str2_val) {
+        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.init__(container_val);
 }

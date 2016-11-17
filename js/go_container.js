@@ -144,15 +144,15 @@ function GoContainerObject(session_object_val) {
         }
     };
 
-    this.abend = function (str1_val, str2_val) {
-        return this.goAbend(this.objectName() + "." + str1_val, str2_val);
-    };
-
     this.logit = function (str1_val, str2_val) {
         return this.goLogit(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.goLog = function (s1_val, s2_val) {
+    this.abend = function (str1_val, str2_val) {
+        return this.goAbend(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.goLogit = function (s1_val, s2_val) {
         this.utilObject().utilLogit(this.sessionObject().sessionId() + s1_val, s2_val);
     };
 

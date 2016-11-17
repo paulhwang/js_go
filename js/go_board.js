@@ -6,7 +6,19 @@
 
 function GoBoardObject(container_val) {
     "use strict";
-    this.theContainerObject = container_val;
+
+    this.init__ = function (container_val) {
+        this.theContainerObject = container_val;
+        this.theBoardArray = [19];
+        this.theMarkedBoardArray = [19];
+        var i = 0;
+        while (i < 19) {
+            this.theBoardArray[i] = [19];
+            this.theMarkedBoardArray[i] = [19];
+            i += 1;
+        }
+        this.resetBoardObjectData();
+    };
 
     this.objectName = function () {
         return "GoBoardObject";
@@ -75,14 +87,6 @@ function GoBoardObject(container_val) {
             return false;
         }
         return true;
-    };
-
-    this.abend = function (str1_val, str2_val) {
-        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
-    };
-
-    this.logit = function (str1_val, str2_val) {
-        return this.containerObject().goLog(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.encodeBoard = function () {
@@ -164,13 +168,19 @@ function GoBoardObject(container_val) {
         }
     };
 
-    this.theBoardArray = [19];
-    this.theMarkedBoardArray = [19];
-    var i = 0;
-    while (i < 19) {
-        this.theBoardArray[i] = [19];
-        this.theMarkedBoardArray[i] = [19];
-        i += 1;
-    }
-    this.resetBoardObjectData();
+    this.debug = function (debug_val, str1_val, str2_val) {
+        if (debug_val) {
+            this.logit(str1_val, str2_val);
+        }
+    };
+
+    this.logit = function (str1_val, str2_val) {
+        return this.containerObject().goLogit(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.abend = function (str1_val, str2_val) {
+        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.init__(container_val);
 }
