@@ -85,12 +85,12 @@ function GoContainerObject(session_object_val) {
         this.engineObject().resetEngineObjectData();
     };
 
+    this.receiveData = function (res_data_val) {
+        this.portObject().receiveData(res_data_val);
+    };
+
     this.startGoGame = function () {
         this.gameObject().processTheWholeMoveList();
-        this.sessionObject().setupClientReceiveCallback(function (container_val, res_data_val) {
-            //console.log("ajaxReceiveCallBack" + port_val.objectName());
-            container_val.portObject().receiveStringData(res_data_val);
-        }, this);
     };
 
     this.launchTopic = function () {

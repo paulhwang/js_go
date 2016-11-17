@@ -83,11 +83,11 @@ function GoPortObject(container_val) {
         this.sessionMgrObject().transmitData();
     };
 
-    this.receiveStringData = function (res_json_val) {
-        this.debug(false, "receiveStringData", "res_json_data=" + res_json_val);
+    this.receiveData = function (res_json_val) {
+        this.debug(false, "receiveData", "res_json_data=" + res_json_val);
 
         if (res_json_val == null) {
-            this.abend("receiveStringData", "null res_json_val");
+            this.abend("receiveData", "null res_json_val");
             return;
         }
 
@@ -102,7 +102,7 @@ function GoPortObject(container_val) {
             this.gameObject().setNextColor(res_data.next_color);
         }
 
-        //this.logit("receiveStringData", "res_data.last_dead_stone=" + res_data.last_dead_stone);
+        //this.logit("receiveData", "res_data.last_dead_stone=" + res_data.last_dead_stone);
         if (res_data.last_dead_stone !== null) {
             this.gameObject().setValidLastDeadInfo(true);
             this.gameObject().setLastDeadX(Number(res_data.last_dead_stone.slice(0, 2)));
@@ -114,7 +114,7 @@ function GoPortObject(container_val) {
         if (res_data.capture_count !== null) {
             this.gameObject().setBlackCaptureStones(Number(res_data.capture_count.slice(0, 3)));
             this.gameObject().setWhiteCaptureStones(Number(res_data.capture_count.slice(3, 6)));
-            //this.logit("receiveStringData", "res_data.capture_count=(" + this.gameObject().blackCaptureStones() + "," + this.gameObject().whiteCaptureStones()  + ")");
+            //this.logit("receiveData", "res_data.capture_count=(" + this.gameObject().blackCaptureStones() + "," + this.gameObject().whiteCaptureStones()  + ")");
         }
 
         if (res_data.game_is_over === false) {
@@ -122,7 +122,7 @@ function GoPortObject(container_val) {
         } else if (res_data.game_is_over === true) {
             this.gameObject().setGameIsOver();
         } else {
-            this.abend("receiveStringData", "game_is_over");
+            this.abend("receiveData", "game_is_over");
         }
 
         if (res_data.black_score !== null) {

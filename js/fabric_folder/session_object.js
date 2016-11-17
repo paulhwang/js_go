@@ -50,14 +50,6 @@ function SessionObject(session_mgr_val, session_id_val) {
         this.theTopicObject = val;
     };
 
-    this.clientReceiveCallbackFunc = function() {
-        return this.theClientReceiveCallbackFunc;
-    };
-
-    this.clientObject = function () {
-        return this.theClientObject;
-    };
-
     this.switchTable = function () {
         return this.theSwitchTable;
     }
@@ -129,15 +121,6 @@ function SessionObject(session_mgr_val, session_id_val) {
         return this.theTransmitQueue;
     };
 
-    this.setupClientReceiveCallback = function (callback_func_val, client_val) {
-        this.theClientReceiveCallbackFunc = callback_func_val;
-        this.theClientObject = client_val;
-    };
-
-    this.receiveData = function (res_data_val) {
-        this.clientReceiveCallbackFunc()(this.clientObject(), res_data_val);
-    };
-
     this.transmitData = function () {
         this.debug(false, "transmitData", "size=" + this.transmitQueue().size());
         while (this.transmitQueue().size() > 0) {
@@ -150,6 +133,10 @@ function SessionObject(session_mgr_val, session_id_val) {
                 this.abend("transmitData", "null data");
             }
         }
+    };
+
+    this.receiveData = function (res_data_val) {
+        this.topicObject().receiveData(res_data_val);
     };
 
     this.initSwitchTable = function () {
