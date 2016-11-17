@@ -15,6 +15,10 @@ function GoHtmlObject(prelude_val) {
     this.theCanvasHolderOn = false;
     this.theScoreHolderOn = false;
 
+    this.objectName = function () {
+        return "GoHtmlObject";
+    };
+
     this.preludeObject = function () {
         return this.thePreludeObject;
     };
@@ -136,7 +140,7 @@ function GoHtmlObject(prelude_val) {
     };
 
     this.createSessionPeerSection = function (session_val) {
-        var root = session_val.rootObject();
+        var root = session_val;/////.rootObject();
         var i;
         var done = false;
 
@@ -676,12 +680,18 @@ function GoHtmlObject(prelude_val) {
         this.removeScoreHolder();
     };
 
-    this.abend = function (str1_val, str2_val) {
-        return this.utilObject().utilAbend("GoHtmlObject." + str1_val, str2_val);
+    this.debug = function (debug_val, str1_val, str2_val) {
+        if (debug_val) {
+            this.logit(str1_val, str2_val);
+        }
     };
 
     this.logit = function (str1_val, str2_val) {
-        return this.utilObject().utilLogit("GoHtmlObject." + str1_val, str2_val);
+        return this.utilObject().utilLogit(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.abend = function (str1_val, str2_val) {
+        return this.utilObject().utilabend(this.objectName() + "." + str1_val, str2_val);
     };
 
     //this.createTitleHolder();

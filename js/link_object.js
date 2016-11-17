@@ -17,6 +17,14 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
         this.ajaxObject().getLinkData(this);
     };
 
+    this.hisName = function () {//////////////////////
+        return "LinkObject";
+    };
+
+    this.gameName = function () {///////////////////////////
+        return "Go";
+    };
+
     this.objectName = function () {
         return "LinkObject";
     };
@@ -142,52 +150,51 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
         if (data) {
             if (data.name_list) {
                 this.setNameList(data.name_list);
-                this.runSession111();
+                this.getConfigAndSetupSession();
             }
         }
     };
 
-    this.runSession111 = function () {
-        /*
+    this.getConfigAndSetupSession = function () {
         var this0 = this;
-        var container = this.containerObject();
+        var title = "go";
+        var size;
+        var color;
+        var komi;
+        var handicap;
+        var his_name = "a";
+
         this.rootObject().htmlObject().createSessionHolders(this);
 
         $(".peer_game_paragraph button").on("click", function() {
-            this0.setGameName($(".peer_game_paragraph select").val());
-            this0.runSession(container);
+            title = $(".peer_game_paragraph select").val();
+            this0.debug(true, "getConfigAndSetupSession", title);
         });
 
         $(".peer_connect_section button").on("click", function() {
-            this0.setHisName($(".peer_name_paragraph select").val());
-            var config = container.configObject();
-            if (this0.containerObject().objectName() === "GoContainerObject") {
-                config.setBoardSize($(".board_size_section select").val());
-                config.setMyColor($(".play_color_section select").val());
-                config.setKomiPoint($(".komi_section select").val());
-                config.setHandicapPoint($(".handicap_section select").val());
-                console.log("runConfig() ", " my_name=" + this0.rootObject().myName() +
-                                            " his_name=" + this0.hisName() +
-                                            " board_size=" + config.boardSize() +
-                                            " color=" + config.myColor() +
-                                            " komi=" + config.komiPoint() +
-                                            " handicap=" + config.handicapPoint());
-            }
-            this0.ajaxObject().setupCallback(this0.ajaxObject().ajaxSetupSessionCommand(), this0.rootObject().ajaxId(), ajaxSetupSessionCallback, this0);
-            */
-
+            his_name = $(".peer_name_paragraph select").val();
+            size = $(".board_size_section select").val();
+            color = $(".play_color_section select").val();
+            komi = $(".komi_section select").val();
+            handicap = $(".handicap_section select").val();
+            this0.debug(true, "getConfigAndSetupSession", " my_name=" + this0.myName() +
+                                            " his_name=" + his_name +
+                                            " board_size=" + size +
+                                            " color=" + color +
+                                            " komi=" + komi +
+                                            " handicap=" + handicap);
             var config = JSON.stringify({
-                            board_size: 19,
-                            color: 1,
-                            komi: 5,
-                            handicap: 0,
+                            board_size: size,
+                            color: color,
+                            komi: komi,
+                            handicap: handicap,
                             });
             var topic_data = JSON.stringify({
-                            title: "go",
+                            title: title,
                             config: config,
                             });
-            this.ajaxObject().setupSession(this, topic_data, "a");
-        //});
+            this0.ajaxObject().setupSession(this0, topic_data, his_name);
+        });
     };
 
     this.setupSessionResponse = function (input_val) {
