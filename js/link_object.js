@@ -41,6 +41,10 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
         return this.linkMgrObject().rootObject();
     };
 
+    this.htmlObject = function () {
+        return this.rootObject().htmlObject();
+    };
+
     this.utilObject = function () {
         return this.rootObject().utilObject();
     };
@@ -164,7 +168,7 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
         var handicap;
         var his_name = "a";
 
-        this.rootObject().htmlObject().createSessionHolders(this);
+        this.htmlObject().goConfigHtmlObject().createSessionHolders(this);
 
         $(".peer_game_paragraph button").on("click", function() {
             title = $(".peer_game_paragraph select").val();
