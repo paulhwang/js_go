@@ -6,7 +6,16 @@
 
 function GoContainerObject(session_object_val) {
     "use strict";
-    this.theSessionObject = session_object_val;
+
+    this.init__ = function (session_object_val) {
+        this.theSessionObject = session_object_val;
+        this.theConfigObject = new GoConfigObject(this);
+        this.theUiObject = new GoUiObject(this);
+        this.theBoardObject = new GoBoardObject(this);
+        this.theGameObject = new GoGameObject(this, this.lastGame());
+        this.theHandlerObject = new GoHandlerObject(this);
+        this.thePortObject = new GoPortObject(this);
+    };
 
     this.objectName = function () {
         return "GoContainerObject";
@@ -84,22 +93,6 @@ function GoContainerObject(session_object_val) {
         this.engineObject().resetEngineObjectData();
     };
 
-    this.abend = function (str1_val, str2_val) {
-        return this.goAbend(this.objectName() + "." + str1_val, str2_val);
-    };
-
-    this.logit = function (str1_val, str2_val) {
-        return this.goLogit(this.objectName() + "." + str1_val, str2_val);
-    };
-
-    this.goLog = function (s1_val, s2_val) {
-        this.utilObject().utilLogit(this.sessionObject().sessionId() + s1_val, s2_val);
-    };
-
-    this.goAbend = function (s1_val, s2_val) {
-        this.utilObject().utilAbend(this.sessionObject().sessionId() + s1_val, s2_val);
-    };
-
     this.startGoGame = function () {
         this.gameObject().processTheWholeMoveList();
         this.sessionObject().setupClientReceiveCallback(function (container_val, res_data_val) {
@@ -145,12 +138,29 @@ function GoContainerObject(session_object_val) {
         });
     };
 
-    this.theConfigObject = new GoConfigObject(this);
-    this.theUiObject = new GoUiObject(this);
-    this.theBoardObject = new GoBoardObject(this);
-    this.theGameObject = new GoGameObject(this, this.lastGame());
-    this.theHandlerObject = new GoHandlerObject(this);
-    this.thePortObject = new GoPortObject(this);
+    this.debug = function (debug_val, str1_val, str2_val) {
+        if (debug_val) {
+            this.logit(str1_val, str2_val);
+        }
+    };
+
+    this.abend = function (str1_val, str2_val) {
+        return this.goAbend(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.logit = function (str1_val, str2_val) {
+        return this.goLogit(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.goLog = function (s1_val, s2_val) {
+        this.utilObject().utilLogit(this.sessionObject().sessionId() + s1_val, s2_val);
+    };
+
+    this.goAbend = function (s1_val, s2_val) {
+        this.utilObject().utilAbend(this.sessionObject().sessionId() + s1_val, s2_val);
+    };
+
+    this.init__(session_object_val);
 }
 
 var GO = new GoDefineObject;
