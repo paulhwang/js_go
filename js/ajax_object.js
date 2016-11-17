@@ -35,18 +35,6 @@ function AjaxObject(root_object_val) {
         return this.rootObject().switchObject();
     };
 
-    this.linkMgrObject = function () {
-        return this.rootObject().linkMgrObject();
-    };
-
-    this.callbackIndex = function () {
-        return this.theCallbackIndex;
-    };
-
-    this.incrementCallbackIndex = function () {
-        return this.theCallbackIndex += 1;
-    };
-
     this.oustandingRequestCount = function () {
         return this.theOustandingRequestCount;
     };
@@ -63,18 +51,6 @@ function AjaxObject(root_object_val) {
         if (this.theOustandingRequestCount !== 0) {
             this.abend("decrementOustandingRequestCount", "not 0");
         }
-    };
-
-    this.callbackArray = function () {
-        return this.theCallbackArray;
-    };
-
-    this.callbackArrayElement = function (index_val) {
-        return this.theCallbackArray[index_val];
-    };
-
-    this.setCallbackArrayElement = function (index_val, data_val) {
-        this.theCallbackArray[index_val] = data_val;
     };
 
     this.ajaxRoute = function () {
