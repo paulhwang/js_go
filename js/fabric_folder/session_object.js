@@ -149,7 +149,7 @@ function SessionObject(session_mgr_val, session_id_val) {
         return new GoContainerObject(this);
     };
 
-    this.appendTopicToSession = function (topic_data_val, his_name_val) {
+    this.appendTopicToSession = function (topic_data_val, his_name_val, initiater_val) {
         this.setHisName(his_name_val);
         this.debug(true, "processSessionSetupAjaxRequest", "topic_data_val=" + topic_data_val);
         var topic_data = JSON.parse(topic_data_val);
@@ -160,7 +160,7 @@ function SessionObject(session_mgr_val, session_id_val) {
             return;
         }
         this.setTopicObject(func.bind(this)());
-        this.topicObject().configObject().setupConfiguration(topic_data.config);
+        this.topicObject().configObject().setupConfiguration(topic_data.config, initiater_val);
         this.topicObject().launchTopic();
         this.ajaxObject().getSessionData(this);
     };

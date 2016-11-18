@@ -132,13 +132,16 @@ function GoConfigObject(container_val) {
         return (0 <= coordinate_val) && (coordinate_val < this.boardSize());
     };
 
-    this.setupConfiguration = function (config_val) {
+    this.setupConfiguration = function (config_val, initiater_val) {
         this.debug(true, "setupConfiguration", "config=" + config_val);
         var config = JSON.parse(config_val);
         this.setBoardSize(config.board_size);
-        this.setMyColor(config.color);
         this.setKomiPoint(config.komi);
         this.setHandicapPoint(config.handicap);
+        this.setMyColor(config.color);
+        if (!initiater_val) {
+            this.setMyColor_(GO.getOppositeColor(this.myColor()));
+        }
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
