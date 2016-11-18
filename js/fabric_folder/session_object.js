@@ -12,7 +12,6 @@ function SessionObject(session_mgr_val, session_id_val) {
         this.theSessionId = session_id_val;
         this.theXmtSeq = 0;
         this.theRcvSeq = 0;
-        this.theTransmitQueue = new QueueObject(this.utilObject());
         this.thePrev = null;
         this.theNext = null;
         this.initSwitchTable();
@@ -115,10 +114,6 @@ function SessionObject(session_mgr_val, session_id_val) {
             this.abend("setSessionId", "already exist");
         }
         this.theSessionId = val;
-    };
-
-    this.transmitQueue = function () {
-        return this.theTransmitQueue;
     };
 
     this.transmitData = function (data_val) {
