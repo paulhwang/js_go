@@ -119,14 +119,6 @@ function GoGameObject(container_val) {
         this.theTotalMoves -= 1;
     };
 
-    this.movesArray = function (i) {
-        return this.theMovesArray[i];
-    };
-
-    this.setMovesArray = function (i, val) {
-        this.theMovesArray[i] = val;
-    };
-
     this.nextColor = function () {
         return this.theNextColor;
     };
@@ -382,17 +374,6 @@ function GoGameObject(container_val) {
     this.processTheWholeMoveList = function () {
         this.boardObject().resetBoardObjectData();
         this.resetGameObjectPartialData();
-/*
-        this.goLog("processTheWholeMoveLst", "totalMoves=" + this.totalMoves());
-        var move;
-        var i = 0;
-        while (i < this.totalMoves()) {
-            move = this.movesArray(i);
-            this.engineObject().enterWar(move);
-            this.setNextColor(GO.getOppositeColor(move.myColor()));
-            i += 1;
-        }
-*/
     };
 
     this.isMyTurn = function () {
@@ -414,7 +395,6 @@ function GoGameObject(container_val) {
 
     this.resetGameObjectData = function () {
         this.theTotalMoves = 0;
-        this.theMovesArray = [];
         this.resetGameObjectPartialData();
     };
 
