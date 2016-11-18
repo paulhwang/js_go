@@ -50,10 +50,6 @@ function GoPortObject(container_val) {
         return this.containerObject().sessionObject();
     };
 
-    this.sessionMgrObject = function () {
-        return this.sessionObject().sessionMgrObject();
-    };
-
     this.boardObject = function () {
         return this.containerObject().boardObject();
     };
@@ -62,27 +58,18 @@ function GoPortObject(container_val) {
         return this.containerObject().uiObject();
     };
 
-    this.receiveQueue = function () {
-        return this.theReceiveQueue;
-    };
-
-    this.transmitQueue = function () {
-        return this.theTransmitQueue;
-    };
-
     this.transmitMoveData = function (move_val) {
         var data = this.GO_PROTOCOL_CODE_MOVE_DATA + move_val.encodeMove();
-        this.debug(false, "transmitMoveData", "data=" + data);
         this.transmitData(data);
     };
 
     this.transmitSpecialMoveData = function (special_val) {
         var data = this.GO_PROTOCOL_CODE_SPECIAL_MOVE + special_val;
-        this.debug(false, "transmitSpecialMoveData", "data=" + data);
         this.transmitData(data);
     };
 
     this.transmitData = function (data_val) {
+        this.debug(false, "transmitData", "data_val=" + data_val);
         this.sessionObject().transmitData(data_val);
     };
 
