@@ -4,16 +4,11 @@
  * File name: holder_pool.js
  */
 
-function HolderPoolObject(util_val) {
+function HolderPoolObject() {
     "use strict";
-    this.theUtilObject = util_val;
 
     this.objectName = function () {
         return "HolderPoolObject";
-    };
-
-    this.utilObject = function () {
-        return this.theUtilObject;
     };
 
     this.head = function () {
@@ -103,12 +98,18 @@ function HolderPoolObject(util_val) {
         }
     };
 
+    this.debug = function (debug_val, str1_val, str2_val) {
+        if (debug_val) {
+            this.logit(str1_val, str2_val);
+        }
+    };
+
     this.logit = function (s1_val, str2_val) {
-        return this.utilObject().utilLogit(this.objectName() + "." + str1_val, str2_val);
+        return LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (s1_val, str2_val) {
-        return this.utilObject().utilAbend(this.objectName() + "." + str1_val, str2_val);
+        return ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.theHead = null;

@@ -14,6 +14,3 @@ var ABEND = function (str1_val, str2_val) {
     var x = junk;
 };
 
-function UtilObject() {
-}
-

@@ -8,7 +8,6 @@ function RootObject() {
     "use strict";
 
     this.init__ = function () {
-        this.theUtilObject = new UtilObject();
         this.theSwitchObject = new SwitchObject(this);
         this.theAjaxObject = new AjaxObject(this);
         this.theLinkMgrObject = new LinkMgrObject(this);
@@ -36,10 +35,6 @@ function RootObject() {
 
     this.linkMgrObject = function () {
         return this.theLinkMgrObject;
-    };
-
-    this.utilObject = function () {
-        return this.theUtilObject;
     };
 
     this.myName = function () {

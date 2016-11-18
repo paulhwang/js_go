@@ -4,17 +4,12 @@
  * File name: queue_object.js
  */
 
-function QueueObject(util_val) {
+function QueueObject() {
     "use strict";
     this.theObjectName = "QueueObject";
-    this.theUtilObject = util_val;
 
     this.objectName = function () {
         return this.theObjectName;
-    };
-
-    this.utilObject = function () {
-        return this.theUtilObject;
     };
 
     this.holderPoolObject = function () {
@@ -147,15 +142,15 @@ function QueueObject(util_val) {
     };
 
     this.logit = function (str1_val, str2_val) {
-        return this.utilObject().utilLogit(this.objectName() + "." + str1_val, str2_val);
+        return LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        return this.utilObject().utilAbend(this.objectName() + "." + str1_val, str2_val);
+        return ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.theHead = null;
     this.theTail = null;
     this.theSize = 0;
-    this.theHolderPoolObject = new HolderPoolObject(this.utilObject());
+    this.theHolderPoolObject = new HolderPoolObject();
 }

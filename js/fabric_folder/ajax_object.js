@@ -13,7 +13,7 @@ function AjaxObject(root_object_val) {
         this.theOustandingRequestCount = 0;
         this.theCallbackIndex = 0;
         this.theCallbackArray = [];
-        this.outputQueue = new QueueObject(this.utilObject());
+        this.outputQueue = new QueueObject();
         this.theHttpPostRequest = new XMLHttpRequest();
         this.theHttpGetRequest = new XMLHttpRequest();
         this.waitOnreadyStateChange(this.httpGetRequest());
