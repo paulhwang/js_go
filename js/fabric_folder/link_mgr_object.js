@@ -54,14 +54,6 @@ function LinkMgrObject(root_object_val) {
         this.theSize -= 1;
     }
 
-    this.transmitData = function () {
-        var session = this.head();
-        while (session) {
-            session.transmitData();
-            session = session.next();
-        }
-    };
-
     this.mallocLinkAndInsert = function (my_name_val, link_id_val) {
         var link = new LinkObject(this, my_name_val, link_id_val);
         if (!link) {
