@@ -370,10 +370,6 @@ function GoGameObject(container_val) {
         }
     };
 
-    this.processTheWholeMoveList = function () {
-        this.boardObject().resetBoardObjectData();
-    };
-
     this.isMyTurn = function () {
         if (this.configObject().playBothSides()) {
             return true;

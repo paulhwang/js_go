@@ -76,13 +76,9 @@ function GoContainerObject(session_object_val) {
         this.portObject().receiveData(res_data_val);
     };
 
-    this.startGoGame = function () {
-        this.gameObject().processTheWholeMoveList();
-    };
-
     this.launchTopic = function () {
         var this0 = this;
-        this.startGoGame();
+        this.boardObject().resetBoardObjectData();
         this.rootObject().htmlObject().createPlayHolders();
         this.uiObject().initElements();
         this.uiObject().drawBoard();
