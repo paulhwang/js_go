@@ -30,10 +30,6 @@ function GoPortObject(container_val) {
         return this.containerObject().rootObject();
     };
 
-    this.utilObject = function () {
-        return this.rootObject().utilObject();
-    };
-
     this.ajxObject = function () {
         return this.rootObject().ajxObject();
     };

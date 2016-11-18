@@ -33,10 +33,6 @@ function SessionObject(session_mgr_val, session_id_val) {
         return this.linkObject().rootObject();
     };
 
-    this.utilObject = function () {
-        return this.rootObject().utilObject();
-    };
-
     this.ajaxObject = function () {
         return this.rootObject().ajaxObject();
     };

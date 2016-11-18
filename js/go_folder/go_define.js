@@ -93,14 +93,4 @@ function GoDefineObject() {
     this.isValidCoordinate = function (coordinate_val, board_size_val) {
         return (0 <= coordinate_val) && (coordinate_val < board_size_val);
     };
-
-    this.goLog = function (s1_val, s2_val) {
-        window.console.log(s1_val + "() " + s2_val);
-    };
-
-    this.goAbend = function (s1_val, s2_val) {
-        window.console.log("goAbend: " + s1_val + "() " + s2_val);
-        window.alert("Abend: " + s1_val + "() " + s2_val);
-        var x = junk;
-    };
 }

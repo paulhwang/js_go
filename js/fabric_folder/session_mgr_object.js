@@ -22,10 +22,6 @@ function SessionMgrObject(link_object_val) {
         return this.theLinkObject;
     };
 
-    this.utilObject = function () {
-        return this.linkObject().utilObject();
-    };
-
     this.head = function () {
         return this.theHead;
     }

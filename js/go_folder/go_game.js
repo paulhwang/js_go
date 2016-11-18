@@ -34,10 +34,6 @@ function GoGameObject(container_val) {
         return this.containerObject().boardObject();
     };
 
-    this.uiObject = function () {
-        return this.containerObject().uiObject();
-    };
-
     this.configObject = function () {
         return this.containerObject().configObject();
     };

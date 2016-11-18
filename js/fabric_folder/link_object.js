@@ -45,10 +45,6 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
         return this.rootObject().htmlObject();
     };
 
-    this.utilObject = function () {
-        return this.rootObject().utilObject();
-    };
-
     this.ajaxObject = function () {
         return this.rootObject().ajaxObject();
     };
