@@ -63,9 +63,9 @@ function LinkMgrObject(root_object_val) {
         return link;
     };
 
-    this.insertLinkToList = function (session_val) {
-        if (!session_val) {
-            this.abend("enQueue", "null session_val");
+    this.insertLinkToList = function (link_val) {
+        if (!link_val) {
+            this.abend("enQueue", "null link_val");
             return;
         }
 
@@ -73,39 +73,39 @@ function LinkMgrObject(root_object_val) {
 
         this.incrementSize();
         if (!this.head()) {
-            session_val.setPrev(null);
-            session_val.setNext(null);
-            this.setHead(session_val);
-            this.setTail(session_val);
+            link_val.setPrev(null);
+            link_val.setNext(null);
+            this.setHead(link_val);
+            this.setTail(link_val);
         } else {
-            this.tail().setNext(session_val);
-            session_val.setPrev(this.tail());
-            session_val.setNext(null);
-            this.setTail(session_val);
+            this.tail().setNext(link_val);
+            link_val.setPrev(this.tail());
+            link_val.setNext(null);
+            this.setTail(link_val);
         }
         this.abendIt();
     };
 
-    this.deleteLinkFromList = function (session_val) {
+    this.deleteLinkFromList = function (link_val) {
         if (this.size() <= 0) {
             this.abend("deleteSessionFromList", "size=" + this.size());
             return;
         }
-        if (!this.sessionExistInTheList(session_val)) {
+        if (!this.sessionExistInTheList(link_val)) {
             this.abend("deleteSessionFromList", "sessionExistInTheList is false");
             return;
         }
 
         this.abendIt();
-        if (session_val.prev()) {
-            session_val.prev().setNext(session_val.next());
+        if (link_val.prev()) {
+            link_val.prev().setNext(link_val.next());
         } else {
-            this.setHead(session_val.next());
+            this.setHead(link_val.next());
         }
-        if (session_val.next()) {
-            session_val.next().setPrev(session_val.prev());
+        if (link_val.next()) {
+            link_val.next().setPrev(link_val.prev());
         } else {
-            this.setTail(session_val.prev());
+            this.setTail(link_val.prev());
         }
         this.decrementSize();
         this.abendIt();
@@ -124,9 +124,9 @@ function LinkMgrObject(root_object_val) {
 
     this.abendIt = function () {
         var i = 0;
-        var session = this.head();
-        while (session) {
-            session = session.next();
+        var link = this.head();
+        while (link) {
+            link = link.next();
             i += 1;
         }
         if (i !== this.size()) {
@@ -134,9 +134,9 @@ function LinkMgrObject(root_object_val) {
         }
 
         i = 0;
-        session = this.tail();
-        while (session) {
-            session = session.prev();
+        link = this.tail();
+        while (link) {
+            link = link.prev();
             i += 1;
         }
         if (i !== this.size()) {
