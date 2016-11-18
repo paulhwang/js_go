@@ -28,20 +28,12 @@ function GoContainerObject(session_object_val) {
         return this.sessionObject().rootObject();
     };
 
-    this.sessionObject = function () {
-        return this.theSessionObject;
-    };
-
     this.configObject = function () {
         return this.theConfigObject;
     };
 
     this.uiObject = function () {
         return this.theUiObject;
-    };
-
-    this.containerIndex = function () {
-        return this.theContainerIndex;
     };
 
     this.utilObject = function () {
@@ -62,14 +54,6 @@ function GoContainerObject(session_object_val) {
 
     this.portObject = function () {
         return this.thePortObject;
-    };
-
-    this.resetContainerObjectForNewGame = function () {
-        this.goLog("resetContainerObjectForNewGame", "");
-        this.setLastGame(0);
-        this.gameObject().resetGameObjectData();
-        this.boardObject().resetBoardObjectData();
-        this.engineObject().resetEngineObjectData();
     };
 
     this.receiveData = function (res_data_val) {
