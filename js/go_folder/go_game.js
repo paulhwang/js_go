@@ -9,18 +9,17 @@ function GoGameObject(container_val) {
 
     this.init__ = function (container_val) {
         this.theContainerObject = container_val;
-
-        this.resetGameObjectData();
-
         this.theBlackCaptureStones = 0;
         this.theWhiteCaptureStones = 0;
-
         this.theLastDeadX = 0;
         this.theLastDeadY = 0;
         this.theValidLastDeadInfo = false;
         this.theBlackScoreString = null;
         this.theWhiteScoreString = null;
         this.theFinalScoreString = null;
+        this.theTotalMoves = 0;
+        this.theNextColor = GO.BLACK_STONE();
+        this.theGameIsOver = false;
     };
 
     this.objectName = function () {
@@ -373,7 +372,6 @@ function GoGameObject(container_val) {
 
     this.processTheWholeMoveList = function () {
         this.boardObject().resetBoardObjectData();
-        this.resetGameObjectPartialData();
     };
 
     this.isMyTurn = function () {
@@ -392,16 +390,6 @@ function GoGameObject(container_val) {
     this.saveLastGame = function () {
         this.containerObject().setLastGame(this.encodeMoveList());
     }
-
-    this.resetGameObjectData = function () {
-        this.theTotalMoves = 0;
-        this.resetGameObjectPartialData();
-    };
-
-    this.resetGameObjectPartialData = function () {
-        this.theNextColor = GO.BLACK_STONE();
-        this.theGameIsOver = false;
-    };
 
     this.isValidMoveOnBoard = function (x_val, y_val) {
         if (this.boardObject().boardArray(x_val, y_val) !== GO.EMPTY_STONE()) {
