@@ -116,6 +116,10 @@ function SwitchObject(root_object_val) {
 
     this.putSessionDataResponse = function (input_val) {
         this.debug(true, "putSessionDataResponse", "input_val=" + input_val);
+        if (!input_val) {
+            return;
+        }
+
         var data = JSON.parse(input_val);
         if (data) {
             var link = this.linkMgrObject().searchLinkByLinkId(data.link_id);
