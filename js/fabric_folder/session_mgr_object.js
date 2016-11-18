@@ -54,14 +54,6 @@ function SessionMgrObject(link_object_val) {
         this.theSize -= 1;
     }
 
-    this.transmitData = function () {
-        var session = this.head();
-        while (session) {
-            session.transmitData();
-            session = session.next();
-        }
-    };
-
     this.mallocSessionAndInsert = function (session_id_val) {
         var session = new SessionObject(this, session_id_val);
         if (!session) {

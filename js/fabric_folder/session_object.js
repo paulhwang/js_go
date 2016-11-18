@@ -121,18 +121,8 @@ function SessionObject(session_mgr_val, session_id_val) {
         return this.theTransmitQueue;
     };
 
-    this.transmitData = function () {
-        this.debug(false, "transmitData", "size=" + this.transmitQueue().size());
-        while (this.transmitQueue().size() > 0) {
-            var data = this.transmitQueue().deQueue();
-            if (data) {
-                this.debug(false, "transmitData", "data=" + data);
-                this.ajaxObject().putSessionData(this, data);
-            }
-            else {
-                this.abend("transmitData", "null data");
-            }
-        }
+    this.transmitData = function (data_val) {
+        this.ajaxObject().putSessionData(this, data_val);
     };
 
     this.receiveData = function (res_data_val) {
@@ -166,46 +156,6 @@ function SessionObject(session_mgr_val, session_id_val) {
         this.topicObject().configObject().setupConfiguration(topic_data.config, initiater_val);
         this.topicObject().launchTopic();
         this.ajaxObject().getSessionData(this);
-    };
-
-    this.runSession_______________________________ = function () {
-        var this0 = this;
-        var container = this.topicObject();
-        this.rootObject().htmlObject().createSessionHolders(this);
-
-        $(".peer_game_paragraph button").on("click", function() {
-            this0.setGameName($(".peer_game_paragraph select").val());
-            this0.runSession(container);
-        });
-
-        $(".peer_connect_section button").on("click", function() {
-            this0.setHisName($(".peer_name_paragraph select").val());
-            var config = container.configObject();
-            if (this0.containerObject().objectName() === "GoContainerObject") {
-                config.setBoardSize($(".board_size_section select").val());
-                config.setMyColor($(".play_color_section select").val());
-                config.setKomiPoint($(".komi_section select").val());
-                config.setHandicapPoint($(".handicap_section select").val());
-                console.log("runConfig() ", " my_name=" + this0.rootObject().myName() +
-                                            " his_name=" + this0.hisName() +
-                                            " board_size=" + config.boardSize() +
-                                            " color=" + config.myColor() +
-                                            " komi=" + config.komiPoint() +
-                                            " handicap=" + config.handicapPoint());
-            }
-            this0.ajaxObject().setupCallback(this0.ajaxObject().ajaxSetupSessionCommand(), this0.rootObject().ajaxId(), ajaxSetupSessionCallback, this0);
-            var data = JSON.stringify({
-                        target: "Go",
-                        command: "config",
-                        data: JSON.stringify({
-                                board_size: config.boardSize(),
-                                color: config.hisColor(),
-                                komi: config.komiPoint(),
-                                handicap: config.handicapPoint(),
-                        }),
-                    });
-            this0.ajaxObject().setupSession(this0.rootObject().ajaxId(), this0, "GO_GAME", data);
-        });
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

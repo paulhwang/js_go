@@ -73,26 +73,21 @@ function GoPortObject(container_val) {
     this.transmitMoveData = function (move_val) {
         var data = this.GO_PROTOCOL_CODE_MOVE_DATA + move_val.encodeMove();
         this.debug(false, "transmitMoveData", "data=" + data);
-        this.transmitStringData(data);
+        this.transmitData(data);
     };
 
     this.transmitSpecialMoveData = function (special_val) {
         var data = this.GO_PROTOCOL_CODE_SPECIAL_MOVE + special_val;
         this.debug(false, "transmitSpecialMoveData", "data=" + data);
-        this.transmitStringData(data);
+        this.transmitData(data);
     };
 
-    this.transmitStringData = function (str_val) {
-        this.sessionObject().transmitQueue().enQueue(str_val);
-        this.sessionMgrObject().transmitData();
+    this.transmitData = function (data_val) {
+        this.sessionObject().transmitData(data_val);
     };
 
     this.receiveData = function (res_data_val) {
         this.debug(false, "receiveData", "res_data_val=" + res_data_val);
-        if (res_data_val === null) {
-            this.abend("receiveData", "null res_data_val");
-            return;
-        }
 
         var res_data = JSON.parse(res_data_val);
 
@@ -106,7 +101,6 @@ function GoPortObject(container_val) {
             this.gameObject().setNextColor(res_data.next_color);
         }
 
-        //this.logit("receiveData", "res_data.last_dead_stone=" + res_data.last_dead_stone);
         if (res_data.last_dead_stone !== null) {
             this.gameObject().setValidLastDeadInfo(true);
             this.gameObject().setLastDeadX(Number(res_data.last_dead_stone.slice(0, 2)));
@@ -118,7 +112,6 @@ function GoPortObject(container_val) {
         if (res_data.capture_count !== null) {
             this.gameObject().setBlackCaptureStones(Number(res_data.capture_count.slice(0, 3)));
             this.gameObject().setWhiteCaptureStones(Number(res_data.capture_count.slice(3, 6)));
-            //this.logit("receiveData", "res_data.capture_count=(" + this.gameObject().blackCaptureStones() + "," + this.gameObject().whiteCaptureStones()  + ")");
         }
 
         if (res_data.game_is_over === false) {
