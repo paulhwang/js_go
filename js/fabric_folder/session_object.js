@@ -159,12 +159,12 @@ function SessionObject(session_mgr_val, session_id_val) {
         }
     };
 
-    this.abend = function (str1_val, str2_val) {
-        return this.utilObject().utilabend(this.objectName() + "." + str1_val, str2_val);
+    this.logit = function (str1_val, str2_val) {
+        return LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.logit = function (str1_val, str2_val) {
-        return this.utilObject().utilLogit(this.objectName() + "." + str1_val, str2_val);
+    this.abend = function (str1_val, str2_val) {
+        return ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.destructor = function () {

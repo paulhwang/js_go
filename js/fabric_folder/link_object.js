@@ -253,12 +253,12 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
         }
     };
 
-    this.abend = function (str1_val, str2_val) {
-        return this.utilObject().utilabend(this.objectName() + "." + str1_val, str2_val);
+    this.logit = function (str1_val, str2_val) {
+        return LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.logit = function (str1_val, str2_val) {
-        return this.utilObject().utilLogit(this.objectName() + "." + str1_val, str2_val);
+    this.abend = function (str1_val, str2_val) {
+        return ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.init__(link_mgr_object_val, my_name_val, link_id_val);

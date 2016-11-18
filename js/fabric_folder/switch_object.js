@@ -20,10 +20,6 @@ function SwitchObject(root_object_val) {
         return this.theRootObject;
     };
 
-    this.utilObject = function () {
-        return this.rootObject().utilObject();
-    };
-
     this.linkMgrObject = function () {
         return this.rootObject().linkMgrObject();
     };
@@ -143,11 +139,11 @@ function SwitchObject(root_object_val) {
     };
 
     this.logit = function (str1_val, str2_val) {
-        return this.utilObject().utilLogit(this.objectName() + "." + str1_val, str2_val);
+        return LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        return this.utilObject().utilAbend(this.objectName() + "." + str1_val, str2_val);
+        return ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.init__(root_object_val);

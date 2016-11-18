@@ -36,10 +36,6 @@ function GoContainerObject(session_object_val) {
         return this.theUiObject;
     };
 
-    this.utilObject = function () {
-        return this.rootObject().utilObject();
-    };
-
     this.boardObject = function () {
         return this.theBoardObject;
     };
@@ -112,11 +108,11 @@ function GoContainerObject(session_object_val) {
     };
 
     this.goLogit = function (s1_val, s2_val) {
-        this.utilObject().utilLogit(this.sessionObject().sessionId() + s1_val, s2_val);
+        LOG_IT(this.sessionObject().sessionId() + s1_val, s2_val);
     };
 
     this.goAbend = function (s1_val, s2_val) {
-        this.utilObject().utilAbend(this.sessionObject().sessionId() + s1_val, s2_val);
+        ABEND(this.sessionObject().sessionId() + s1_val, s2_val);
     };
 
     this.init__(session_object_val);
