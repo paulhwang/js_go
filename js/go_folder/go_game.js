@@ -217,6 +217,22 @@ function GoGameObject(container_val) {
         this.portObject().transmitSpecialMoveData(GO.PASS_MOVE());
     };
 
+    this.processConfirmMoveFromUi = function () {
+        this.portObject().transmitSpecialMoveData(GO.CONFIRM_MOVE());
+    };
+
+    this.processResignMoveFromUi = function () {
+        this.portObject().transmitSpecialMoveData(GO.RESIGN_MOVE());
+    };
+
+    this.processPlayAnotherGameMoveFromUi = function () {
+        this.portObject().transmitSpecialMoveData(GO.PLAY_ANOTHER_GAME_MOVE());
+    };
+
+    this.processBackToPlayMoveFromUi = function () {
+        this.portObject().transmitSpecialMoveData(GO.BACK_TO_PLAY_MOVE());
+    };
+
     this.displayResult = function () {
         this.goLog("displayResult", "Black: "
                 + this.engineObject().blackScore() + " ("
@@ -228,65 +244,6 @@ function GoGameObject(container_val) {
                 + this.engineObject().whiteCaptureStones() + " + "
                 + this.engineObject().whiteLandScore() + " + "
                 + this.engineObject().blackDeadGroupList().totalStoneCount() + "*2)");
-    };
-
-    this.processConfirmMoveFromUi = function () {
-        if (!this.configObject().playBothSides()) {
-            this.processConfirmMove();
-        }
-        this.portObject().transmitSpecialMoveData(GO.CONFIRM_MOVE());
-    };
-
-    this.processConfirmMove = function () {
-        this.goLog("processConfirmMove", "");
-        if (!this.gameIsOver()) {
-            return;
-        }
-
-        this.engineObject().computeScore();
-        this.engineObject().printScore();
-        this.engineObject().abendEngine();
-    };
-
-    this.processResignMoveFromUi = function () {
-        if (!this.configObject().playBothSides()) {
-            this.processResignMove();
-        }
-        this.portObject().transmitSpecialMoveData(GO.RESIGN_MOVE());
-    };
-
-    this.processResignMove = function () {
-        this.goLog("processResignMove", "");
-        this.containerObject().resetContainerObjectForNewGame();
-        this.engineObject().abendEngine();
-    };
-
-    this.processPlayAnotherGameMoveFromUi = function () {
-        if (!this.configObject().playBothSides()) {
-            this.processResignMove();
-        }
-        this.portObject().transmitSpecialMoveData(GO.PLAY_ANOTHER_GAME_MOVE());
-    };
-
-    this.processPlayAnotherGameMove = function () {
-        this.goLog("processPlayAnotherGameMove", "");
-        this.containerObject().resetContainerObjectForNewGame();
-        this.engineObject().abendEngine();
-    };
-
-    this.processBackToPlayMoveFromUi = function () {
-        if (!this.configObject().playBothSides()) {
-            this.processResignMove();
-        }
-        this.portObject().transmitSpecialMoveData(GO.BACK_TO_PLAY_MOVE());
-    };
-
-    this.processBackToPlayMove = function () {
-        this.goLog("processBackToPlayMove", "");
-        if (this.gameIsOver()) {
-            this.resetBothPasses();
-            this.engineObject().abendEngine();
-        }
     };
 
     this.isMyTurn = function () {
