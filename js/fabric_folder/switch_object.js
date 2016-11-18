@@ -32,14 +32,6 @@ function SwitchObject(root_object_val) {
         return this.theSwitchTable;
     }
 
-    this.transmitData = function () {
-        var session = this.head();
-        while (session) {
-            session.transmitData();
-            session = session.next();
-        }
-    };
-
     this.initSwitchTable = function () {
         this.theSwitchTable = {
             "setup_link": this.setupLinkResponse,
