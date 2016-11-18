@@ -136,6 +136,9 @@ function SessionObject(session_mgr_val, session_id_val) {
     };
 
     this.receiveData = function (res_data_val) {
+        if (res_data_val === null) {
+            return;
+        }
         this.topicObject().receiveData(res_data_val);
     };
 

@@ -42,24 +42,16 @@ function RootObject() {
         return this.theUtilObject;
     };
 
-    this.languageUsed = function () {
-        return this.theLanguageUsed;
-    };
-
     this.myName = function () {
         return this.theMyName;
     };
 
-    this.myName2 = function () {
-        return this.theMyName2;
-    };
-
-    this.setHtmlObject = function (val) {
-        this.theHtmlObject = val;
-    };
-
     this.setMyName = function (val) {
         this.theMyName = val;
+    };
+
+    this.languageUsed = function () {
+        return this.theLanguageUsed;
     };
 
     this.setLanguageUsed = function (val) {

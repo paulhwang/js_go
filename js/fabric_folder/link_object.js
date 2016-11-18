@@ -231,9 +231,7 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
         if (data) {
             var session = this.sessionMgrObject().searchSessionBySessionId(data.session_id);
             if (session) {
-                if (data.res_data) {
-                    session.receiveData(data.res_data);
-                }
+                session.receiveData(data.res_data);
             }
         }
     };
@@ -244,9 +242,7 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
         if (data) {
             var session = this.sessionMgrObject().searchSessionBySessionId(data.session_id);
             if (session) {
-                if (data.res_data) {
-                    session.receiveData(data.res_data);
-                }
+                session.receiveData(data.res_data);
             }
         }
     };
