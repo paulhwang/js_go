@@ -14,6 +14,10 @@ function SessionMgrObject(link_object_val) {
         this.theSize = 0;
     };
 
+    this.debugMe = function () {
+        return true;
+    };
+
     this.objectName = function () {
         return "SessionMgrObject";
     };
@@ -119,6 +123,10 @@ function SessionMgrObject(link_object_val) {
     };
 
     this.abendIt = function () {
+        if (!this.debugMe()) {
+            return;
+        }
+
         var i = 0;
         var session = this.head();
         while (session) {

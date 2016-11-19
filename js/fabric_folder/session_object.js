@@ -163,10 +163,6 @@ function SessionObject(session_mgr_val, session_id_val) {
         return ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.destructor = function () {
-        window.clearInterval(this.updateNameListTimer);
-    };
-
     this.init__(session_mgr_val, session_id_val);
 }
 

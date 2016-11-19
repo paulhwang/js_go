@@ -52,8 +52,8 @@ function AjaxObject(root_object_val) {
     this.setupReceiveAjaxResponse = function () {
         var this0 = this;
         this.httpGetRequest().onreadystatechange = function() {
-            if ((this0.httpGetRequest().readyState === 4) && (this0.httpGetRequest().status === 200)) {
-                this0.debug(false, "setupReceiveAjaxResponse", "json_str= " + this0.httpGetRequest().responseText);
+            if ((this0.httpGetRequest().readyState === 4) &&
+                (this0.httpGetRequest().status === 200)) {
                 this0.switchObject().switchAjaxResponseData(this0.httpGetRequest().responseText);
             }
         };
