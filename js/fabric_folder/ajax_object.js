@@ -15,7 +15,7 @@ function AjaxObject(root_object_val) {
         this.theCallbackArray = [];
         this.theHttpPostRequest = new XMLHttpRequest();
         this.theHttpGetRequest = new XMLHttpRequest();
-        this.waitOnreadyStateChange(this.httpGetRequest());
+        this.receiveAjaxResponse();
     };
 
     this.objectName = function () {
@@ -59,26 +59,6 @@ function AjaxObject(root_object_val) {
 
     this.incrementPacketId = function () {
         this.thePacketId += 1;
-    };
-
-    this.transmitAjaxRequest = function (output_val) {
-        this.httpGetRequest().open("GET", this.ajaxRoute(), true);
-        this.httpGetRequest().setRequestHeader("X-Requested-With", "XMLHttpRequest");
-        this.httpGetRequest().setRequestHeader("Content-Type", this.jsonContext());
-        this.httpGetRequest().setRequestHeader("gorequest", output_val);
-        this.httpGetRequest().setRequestHeader("GOPACKETID", this.packetId());
-        this.incrementPacketId();
-        this.httpGetRequest().send(null);
-    };
-
-    this.waitOnreadyStateChange = function (request_val) {
-        var this0 = this;
-        request_val.onreadystatechange = function() {
-            if ((request_val.readyState === 4) && (request_val.status === 200)) {
-                this0.debug(false, "waitOnreadyStateChange", "json_str= " + request_val.responseText);
-                this0.switchObject().switchAjaxResponseData(request_val.responseText);
-            }
-        };
     };
 
     this.setupLink = function (root_val) {
@@ -159,6 +139,26 @@ function AjaxObject(root_object_val) {
         session_val.incrementXmtSeq();
         this.debug(true, "putSessionData", "output=" + output);
         this.transmitAjaxRequest(output);
+    };
+
+    this.transmitAjaxRequest = function (output_val) {
+        this.httpGetRequest().open("GET", this.ajaxRoute(), true);
+        this.httpGetRequest().setRequestHeader("X-Requested-With", "XMLHttpRequest");
+        this.httpGetRequest().setRequestHeader("Content-Type", this.jsonContext());
+        this.httpGetRequest().setRequestHeader("gorequest", output_val);
+        this.httpGetRequest().setRequestHeader("GOPACKETID", this.packetId());
+        this.incrementPacketId();
+        this.httpGetRequest().send(null);
+    };
+
+    this.receiveAjaxResponse = function () {
+        var this0 = this;
+        this.httpGetRequest().onreadystatechange = function() {
+            if ((this0.httpGetRequest().readyState === 4) && (this0.httpGetRequest().status === 200)) {
+                this0.debug(false, "receiveAjaxResponse", "json_str= " + this0.httpGetRequest().responseText);
+                this0.switchObject().switchAjaxResponseData(this0.httpGetRequest().responseText);
+            }
+        };
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
