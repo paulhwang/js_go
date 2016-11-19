@@ -12,6 +12,10 @@ function SwitchObject(root_object_val) {
         this.initSwitchTable();
     };
 
+    this.debugInput = function () {
+        return false;
+    };
+
     this.objectName = function () {
         return "SwitchObject";
     };
@@ -53,13 +57,13 @@ function SwitchObject(root_object_val) {
     };
 
     this.setupLinkResponse = function (input_val) {
-        this.debug(true, "setupLinkResponse", "input_val=" + input_val);
+        this.debug_(true, this.debugInput(), "setupLinkResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         this.linkMgrObject().mallocLinkAndInsert(data.my_name, data.link_id);
     };
 
     this.getLinkDataResponse = function (input_val) {
-        this.debug(false, "getLinkDataResponse", "input_val=" + input_val);
+        this.debug_(false, this.debugInput(), "getLinkDataResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         if (data) {
             var link = this.linkMgrObject().searchLinkByLinkId(data.link_id);
@@ -70,7 +74,7 @@ function SwitchObject(root_object_val) {
     };
 
     this.getNameListResponse = function (input_val) {
-        this.debug(true, "getNameListResponse", "input_val=" + input_val);
+        this.debug_(true, this.debugInput(), "getNameListResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         if (data) {
             var link = this.linkMgrObject().searchLinkByLinkId(data.link_id);
@@ -81,7 +85,7 @@ function SwitchObject(root_object_val) {
     };
 
     this.setupSessionResponse = function (input_val) {
-        this.debug(true, "setupSessionResponse", "input_val=" + input_val);
+        this.debug_(true, this.debugInput(), "setupSessionResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         if (data) {
             var link = this.linkMgrObject().searchLinkByLinkId(data.link_id);
@@ -92,7 +96,7 @@ function SwitchObject(root_object_val) {
     };
 
     this.setupSessionReplyResponse = function (input_val) {
-        this.debug(true, "setupSessionReplyResponse", "input_val=" + input_val);
+        this.debug_(true, this.debugInput(), "setupSessionReplyResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         if (data) {
             var link = this.linkMgrObject().searchLinkByLinkId(data.link_id);
@@ -103,7 +107,7 @@ function SwitchObject(root_object_val) {
     };
 
     this.putSessionDataResponse = function (input_val) {
-        this.debug(true, "putSessionDataResponse", "input_val=" + input_val);
+        this.debug_(true, this.debugInput(), "putSessionDataResponse", "input_val=" + input_val);
         if (!input_val) {
             return;
         }
@@ -118,7 +122,7 @@ function SwitchObject(root_object_val) {
     };
 
     this.getSessionDataResponse = function (input_val) {
-        this.debug(true, "getSessionDataResponse", "input_val=" + input_val);
+        this.debug_(true, this.debugInput(), "getSessionDataResponse", "input_val=" + input_val);
         if (!input_val) {
             return;
         }
@@ -132,6 +136,12 @@ function SwitchObject(root_object_val) {
         }
     };
  
+    this.debug_ = function (debug_val, debug_val_, str1_val, str2_val) {
+        if (debug_val && debug_val_) {
+            this.logit(str1_val, str2_val);
+        }
+    };
+
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
             this.logit(str1_val, str2_val);

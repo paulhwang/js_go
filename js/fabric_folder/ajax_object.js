@@ -18,6 +18,10 @@ function AjaxObject(root_object_val) {
         return "AjaxObject";
     };
 
+    this.debugOutput = function () {
+        return false;
+    };
+
     this.rootObject = function () {
         return this.theRootObject;
     };
@@ -74,7 +78,7 @@ function AjaxObject(root_object_val) {
                         command: "setup_link",
                         my_name: root_val.myName(),
                         });
-        this.debug(true, "setupLink", "output=" + output);
+        this.debug_(true, this.debugOutput(), "setupLink", "output=" + output);
         this.transmitAjaxRequest(output);
     };
 
@@ -84,7 +88,7 @@ function AjaxObject(root_object_val) {
                         my_name: link_val.myName(),
                         link_id: link_val.linkId(),
                         });
-        this.debug(false, "getLinkData", "output=" + output);
+        this.debug_(false, this.debugOutput(), "getLinkData", "output=" + output);
         this.transmitAjaxRequest(output);
     };
 
@@ -94,7 +98,7 @@ function AjaxObject(root_object_val) {
                         my_name: link_val.myName(),
                         link_id: link_val.linkId(),
                         });
-        this.debug(true, "getNameList", "output=" + output);
+        this.debug_(true, this.debugOutput(), "getNameList", "output=" + output);
         this.transmitAjaxRequest(output);
     };
 
@@ -106,7 +110,7 @@ function AjaxObject(root_object_val) {
                         his_name: his_name_val,
                         topic_data: topic_data_val,
                         });
-        this.debug(true, "setupSession", "output=" + output);
+        this.debug_(true, this.debugOutput(), "setupSession", "output=" + output);
         this.transmitAjaxRequest(output);
     };
 
@@ -120,7 +124,7 @@ function AjaxObject(root_object_val) {
                         accept: "yes",
                         topic_data: data.topic_data,
                         });
-        this.debug(true, "setupSessionReply", "output=" + output);
+        this.debug_(true, this.debugOutput(), "setupSessionReply", "output=" + output);
         this.transmitAjaxRequest(output);
     };
 
@@ -130,7 +134,7 @@ function AjaxObject(root_object_val) {
                         link_id: session_val.linkObject().linkId(),
                         session_id: session_val.sessionId(),
                         });
-        this.debug(true, "getSessionData", "output=" + output);
+        this.debug_(true, this.debugOutput(), "getSessionData", "output=" + output);
         this.transmitAjaxRequest(output);
     };
 
@@ -145,8 +149,14 @@ function AjaxObject(root_object_val) {
                         data: data_val,
                         });
         session_val.incrementXmtSeq();
-        this.debug(true, "putSessionData", "output=" + output);
+        this.debug_(true, this.debugOutput(), "putSessionData", "output=" + output);
         this.transmitAjaxRequest(output);
+    };
+
+    this.debug_ = function (debug_val, debug_val_, str1_val, str2_val) {
+        if (debug_val && debug_val_) {
+            this.logit(str1_val, str2_val);
+        }
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
