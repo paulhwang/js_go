@@ -180,7 +180,7 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
             color = $(".play_color_section select").val();
             komi = $(".komi_section select").val();
             handicap = $(".handicap_section select").val();
-            this0.debug(true, "getConfigAndSetupSession", " my_name=" + this0.myName() +
+            this0.debug(false, "getConfigAndSetupSession", " my_name=" + this0.myName() +
                                             " his_name=" + his_name +
                                             " board_size=" + size +
                                             " color=" + color +

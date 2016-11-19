@@ -9,10 +9,16 @@ function GoConfigObject(container_val, config_val, initiater_val) {
 
     this.init__ = function (container_val, config_val, initiater_val) {
         this.theContainerObject = container_val;
-        if (config_val) {
-            this.setupConfiguration(config_val, initiater_val);
+        this.debug(false, "setupConfiguration", "config=" + config_val);
+        var config = JSON.parse(config_val);
+        this.setBoardSize(config.board_size);
+        this.setKomiPoint(config.komi);
+        this.setHandicapPoint(config.handicap);
+        this.setMyColor(config.color);
+        if (!initiater_val) {
+            this.setMyColor_(GO.getOppositeColor(this.myColor()));
         }
-        this.debug(true, "init__", "size=" + this.boardSize() + " color=" + this.myColor() + " handicap=" + this.handicapPoint());
+        this.debug(false, "init__", "size=" + this.boardSize() + " color=" + this.myColor() + " handicap=" + this.handicapPoint());
     };
 
     this.objectName = function () {
@@ -118,34 +124,12 @@ function GoConfigObject(container_val, config_val, initiater_val) {
         return true;
     };
 
-    this.createTwoBoardOpponentConfig = function () {
-        var config = new GoConfigObject(this.opponentName());
-        config.theOpponentName = this.myName();
-        config.theBoardSize = this.boardSize();
-        config.theMyColor = this.hisColor();
-        config.theHandicapPoint = this.handicapPoint();
-        config.theKomiPoint = this.komiPoint();
-        return config;
-    };
-
     this.isValidCoordinates = function (x_val, y_val) {
         return this.isValidCoordinate(x_val) && this.isValidCoordinate(y_val) ;
     };
 
     this.isValidCoordinate = function (coordinate_val) {
         return (0 <= coordinate_val) && (coordinate_val < this.boardSize());
-    };
-
-    this.setupConfiguration = function (config_val, initiater_val) {
-        this.debug(true, "setupConfiguration", "config=" + config_val);
-        var config = JSON.parse(config_val);
-        this.setBoardSize(config.board_size);
-        this.setKomiPoint(config.komi);
-        this.setHandicapPoint(config.handicap);
-        this.setMyColor(config.color);
-        if (!initiater_val) {
-            this.setMyColor_(GO.getOppositeColor(this.myColor()));
-        }
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

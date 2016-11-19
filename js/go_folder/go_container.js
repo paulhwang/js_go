@@ -9,12 +9,15 @@ function GoContainerObject(session_object_val) {
 
     this.init__ = function (session_object_val) {
         this.theSessionObject = session_object_val;
-        this.theConfigObject = new GoConfigObject(this);
         this.theUiObject = new GoUiObject(this);
-        this.theBoardObject = new GoBoardObject(this);
         this.theGameObject = new GoGameObject(this);
         this.thePortObject = new GoPortObject(this);
-        this.debug(true, "init__", "session=" + this.sessionObject().sessionName());
+        this.debug(false, "init__", "session=" + this.sessionObject().sessionName());
+    };
+
+    this.init___ = function (config_val, initiater_val) {
+        this.theConfigObject = new GoConfigObject(this, config_val, initiater_val);
+        this.theBoardObject = new GoBoardObject(this);
     };
 
     this.objectName = function () {
@@ -27,10 +30,6 @@ function GoContainerObject(session_object_val) {
 
     this.rootObject = function () {
         return this.sessionObject().rootObject();
-    };
-
-    this.configObject = function () {
-        return this.theConfigObject;
     };
 
     this.uiObject = function () {
@@ -51,6 +50,14 @@ function GoContainerObject(session_object_val) {
 
     this.portObject = function () {
         return this.thePortObject;
+    };
+
+    this.configObject = function () {
+        return this.theConfigObject;
+    };
+
+    this.setConfigObject = function (val) {
+        this.theConfigObject = val;
     };
 
     this.receiveData = function (res_data_val) {
