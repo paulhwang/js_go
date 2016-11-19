@@ -10,9 +10,6 @@ function AjaxObject(root_object_val) {
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
         this.thePacketId = 1;
-        this.theOustandingRequestCount = 0;
-        this.theCallbackIndex = 0;
-        this.theCallbackArray = [];
         this.theHttpGetRequest = new XMLHttpRequest();
         this.setupReceiveAjaxResponse();
     };
@@ -23,10 +20,6 @@ function AjaxObject(root_object_val) {
 
     this.rootObject = function () {
         return this.theRootObject;
-    };
-
-    this.utilObject = function () {
-        return this.rootObject().utilObject();
     };
 
     this.switchObject = function () {
