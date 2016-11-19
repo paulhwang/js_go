@@ -14,6 +14,7 @@ function GoContainerObject(session_object_val) {
         this.theBoardObject = new GoBoardObject(this);
         this.theGameObject = new GoGameObject(this);
         this.thePortObject = new GoPortObject(this);
+        this.debug(true, this.objectName(), "");
     };
 
     this.objectName = function () {

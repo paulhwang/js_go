@@ -15,6 +15,7 @@ function RootObject() {
         this.theMyName = "";
         this.theNameList = [];
         this.runRoot();
+        this.debug(false, this.objectName(), "");
     };
 
     this.objectName = function () {
@@ -59,7 +60,7 @@ function RootObject() {
         $(".prelude_holder button").on("click", function() {
             this0.setMyName($(".prelude_holder input").val());
             this0.setLanguageUsed($(".prelude_holder select").val());
-            this0.logit("runRoot", "my_name=" + this0.myName() + " language=" + this0.languageUsed());
+            this0.debug(false, "runRoot", "my_name=" + this0.myName() + " language=" + this0.languageUsed());
             if (this0.myName()) {
                 this0.ajaxObject().setupLink(this0);
             }

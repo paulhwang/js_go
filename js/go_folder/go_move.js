@@ -19,6 +19,7 @@ function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, container_val)
         } else {
             this.moveObjectDecode(str_val);
         }
+        this.debug(true, this.objectName(), "");
     };
 
     this.objectName = function () {

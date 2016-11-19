@@ -9,6 +9,7 @@ function GoConfigHtmlObject(root_html_val) {
 
     this.init__ = function (root_html_val) {
         this.theRootHtmlObject = root_html_val;
+        this.debug(false, this.objectName(), "");
     };
 
     this.objectName = function () {
@@ -19,8 +20,8 @@ function GoConfigHtmlObject(root_html_val) {
         return this.theRootHtmlObject;
     };
 
-    this.preludeObject = function () {
-        return this.rootHtmlObject().preludeObject();
+    this.rootObject = function () {
+        return this.rootHtmlObject().rootObject();
     };
 
     this.canvasWidth = function () {
@@ -28,7 +29,7 @@ function GoConfigHtmlObject(root_html_val) {
     };
 
     this.utilObject = function () {
-        return this.preludeObject().utilObject();
+        return this.rootObject().utilObject();
     };
 
     this.createSessionPeerSection = function (session_val) {
@@ -339,11 +340,11 @@ function GoConfigHtmlObject(root_html_val) {
     };
 
     this.logit = function (str1_val, str2_val) {
-        return this.utilObject().utilLogit(this.objectName() + "." + str1_val, str2_val);
+        return LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        return this.utilObject().utilabend(this.objectName() + "." + str1_val, str2_val);
+        return ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.init__(root_html_val);

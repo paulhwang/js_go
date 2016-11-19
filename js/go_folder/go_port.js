@@ -16,6 +16,7 @@ function GoPortObject(container_val) {
 
     this.init__ = function (container_val) {
         this.theContainerObject = container_val;
+        this.debug(true, this.objectName(), "");
     };
 
     this.objectName = function () {

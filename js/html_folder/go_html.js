@@ -4,39 +4,39 @@
  * File name: go_html.js
  */
 
-function GoHtmlObject(prelude_val) {
+function GoHtmlObject(root_object_val) {
     "use strict";
 
-    this.init__ = function (prelude_val) {
-        this.thePreludeObject = prelude_val;
+    this.init__ = function (root_object_val) {
+        this.theRootObject = root_object_val;
         this.theCanvasWidth = 432;
-
         this.thePreludeHolderOn = false;
         this.theTitleHolderOn = false;
         this.theConfigHolderOn = false;
         this.theCanvasHolderOn = false;
         this.theScoreHolderOn = false;
         this.theGoConfigHtmlObject = new GoConfigHtmlObject(this);
+        this.debug(false, this.objectName(), "");
     };
 
     this.objectName = function () {
         return "GoHtmlObject";
     };
 
-    this.preludeObject = function () {
-        return this.thePreludeObject;
+    this.rootObject = function () {
+        return this.theRootObject;
     };
 
     this.goConfigHtmlObject = function () {
         return this.theGoConfigHtmlObject;
     };
 
-    this.canvasWidth = function () {
-        return this.theCanvasWidth;
+    this.utilObject = function () {
+        return this.rootObject().utilObject();
     };
 
-    this.utilObject = function () {
-        return this.preludeObject().utilObject();
+    this.canvasWidth = function () {
+        return this.theCanvasWidth;
     };
 
     this.preludeHolderOn = function () {
@@ -393,13 +393,13 @@ function GoHtmlObject(prelude_val) {
     };
 
     this.logit = function (str1_val, str2_val) {
-        return this.utilObject().utilLogit(this.objectName() + "." + str1_val, str2_val);
+        return LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        return this.utilObject().utilabend(this.objectName() + "." + str1_val, str2_val);
+        return ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
     //this.createTitleHolder();
-    this.init__(prelude_val);
+    this.init__(root_object_val);
 }

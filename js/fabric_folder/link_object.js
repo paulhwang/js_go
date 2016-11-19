@@ -15,6 +15,7 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
         this.thePrev = null;
         this.theNext = null;
         this.ajaxObject().getLinkData(this);
+        this.debug(true, this.objectName(), "");
     };
 
     this.hisName = function () {//////////////////////
