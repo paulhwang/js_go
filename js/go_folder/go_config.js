@@ -4,12 +4,15 @@
  * File name: go_config.js
  */
 
-function GoConfigObject(container_val) {
+function GoConfigObject(container_val, config_val, initiater_val) {
     "use strict";
 
-    this.init__ = function (container_val) {
+    this.init__ = function (container_val, config_val, initiater_val) {
         this.theContainerObject = container_val;
-        this.debug(true, "init__", "");
+        if (config_val) {
+            this.setupConfiguration(config_val, initiater_val);
+        }
+        this.debug(true, "init__", "size=" + this.boardSize() + " color=" + this.myColor() + " handicap=" + this.handicapPoint());
     };
 
     this.objectName = function () {
@@ -159,5 +162,5 @@ function GoConfigObject(container_val) {
         return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(container_val);
+    this.init__(container_val, config_val, initiater_val);
 }
