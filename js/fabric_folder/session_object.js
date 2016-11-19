@@ -15,7 +15,7 @@ function SessionObject(session_mgr_val, session_id_val) {
         this.thePrev = null;
         this.theNext = null;
         this.initSwitchTable();
-        this.debug(true, this.objectName(), "");
+        this.debug(true, "init__", "session=" + this.sessionName());
     };
 
     this.objectName = function () {
@@ -104,6 +104,10 @@ function SessionObject(session_mgr_val, session_id_val) {
 
     this.sessionId = function () {
         return this.theSessionId;
+    };
+
+    this.sessionName = function () {
+        return  this.linkObject().linkId() + ":" + this.sessionId();
     };
 
     this.setSessionId = function (val) {

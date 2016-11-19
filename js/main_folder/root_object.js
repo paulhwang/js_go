@@ -15,7 +15,7 @@ function RootObject() {
         this.theMyName = "";
         this.theNameList = [];
         this.runRoot();
-        this.debug(false, this.objectName(), "");
+        this.debug(false, "init__", "");
     };
 
     this.objectName = function () {

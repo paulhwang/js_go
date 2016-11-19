@@ -9,7 +9,7 @@ function GoConfigHtmlObject(root_html_val) {
 
     this.init__ = function (root_html_val) {
         this.theRootHtmlObject = root_html_val;
-        this.debug(false, this.objectName(), "");
+        this.debug(false, "init__", "");
     };
 
     this.objectName = function () {

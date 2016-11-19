@@ -12,7 +12,7 @@ function LinkMgrObject(root_object_val) {
         this.theHead = null;
         this.theTail = null;
         this.theSize = 0;
-        this.debug(false, this.objectName(), "");
+        this.debug(false, "init__", "");
     };
 
     this.debugMe = function () {

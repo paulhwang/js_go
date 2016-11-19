@@ -16,7 +16,7 @@ function GoHtmlObject(root_object_val) {
         this.theCanvasHolderOn = false;
         this.theScoreHolderOn = false;
         this.theGoConfigHtmlObject = new GoConfigHtmlObject(this);
-        this.debug(false, this.objectName(), "");
+        this.debug(false, "init__", "");
     };
 
     this.objectName = function () {

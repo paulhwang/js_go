@@ -10,7 +10,7 @@ function SwitchObject(root_object_val) {
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
         this.initSwitchTable();
-        this.debug(false, this.objectName(), "");
+        this.debug(false, "init__", "");
     };
 
     this.debugInput = function () {

@@ -12,7 +12,7 @@ function SessionMgrObject(link_object_val) {
         this.theHead = null;
         this.theTail = null;
         this.theSize = 0;
-        this.debug(true, this.objectName(), "");
+        this.debug(false, "init__", "link_id=" + this.linkObject().linkId());
     };
 
     this.debugMe = function () {

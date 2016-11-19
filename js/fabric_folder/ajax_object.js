@@ -12,7 +12,7 @@ function AjaxObject(root_object_val) {
         this.thePacketId = 1;
         this.theHttpGetRequest = new XMLHttpRequest();
         this.setupReceiveAjaxResponse();
-        this.debug(false, this.objectName(), "");
+        this.debug(false, "init__", "");
     };
 
     this.objectName = function () {
