@@ -18,7 +18,7 @@ function GoBoardObject(container_val) {
             i += 1;
         }
         this.resetBoardObjectData();
-        this.debug(true, this.objectName(), "");
+        this.debug(false, "init__", "");
     };
 
     this.objectName = function () {

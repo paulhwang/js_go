@@ -12,7 +12,7 @@ function GoUiObject(container_val) {
         this.theLastMouseX = 9;
         this.theLastMouseY = 9;
         this.theEncodedMoveList = null;
-        this.debug(true, this.objectName(), "");
+        this.debug(false, "init__", "");
     };
 
     this.objectName = function () {
