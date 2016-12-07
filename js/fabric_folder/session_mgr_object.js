@@ -11,9 +11,6 @@ function SessionMgrObject(link_object_val) {
         this.theLinkObject = link_object_val;
         this.theSessionIndexArray = [0];
         this.theSessionTableArray = [null];
-        this.theHead = null;
-        this.theTail = null;
-        this.theSize = 0;
         this.debug(false, "init__", "link_id=" + this.linkObject().linkId());
     };
 
@@ -28,34 +25,6 @@ function SessionMgrObject(link_object_val) {
     this.linkObject = function () {
         return this.theLinkObject;
     };
-
-    this.head = function () {
-        return this.theHead;
-    }
-
-    this.setHead = function (val) {
-        this.theHead = val;
-    }
-
-    this.tail = function () {
-        return this.theTail;
-    }
-
-    this.setTail = function (val) {
-        this.theTail = val;
-    }
-
-    this.size = function () {
-        return this.theSize;
-    }
-
-    this.incrementSize = function () {
-        this.theSize += 1;
-    }
-
-    this.decrementSize = function () {
-        this.theSize -= 1;
-    }
 
     this.sessionIndexArray = function () {
         return this.theSessionIndexArray;
@@ -90,32 +59,6 @@ function SessionMgrObject(link_object_val) {
         } else {
             var session =this.sessionTableArray()[index];
             return session;
-        }
-    };
-
-    this.abendIt = function () {
-        if (!this.debugMe()) {
-            return;
-        }
-
-        var i = 0;
-        var session = this.head();
-        while (session) {
-            session = session.next();
-            i += 1;
-        }
-        if (i !== this.size()) {
-            this.abend("abendIt", "head: size=" + this.size() + " i=" + i);
-        }
-
-        i = 0;
-        session = this.tail();
-        while (session) {
-            session = session.prev();
-            i += 1;
-        }
-        if (i !== this.size()) {
-            this.abend("abendIt", "tail: size=" + this.size() + " i=" + i);
         }
     };
 
