@@ -47,6 +47,10 @@ function SwitchObject(root_object_val) {
 
     this.switchAjaxResponseData = function (response_val) {
         var response = JSON.parse(response_val);
+        if (response.command === "setup_link") {
+            this.setupLinkResponse(response.data);
+            return;
+        }
         var func = this.switchTable()[response.command];
         if (func) {
             func.bind(this)(response.data);
