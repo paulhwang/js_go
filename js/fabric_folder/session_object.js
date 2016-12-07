@@ -4,11 +4,11 @@
  * File name: SessionObject.js
  */
 
-function SessionObject(session_mgr_val, session_id_val) {
+function SessionObject(link_object_val, session_id_val) {
     "use strict";
 
-    this.init__ = function (session_mgr_val, session_id_val) {
-        this.theSessionMgrObject = session_mgr_val;
+    this.init__ = function (link_object_val, session_id_val) {
+        this.theLinkObject = link_object_val;
         this.theSessionId = session_id_val;
         this.theXmtSeq = 0;
         this.theRcvSeq = 0;
@@ -20,16 +20,12 @@ function SessionObject(session_mgr_val, session_id_val) {
         return "SessionObject";
     };
 
-    this.sessionMgrObject = function () {
-        return this.theSessionMgrObject;
+    this.linkObject = function () {
+        return this.theLinkObject;
     };
 
     this.sessionId = function () {
         return this.theSessionId;
-    };
-
-    this.linkObject = function () {
-        return this.sessionMgrObject().linkObject();
     };
 
     this.rootObject = function () {
@@ -150,6 +146,6 @@ function SessionObject(session_mgr_val, session_id_val) {
         return ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(session_mgr_val, session_id_val);
+    this.init__(link_object_val, session_id_val);
 }
 

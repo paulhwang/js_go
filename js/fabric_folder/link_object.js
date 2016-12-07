@@ -14,6 +14,8 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
         this.theSessionMgrObject = new SessionMgrObject(this);
         this.thePrev = null;
         this.theNext = null;
+        this.theSessionIndexArray = [0];
+        this.theSessionTableArray = [null];
         this.ajaxObject().getLinkData(this);
         this.debug(false, "init__", "link_id=" + this.linkId());
     };
@@ -70,6 +72,22 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
         return this.theLinkId;
     };
 
+    this.sessionIndexArray = function () {
+        return this.theSessionIndexArray;
+    };
+
+    this.sessionTableArray = function () {
+        return this.theSessionTableArray;
+    };
+
+    this.sessionTableArrayLength = function () {
+        return this.sessionTableArray().length;
+    };
+
+    this.sessionTableArrayElement = function (val) {
+        return this.sessionTableArray()[val];
+    };
+
     this.setLinkId = function (val) {
         if (this.linkId()) {
             this.abend("setLinkId", "already exist");
@@ -103,6 +121,26 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
 
     this.setNameListElement = function (index_val, data_val) {
         this.nameList()[index_val] = data_val;
+    };
+
+    this.mallocSessionAndInsert = function (session_id_val) {
+        var session = new SessionObject(this, session_id_val);
+        if (!session) {
+            return null;
+        }
+        this.sessionIndexArray().push(session.sessionId());
+        this.sessionTableArray().push(session);
+        return session;
+    };
+
+    this.getSession = function (session_id_val) {
+        var index = this.sessionIndexArray().indexOf(session_id_val);
+        if (index === -1) {
+            return null;
+        } else {
+            var session =this.sessionTableArray()[index];
+            return session;
+        }
     };
 
     this.getLinkDataResponse = function (input_val) {
@@ -200,7 +238,7 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
         this.debug(false, "setupSessionResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         if (data) {
-            var session = this.sessionMgrObject().mallocSessionAndInsert(data.session_id);
+            var session = this.mallocSessionAndInsert(data.session_id);
             if (data.topic_data) {
                 session.appendTopicToSession(data.topic_data, data.his_name, true);
             }
@@ -211,7 +249,7 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
         this.debug(true, "setupSessionReplyResponse", "data=" + json_data_val);
         var data = JSON.parse(json_data_val);
         if (data) {
-            var session = this.sessionMgrObject().mallocSessionAndInsert(data.session_id);
+            var session = this.mallocSessionAndInsert(data.session_id);
             if (data.topic_data) {
                 session.appendTopicToSession(data.topic_data, data.his_name, false);
             }
@@ -222,7 +260,7 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
         this.debug(false, "putSessionDataResponse", "data=" + json_data_val);
         var data = JSON.parse(json_data_val);
         if (data) {
-            var session = this.sessionMgrObject().getSession(data.session_id);
+            var session = this.getSession(data.session_id);
             if (session) {
                 session.receiveData(data.res_data);
             }
@@ -233,7 +271,7 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
         this.debug(false, "getSessionDataResponse", "data=" + json_data_val);
         var data = JSON.parse(json_data_val);
         if (data) {
-            var session = this.sessionMgrObject().searchSessionBySessionId(data.session_id);
+            var session = this.getSession(data.session_id);
             if (session) {
                 session.receiveData(data.res_data);
             }
