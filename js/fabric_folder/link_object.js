@@ -226,7 +226,7 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
         this.debug(false, "putSessionDataResponse", "data=" + json_data_val);
         var data = JSON.parse(json_data_val);
         if (data) {
-            var session = this.sessionMgrObject().searchSessionBySessionId(data.session_id);
+            var session = this.sessionMgrObject().getSession(data.session_id);
             if (session) {
                 session.receiveData(data.res_data);
             }

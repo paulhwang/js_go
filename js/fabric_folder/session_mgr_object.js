@@ -9,6 +9,8 @@ function SessionMgrObject(link_object_val) {
 
     this.init__ = function (link_object_val) {
         this.theLinkObject = link_object_val;
+        this.theSessionIndexArray = [0];
+        this.theSessionTableArray = [null];
         this.theHead = null;
         this.theTail = null;
         this.theSize = 0;
@@ -55,12 +57,33 @@ function SessionMgrObject(link_object_val) {
         this.theSize -= 1;
     }
 
+    this.sessionIndexArray = function () {
+        return this.theSessionIndexArray;
+    };
+
+    this.sessionTableArray = function () {
+        return this.theSessionTableArray;
+    };
+
+    this.sessionTableArrayLength = function () {
+        return this.sessionTableArray().length;
+    };
+
+    this.sessionTableArrayElement = function (val) {
+        return this.sessionTableArray()[val];
+    };
+
     this.mallocSessionAndInsert = function (session_id_val) {
+
         var session = new SessionObject(this, session_id_val);
         if (!session) {
             return null;
         }
         this.insertSessionToList(session);
+
+        this.sessionIndexArray().push(session.sessionId());
+        this.sessionTableArray().push(session);
+
         return session;
     };
 
@@ -112,15 +135,14 @@ function SessionMgrObject(link_object_val) {
         this.abendIt();
     };
 
-    this.searchSessionBySessionId = function (session_id_val) {
-        var session = this.head();
-        while (session) {
-            if (session.sessionId() === session_id_val) {
-                return session;
-            }
-            session = session.next();
+    this.getSession = function (session_id_val) {
+        var index = this.sessionIndexArray().indexOf(session_id_val);
+        if (index === -1) {
+            return null;
+        } else {
+            var session =this.sessionTableArray()[index];
+            return session;
         }
-        return null;
     };
 
     this.abendIt = function () {
