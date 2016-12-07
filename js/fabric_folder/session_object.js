@@ -24,6 +24,10 @@ function SessionObject(session_mgr_val, session_id_val) {
         return this.theSessionMgrObject;
     };
 
+    this.sessionId = function () {
+        return this.theSessionId;
+    };
+
     this.linkObject = function () {
         return this.sessionMgrObject().linkObject();
     };
@@ -82,10 +86,6 @@ function SessionObject(session_mgr_val, session_id_val) {
 
     this.incrementRcvSeq = function () {
         this.theRcvSeq += 1;
-    };
-
-    this.sessionId = function () {
-        return this.theSessionId;
     };
 
     this.sessionName = function () {
