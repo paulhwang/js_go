@@ -10,7 +10,6 @@ function RootObject() {
     this.init__ = function () {
         this.theSwitchObject = new SwitchObject(this);
         this.theAjaxObject = new AjaxObject(this);
-        this.theLinkMgrObject = new LinkMgrObject(this);
         this.theHtmlObject = new GoHtmlObject(this);
         this.theLinkObject = null;
         this.theMyName = "";
@@ -33,10 +32,6 @@ function RootObject() {
 
     this.ajaxObject = function () {
         return this.theAjaxObject;
-    };
-
-    this.linkMgrObject = function () {
-        return this.theLinkMgrObject;
     };
 
     this.linkObject = function () {
