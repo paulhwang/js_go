@@ -27,22 +27,6 @@ function SwitchObject(root_object_val) {
     this.linkObject = function () {
         return this.rootObject().linkObject();
     };
-
-    this.switchAjaxResponseData = function (json_response_val) {
-        var response = JSON.parse(json_response_val);
-        if (response.command === "setup_link") {
-            this.setupLinkResponse(response.data);
-        } else {
-            this.linkObject().parseAjaxResponseData(response);
-        }
-    };
-
-    this.setupLinkResponse = function (input_val) {
-        this.debug(true, "setupLinkResponse", "input_val=" + input_val);
-        var data = JSON.parse(input_val);
-        this.rootObject().mallocLinkObject(data.my_name, data.link_id);
-    };
-
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
             this.logit(str1_val, str2_val);

@@ -27,8 +27,8 @@ function AjaxObject(root_object_val) {
         return this.theRootObject;
     };
 
-    this.switchObject = function () {
-        return this.rootObject().switchObject();
+    this.linkObject = function () {
+        return this.rootObject().linkObject();
     };
 
     this.ajaxRoute = function () {
@@ -59,9 +59,20 @@ function AjaxObject(root_object_val) {
         this.httpGetRequest().onreadystatechange = function() {
             if ((this0.httpGetRequest().readyState === 4) &&
                 (this0.httpGetRequest().status === 200)) {
-                this0.switchObject().switchAjaxResponseData(this0.httpGetRequest().responseText);
+                this0.switchAjaxResponseData(this0.httpGetRequest().responseText);
             }
         };
+    };
+
+    this.switchAjaxResponseData = function (json_response_val) {
+        var response = JSON.parse(json_response_val);
+        if (response.command === "setup_link") {
+            this.debug(true, "switchAjaxResponseData", "command=" + response.command + " data=" + response.data);
+            var data = JSON.parse(response.data);
+            this.rootObject().mallocLinkObject(data.my_name, data.link_id);
+        } else {
+            this.linkObject().parseAjaxResponseData(response);
+        }
     };
 
     this.transmitAjaxRequest = function (output_val) {
