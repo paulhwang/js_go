@@ -13,7 +13,6 @@ function RootObject() {
         this.theHtmlObject = new GoHtmlObject(this);
         this.theLinkObject = null;
         this.theMyName = "";
-        this.theNameList = [];
         this.runRoot();
         this.debug(false, "init__", "");
     };
