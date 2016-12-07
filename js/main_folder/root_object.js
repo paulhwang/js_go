@@ -59,12 +59,7 @@ function RootObject() {
     };
 
     this.mallocLinkObject = function (my_name_val, link_id_val) {
-        var link = new LinkObject(this, my_name_val, link_id_val);
-        if (!link) {
-            return null;
-        }
-        this.setLinkObject(link);
-        return link;
+        this.setLinkObject(new LinkObject(this, my_name_val, link_id_val));
     };
 
     this.runRoot = function () {
