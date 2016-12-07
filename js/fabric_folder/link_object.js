@@ -72,6 +72,14 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
         this.theLinkId = val;
     };
 
+    this.verifyLinkId = function (id_val) {
+        if (this.linkId() === id_val) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
     this.linkUpdateInterval = function () {
         return this.theLinkUpdateInterval;
     };
