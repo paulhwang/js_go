@@ -49,7 +49,7 @@ function SwitchObject(root_object_val) {
         if (response.command === "setup_link") {
             this.setupLinkResponse(response.data);
         } else {
-            this.parseAjaxResponseData(response);
+            this.linkObject().parseAjaxResponseData(response);
         }
     };
 

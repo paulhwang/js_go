@@ -11,6 +11,7 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
         this.theRootObject = root_object_val;
         this.theMyName = my_name_val;
         this.theLinkId = link_id_val;
+        this.initSwitchTable();
         this.theSessionIndexArray = [0];
         this.theSessionTableArray = [null];
         this.ajaxObject().getLinkData(this);
@@ -80,6 +81,10 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
         }
     };
 
+    this.switchTable = function () {
+        return this.theSwitchTable;
+    }
+
     this.linkUpdateInterval = function () {
         return this.theLinkUpdateInterval;
     };
@@ -125,6 +130,28 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
         } else {
             var session =this.sessionTableArray()[index];
             return session;
+        }
+    };
+
+    this.initSwitchTable = function () {
+        this.theSwitchTable = {
+            "get_link_data": this.getLinkDataResponse,
+            "get_name_list": this.getNameListResponse,
+            "setup_session": this.setupSessionResponse,
+            "setup_session_reply": this.setupSessionReplyResponse,
+            "get_session_data": this.getSessionDataResponse,
+            "put_session_data": this.putSessionDataResponse,
+        };
+    };
+
+    this.parseAjaxResponseData = function (response_val) {
+        var func = this.switchTable()[response_val.command];
+        if (func) {
+            func.bind(this)(response_val.data);
+        }
+        else {
+            this.abend("switchAjaxResponseData", "bad command=" + response_val.command);
+            return;
         }
     };
 
