@@ -145,6 +145,15 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
     };
 
     this.parseAjaxResponseData = function (response_val) {
+        var data = JSON.parse(response_val.data);
+        if (!data) {
+            return;
+        }
+        if (!this.verifyLinkId(data.link_id)) {
+            this.abend("parseAjaxResponseData", "link_id=" + data.link_id);
+            return;
+        }
+
         var func = this.switchTable()[response_val.command];
         if (func) {
             func.bind(this)(response_val.data);
