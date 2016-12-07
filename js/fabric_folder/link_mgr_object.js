@@ -9,6 +9,7 @@ function LinkMgrObject(root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
+        this.theLinkObject = null;
         this.theHead = null;
         this.theTail = null;
         this.theSize = 0;
@@ -25,6 +26,14 @@ function LinkMgrObject(root_object_val) {
 
     this.rootObject = function () {
         return this.theRootObject;
+    };
+
+    this.linkObject = function () {
+        return this.theLinkObject;
+    };
+
+    this.setLinkObject = function (val) {
+        this.theLinkObject = val;
     };
 
     this.head = function () {
