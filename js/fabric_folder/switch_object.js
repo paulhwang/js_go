@@ -35,7 +35,6 @@ function SwitchObject(root_object_val) {
 
     this.initSwitchTable = function () {
         this.theSwitchTable = {
-            "setup_link": this.setupLinkResponse,
             "get_link_data": this.getLinkDataResponse,
             "get_name_list": this.getNameListResponse,
             "setup_session": this.setupSessionResponse,
@@ -45,18 +44,22 @@ function SwitchObject(root_object_val) {
         };
     };
 
-    this.switchAjaxResponseData = function (response_val) {
-        var response = JSON.parse(response_val);
+    this.switchAjaxResponseData = function (json_response_val) {
+        var response = JSON.parse(json_response_val);
         if (response.command === "setup_link") {
             this.setupLinkResponse(response.data);
-            return;
+        } else {
+            this.parseAjaxResponseData(response);
         }
-        var func = this.switchTable()[response.command];
+    };
+
+    this.parseAjaxResponseData = function (response_val) {
+        var func = this.switchTable()[response_val.command];
         if (func) {
-            func.bind(this)(response.data);
+            func.bind(this)(response_val.data);
         }
         else {
-            this.abend("switchAjaxResponseData", "bad command=" + response.command);
+            this.abend("switchAjaxResponseData", "bad command=" + response_val.command);
             return;
         }
     };
