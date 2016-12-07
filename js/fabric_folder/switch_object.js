@@ -67,7 +67,11 @@ function SwitchObject(root_object_val) {
         this.debug_(false, this.debugInput(), "getLinkDataResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         if (data) {
-            var link = this.linkMgrObject().searchLinkByLinkId(data.link_id);
+            if (this.linkMgrObject().linkObject().linkId() !== data.link_id) {
+                this.abend("getLinkDataResponse", "linkId=" + data.link_id);
+                return;
+            }
+            var link = this.linkMgrObject().linkObject();
             if (link) {
                 link.getLinkDataResponse(input_val);
             }
@@ -78,7 +82,11 @@ function SwitchObject(root_object_val) {
         this.debug_(true, this.debugInput(), "getNameListResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         if (data) {
-            var link = this.linkMgrObject().searchLinkByLinkId(data.link_id);
+            if (this.linkMgrObject().linkObject().linkId() !== data.link_id) {
+                this.abend("getNameListResponse", "linkId=" + data.link_id);
+                return;
+            }
+            var link = this.linkMgrObject().linkObject();
             if (link) {
                 link.getNameListResponse(input_val);
             }
@@ -89,7 +97,11 @@ function SwitchObject(root_object_val) {
         this.debug_(true, this.debugInput(), "setupSessionResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         if (data) {
-            var link = this.linkMgrObject().searchLinkByLinkId(data.link_id);
+            if (this.linkMgrObject().linkObject().linkId() !== data.link_id) {
+                this.abend("setupSessionResponse", "linkId=" + data.link_id);
+                return;
+            }
+            var link = this.linkMgrObject().linkObject();
             if (link) {
                 link.setupSessionResponse(input_val);
             }
@@ -100,7 +112,7 @@ function SwitchObject(root_object_val) {
         this.debug_(true, this.debugInput(), "setupSessionReplyResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         if (data) {
-            var link = this.linkMgrObject().searchLinkByLinkId(data.link_id);
+            var link = this.linkMgrObject().linkObject();
             if (link) {
                 link.setupSessionReplyResponse(input_val);
             }
@@ -115,7 +127,7 @@ function SwitchObject(root_object_val) {
 
         var data = JSON.parse(input_val);
         if (data) {
-            var link = this.linkMgrObject().searchLinkByLinkId(data.link_id);
+            var link = this.linkMgrObject().linkObject();
             if (link) {
                 link.putSessionDataResponse(input_val);
             }
@@ -130,7 +142,7 @@ function SwitchObject(root_object_val) {
 
         var data = JSON.parse(input_val);
         if (data) {
-            var link = this.linkMgrObject().searchLinkByLinkId(data.link_id);
+            var link = this.linkMgrObject().linkObject();
             if (link) {
                 link.getSessionDataResponse(input_val);
             }
