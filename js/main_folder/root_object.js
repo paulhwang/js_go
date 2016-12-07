@@ -12,6 +12,7 @@ function RootObject() {
         this.theAjaxObject = new AjaxObject(this);
         this.theLinkMgrObject = new LinkMgrObject(this);
         this.theHtmlObject = new GoHtmlObject(this);
+        this.theLinkObject = null;
         this.theMyName = "";
         this.theNameList = [];
         this.runRoot();
@@ -38,6 +39,14 @@ function RootObject() {
         return this.theLinkMgrObject;
     };
 
+    this.linkObject = function () {
+        return this.theLinkObject;
+    };
+
+    this.setLinkObject = function (val) {
+        this.theLinkObject = val;
+    };
+
     this.myName = function () {
         return this.theMyName;
     };
@@ -52,6 +61,15 @@ function RootObject() {
 
     this.setLanguageUsed = function (val) {
         this.theLanguageUsed = val;
+    };
+
+    this.mallocLinkObject = function (my_name_val, link_id_val) {
+        var link = new LinkObject(this, my_name_val, link_id_val);
+        if (!link) {
+            return null;
+        }
+        this.setLinkObject(link);
+        return link;
     };
 
     this.runRoot = function () {

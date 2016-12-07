@@ -4,11 +4,11 @@
  * File name: LinkObject.js
  */
 
-function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
+function LinkObject(root_object_val, my_name_val, link_id_val) {
     "use strict";
 
-    this.init__ = function (link_mgr_object_val, my_name_val, link_id_val) {
-        this.theLinkMgrObject = link_mgr_object_val;
+    this.init__ = function (root_object_val, my_name_val, link_id_val) {
+        this.theRootObject = root_object_val;
         this.theMyName = my_name_val;
         this.theLinkId = link_id_val;
         this.theSessionMgrObject = new SessionMgrObject(this);
@@ -30,16 +30,12 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
         return "LinkObject";
     };
 
-    this.linkMgrObject = function () {
-        return this.theLinkMgrObject;
+    this.rootObject = function () {
+        return this.theRootObject;
     };
 
     this.sessionMgrObject = function () {
         return this.theSessionMgrObject;
-    };
-
-    this.rootObject = function () {
-        return this.linkMgrObject().rootObject();
     };
 
     this.htmlObject = function () {
@@ -258,6 +254,6 @@ function LinkObject(link_mgr_object_val, my_name_val, link_id_val) {
         return ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(link_mgr_object_val, my_name_val, link_id_val);
+    this.init__(root_object_val, my_name_val, link_id_val);
 }
 

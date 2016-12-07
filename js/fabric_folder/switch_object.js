@@ -25,8 +25,8 @@ function SwitchObject(root_object_val) {
         return this.theRootObject;
     };
 
-    this.linkMgrObject = function () {
-        return this.rootObject().linkMgrObject();
+    this.linkObject = function () {
+        return this.rootObject().linkObject();
     };
 
     this.switchTable = function () {
@@ -60,21 +60,18 @@ function SwitchObject(root_object_val) {
     this.setupLinkResponse = function (input_val) {
         this.debug_(true, this.debugInput(), "setupLinkResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
-        this.linkMgrObject().mallocLinkAndInsert(data.my_name, data.link_id);
+        this.rootObject().mallocLinkObject(data.my_name, data.link_id);
     };
 
     this.getLinkDataResponse = function (input_val) {
         this.debug_(false, this.debugInput(), "getLinkDataResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         if (data) {
-            if (this.linkMgrObject().linkObject().linkId() !== data.link_id) {
+            if (this.linkObject().linkId() !== data.link_id) {
                 this.abend("getLinkDataResponse", "linkId=" + data.link_id);
                 return;
             }
-            var link = this.linkMgrObject().linkObject();
-            if (link) {
-                link.getLinkDataResponse(input_val);
-            }
+            this.linkObject().getLinkDataResponse(input_val);
         }
     };
 
@@ -82,14 +79,11 @@ function SwitchObject(root_object_val) {
         this.debug_(true, this.debugInput(), "getNameListResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         if (data) {
-            if (this.linkMgrObject().linkObject().linkId() !== data.link_id) {
+            if (this.linkObject().linkId() !== data.link_id) {
                 this.abend("getNameListResponse", "linkId=" + data.link_id);
                 return;
             }
-            var link = this.linkMgrObject().linkObject();
-            if (link) {
-                link.getNameListResponse(input_val);
-            }
+            this.linkObject().getNameListResponse(input_val);
         }
     };
 
@@ -97,14 +91,11 @@ function SwitchObject(root_object_val) {
         this.debug_(true, this.debugInput(), "setupSessionResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         if (data) {
-            if (this.linkMgrObject().linkObject().linkId() !== data.link_id) {
+            if (this.linkObject().linkId() !== data.link_id) {
                 this.abend("setupSessionResponse", "linkId=" + data.link_id);
                 return;
             }
-            var link = this.linkMgrObject().linkObject();
-            if (link) {
-                link.setupSessionResponse(input_val);
-            }
+            this.linkObject().setupSessionResponse(input_val);
         }
     };
 
@@ -112,10 +103,7 @@ function SwitchObject(root_object_val) {
         this.debug_(true, this.debugInput(), "setupSessionReplyResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         if (data) {
-            var link = this.linkMgrObject().linkObject();
-            if (link) {
-                link.setupSessionReplyResponse(input_val);
-            }
+            this.linkObject().setupSessionReplyResponse(input_val);
         }
     };
 
@@ -127,10 +115,7 @@ function SwitchObject(root_object_val) {
 
         var data = JSON.parse(input_val);
         if (data) {
-            var link = this.linkMgrObject().linkObject();
-            if (link) {
-                link.putSessionDataResponse(input_val);
-            }
+            this.linkObject().putSessionDataResponse(input_val);
         }
     };
 
@@ -142,10 +127,7 @@ function SwitchObject(root_object_val) {
 
         var data = JSON.parse(input_val);
         if (data) {
-            var link = this.linkMgrObject().linkObject();
-            if (link) {
-                link.getSessionDataResponse(input_val);
-            }
+            this.linkObject().getSessionDataResponse(input_val);
         }
     };
  

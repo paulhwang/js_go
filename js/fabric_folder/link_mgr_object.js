@@ -9,7 +9,6 @@ function LinkMgrObject(root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
-        this.theLinkObject = null;
         this.theHead = null;
         this.theTail = null;
         this.theSize = 0;
@@ -26,14 +25,6 @@ function LinkMgrObject(root_object_val) {
 
     this.rootObject = function () {
         return this.theRootObject;
-    };
-
-    this.linkObject = function () {
-        return this.theLinkObject;
-    };
-
-    this.setLinkObject = function (val) {
-        this.theLinkObject = val;
     };
 
     this.head = function () {
@@ -63,15 +54,6 @@ function LinkMgrObject(root_object_val) {
     this.decrementSize = function () {
         this.theSize -= 1;
     }
-
-    this.mallocLinkAndInsert = function (my_name_val, link_id_val) {
-        var link = new LinkObject(this, my_name_val, link_id_val);
-        if (!link) {
-            return null;
-        }
-        this.setLinkObject(link);
-        return link;
-    };
 
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
