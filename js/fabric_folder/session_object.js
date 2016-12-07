@@ -12,8 +12,6 @@ function SessionObject(session_mgr_val, session_id_val) {
         this.theSessionId = session_id_val;
         this.theXmtSeq = 0;
         this.theRcvSeq = 0;
-        this.thePrev = null;
-        this.theNext = null;
         this.initSwitchTable();
         this.debug(false, "init__", "session=" + this.sessionName());
     };
@@ -49,22 +47,6 @@ function SessionObject(session_mgr_val, session_id_val) {
     this.switchTable = function () {
         return this.theSwitchTable;
     }
-
-    this.prev = function () {
-        return this.thePrev;
-    };
-
-    this.setPrev = function (val) {
-        this.thePrev = val;
-    };
-
-    this.next = function () {
-        return this.theNext;
-    };
-
-    this.setNext = function (val) {
-        this.theNext = val;
-    };
 
     this.myName = function () {
         return this.rootObject().myName();
