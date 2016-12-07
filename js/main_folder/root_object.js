@@ -8,7 +8,6 @@ function RootObject() {
     "use strict";
 
     this.init__ = function () {
-        this.theSwitchObject = new SwitchObject(this);
         this.theAjaxObject = new AjaxObject(this);
         this.theHtmlObject = new GoHtmlObject(this);
         this.theLinkObject = null;
@@ -23,10 +22,6 @@ function RootObject() {
 
     this.htmlObject = function () {
         return this.theHtmlObject;
-    };
-
-    this.switchObject = function () {
-        return this.theSwitchObject;
     };
 
     this.ajaxObject = function () {
