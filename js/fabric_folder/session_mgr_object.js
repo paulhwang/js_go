@@ -83,31 +83,6 @@ function SessionMgrObject(link_object_val) {
         return session;
     };
 
-    this.deleteSessionFromList = function (session_val) {
-        if (this.size() <= 0) {
-            this.abend("deleteSessionFromList", "size=" + this.size());
-            return;
-        }
-        if (!this.sessionExistInTheList(session_val)) {
-            this.abend("deleteSessionFromList", "sessionExistInTheList is false");
-            return;
-        }
-
-        this.abendIt();
-        if (session_val.prev()) {
-            session_val.prev().setNext(session_val.next());
-        } else {
-            this.setHead(session_val.next());
-        }
-        if (session_val.next()) {
-            session_val.next().setPrev(session_val.prev());
-        } else {
-            this.setTail(session_val.prev());
-        }
-        this.decrementSize();
-        this.abendIt();
-    };
-
     this.getSession = function (session_id_val) {
         var index = this.sessionIndexArray().indexOf(session_id_val);
         if (index === -1) {
