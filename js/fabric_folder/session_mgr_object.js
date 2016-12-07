@@ -74,40 +74,13 @@ function SessionMgrObject(link_object_val) {
     };
 
     this.mallocSessionAndInsert = function (session_id_val) {
-
         var session = new SessionObject(this, session_id_val);
         if (!session) {
             return null;
         }
-        this.insertSessionToList(session);
-
         this.sessionIndexArray().push(session.sessionId());
         this.sessionTableArray().push(session);
-
         return session;
-    };
-
-    this.insertSessionToList = function (session_val) {
-        if (!session_val) {
-            this.abend("enQueue", "null session_val");
-            return;
-        }
-
-        this.abendIt();
-
-        this.incrementSize();
-        if (!this.head()) {
-            session_val.setPrev(null);
-            session_val.setNext(null);
-            this.setHead(session_val);
-            this.setTail(session_val);
-        } else {
-            this.tail().setNext(session_val);
-            session_val.setPrev(this.tail());
-            session_val.setNext(null);
-            this.setTail(session_val);
-        }
-        this.abendIt();
     };
 
     this.deleteSessionFromList = function (session_val) {
