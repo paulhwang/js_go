@@ -12,8 +12,6 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
         this.theMyName = my_name_val;
         this.theLinkId = link_id_val;
         this.theSessionMgrObject = new SessionMgrObject(this);
-        this.thePrev = null;
-        this.theNext = null;
         this.theSessionIndexArray = [0];
         this.theSessionTableArray = [null];
         this.ajaxObject().getLinkData(this);
@@ -46,22 +44,6 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
 
     this.ajaxObject = function () {
         return this.rootObject().ajaxObject();
-    };
-
-    this.prev = function () {
-        return this.thePrev;
-    };
-
-    this.setPrev = function (val) {
-        this.thePrev = val;
-    };
-
-    this.next = function () {
-        return this.theNext;
-    };
-
-    this.setNext = function (val) {
-        this.theNext = val;
     };
 
     this.myName = function () {
