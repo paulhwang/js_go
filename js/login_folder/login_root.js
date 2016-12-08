@@ -4,7 +4,7 @@
  * File name: root.js
  */
 
-function RootObject() {
+function LoginRootObject() {
     "use strict";
 
     this.init__ = function () {
@@ -13,11 +13,11 @@ function RootObject() {
         //this.theLinkObject = null;
         this.theMyName = "";
         this.runRoot();
-        this.debug(false, "init__", "");
+        this.debug(true, "init__", "");
     };
 
     this.objectName = function () {
-        return "RootObject";
+        return "LoginRootObject";
     };
 
     this.htmlObject = function () {
@@ -66,6 +66,7 @@ function RootObject() {
             if (this0.myName()) {
                 //this0.ajaxObject().setupLink(this0);
                 this0.logit("hello", "there!");
+                window.open("http://127.0.0.1:8080/go_config.html", "_self")
             }
         });
     };
