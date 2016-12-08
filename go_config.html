@@ -13,7 +13,7 @@
 
 <body id="body">
 	<section class="prelude_holder" id="prelude_holder">
-		<p>Peer Name:
+		<p class="peer_name_paragraph">Peer Name:
 			<select name="opponent">
 			</select>
 		</p>
@@ -85,5 +85,10 @@
 			<button>Connect</button>
 		</section>
 	</section>
+
+	<script>
+		$('.peer_name_paragraph select').append($('<option>', {value:1, text:'One'}));
+		$('.peer_name_paragraph select').append('<option val="1">One</option>');
+	</script>
 </body>
 </html>
