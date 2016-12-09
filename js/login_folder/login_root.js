@@ -1,16 +1,10 @@
-/*
- * Copyrights phwang
- * Written by Paul Hwang
- * File name: login_root.js
- */
-
 function LoginRootObject() {
     "use strict";
 
     this.init__ = function () {
         this.theStorage = localStorage;
+        this.thePassWord = null;
         //this.theAjaxObject = new AjaxObject(this);
-        this.theHtmlObject = new GoHtmlObject(this);
         this.runRoot();
         this.debug(true, "init__", "userName=" + this.userName() + " linkId=" + this.linkId());
     };
@@ -31,6 +25,14 @@ function LoginRootObject() {
         this.storage().user_name = val;
     };
 
+    this.passWord = function () {
+        return this.thePassWord;
+    };
+
+    this.setPassWord = function (val) {
+        this.thePassWord = val;
+    };
+
     this.linkId = function () {
         return this.storage().link_id;
     };
@@ -39,24 +41,20 @@ function LoginRootObject() {
         this.storage().link_id = val;
     };
 
-    this.htmlObject = function () {
-        return this.theHtmlObject;
-    };
-
     this.ajaxObject = function () {
         return this.theAjaxObject;
     };
 
     this.runRoot = function () {
         var this0 = this;
-        this.htmlObject().createPreludeHolder();
-        $(".prelude_holder button").on("click", function() {
-            this0.setUserName($(".prelude_holder input").val());
-            this0.debug(true, "runRoot", "my_name=" + this0.userName());
+        $(".login_section .login_button").on("click", function() {
+            this0.setUserName($(".login_section .login_name").val());
+            this0.setPassWord($(".login_section .login_password").val());
+            this0.debug(true, "runRoot", "userName=" + this0.userName() + " passWord=" + this0.passWord());
             if (this0.userName()) {
                 //this0.ajaxObject().setupLink(this0);
                 this0.setLinkId(1);
-                window.open("http://127.0.0.1:8080/go_config.html", "_self")
+                //window.open("http://127.0.0.1:8080/go_config.html", "_self")
             }
         });
     };

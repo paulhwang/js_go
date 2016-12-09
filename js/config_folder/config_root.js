@@ -1,9 +1,3 @@
-/*
- * Copyrights phwang
- * Written by Paul Hwang
- * File name: config_root.js
- */
-
 function ConfigRootObject() {
     "use strict";
 
