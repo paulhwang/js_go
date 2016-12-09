@@ -1,20 +1,23 @@
 <!doctype html>
 <html>
 <head>
-	<title> node.js based Go Game by phwang </title>
-	<link href="./css/go_play.css" rel="stylesheet" type="text/css">
-	<script src="./js/main_folder/jquery-2.0.3.min.js"> </script>
-	<script src="./js/go_folder/go_play_main.js"> </script>
-	<script src="./js/go_folder/go_play_root.js"> </script>
-	<script src="./js/util_folder/util_object.js"> </script>
+    <title> node.js based Go Game by phwang </title>
+    <link href="./css/go_play.css" rel="stylesheet" type="text/css">
+    <script src="./js/main_folder/jquery-2.0.3.min.js"> </script>
+    <script src="./js/go_folder/go_play_main.js"> </script>
+    <script src="./js/go_folder/go_play_root.js"> </script>
+    <script src="./js/util_folder/util_object.js"> </script>
 </head>
 
 <body>
-    <section class="go_play_section">
-    	<section class="go_canvas_section">
-    		<canvas style=border:1px solid #000000;">
-		</section>
-		<button class="config_button">Connect</button>
-	</section>
+    <section class="go_canvas_section">
+        <canvas id="go_canvas" style=border:1px solid #000000;" width=432 height=485>
+    </section>
+    <section>
+        <p id="black_score">Black: 0</p>
+    </section>
+    <section>
+        <p id="white_score">White: 0</p>
+    </section>
 </body>
 </html>

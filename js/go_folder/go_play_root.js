@@ -3,6 +3,8 @@ function GoPlayRootObject() {
 
     this.init__ = function () {
         this.theStorage = localStorage;
+        this.theCanvasWidth = 432;
+        this.initElements();
         //this.theAjaxObject = new AjaxObject(this);
         this.runRoot();
         this.debug(true, "init__", "userName=" + this.userName() + " linkId=" + this.linkId());
@@ -49,6 +51,53 @@ function GoPlayRootObject() {
         var this0 = this;
         $(".config_section .config_button").on("click", function() {
         });
+    };
+
+    this.canvasWidth = function () {
+        return this.theCanvasWidth;
+    };
+
+    this.canvasElement = function () {
+        return this.theCanvasElement;
+    };
+
+    this.canvasContext = function () {
+        return this.theCanvasContext;
+    };
+
+    this.blackScoreElement = function () {
+        return this.theBlackScoreElement;
+    };
+
+    this.whiteScoreElement = function () {
+        return this.theWhiteScoreElement;
+    };
+
+    this.initElements = function () {
+        this.theCanvasElement = window.document.getElementById("go_canvas");
+        this.logit("initElements", this.canvasElement());
+        if (this.canvasElement() === null) {
+            this.abend("GoUiObject", "null canvasElement");
+            return;
+        }
+
+        this.theCanvasContext = this.canvasElement().getContext("2d");
+        if (this.canvasContext() === null) {
+            this.abend("GoUiObject", "null canvasContext");
+            return;
+        }
+
+        this.theBlackScoreElement = window.document.getElementById("black_score");
+        if (this.blackScoreElement() === null) {
+            this.abend("GoUiObject", "null theBlackScoreElement");
+            return;
+        }
+
+        this.theWhiteScoreElement = window.document.getElementById("white_score");
+        if (this.whiteScoreElement() === null) {
+            this.abend("GoUiObject", "null theWhiteScoreElement");
+            return;
+        }
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
