@@ -117,8 +117,6 @@ function LoginRootObject() {
         this.httpGetRequest().setRequestHeader("X-Requested-With", "XMLHttpRequest");
         this.httpGetRequest().setRequestHeader("Content-Type", this.jsonContext());
         this.httpGetRequest().setRequestHeader("gorequest", output_val);
-        this.httpGetRequest().setRequestHeader("GOPACKETID", this.packetId());
-        this.incrementPacketId();
         this.httpGetRequest().send(null);
     };
 
