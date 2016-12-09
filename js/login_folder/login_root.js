@@ -6,7 +6,7 @@ function LoginRootObject() {
         this.thePassWord = null;
         this.theHttpGetRequest = new XMLHttpRequest();
         this.setupReceiveAjaxResponse();
-        this.runRoot();
+        this.setupHtmlInput();
         this.debug(true, "init__", "userName=" + this.userName() + " linkId=" + this.linkId());
     };
 
@@ -72,7 +72,7 @@ function LoginRootObject() {
         }
     };
 
-    this.runRoot = function () {
+    this.setupHtmlInput = function () {
         var this0 = this;
         $(".login_section .login_button").on("click", function() {
             this0.setUserName($(".login_section .login_name").val());
