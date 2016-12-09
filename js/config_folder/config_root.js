@@ -3,7 +3,7 @@ function ConfigRootObject() {
 
     this.init__ = function () {
         this.theStorage = localStorage;
-        this.setupReceiveAjaxResponse();
+        this.theAjaxUtilObject = new AjaxUtilObject(this, this.switchAjaxResponseData);
         this.getNameList();
         this.setupHtmlInput();
         this.debug(true, "init__", "userName=" + this.userName() + " linkId=" + this.linkId());
@@ -11,6 +11,10 @@ function ConfigRootObject() {
 
     this.objectName = function () {
         return "ConfigRootObject";
+    };
+
+    this.ajaxUtilObject = function () {
+        return this.theAjaxUtilObject;
     };
 
     this.storage = function () {
@@ -73,37 +77,6 @@ function ConfigRootObject() {
         this.nameList()[index_val] = data_val;
     };
 
-    this.ajaxRoute = function () {
-        return "/django_go/go_ajax/";
-    };
-
-    this.httpGetRequest = function () {
-        return this.theHttpGetRequest;
-    };
-
-    this.setHttpGetRequest = function (val) {
-        this.theHttpGetRequest = val;
-    };
-
-    this.transmitAjaxRequest = function (output_val) {
-        this.httpGetRequest().open("GET", this.ajaxRoute(), true);
-        this.httpGetRequest().setRequestHeader("X-Requested-With", "XMLHttpRequest");
-        this.httpGetRequest().setRequestHeader("Content-Type", "application/json; charset=utf-8");
-        this.httpGetRequest().setRequestHeader("gorequest", output_val);
-        this.httpGetRequest().send(null);
-    };
-
-    this.setupReceiveAjaxResponse = function () {
-        this.setHttpGetRequest(new XMLHttpRequest());
-        var this0 = this;
-        this.httpGetRequest().onreadystatechange = function() {
-            if ((this0.httpGetRequest().readyState === 4) &&
-                (this0.httpGetRequest().status === 200)) {
-                this0.switchAjaxResponseData(this0.httpGetRequest().responseText);
-            }
-        };
-    };
-
     this.switchAjaxResponseData = function (json_response_val) {
         var response = JSON.parse(json_response_val);
         this.debug(true, "switchAjaxResponseData", "command=" + response.command + " data=" + response.data);
@@ -131,7 +104,7 @@ function ConfigRootObject() {
                         link_id: this.linkId(),
                         });
         this.debug(true, "getNameList", "output=" + output);
-        this.transmitAjaxRequest(output);
+        this.ajaxUtilObject().transmitAjaxRequest(output);
     };
 
     this.setupHtmlInput = function () {
