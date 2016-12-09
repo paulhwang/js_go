@@ -4,7 +4,8 @@ function AjaxUtilObject(root_object_val, callback_func_val) {
     this.init__ = function (root_object_val, callback_func_val) {
         this.theRootObject = root_object_val;
         this.theCallbackFunc = callback_func_val;
-        this.callbackFunc().bind(this.rootObject())("hello");
+        //this.callbackFunc().bind(this.rootObject())("hello");
+        this.thePacketId = 1;
         this.theHttpGetRequest = new XMLHttpRequest();
         this.setupReceiveAjaxResponse();
         this.debug(true, "init__", "");
@@ -37,12 +38,20 @@ function AjaxUtilObject(root_object_val, callback_func_val) {
         return this.theHttpGetRequest;
     };
 
+    this.packetId = function () {
+        return this.thePacketId;
+    };
+
+    this.incrementPacketId = function () {
+        this.thePacketId += 1;
+    };
+
     this.setupReceiveAjaxResponse = function () {
         var this0 = this;
         this.httpGetRequest().onreadystatechange = function() {
             if ((this0.httpGetRequest().readyState === 4) &&
                 (this0.httpGetRequest().status === 200)) {
-                this.callbackFunc().bind(this.rootObject())(this0.httpGetRequest().responseText);
+                this0.callbackFunc().bind(this0.rootObject())(this0.httpGetRequest().responseText);
             }
         };
     };

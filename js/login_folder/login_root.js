@@ -3,14 +3,18 @@ function LoginRootObject() {
 
     this.init__ = function () {
         this.theStorage = localStorage;
+        this.theAjaxUtilObject = new AjaxUtilObject(this, this.switchAjaxResponseData);
         this.thePassWord = null;
-        this.setupReceiveAjaxResponse();
         this.setupHtmlInput();
         this.debug(true, "init__", "userName=" + this.userName() + " linkId=" + this.linkId());
     };
 
     this.objectName = function () {
         return "LoginRootObject";
+    };
+
+    this.ajaxUtilObject = function () {
+        return this.theAjaxUtilObject;
     };
 
     this.storage = function () {
@@ -39,37 +43,6 @@ function LoginRootObject() {
 
     this.setLinkId = function (val) {
         this.storage().link_id = val;
-    };
-
-    this.ajaxRoute = function () {
-        return "/django_go/go_ajax/";
-    };
-
-    this.httpGetRequest = function () {
-        return this.theHttpGetRequest;
-    };
-
-    this.setHttpGetRequest = function (val) {
-        this.theHttpGetRequest = val;
-    };
-
-    this.transmitAjaxRequest = function (output_val) {
-        this.httpGetRequest().open("GET", this.ajaxRoute(), true);
-        this.httpGetRequest().setRequestHeader("X-Requested-With", "XMLHttpRequest");
-        this.httpGetRequest().setRequestHeader("Content-Type", "application/json; charset=utf-8");
-        this.httpGetRequest().setRequestHeader("gorequest", output_val);
-        this.httpGetRequest().send(null);
-    };
-
-    this.setupReceiveAjaxResponse = function () {
-        this.setHttpGetRequest(new XMLHttpRequest());
-        var this0 = this;
-        this.httpGetRequest().onreadystatechange = function() {
-            if ((this0.httpGetRequest().readyState === 4) &&
-                (this0.httpGetRequest().status === 200)) {
-                this0.switchAjaxResponseData(this0.httpGetRequest().responseText);
-            }
-        };
     };
 
     this.switchAjaxResponseData = function (json_response_val) {
@@ -103,7 +76,7 @@ function LoginRootObject() {
                         password: this.passWord(),
                         });
         this.debug(true, "setupLink", "output=" + output);
-        this.transmitAjaxRequest(output);
+        this.ajaxUtilObject().transmitAjaxRequest(output);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
