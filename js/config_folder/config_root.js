@@ -4,8 +4,6 @@ function ConfigRootObject() {
     this.init__ = function () {
         this.theStorage = localStorage;
         //this.theAjaxObject = new AjaxObject(this);
-        this.theMyName = "";
-        this.setBoardSize(11);
         this.runRoot();
         this.debug(true, "init__", "userName=" + this.userName() + " linkId=" + this.linkId());
     };
@@ -62,26 +60,6 @@ function ConfigRootObject() {
         return this.theAjaxObject;
     };
 
-    this.linkObject = function () {
-        return this.theLinkObject;
-    };
-
-    this.setLinkObject = function (val) {
-        this.theLinkObject = val;
-    };
-
-    this.myName = function () {
-        return this.theMyName;
-    };
-
-    this.setMyName = function (val) {
-        this.theMyName = val;
-    };
-
-    this.mallocLinkObject = function (my_name_val, link_id_val) {
-        this.setLinkObject(new LinkObject(this, my_name_val, link_id_val));
-    };
-
     this.runRoot = function () {
         var this0 = this;
         $(".config_section .config_button").on("click", function() {
@@ -90,11 +68,7 @@ function ConfigRootObject() {
             this0.setKomi($(".config_section .go_config_section .komi").val());
             this0.setHandicap($(".config_section .go_config_section .handicap").val());
             this0.debug(true, "runRoot", "boardSize=" + this0.boardSize() + " stoneColor=" + this0.stoneColor() + " komi=" + this0.komi() + " handicap=" + this0.handicap());
-            if (this0.myName()) {
-                //this0.ajaxObject().setupLink(this0);
-                this0.logit("hello", "there!");
-                window.open("http://127.0.0.1:8080/go_config.html", "_self")
-            }
+            //window.open("http://127.0.0.1:8080/go_config.html", "_self")
         });
     };
 
