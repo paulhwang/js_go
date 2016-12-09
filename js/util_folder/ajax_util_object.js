@@ -4,7 +4,6 @@ function AjaxUtilObject(root_object_val, callback_func_val) {
     this.init__ = function (root_object_val, callback_func_val) {
         this.theRootObject = root_object_val;
         this.theCallbackFunc = callback_func_val;
-        //this.callbackFunc().bind(this.rootObject())("hello");
         this.thePacketId = 1;
         this.theHttpGetRequest = new XMLHttpRequest();
         this.setupReceiveAjaxResponse();
