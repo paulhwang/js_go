@@ -34,7 +34,7 @@ function LoginRootObject() {
     };
 
     this.linkId = function () {
-        return this.storage().link_id;
+        return Number(this.storage().link_id);
     };
 
     this.setLinkId = function (val) {

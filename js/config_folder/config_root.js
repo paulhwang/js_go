@@ -3,8 +3,8 @@ function ConfigRootObject() {
 
     this.init__ = function () {
         this.theStorage = localStorage;
-        //this.theAjaxObject = new AjaxObject(this);
         this.setupReceiveAjaxResponse();
+        this.getNameList();
         this.setupHtmlInput();
         this.debug(true, "init__", "userName=" + this.userName() + " linkId=" + this.linkId());
     };
@@ -22,7 +22,7 @@ function ConfigRootObject() {
     };
 
     this.linkId = function () {
-        return this.storage().link_id;
+        return Number(this.storage().link_id);
     };
 
     this.boardSize = function () {
@@ -57,8 +57,20 @@ function ConfigRootObject() {
         this.storage().handicap = val;
     };
 
-    this.ajaxObject = function () {
-        return this.theAjaxObject;
+    this.setNameList = function (data_val) {
+        this.theNameList = data_val;
+    };
+
+    this.nameListLength = function () {
+        return this.nameList().length;
+    };
+
+    this.nameListElement = function (index_val) {
+        return this.nameList()[index_val];
+    };
+
+    this.setNameListElement = function (index_val, data_val) {
+        this.nameList()[index_val] = data_val;
     };
 
     this.ajaxRoute = function () {
@@ -90,6 +102,36 @@ function ConfigRootObject() {
                 this0.switchAjaxResponseData(this0.httpGetRequest().responseText);
             }
         };
+    };
+
+    this.switchAjaxResponseData = function (json_response_val) {
+        var response = JSON.parse(json_response_val);
+        this.debug(true, "switchAjaxResponseData", "command=" + response.command + " data=" + response.data);
+        if (response.command === "get_name_list") {
+            this.getNameListResponse(response.data);
+        } else {
+            this.abend("switchAjaxResponseData", "not get_name_list");
+        }
+    };
+
+    this.getNameListResponse = function (input_val) {
+        this.debug(true, "getNameListResponse", "input_val=" + input_val);
+        var data = JSON.parse(input_val);
+        if (data) {
+            if (data.name_list) {
+                this.setNameList(data.name_list);
+            }
+        }
+    };
+
+    this.getNameList = function () {
+        var output = JSON.stringify({
+                        command: "get_name_list",
+                        my_name: this.userName(),
+                        link_id: this.linkId(),
+                        });
+        this.debug(true, "getNameList", "output=" + output);
+        this.transmitAjaxRequest(output);
     };
 
     this.setupHtmlInput = function () {
