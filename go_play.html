@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title> node.js based Go Game by phwang </title>
-	<link href="./css/config.css" rel="stylesheet" type="text/css">
+	<link href="./css/go_play.css" rel="stylesheet" type="text/css">
 	<script src="./js/main_folder/jquery-2.0.3.min.js"> </script>
 	<script src="./js/go_folder/go_play_main.js"> </script>
 	<script src="./js/go_folder/go_play_root.js"> </script>
@@ -10,67 +10,10 @@
 </head>
 
 <body>
-    <section class="config_section">
-		<p class="peer_name_paragraph">Peer Name:
-			<select name="opponent">
-			</select>
-		</p>
-
-		<p class="peer_game_paragraph">Game:
-			<select>
-				<option value="Go">Go</option>
-				<option value="game1">game1</option>
-				<option value="game2">game2</option>
-			</select>
-			<button>Select</button>
-		</p>
-
-		<section class = "go_config_section">
-			<p>Board Size:
-				<select class = "board_size">
-					<option value = "19">19 x 19</option>
-					<option value = "13">13 x 13</option>
-					<option value = "9">9 x 9</option>
-				</select>
-			</p>
-
-			<p>Stone Color:
-				<select class = "stone_color">
-					<option value = "black">Black</option>
-					<option value = "white">White</option>
-				</select>
-			</p>
-
-			<p>Komi:
-				<select class = "komi">
-					<option value = "0">0.5</option>
-					<option value = "4">4.5</option>
-					<option value = "5">5.5</option>
-					<option value = "6">6.5</option>
-					<option value = "7">7.5</option>
-					<option value = "8">8.5</option>
-				</select>
-			</p>
-
-			<p>Handicap:
-				<select class = "handicap">
-					<option value = "0">0</option>
-					<option value = "2">2</option>
-					<option value = "3">3</option>
-					<option value = "4">4</option>
-					<option value = "5">5</option>
-					<option value = "6">6</option>
-					<option value = "7">7</option>
-					<option value = "8">8</option>
-					<option value = "9">9</option>
-					<option value = "10">10</option>
-					<option value = "11">11</option>
-					<option value = "12">12</option>
-					<option value = "13">13</option>
-				</select>
-			</p>
+    <section class="go_play_section">
+    	<section class="go_canvas_section">
+    		<canvas style=border:1px solid #000000;">
 		</section>
-
 		<button class="config_button">Connect</button>
 	</section>
 </body>

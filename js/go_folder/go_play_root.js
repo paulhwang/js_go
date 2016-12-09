@@ -6,6 +6,7 @@ function GoPlayRootObject() {
         //this.theAjaxObject = new AjaxObject(this);
         this.runRoot();
         this.debug(true, "init__", "userName=" + this.userName() + " linkId=" + this.linkId());
+        this.debug(true, "init__", "boardSize=" + this.boardSize() + " stoneColor=" + this.stoneColor() + " komi=" + this.komi() + " handicap=" + this.handicap());
     };
 
     this.objectName = function () {
@@ -40,37 +41,13 @@ function GoPlayRootObject() {
         return this.storage().handicap;
     };
 
-    this.setBoardSize = function (val) {
-        this.storage().board_size = val;
-    };
-
-    this.setStoneColor = function (val) {
-        this.storage().stone_color = val;
-    };
-
-    this.setKomi = function (val) {
-        this.storage().komi = val;
-    };
-
-    this.setHandicap = function (val) {
-        this.storage().handicap = val;
-    };
-
     this.ajaxObject = function () {
         return this.theAjaxObject;
     };
 
     this.runRoot = function () {
         var this0 = this;
-        $('.peer_name_paragraph select').append($('<option>', {value:1, text:'One1'}));
-        $('.peer_name_paragraph select').append('<option val="1">One2</option>');
         $(".config_section .config_button").on("click", function() {
-            this0.setBoardSize($(".config_section .go_config_section .board_size").val());
-            this0.setStoneColor($(".config_section .go_config_section .stone_color").val());
-            this0.setKomi($(".config_section .go_config_section .komi").val());
-            this0.setHandicap($(".config_section .go_config_section .handicap").val());
-            this0.debug(true, "runRoot", "boardSize=" + this0.boardSize() + " stoneColor=" + this0.stoneColor() + " komi=" + this0.komi() + " handicap=" + this0.handicap());
-            window.open("http://127.0.0.1:8080/go_play.html", "_self")
         });
     };
 
