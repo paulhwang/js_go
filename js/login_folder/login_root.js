@@ -7,7 +7,6 @@ function LoginRootObject() {
         this.thePacketId = 1;
         this.theHttpGetRequest = new XMLHttpRequest();
         this.setupReceiveAjaxResponse();
-        //this.theAjaxObject = new AjaxObject(this);
         this.runRoot();
         this.debug(true, "init__", "userName=" + this.userName() + " linkId=" + this.linkId());
     };
@@ -56,10 +55,6 @@ function LoginRootObject() {
         this.storage().link_id = val;
     };
 
-    this.ajaxObject = function () {
-        return this.theAjaxObject;
-    };
-
     this.setupReceiveAjaxResponse = function () {
         var this0 = this;
         this.httpGetRequest().onreadystatechange = function() {
@@ -99,17 +94,10 @@ function LoginRootObject() {
         var output = JSON.stringify({
                         command: "setup_link",
                         my_name: this.userName(),
+                        password: this.passWord(),
                         });
         this.debug(true, "setupLink", "output=" + output);
         this.transmitAjaxRequest(output);
-    };
-
-    this.packetId = function () {
-        return this.thePacketId;
-    };
-
-    this.incrementPacketId = function () {
-        this.thePacketId += 1;
     };
 
     this.transmitAjaxRequest = function (output_val) {
