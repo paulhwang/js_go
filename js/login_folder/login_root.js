@@ -18,10 +18,6 @@ function LoginRootObject() {
         return "/django_go/go_ajax/";
     };
 
-    this.jsonContext = function () {
-        return "application/json; charset=utf-8";
-    }
-
     this.httpGetRequest = function () {
         return this.theHttpGetRequest;
     };
@@ -101,7 +97,7 @@ function LoginRootObject() {
     this.transmitAjaxRequest = function (output_val) {
         this.httpGetRequest().open("GET", this.ajaxRoute(), true);
         this.httpGetRequest().setRequestHeader("X-Requested-With", "XMLHttpRequest");
-        this.httpGetRequest().setRequestHeader("Content-Type", this.jsonContext());
+        this.httpGetRequest().setRequestHeader("Content-Type", "application/json; charset=utf-8");
         this.httpGetRequest().setRequestHeader("gorequest", output_val);
         this.httpGetRequest().send(null);
     };
