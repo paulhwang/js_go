@@ -13,7 +13,7 @@ function ConfigRootObject() {
         //this.theLinkObject = null;
         this.theMyName = "";
         this.runRoot();
-        this.debug(true, "init__", "");
+        this.debug(true, "init__", "name=" + localStorage.user_name + " link_id=" + localStorage.link_id);
     };
 
     this.objectName = function () {
