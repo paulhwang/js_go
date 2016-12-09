@@ -4,7 +4,6 @@ function LoginRootObject() {
     this.init__ = function () {
         this.theStorage = localStorage;
         this.thePassWord = null;
-        this.thePacketId = 1;
         this.theHttpGetRequest = new XMLHttpRequest();
         this.setupReceiveAjaxResponse();
         this.runRoot();
@@ -58,7 +57,6 @@ function LoginRootObject() {
     this.setupReceiveAjaxResponse = function () {
         var this0 = this;
         this.httpGetRequest().onreadystatechange = function() {
-            this0.debug(true, "setupReceiveAjaxResponse", "aaa");
             if ((this0.httpGetRequest().readyState === 4) &&
                 (this0.httpGetRequest().status === 200)) {
                 this0.switchAjaxResponseData(this0.httpGetRequest().responseText);
