@@ -1,4 +1,4 @@
-function ConfigRootObject() {
+function GoPlayRootObject() {
     "use strict";
 
     this.init__ = function () {
@@ -9,7 +9,7 @@ function ConfigRootObject() {
     };
 
     this.objectName = function () {
-        return "ConfigRootObject";
+        return "GoPlayRootObject";
     };
 
     this.storage = function () {
