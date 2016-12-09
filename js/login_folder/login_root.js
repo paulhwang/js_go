@@ -4,7 +4,6 @@ function LoginRootObject() {
     this.init__ = function () {
         this.theStorage = localStorage;
         this.thePassWord = null;
-        this.theHttpGetRequest = new XMLHttpRequest();
         this.setupReceiveAjaxResponse();
         this.setupHtmlInput();
         this.debug(true, "init__", "userName=" + this.userName() + " linkId=" + this.linkId());
@@ -12,14 +11,6 @@ function LoginRootObject() {
 
     this.objectName = function () {
         return "LoginRootObject";
-    };
-
-    this.ajaxRoute = function () {
-        return "/django_go/go_ajax/";
-    };
-
-    this.httpGetRequest = function () {
-        return this.theHttpGetRequest;
     };
 
     this.storage = function () {
@@ -50,7 +41,28 @@ function LoginRootObject() {
         this.storage().link_id = val;
     };
 
+    this.ajaxRoute = function () {
+        return "/django_go/go_ajax/";
+    };
+
+    this.httpGetRequest = function () {
+        return this.theHttpGetRequest;
+    };
+
+    this.setHttpGetRequest = function (val) {
+        this.theHttpGetRequest = val;
+    };
+
+    this.transmitAjaxRequest = function (output_val) {
+        this.httpGetRequest().open("GET", this.ajaxRoute(), true);
+        this.httpGetRequest().setRequestHeader("X-Requested-With", "XMLHttpRequest");
+        this.httpGetRequest().setRequestHeader("Content-Type", "application/json; charset=utf-8");
+        this.httpGetRequest().setRequestHeader("gorequest", output_val);
+        this.httpGetRequest().send(null);
+    };
+
     this.setupReceiveAjaxResponse = function () {
+        this.setHttpGetRequest(new XMLHttpRequest());
         var this0 = this;
         this.httpGetRequest().onreadystatechange = function() {
             if ((this0.httpGetRequest().readyState === 4) &&
@@ -92,14 +104,6 @@ function LoginRootObject() {
                         });
         this.debug(true, "setupLink", "output=" + output);
         this.transmitAjaxRequest(output);
-    };
-
-    this.transmitAjaxRequest = function (output_val) {
-        this.httpGetRequest().open("GET", this.ajaxRoute(), true);
-        this.httpGetRequest().setRequestHeader("X-Requested-With", "XMLHttpRequest");
-        this.httpGetRequest().setRequestHeader("Content-Type", "application/json; charset=utf-8");
-        this.httpGetRequest().setRequestHeader("gorequest", output_val);
-        this.httpGetRequest().send(null);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
