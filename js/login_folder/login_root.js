@@ -54,7 +54,7 @@ function LoginRootObject() {
             if (this0.userName()) {
                 //this0.ajaxObject().setupLink(this0);
                 this0.setLinkId(1);
-                //window.open("http://127.0.0.1:8080/go_config.html", "_self")
+                window.open("http://127.0.0.1:8080/go_config.html", "_self")
             }
         });
     };

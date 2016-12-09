@@ -1,8 +1,6 @@
-var main = function () {
+var config_main = function () {
     "use strict";
-
-    document.cookie = "paul's cookie is here";
-    var root = new ConfigRootObject();
+    new ConfigRootObject();
 };
 
-$(document).ready(main);
+$(document).ready(config_main);

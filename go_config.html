@@ -11,8 +11,8 @@
 	<script src="./js/util_folder/util_object.js"> </script>
 </head>
 
-<body id="body">
-	<section class="prelude_holder" id="prelude_holder">
+<body>
+    <section class="config_section">
 		<p class="peer_name_paragraph">Peer Name:
 			<select name="opponent">
 			</select>
@@ -27,29 +27,24 @@
 			<button>Select</button>
 		</p>
 
-		<section id="go_config_section" class = "go_config_section">
-			<section class="board_size_section">
+		<section class = "go_config_section">
 				<p>Board Size:
-					<select name = "board_size">
+					<select class = "board_size">
 						<option value = "19">19 x 19</option>
 						<option value = "13">13 x 13</option>
 						<option value = "9">9 x 9</option>
 					</select>
 				</p>
-			</section>
 
-			<section class="play_color_section">
 				<p>Stone Color:
-					<select name = "play_color">
-						<option value = "blacki">Black</option>
+					<select class = "stone_color">
+						<option value = "black">Black</option>
 						<option value = "white">White</option>
 					</select>
 				</p>
-			</section>
 
-			<section class="komi_section">
 				<p>Komi:
-					<select name = "komi">
+					<select class = "komi">
 						<option value = "0">0.5</option>
 						<option value = "4">4.5</option>
 						<option value = "5">5.5</option>
@@ -58,11 +53,9 @@
 						<option value = "8">8.5</option>
 					</select>
 				</p>
-			</section>
 
-			<section class="handicap_section">
 				<p>Handicap:
-					<select name = "handicap">
+					<select class = "handicap">
 						<option value = "0">0</option>
 						<option value = "2">2</option>
 						<option value = "3">3</option>
@@ -78,11 +71,10 @@
 						<option value = "13">13</option>
 					</select>
 				</p>
-			</section>
 		</section>
 
 		<section>
-			<button>Connect</button>
+			<button class="config_button">Connect</button>
 		</section>
 	</section>
 

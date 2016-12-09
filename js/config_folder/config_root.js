@@ -2,20 +2,60 @@ function ConfigRootObject() {
     "use strict";
 
     this.init__ = function () {
+        this.theStorage = localStorage;
         //this.theAjaxObject = new AjaxObject(this);
-        this.theHtmlObject = new GoHtmlObject(this);
-        //this.theLinkObject = null;
         this.theMyName = "";
+        this.setBoardSize(11);
         this.runRoot();
-        this.debug(true, "init__", "name=" + localStorage.user_name + " link_id=" + localStorage.link_id);
+        this.debug(true, "init__", "userName=" + this.userName() + " linkId=" + this.linkId());
     };
 
     this.objectName = function () {
         return "ConfigRootObject";
     };
 
-    this.htmlObject = function () {
-        return this.theHtmlObject;
+    this.storage = function () {
+        return this.theStorage;
+    };
+
+    this.userName = function () {
+        return this.storage().user_name;
+    };
+
+    this.linkId = function () {
+        return this.storage().link_id;
+    };
+
+    this.boardSize = function () {
+        return this.storage().board_size;
+    };
+
+    this.stoneColor = function () {
+        return this.storage().stone_color;
+    };
+
+    this.komi = function () {
+        return this.storage().komi;
+    };
+
+    this.handicap = function () {
+        return this.storage().handicap;
+    };
+
+    this.setBoardSize = function (val) {
+        this.storage().board_size = val;
+    };
+
+    this.setStoneColor = function (val) {
+        this.storage().stone_color = val;
+    };
+
+    this.setKomi = function (val) {
+        this.storage().komi = val;
+    };
+
+    this.setHandicap = function (val) {
+        this.storage().handicap = val;
     };
 
     this.ajaxObject = function () {
@@ -38,25 +78,18 @@ function ConfigRootObject() {
         this.theMyName = val;
     };
 
-    this.languageUsed = function () {
-        return this.theLanguageUsed;
-    };
-
-    this.setLanguageUsed = function (val) {
-        this.theLanguageUsed = val;
-    };
-
     this.mallocLinkObject = function (my_name_val, link_id_val) {
         this.setLinkObject(new LinkObject(this, my_name_val, link_id_val));
     };
 
     this.runRoot = function () {
         var this0 = this;
-        this.htmlObject().createPreludeHolder();
-        $(".prelude_holder button").on("click", function() {
-            this0.setMyName($(".prelude_holder input").val());
-            this0.setLanguageUsed($(".prelude_holder select").val());
-            this0.debug(false, "runRoot", "my_name=" + this0.myName() + " language=" + this0.languageUsed());
+        $(".config_section .config_button").on("click", function() {
+            this0.setBoardSize($(".config_section .go_config_section .board_size").val());
+            this0.setStoneColor($(".config_section .go_config_section .stone_color").val());
+            this0.setKomi($(".config_section .go_config_section .komi").val());
+            this0.setHandicap($(".config_section .go_config_section .handicap").val());
+            this0.debug(true, "runRoot", "boardSize=" + this0.boardSize() + " stoneColor=" + this0.stoneColor() + " komi=" + this0.komi() + " handicap=" + this0.handicap());
             if (this0.myName()) {
                 //this0.ajaxObject().setupLink(this0);
                 this0.logit("hello", "there!");
