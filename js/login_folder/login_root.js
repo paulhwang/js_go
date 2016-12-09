@@ -63,12 +63,24 @@ function LoginRootObject() {
     this.setupReceiveAjaxResponse = function () {
         var this0 = this;
         this.httpGetRequest().onreadystatechange = function() {
-            this.debug(true, "setupReceiveAjaxResponse", "aaa");
+            this0.debug(true, "setupReceiveAjaxResponse", "aaa");
             if ((this0.httpGetRequest().readyState === 4) &&
                 (this0.httpGetRequest().status === 200)) {
                 this0.switchAjaxResponseData(this0.httpGetRequest().responseText);
             }
         };
+    };
+
+    this.switchAjaxResponseData = function (json_response_val) {
+        var response = JSON.parse(json_response_val);
+        if (response.command === "setup_link") {
+            this.debug(true, "switchAjaxResponseData", "command=" + response.command + " data=" + response.data);
+            var data = JSON.parse(response.data);
+            this.setLinkId(data.link_id);
+            window.open("http://127.0.0.1:8080/go_config.html", "_self")
+        } else {
+            this.abend("switchAjaxResponseData", "not setup_link");
+        }
     };
 
     this.runRoot = function () {
@@ -79,8 +91,6 @@ function LoginRootObject() {
             this0.debug(true, "runRoot", "userName=" + this0.userName() + " passWord=" + this0.passWord());
             if (this0.userName()) {
                 this0.setupLink();
-                this0.setLinkId(1);
-                window.open("http://127.0.0.1:8080/go_config.html", "_self")
             }
         });
     };
