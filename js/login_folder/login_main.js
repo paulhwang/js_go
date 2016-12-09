@@ -1,8 +1,6 @@
-var main = function () {
+var login_main = function () {
     "use strict";
-
-    document.cookie = "paul's cookie is here";
-    var root = new LoginRootObject();
+    new LoginRootObject();
 };
 
-$(document).ready(main);
+$(document).ready(login_main);
