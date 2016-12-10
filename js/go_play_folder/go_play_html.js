@@ -10,7 +10,6 @@ function GoPlayHtmlObject(root_object_val) {
         this.theRootObject = root_object_val;
         this.theCanvasWidth = 432;
         this.initElements();
-        this.runRoot();
         this.debug(true, "init__", "");
     };
 
@@ -28,12 +27,6 @@ function GoPlayHtmlObject(root_object_val) {
 
     this.ajaxObject = function () {
         return this.rootObject().ajaxObject();
-    };
-
-    this.runRoot = function () {
-        var this0 = this;
-        $(".config_section .config_button").on("click", function() {
-        });
     };
 
     this.canvasWidth = function () {
