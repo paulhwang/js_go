@@ -1,3 +1,8 @@
+/*
+  Copyrights reserved
+  Written by Paul Hwang
+*/
+
 function GoPlayRootObject() {
     "use strict";
 
