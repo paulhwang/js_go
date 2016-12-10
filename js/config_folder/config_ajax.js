@@ -3,83 +3,30 @@
   Written by Paul Hwang since 2017
 */
 
-function ConfigAjaxObject() {
+function ConfigAjaxObject(root_object_val) {
     "use strict";
 
-    this.init__ = function () {
-        this.theStorage = localStorage;
+    this.init__ = function (root_object_val) {
+        this.theRootObject = root_object_val;
         this.theAjaxUtilObject = new AjaxUtilObject(this, this.switchAjaxResponseData);
         this.getNameList();
-        this.setupHtmlInput();
-        this.debug(true, "init__", "userName=" + this.userName() + " linkId=" + this.linkId());
+        this.debug(true, "init__", "");
     };
 
     this.objectName = function () {
-        return "ConfigRootObject";
+        return "ConfigAjaxObject";
+    };
+
+    this.rootObject = function () {
+        return this.theRootObject;
     };
 
     this.ajaxUtilObject = function () {
         return this.theAjaxUtilObject;
     };
 
-    this.storage = function () {
-        return this.theStorage;
-    };
-
-    this.userName = function () {
-        return this.storage().user_name;
-    };
-
-    this.linkId = function () {
-        return Number(this.storage().link_id);
-    };
-
-    this.boardSize = function () {
-        return this.storage().board_size;
-    };
-
-    this.stoneColor = function () {
-        return this.storage().stone_color;
-    };
-
-    this.komi = function () {
-        return this.storage().komi;
-    };
-
-    this.handicap = function () {
-        return this.storage().handicap;
-    };
-
-    this.setBoardSize = function (val) {
-        this.storage().board_size = val;
-    };
-
-    this.setStoneColor = function (val) {
-        this.storage().stone_color = val;
-    };
-
-    this.setKomi = function (val) {
-        this.storage().komi = val;
-    };
-
-    this.setHandicap = function (val) {
-        this.storage().handicap = val;
-    };
-
-    this.setNameList = function (data_val) {
-        this.theNameList = data_val;
-    };
-
-    this.nameListLength = function () {
-        return this.nameList().length;
-    };
-
-    this.nameListElement = function (index_val) {
-        return this.nameList()[index_val];
-    };
-
-    this.setNameListElement = function (index_val, data_val) {
-        this.nameList()[index_val] = data_val;
+    this.storageObject = function () {
+        return this.rootObject().storageObject();
     };
 
     this.switchAjaxResponseData = function (json_response_val) {
@@ -97,7 +44,7 @@ function ConfigAjaxObject() {
         var data = JSON.parse(input_val);
         if (data) {
             if (data.name_list) {
-                this.setNameList(data.name_list);
+                this.storageObject().setNameList(data.name_list);
             }
         }
     };
@@ -105,8 +52,8 @@ function ConfigAjaxObject() {
     this.getNameList = function () {
         var output = JSON.stringify({
                         command: "get_name_list",
-                        my_name: this.userName(),
-                        link_id: this.linkId(),
+                        my_name: this.storageObject().userName(),
+                        link_id: this.storageObject().linkId(),
                         });
         this.debug(true, "getNameList", "output=" + output);
         this.ajaxUtilObject().transmitAjaxRequest(output);
@@ -140,6 +87,6 @@ function ConfigAjaxObject() {
         return ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__();
+    this.init__(root_object_val);
 }
 
