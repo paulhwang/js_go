@@ -1,6 +1,6 @@
 /*
   Copyrights reserved
-  Written by Paul Hwang since 2017
+  Written by Paul Hwang
 */
 
 function LoginRootObject() {
