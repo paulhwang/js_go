@@ -7,79 +7,33 @@ function ConfigRootObject() {
     "use strict";
 
     this.init__ = function () {
-        this.theStorage = localStorage;
+        this.theStorageObject = new ConfigStorageObject();
+        //this.theAjaxObject = new LoginAjaxObject(this);
+        //this.theHtmlObject = new LoginHtmlObject(this);
         this.theAjaxUtilObject = new AjaxUtilObject(this, this.switchAjaxResponseData);
         this.getNameList();
         this.setupHtmlInput();
-        this.debug(true, "init__", "userName=" + this.userName() + " linkId=" + this.linkId());
+        this.debug(true, "init__", "userName=" + this.storageObject().userName() + " linkId=" + this.storageObject().linkId());
     };
 
     this.objectName = function () {
         return "ConfigRootObject";
     };
 
+    this.storageObject = function () {
+        return this.theStorageObject;
+    };
+
+    this.ajaxObject = function () {
+        return this.theAjaxObject;
+    };
+
+    this.htmlObject = function () {
+        return this.theHtmlObject;
+    };
+
     this.ajaxUtilObject = function () {
         return this.theAjaxUtilObject;
-    };
-
-    this.storage = function () {
-        return this.theStorage;
-    };
-
-    this.userName = function () {
-        return this.storage().user_name;
-    };
-
-    this.linkId = function () {
-        return Number(this.storage().link_id);
-    };
-
-    this.boardSize = function () {
-        return this.storage().board_size;
-    };
-
-    this.stoneColor = function () {
-        return this.storage().stone_color;
-    };
-
-    this.komi = function () {
-        return this.storage().komi;
-    };
-
-    this.handicap = function () {
-        return this.storage().handicap;
-    };
-
-    this.setBoardSize = function (val) {
-        this.storage().board_size = val;
-    };
-
-    this.setStoneColor = function (val) {
-        this.storage().stone_color = val;
-    };
-
-    this.setKomi = function (val) {
-        this.storage().komi = val;
-    };
-
-    this.setHandicap = function (val) {
-        this.storage().handicap = val;
-    };
-
-    this.setNameList = function (data_val) {
-        this.theNameList = data_val;
-    };
-
-    this.nameListLength = function () {
-        return this.nameList().length;
-    };
-
-    this.nameListElement = function (index_val) {
-        return this.nameList()[index_val];
-    };
-
-    this.setNameListElement = function (index_val, data_val) {
-        this.nameList()[index_val] = data_val;
     };
 
     this.switchAjaxResponseData = function (json_response_val) {
@@ -97,7 +51,7 @@ function ConfigRootObject() {
         var data = JSON.parse(input_val);
         if (data) {
             if (data.name_list) {
-                this.setNameList(data.name_list);
+                this.storageObject().setNameList(data.name_list);
             }
         }
     };
@@ -105,8 +59,8 @@ function ConfigRootObject() {
     this.getNameList = function () {
         var output = JSON.stringify({
                         command: "get_name_list",
-                        my_name: this.userName(),
-                        link_id: this.linkId(),
+                        my_name: this.storageObject().userName(),
+                        link_id: this.storageObject().linkId(),
                         });
         this.debug(true, "getNameList", "output=" + output);
         this.ajaxUtilObject().transmitAjaxRequest(output);
