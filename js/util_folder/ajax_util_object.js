@@ -1,3 +1,8 @@
+/*
+  Copyrights reserved
+  Written by Paul Hwang since 2017
+*/
+
 function AjaxUtilObject(root_object_val, callback_func_val) {
     "use strict";
 

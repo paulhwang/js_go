@@ -3,7 +3,7 @@
   Written by Paul Hwang since 2017
 */
 
-function ConfigRootObject() {
+function ConfigAjaxObject() {
     "use strict";
 
     this.init__ = function () {

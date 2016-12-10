@@ -1,0 +1,69 @@
+/*
+  Copyrights reserved
+  Written by Paul Hwang since 2017
+*/
+
+function LoginAjaxObject(root_object_val) {
+    "use strict";
+
+    this.init__ = function (root_object_val) {
+        this.theRootObject = root_object_val;
+        this.theAjaxUtilObject = new AjaxUtilObject(this, this.switchAjaxResponseData);
+        this.debug(true, "init__", "");
+    };
+
+    this.objectName = function () {
+        return "LoginAjaxObject";
+    };
+
+    this.rootObject = function () {
+        return this.theRootObject;
+    };
+
+    this.ajaxUtilObject = function () {
+        return this.theAjaxUtilObject;
+    };
+
+    this.storageObject = function () {
+        return this.rootObject().storageObject();
+    };
+
+    this.switchAjaxResponseData = function (json_response_val) {
+        var response = JSON.parse(json_response_val);
+        if (response.command === "setup_link") {
+            this.debug(true, "switchAjaxResponseData", "command=" + response.command + " data=" + response.data);
+            var data = JSON.parse(response.data);
+            this.storageObject().setLinkId(data.link_id);
+            window.open("http://127.0.0.1:8080/go_config.html", "_self")
+        } else {
+            this.abend("switchAjaxResponseData", "not setup_link");
+        }
+    };
+
+    this.setupLink = function () {
+        var output = JSON.stringify({
+                        command: "setup_link",
+                        my_name: this.storageObject().userName(),
+                        password: this.storageObject().passWord(),
+                        });
+        this.debug(true, "setupLink", "output=" + output);
+        this.ajaxUtilObject().transmitAjaxRequest(output);
+    };
+
+    this.debug = function (debug_val, str1_val, str2_val) {
+        if (debug_val) {
+            this.logit(str1_val, str2_val);
+        }
+    };
+
+    this.logit = function (str1_val, str2_val) {
+        return LOG_IT(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.abend = function (str1_val, str2_val) {
+        return ABEND(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.init__(root_object_val);
+}
+

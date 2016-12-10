@@ -1,82 +1,32 @@
+/*
+  Copyrights reserved
+  Written by Paul Hwang since 2017
+*/
+
 function LoginRootObject() {
     "use strict";
 
     this.init__ = function () {
-        this.theStorage = localStorage;
-        this.theAjaxUtilObject = new AjaxUtilObject(this, this.switchAjaxResponseData);
-        this.thePassWord = null;
-        this.setupHtmlInput();
-        this.debug(true, "init__", "userName=" + this.userName() + " linkId=" + this.linkId());
+        this.theStorageObject = new LoginStorageObject();
+        this.theAjaxObject = new LoginAjaxObject(this);
+        this.theHtmlObject = new LoginHtmlObject(this);
+        this.debug(true, "init__", "userName=" + this.storageObject().userName() + " linkId=" + this.storageObject().linkId());
     };
 
     this.objectName = function () {
         return "LoginRootObject";
     };
 
-    this.ajaxUtilObject = function () {
-        return this.theAjaxUtilObject;
+    this.storageObject = function () {
+        return this.theStorageObject;
     };
 
-    this.storage = function () {
-        return this.theStorage;
+    this.ajaxObject = function () {
+        return this.theAjaxObject;
     };
 
-    this.userName = function () {
-        return this.storage().user_name;
-    };
-
-    this.setUserName = function (val) {
-        this.storage().user_name = val;
-    };
-
-    this.passWord = function () {
-        return this.thePassWord;
-    };
-
-    this.setPassWord = function (val) {
-        this.thePassWord = val;
-    };
-
-    this.linkId = function () {
-        return Number(this.storage().link_id);
-    };
-
-    this.setLinkId = function (val) {
-        this.storage().link_id = val;
-    };
-
-    this.switchAjaxResponseData = function (json_response_val) {
-        var response = JSON.parse(json_response_val);
-        if (response.command === "setup_link") {
-            this.debug(true, "switchAjaxResponseData", "command=" + response.command + " data=" + response.data);
-            var data = JSON.parse(response.data);
-            this.setLinkId(data.link_id);
-            window.open("http://127.0.0.1:8080/go_config.html", "_self")
-        } else {
-            this.abend("switchAjaxResponseData", "not setup_link");
-        }
-    };
-
-    this.setupHtmlInput = function () {
-        var this0 = this;
-        $(".login_section .login_button").on("click", function() {
-            this0.setUserName($(".login_section .login_name").val());
-            this0.setPassWord($(".login_section .login_password").val());
-            this0.debug(true, "runRoot", "userName=" + this0.userName() + " passWord=" + this0.passWord());
-            if (this0.userName()) {
-                this0.setupLink();
-            }
-        });
-    };
-
-    this.setupLink = function () {
-        var output = JSON.stringify({
-                        command: "setup_link",
-                        my_name: this.userName(),
-                        password: this.passWord(),
-                        });
-        this.debug(true, "setupLink", "output=" + output);
-        this.ajaxUtilObject().transmitAjaxRequest(output);
+    this.htmlObject = function () {
+        return this.theHtmlObject;
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

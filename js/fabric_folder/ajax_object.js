@@ -1,8 +1,8 @@
 /*
- * Copyrights phwang
- * Written by Paul Hwang
- * File name: AjaxObject.js
- */
+  Copyrights reserved
+  Written by Paul Hwang since 2017
+*/
+
 
 function AjaxObject(root_object_val) {
     "use strict";
