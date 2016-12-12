@@ -51,7 +51,6 @@ function GoPlayHtmlObject(root_object_val) {
 
     this.initElements = function () {
         this.theCanvasElement = window.document.getElementById("go_canvas");
-        this.logit("initElements", this.canvasElement());
         if (this.canvasElement() === null) {
             this.abend("GoUiObject", "null canvasElement");
             return;
