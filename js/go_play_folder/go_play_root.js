@@ -8,9 +8,9 @@ function GoPlayRootObject() {
 
     this.init__ = function () {
         this.theStorageObject = new GoPlayStorageObject();
+        this.theHtmlObject = new GoPlayHtmlObject(this);
         this.theInputObject = new GoPlayInputObject(this);
         this.theDisplayObject = new GoPlayDisplayObject(this);
-        this.theHtmlObject = new GoPlayHtmlObject(this);
         this.theAjaxObject = new GoPlayAjaxObject(this);
         this.debug(true, "init__", "userName=" + this.storageObject().userName() + " linkId=" + this.storageObject().linkId());
         this.debug(true, "init__", "boardSize=" + this.storageObject().boardSize() + " stoneColor=" + this.storageObject().stoneColor() + " komi=" + this.storageObject().komi() + " handicap=" + this.storageObject().handicap());

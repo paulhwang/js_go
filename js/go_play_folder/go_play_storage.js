@@ -28,7 +28,7 @@ function GoPlayStorageObject() {
     };
 
     this.boardSize = function () {
-        return this.storage().board_size;
+        return Number(this.storage().board_size);
     };
 
     this.stoneColor = function () {
@@ -36,11 +36,11 @@ function GoPlayStorageObject() {
     };
 
     this.komi = function () {
-        return this.storage().komi;
+        return Number(this.storage().komi);
     };
 
     this.handicap = function () {
-        return this.storage().handicap;
+        return Number(this.storage().handicap);
     };
 
     this.ajaxObject = function () {
