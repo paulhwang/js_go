@@ -9,6 +9,7 @@ function GoPlayDisplayObject(root_object_val) {
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
         this.drawBoard();
+        this.drawArrows();
         this.debug(true, "init__", "");
     };
 
@@ -44,9 +45,12 @@ function GoPlayDisplayObject(root_object_val) {
         return this.canvasElement().width / (this.boardSize() + 1);
     };
 
+    this.getArrowUnitLength = function () {
+        return this.canvasElement().width / 20;
+    };
+
     this.drawBoard = function () {
         var context = this.canvasContext();
-
         this.drawEmptyBoard();
     };
 
@@ -102,6 +106,91 @@ function GoPlayDisplayObject(root_object_val) {
         this.canvasContext().fillStyle = "#FF8000";
         this.canvasContext().fillRect(0, 0, this.canvasElement().width, this.canvasElement().width);
     }
+
+    this.drawOneStone = function (x_val, y_val, paint_val) {
+        var grid_len = this.getGridLength();
+        var micro_grid_len = grid_len / 8;
+        var radius = 3.2 * micro_grid_len;
+        var context = this.canvasContext();
+
+        context.beginPath();
+        context.arc((x_val + 1) * grid_len, (y_val + 1) * grid_len, radius, 0, 2 * Math.PI, false);
+        context.fillStyle = paint_val;
+        context.fill();
+        context.lineWidth = 1;
+        context.strokeStyle = '#003300';
+        context.stroke();
+     }
+
+
+    this.drawArrows = function () {
+        var arrow_len = this.getArrowUnitLength();
+        var context = this.canvasContext();
+
+        context.beginPath();
+        context.moveTo(arrow_len * 0.5,  arrow_len * 1.5 + this.canvasElement().width);
+        context.lineTo(arrow_len * 1.25, arrow_len       + this.canvasElement().width);
+        context.lineTo(arrow_len * 1.25, arrow_len * 2   + this.canvasElement().width);
+        context.lineTo(arrow_len * 0.5,  arrow_len * 1.5 + this.canvasElement().width);
+        context.fill();
+        context.stroke();
+        context.beginPath();
+        context.moveTo(arrow_len * 1.25, arrow_len * 1.5 + this.canvasElement().width);
+        context.lineTo(arrow_len * 2,    arrow_len       + this.canvasElement().width);
+        context.lineTo(arrow_len * 2,    arrow_len * 2   + this.canvasElement().width);
+        context.lineTo(arrow_len * 1.25, arrow_len * 1.5 + this.canvasElement().width);
+        context.fill();
+        context.stroke();
+
+        context.beginPath();
+        context.moveTo(arrow_len * 3, arrow_len  * 1.5 + this.canvasElement().width);
+        context.lineTo(arrow_len * 4, arrow_len        + this.canvasElement().width);
+        context.lineTo(arrow_len * 4, arrow_len  * 2   + this.canvasElement().width);
+        context.lineTo(arrow_len * 3, arrow_len  * 1.5 + this.canvasElement().width);
+        context.fill();
+        context.stroke();
+
+        context.beginPath();
+        context.moveTo(arrow_len * 5, arrow_len       + this.canvasElement().width);
+        context.lineTo(arrow_len * 6, arrow_len * 1.5 + this.canvasElement().width);
+        context.lineTo(arrow_len * 5, arrow_len * 2   + this.canvasElement().width);
+        context.lineTo(arrow_len * 5, arrow_len       + this.canvasElement().width);
+        context.fill();
+        context.stroke();
+
+        context.beginPath();
+        context.moveTo(arrow_len * 7,    arrow_len       + this.canvasElement().width);
+        context.lineTo(arrow_len * 7.75, arrow_len * 1.5 + this.canvasElement().width);
+        context.lineTo(arrow_len * 7,    arrow_len * 2   + this.canvasElement().width);
+        context.lineTo(arrow_len * 7,    arrow_len       + this.canvasElement().width);
+        context.fill();
+        context.stroke();
+        context.beginPath();
+        context.moveTo(arrow_len * 7.75, arrow_len       + this.canvasElement().width);
+        context.lineTo(arrow_len * 8.5,  arrow_len * 1.5 + this.canvasElement().width);
+        context.lineTo(arrow_len * 7.75, arrow_len * 2   + this.canvasElement().width);
+        context.lineTo(arrow_len * 7.75, arrow_len       + this.canvasElement().width);
+        context.fill();
+        context.stroke();
+        context.moveTo(arrow_len * 8.5, arrow_len     + this.canvasElement().width);
+        context.lineTo(arrow_len * 8.5, arrow_len * 2 + this.canvasElement().width);
+        context.stroke();
+
+        context.moveTo(arrow_len * 0.5, arrow_len     + this.canvasElement().width);
+        context.lineTo(arrow_len * 0.5, arrow_len * 2 + this.canvasElement().width);
+        context.stroke();
+
+        context.fillStyle = "pink";
+        context.fillRect(arrow_len * 8.5, arrow_len + this.canvasElement().width, arrow_len * 2, arrow_len);
+        context.fillStyle = "yellow";
+        context.fillRect(arrow_len * 10.5, arrow_len + this.canvasElement().width, arrow_len * 2, arrow_len);
+        context.fillStyle = "pink";
+        context.fillRect(arrow_len * 12.5, arrow_len + this.canvasElement().width, arrow_len * 2, arrow_len);
+        context.fillStyle = "yellow";
+        context.fillRect(arrow_len * 14.5, arrow_len + this.canvasElement().width, arrow_len * 2, arrow_len);
+        context.fillStyle = "pink";
+        context.fillRect(arrow_len * 16.5, arrow_len + this.canvasElement().width, arrow_len * 2, arrow_len);
+    };
 
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
