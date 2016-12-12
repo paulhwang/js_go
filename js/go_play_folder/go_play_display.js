@@ -56,7 +56,7 @@ function GoPlayDisplayObject(root_object_val) {
     this.drawBoard = function () {
         this.drawEmptyBoard();
         this.drawCandidateStone(this.inputObject().lastMouseX(), this.inputObject().lastMouseY());
-        this.drawEmptyBoard();
+        this.drawEmptyBoard();////////////////////////////////////////////////
     };
 
     this.drawEmptyBoard = function () {
