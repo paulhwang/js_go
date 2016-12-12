@@ -42,15 +42,14 @@ function GoPlayDisplayObject(root_object_val) {
     };
 
     this.getGridLength = function () {
-        return this.canvasElement().width / (this.boardSize() + 1);
+        return this.htmlObject().getGridLength();
     };
 
     this.getArrowUnitLength = function () {
-        return this.canvasElement().width / 20;
+        return this.htmlObject().getArrowUnitLength();
     };
 
     this.drawBoard = function () {
-        var context = this.canvasContext();
         this.drawEmptyBoard();
     };
 

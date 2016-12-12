@@ -10,6 +10,7 @@ function GoPlayHtmlObject(root_object_val) {
         this.theRootObject = root_object_val;
         this.theCanvasWidth = 432;
         this.initElements();
+        this.setupHtmlInput();
         this.debug(true, "init__", "");
     };
 
@@ -27,6 +28,10 @@ function GoPlayHtmlObject(root_object_val) {
 
     this.ajaxObject = function () {
         return this.rootObject().ajaxObject();
+    };
+
+    this.inputObject = function () {
+        return this.rootObject().inputObject();
     };
 
     this.canvasWidth = function () {
@@ -47,6 +52,14 @@ function GoPlayHtmlObject(root_object_val) {
 
     this.whiteScoreElement = function () {
         return this.theWhiteScoreElement;
+    };
+
+    this.getGridLength = function () {
+        return this.canvasElement().width / (this.storageObject().boardSize() + 1);
+    };
+
+    this.getArrowUnitLength = function () {
+        return this.canvasElement().width / 20;
     };
 
     this.initElements = function () {
@@ -76,6 +89,19 @@ function GoPlayHtmlObject(root_object_val) {
             this.abend("GoUiObject", "null theWhiteScoreElement");
             return;
         }
+    };
+
+
+    this.setupHtmlInput = function (str1_val, str2_val) {
+        var this0 = this;
+
+        $("canvas").on("click", function(event) {
+            this0.inputObject().uiClick(event.clientX, event.clientY);
+        });
+
+        $("canvas").on("mousemove", function(event) {
+            this0.inputObject().uiMouseMove(event.clientX, event.clientY);
+        });
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
