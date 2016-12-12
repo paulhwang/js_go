@@ -8,8 +8,8 @@ function GoPlayDisplayObject(root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
-        this.drawBoard();
         this.drawArrows();
+        this.drawBoard();
         this.debug(true, "init__", "");
     };
 
@@ -27,6 +27,10 @@ function GoPlayDisplayObject(root_object_val) {
 
     this.htmlObject = function () {
         return this.rootObject().htmlObject();
+    };
+
+    this.inputObject = function () {
+        return this.rootObject().inputObject();
     };
 
     this.boardSize = function () {
@@ -50,6 +54,8 @@ function GoPlayDisplayObject(root_object_val) {
     };
 
     this.drawBoard = function () {
+        this.drawEmptyBoard();
+        this.drawCandidateStone(this.inputObject().lastMouseX(), this.inputObject().lastMouseY());
         this.drawEmptyBoard();
     };
 
@@ -104,6 +110,21 @@ function GoPlayDisplayObject(root_object_val) {
     this.setBoardColor = function () {
         this.canvasContext().fillStyle = "#FF8000";
         this.canvasContext().fillRect(0, 0, this.canvasElement().width, this.canvasElement().width);
+    }
+
+    this.drawCandidateStone = function (x_val, y_val) {
+        var grid_len = this.getGridLength();
+        var micro_grid_len = grid_len / 8;
+        var radius = 3.2 * micro_grid_len;
+        var context = this.canvasContext();
+        
+        context.beginPath();
+        context.arc((x_val + 1) * grid_len, (y_val + 1) * grid_len, radius / 2, 0, 2 * Math.PI, false);
+        context.fillStyle = "red";
+        context.fill();
+        context.lineWidth = 1;
+        context.strokeStyle = '#003300';
+        context.stroke();
     }
 
     this.drawOneStone = function (x_val, y_val, paint_val) {
