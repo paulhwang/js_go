@@ -8,7 +8,7 @@ function GoPlayDisplayObject(root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
-        this.drawEmptyBoard();
+        this.drawBoard();
         this.debug(true, "init__", "");
     };
 
@@ -44,10 +44,17 @@ function GoPlayDisplayObject(root_object_val) {
         return this.canvasElement().width / (this.boardSize() + 1);
     };
 
+    this.drawBoard = function () {
+        var context = this.canvasContext();
+
+        this.drawEmptyBoard();
+    };
+
     this.drawEmptyBoard = function () {
         var grid_len = this.getGridLength();
         var context = this.canvasContext();
 
+        this.setBoardColor();
         context.lineWidth = 1;
         var i = 1;
         while (i <= this.boardSize()) {
@@ -90,6 +97,11 @@ function GoPlayDisplayObject(root_object_val) {
             context.stroke();
         }
     };
+
+    this.setBoardColor = function () {
+        this.canvasContext().fillStyle = "#FF8000";
+        this.canvasContext().fillRect(0, 0, this.canvasElement().width, this.canvasElement().width);
+    }
 
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
