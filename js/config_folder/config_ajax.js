@@ -29,6 +29,10 @@ function ConfigAjaxObject(root_object_val) {
         return this.rootObject().storageObject();
     };
 
+    this.htmlObject = function () {
+        return this.rootObject().htmlObject();
+    };
+
     this.switchAjaxResponseData = function (json_response_val) {
         var response = JSON.parse(json_response_val);
         this.debug(true, "switchAjaxResponseData", "command=" + response.command + " data=" + response.data);
@@ -45,6 +49,7 @@ function ConfigAjaxObject(root_object_val) {
         if (data) {
             if (data.name_list) {
                 this.storageObject().setNameList(data.name_list);
+                this.htmlObject().renderNameList();
             }
         }
     };

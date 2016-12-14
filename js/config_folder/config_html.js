@@ -8,7 +8,7 @@ function ConfigHtmlObject(root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
-        this.setupHtmlInput();
+        this.setupHtmlInputFunction();
         this.debug(true, "init__", "");
     };
 
@@ -24,8 +24,8 @@ function ConfigHtmlObject(root_object_val) {
         return this.rootObject().storageObject();
     };
 
-    this.setupHtmlInput = function () {
-        this.setNameList();
+    this.setupHtmlInputFunction = function () {
+        this.renderNameList();
         var this0 = this;
         $(".config_section .config_button").on("click", function() {
             this0.storageObject().setBoardSize($(".config_section .go_config_section .board_size").val());
@@ -33,11 +33,11 @@ function ConfigHtmlObject(root_object_val) {
             this0.storageObject().setKomi($(".config_section .go_config_section .komi").val());
             this0.storageObject().setHandicap($(".config_section .go_config_section .handicap").val());
             this0.debug(true, "setupHtmlInput", "boardSize=" + this0.storageObject().boardSize() + " stoneColor=" + this0.storageObject().stoneColor() + " komi=" + this0.storageObject().komi() + " handicap=" + this0.storageObject().handicap());
-            window.open("http://127.0.0.1:8080/go_play.html", "_self")
+            //window.open("http://127.0.0.1:8080/go_play.html", "_self")
         });
     };
 
-    this.setNameList = function () {
+    this.renderNameList = function () {
         var i = 0;
         while (i < this.storageObject().nameListLength()) {
             $('.peer_name_paragraph select').append($('<option>', {value:this.storageObject().nameListElement(i), text:this.storageObject().nameListElement(i)}));
