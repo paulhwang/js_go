@@ -25,9 +25,8 @@ function ConfigHtmlObject(root_object_val) {
     };
 
     this.setupHtmlInput = function () {
+        this.setNameList();
         var this0 = this;
-        $('.peer_name_paragraph select').append($('<option>', {value:1, text:'One1'}));
-        $('.peer_name_paragraph select').append('<option val="1">One2</option>');
         $(".config_section .config_button").on("click", function() {
             this0.storageObject().setBoardSize($(".config_section .go_config_section .board_size").val());
             this0.storageObject().setStoneColor($(".config_section .go_config_section .stone_color").val());
@@ -36,6 +35,14 @@ function ConfigHtmlObject(root_object_val) {
             this0.debug(true, "setupHtmlInput", "boardSize=" + this0.storageObject().boardSize() + " stoneColor=" + this0.storageObject().stoneColor() + " komi=" + this0.storageObject().komi() + " handicap=" + this0.storageObject().handicap());
             window.open("http://127.0.0.1:8080/go_play.html", "_self")
         });
+    };
+
+    this.setNameList = function () {
+        var i = 0;
+        while (i < this.storageObject().nameListLength()) {
+            $('.peer_name_paragraph select').append($('<option>', {value:this.storageObject().nameListElement(i), text:this.storageObject().nameListElement(i)}));
+            i += 1;
+        }
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

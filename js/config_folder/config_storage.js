@@ -8,6 +8,7 @@ function ConfigStorageObject() {
 
     this.init__ = function () {
         this.theStorage = localStorage;
+        this.theNameList = ["Paul_Hwang", "Annie_Laurie"];
         this.debug(true, "init__", "");
     };
 
@@ -57,6 +58,10 @@ function ConfigStorageObject() {
 
     this.setHandicap = function (val) {
         this.storage().handicap = val;
+    };
+
+    this.nameList = function () {
+        return this.theNameList;
     };
 
     this.setNameList = function (data_val) {
