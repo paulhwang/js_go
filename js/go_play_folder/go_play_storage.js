@@ -27,6 +27,10 @@ function GoPlayStorageObject() {
         return this.storage().link_id;
     };
 
+    this.sessionId = function () {
+        return this.storage().session_id;
+    };
+
     this.boardSize = function () {
         return Number(this.storage().board_size);
     };
