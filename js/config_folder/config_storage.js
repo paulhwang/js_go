@@ -28,6 +28,14 @@ function ConfigStorageObject() {
         return Number(this.storage().link_id);
     };
 
+    this.sessionId = function () {
+        return Number(this.storage().session_id);
+    };
+
+    this.setSessionId = function (val) {
+        this.storage().session_id = val;
+    };
+
     this.boardSize = function () {
         return this.storage().board_size;
     };

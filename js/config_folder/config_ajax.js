@@ -38,7 +38,11 @@ function ConfigAjaxObject(root_object_val) {
         this.debug(true, "switchAjaxResponseData", "command=" + response.command + " data=" + response.data);
         if (response.command === "get_name_list") {
             this.getNameListResponse(response.data);
-        } else {
+        }
+        else if (response.command === "setup_session") {
+            this.setupSessionResponse(response.data);
+        }
+        else {
             this.abend("switchAjaxResponseData", "not get_name_list");
         }
     };
@@ -64,18 +68,26 @@ function ConfigAjaxObject(root_object_val) {
         this.ajaxUtilObject().transmitAjaxRequest(output);
     };
 
-    this.setupHtmlInput = function () {
-        var this0 = this;
-        $('.peer_name_paragraph select').append($('<option>', {value:1, text:'One1'}));
-        $('.peer_name_paragraph select').append('<option val="1">One2</option>');
-        $(".config_section .config_button").on("click", function() {
-            this0.setBoardSize($(".config_section .go_config_section .board_size").val());
-            this0.setStoneColor($(".config_section .go_config_section .stone_color").val());
-            this0.setKomi($(".config_section .go_config_section .komi").val());
-            this0.setHandicap($(".config_section .go_config_section .handicap").val());
-            this0.debug(true, "setupHtmlInput", "boardSize=" + this0.boardSize() + " stoneColor=" + this0.stoneColor() + " komi=" + this0.komi() + " handicap=" + this0.handicap());
+    this.setupSessionResponse = function (input_val) {
+        this.debug(true, "setupSessionResponse", "input_val=" + input_val);
+        var data = JSON.parse(input_val);
+        if (data) {
+            this.storageObject().setSessionId(data.session_id);
+            this.debug(true, "setupSessionResponse", "sessionId=" + this.storageObject().sessionId());
             window.open("http://127.0.0.1:8080/go_play.html", "_self")
-        });
+        }
+    };
+
+    this.setupSession = function (link_val, topic_data_val, his_name_val) {
+        var output = JSON.stringify({
+                        command: "setup_session",
+                        my_name: this.storageObject().userName(),
+                        link_id: this.storageObject().linkId(),
+                        his_name: his_name_val,
+                        topic_data: topic_data_val,
+                        });
+        this.debug(true, "setupSession", "output=" + output);
+        this.ajaxUtilObject().transmitAjaxRequest(output);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

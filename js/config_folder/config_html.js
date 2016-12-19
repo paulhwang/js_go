@@ -24,6 +24,10 @@ function ConfigHtmlObject(root_object_val) {
         return this.rootObject().storageObject();
     };
 
+    this.ajaxObject = function () {
+        return this.rootObject().ajaxObject();
+    };
+
     this.setupHtmlInputFunction = function () {
         this.renderNameList();
         var this0 = this;
@@ -33,7 +37,17 @@ function ConfigHtmlObject(root_object_val) {
             this0.storageObject().setKomi($(".config_section .go_config_section .komi").val());
             this0.storageObject().setHandicap($(".config_section .go_config_section .handicap").val());
             this0.debug(true, "setupHtmlInput", "boardSize=" + this0.storageObject().boardSize() + " stoneColor=" + this0.storageObject().stoneColor() + " komi=" + this0.storageObject().komi() + " handicap=" + this0.storageObject().handicap());
-            //window.open("http://127.0.0.1:8080/go_play.html", "_self")
+            var config = JSON.stringify({
+                            board_size: this0.storageObject().boardSize(),
+                            color: this0.storageObject().stoneColor(),
+                            komi: this0.storageObject().komi(),
+                            handicap: this0.storageObject().handicap(),
+                            });
+            var topic_data = JSON.stringify({
+                            title: "go",
+                            config: config,
+                            });
+            this0.ajaxObject().setupSession(this0, topic_data, this0.storageObject().userName());
         });
     };
 
