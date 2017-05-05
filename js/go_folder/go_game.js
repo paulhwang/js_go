@@ -107,14 +107,6 @@ function GoGameObject(container_val) {
         this.theTotalMoves = total_moves_val;
     };
 
-    this.incrementTotalMoves = function () {
-        this.theTotalMoves += 1;
-    };
-
-    this.decrementTotalMoves = function () {
-        this.theTotalMoves -= 1;
-    };
-
     this.nextColor = function () {
         return this.theNextColor;
     };
@@ -163,21 +155,6 @@ function GoGameObject(container_val) {
         this.theGameIsOver = false;
     };
 
-    this.getLastMove = function () {
-        if (this.totalMoves() <= 0) {
-            return null;
-        }
-        return this.movesArray(this.totalMoves() - 1);
-    };
-
-    this.isLastMove = function (x_val, y_val) {
-        var move = this.getLastMove();
-        if (move && (move.xX() === x_val) && (move.yY() === y_val)) {
-            return true;
-        }
-        return false;
-    };
-
     this.enterGameFromUi = function (x_val, y_val) {
         this.debug(false, "enterGameFromUi", "(" + x_val + "," + y_val + ")");
 
@@ -190,7 +167,7 @@ function GoGameObject(container_val) {
         if (!this.isValidMoveOnBoard(x_val, y_val)) {
             return;
         }
-        var move = new GoMoveObject(null, x_val, y_val, this.nextColor(), this.totalMoves(), this.containerObject());
+        var move = new GoMoveObject(null, x_val, y_val, this.nextColor(), this.totalMoves() + 1, this.containerObject());
         this.portObject().transmitMoveData(move);
     };
 

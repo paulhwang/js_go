@@ -274,7 +274,7 @@ function GoUiObject(container_val) {
                     context.stroke();
                     */
 
-                    if (!this.gameObject().gameIsOver() && this.gameObject().isLastMove(i, j)) {
+                    if (!this.gameObject().gameIsOver()) {
                         this.drawCandidateStone(i, j);
                         /*
                         context.beginPath();

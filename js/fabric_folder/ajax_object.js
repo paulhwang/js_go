@@ -76,6 +76,7 @@ function AjaxObject(root_object_val) {
     };
 
     this.transmitAjaxRequest = function (output_val) {
+        this.debug(true, "transmitAjaxRequest", "output=" + output_val);
         this.httpGetRequest().open("GET", this.ajaxRoute(), true);
         this.httpGetRequest().setRequestHeader("X-Requested-With", "XMLHttpRequest");
         this.httpGetRequest().setRequestHeader("Content-Type", this.jsonContext());

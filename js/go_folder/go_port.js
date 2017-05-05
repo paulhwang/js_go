@@ -85,6 +85,10 @@ function GoPortObject(container_val) {
             this.gameObject().setNextColor(res_data.next_color);
         }
 
+        if (res_data.total_moves !== null) {
+            this.gameObject().setTotalMoves(res_data.total_moves);
+        }
+
         if (res_data.last_dead_stone !== null) {
             this.gameObject().setValidLastDeadInfo(true);
             this.gameObject().setLastDeadX(Number(res_data.last_dead_stone.slice(0, 2)));
