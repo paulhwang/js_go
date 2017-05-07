@@ -12,6 +12,7 @@ function GoPlayRootObject() {
         this.theInputObject = new GoPlayInputObject(this);
         this.theDisplayObject = new GoPlayDisplayObject(this);
         this.theAjaxObject = new GoPlayAjaxObject(this);
+        this.thePortObject = new GoPlayPortObject(this);
         this.theGameObject = new GoPlayGameObject(this);
         this.debug(true, "init__", "userName=" + this.storageObject().userName() + " linkId=" + this.storageObject().linkId() + " sessionId=" + this.storageObject().sessionId());
         this.debug(true, "init__", "boardSize=" + this.storageObject().boardSize() + " stoneColor=" + this.storageObject().stoneColor() + " komi=" + this.storageObject().komi() + " handicap=" + this.storageObject().handicap());
@@ -43,6 +44,10 @@ function GoPlayRootObject() {
 
     this.gameObject = function () {
         return this.theGameObject;
+    };
+
+    this.portObject = function () {
+        return this.thePortObject;
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
