@@ -88,7 +88,6 @@ function GoPlayGameObject(root_object_val) {
     };
 
     this.isValidMoveOnBoard = function (x_val, y_val) {
-        /*
         if (this.boardObject().boardArray(x_val, y_val) !== GO.EMPTY_STONE()) {
             return false;
         }
@@ -96,12 +95,20 @@ function GoPlayGameObject(root_object_val) {
         if (this.validLastDeadInfo() && (x_val === this.lastDeadX()) && (y_val === this.lastDeadY())) {
             return false;
         }
-        */
         return true;
     };
 
     this.isMyTurn = function () {
-        return true;
+        if (this.configObject().playBothSides()) {
+            return true;
+        }
+
+        this.debug(true, "isMyTurn", "nextColor=" + this.nextColor() + ", myColor=" + this.configObject().myColor());
+        if (this.nextColor() === this.configObject().myColor()) {
+            return true;
+        } else {
+            return false;
+        }
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

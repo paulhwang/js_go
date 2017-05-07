@@ -1,14 +1,13 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: go_board.js
  */
 
-function GoBoardObject(container_val) {
+function GoPlayBoardObject(root_val) {
     "use strict";
 
-    this.init__ = function (container_val) {
-        this.theContainerObject = container_val;
+    this.init__ = function (root_val) {
+        this.theRootObject = root_val;
         this.theBoardArray = [19];
         this.theMarkedBoardArray = [19];
         var i = 0;
@@ -18,19 +17,19 @@ function GoBoardObject(container_val) {
             i += 1;
         }
         this.resetBoardObjectData();
-        this.debug(false, "init__", "");
+        this.debug(true, "init__", "");
     };
 
     this.objectName = function () {
-        return "GoBoardObject";
+        return "GoPlayBoardObject";
     };
 
-    this.containerObject = function () {
-        return this.theContainerObject;
+    this.rootObject = function () {
+        return this.theRootObject;
     };
 
     this.configObject = function () {
-        return this.containerObject().configObject();
+        return this.rootObject().configObject();
     };
 
     this.boardSize = function () {
@@ -176,12 +175,12 @@ function GoBoardObject(container_val) {
     };
 
     this.logit = function (str1_val, str2_val) {
-        return this.containerObject().goLogit(this.objectName() + "." + str1_val, str2_val);
+        return LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
+        return ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(container_val);
+    this.init__(root_val);
 }
