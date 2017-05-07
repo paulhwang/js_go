@@ -7,13 +7,18 @@ function GoPlayConfigObject(root_val, config_val, initiater_val) {
     "use strict";
 
     this.init__ = function (root_val, config_val, initiater_val) {
-        this.theContainerObject = root_val;
+        this.theRootObject = root_val;
         this.debug(true, "setupConfiguration", "config=" + config_val);
-        var config = JSON.parse(config_val);
-        this.setBoardSize(config.board_size);
-        this.setKomiPoint(config.komi);
-        this.setHandicapPoint(config.handicap);
-        this.setMyColor(config.color);
+
+
+
+
+        /////var config = JSON.parse(config_val);
+        /////this.setBoardSize(config.board_size);
+        /////this.setKomiPoint(config.komi);
+        /////this.setHandicapPoint(config.handicap);
+        /////this.setMyColor(config.color);
+
         if (!initiater_val) {
             this.setMyColor_(GO.getOppositeColor(this.myColor()));
         }
@@ -24,24 +29,24 @@ function GoPlayConfigObject(root_val, config_val, initiater_val) {
         return "GoPlayConfigObject";
     };
 
-    this.containerObject = function () {
-        return this.theContainerObject;
+    this.rootObject = function () {
+        return this.theRootObject;
+    };
+
+    this.storageObject = function () {
+        return this.rootObject().storageObject();
     };
 
     this.sessionObject = function () {
-        return this.containerObject().sessionObject();
-    };
-
-    this.rootObject = function () {
-        return this.sessionObject().rootObject();
+        return this.rootObject().sessionObject();
     };
 
     this.gameObject = function () {
-        return this.containerObject().gameObject();
+        return this.rootObject().gameObject();
     };
 
     this.myName = function () {
-        return this.rootObject().myName();
+        return this.storageObject().userName();
     };
 
     this.opponentName = function () {

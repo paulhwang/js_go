@@ -12,7 +12,9 @@ function GoPlayRootObject() {
         this.theInputObject = new GoPlayInputObject(this);
         this.theDisplayObject = new GoPlayDisplayObject(this);
         this.theAjaxObject = new GoPlayAjaxObject(this);
-        this.theConfigObject = new GoPlayConfigObject(this);
+        this.theLinkObject = new LinkObject(this, "null", 0);
+        this.theSessionObject = new SessionObject(this.linkObject());
+        this.theConfigObject = new GoPlayConfigObject(this, null, true);
         this.theBoardObject = new GoPlayBoardObject(this);
         this.thePortObject = new GoPlayPortObject(this);
         this.theGameObject = new GoPlayGameObject(this);
@@ -38,6 +40,14 @@ function GoPlayRootObject() {
 
     this.htmlObject = function () {
         return this.theHtmlObject;
+    };
+
+    this.linkObject = function () {
+        return this.theLinkObject;
+    };
+
+    this.sessionObject = function () {
+        return this.theSessionObject;
     };
 
     this.ajaxObject = function () {

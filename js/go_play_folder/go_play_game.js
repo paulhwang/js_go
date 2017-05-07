@@ -34,6 +34,10 @@ function GoPlayGameObject(root_object_val) {
         return this.rootObject().storageObject();
     };
 
+    this.configObject = function () {
+        return this.rootObject().configObject();
+    };
+
     this.boardObject = function () {
         return this.rootObject().boardObject();
     };
