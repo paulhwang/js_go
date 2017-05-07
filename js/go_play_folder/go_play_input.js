@@ -33,6 +33,10 @@ function GoPlayInputObject(root_object_val) {
         return this.rootObject().displayObject();
     };
 
+    this.gameObject = function () {
+        return this.rootObject().gameObject();
+    };
+
     this.boardSize = function () {
         return this.storageObject().boardSize();
     };
@@ -171,8 +175,6 @@ function GoPlayInputObject(root_object_val) {
 
         this.debug(true, "uiClick", "(" + x + "," + y + ")");
 
-
-        return;////////////////////////////////////////////////////
         if (!this.gameObject().isMyTurn()) {
             this.debug(true, "uiClick", "not my turn");
             return;
