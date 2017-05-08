@@ -14,7 +14,7 @@ function GoPlayRootObject() {
         this.theAjaxObject = new GoPlayAjaxObject(this);
         this.theLinkObject = new LinkObject(this, "null", 0);
         this.theSessionObject = new SessionObject(this.linkObject());
-        this.theConfigObject = new GoPlayConfigObject(this, null, true);
+        this.theConfigObject = new GoPlayConfigObject(this, this.storageObject().configInJson(), true);
         this.theBoardObject = new GoPlayBoardObject(this);
         this.thePortObject = new GoPlayPortObject(this);
         this.theGameObject = new GoPlayGameObject(this);

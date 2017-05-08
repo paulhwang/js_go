@@ -80,6 +80,15 @@ function ConfigStorageObject() {
         return this.nameList().length;
     };
 
+    this.configInJson = function () {
+        return JSON.stringify({
+                            board_size: this.boardSize(),
+                            color: this.stoneColor(),
+                            komi: this.komi(),
+                            handicap: this.handicap(),
+                            });
+    };
+
     this.nameListElement = function (index_val) {
         return this.nameList()[index_val];
     };
