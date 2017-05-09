@@ -33,6 +33,10 @@ function GoPlayDisplayObject(root_object_val) {
         return this.rootObject().inputObject();
     };
 
+    this.boardObject = function () {
+        return this.rootObject().boardObject();
+    };
+
     this.boardSize = function () {
         return this.configStorageObject().boardSize();
     };
@@ -54,9 +58,31 @@ function GoPlayDisplayObject(root_object_val) {
     };
 
     this.drawBoard = function () {
+        var arrow_color = "black";
+        var grid_len = this.getGridLength();
+        //var half_grid_len = grid_len / 2;
+        var micro_grid_len = grid_len / 8;
+        //var radius = 3.2 * micro_grid_len;
+        var context = this.canvasContext();
+        //var canvas_extra = this.canvasElement_().height - this.canvasElement_().width;
+
+        context.fillStyle = arrow_color;
+        context.lineWidth = 1;
+        context.strokeStyle = '#003300';
+
+        this.drawArrows();
+
+        context.fillStyle = "#FF8000";
+        context.fillRect(0, 0, this.canvasElement().width, this.canvasElement().width);
+
         this.drawEmptyBoard();
-        this.drawCandidateStone(this.inputObject().lastMouseX(), this.inputObject().lastMouseY());
-        this.drawEmptyBoard();////////////////////////////////////////////////
+        this.drawStones();
+        if (this.gameObject().gameIsOver()) {
+            this.drawMarkedStones();
+            //////////////////this.drawLandMarks();
+        }
+        this.drawCandidateStone();
+        this.drawScore();
     };
 
     this.drawEmptyBoard = function () {
@@ -126,6 +152,57 @@ function GoPlayDisplayObject(root_object_val) {
         context.strokeStyle = '#003300';
         context.stroke();
     }
+
+    this.drawStones = function () {
+        var grid_len = this.getGridLength();
+        var micro_grid_len = grid_len / 8;
+        var radius = 3.2 * micro_grid_len;
+        var context = this.canvasContext();
+        var paint;
+        var i, j;
+
+        i = 0;
+        while (i < this.boardSize()) {
+            j = 0;
+            while (j < this.boardSize()) {
+                this.logit("jsdjdsfjdsd", this.boardObject().objectName());
+                if (this.boardObject().boardArray(i, j) === GO.BLACK_STONE()) {
+                    paint = "black";
+                } else if (this.boardObject().boardArray(i, j) === GO.WHITE_STONE()) {
+                    paint = "white";
+                }
+
+                if (paint) {
+                    this.drawOneStone(i, j, paint);
+                    /*
+                    context.beginPath();
+                    context.arc((i + 1) * grid_len, (j + 1) * grid_len, radius, 0, 2 * Math.PI, false);
+                    context.fillStyle = paint;
+                    context.fill();
+                    context.lineWidth = 1;
+                    context.strokeStyle = '#003300';
+                    context.stroke();
+                    */
+
+                    if (!this.gameObject().gameIsOver()) {
+                        this.drawCandidateStone(i, j);
+                        /*
+                        context.beginPath();
+                        context.arc((i + 1) * grid_len, (j + 1) * grid_len, radius / 2, 0, 2 * Math.PI, false);
+                        context.fillStyle = "red";
+                        context.fill();
+                        context.lineWidth = 1;
+                        context.strokeStyle = '#003300';
+                        context.stroke();
+                        */
+                    }
+                    paint = null;
+                }
+                j += 1;
+            }
+            i += 1;
+        }
+    };
 
     this.drawOneStone = function (x_val, y_val, paint_val) {
         var grid_len = this.getGridLength();
