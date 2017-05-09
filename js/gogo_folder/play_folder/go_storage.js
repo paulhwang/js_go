@@ -39,15 +39,6 @@ function GoPlayStorageObject() {
         return this.theAjaxObject;
     };
 
-    this.configInJson = function () {
-        return JSON.stringify({
-                            board_size: this.boardSize(),
-                            color: this.stoneColor(),
-                            komi: this.komi(),
-                            handicap: this.handicap(),
-                            });
-    };
-
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
             this.logit(str1_val, str2_val);

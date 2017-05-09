@@ -17,12 +17,12 @@ function GoPlayRootObject() {
         this.theAjaxObject = new GoPlayAjaxObject(this);
         this.theLinkObject = new LinkObject(this, "null", 0);
         this.theSessionObject = new SessionObject(this.linkObject());
-        this.theConfigObject = new GoPlayConfigObject(this, this.storageObject().configInJson(), true);
+        this.theConfigObject = new GoPlayConfigObject(this, this.configStorageObject().configInJson(), true);
         this.theBoardObject = new GoPlayBoardObject(this);
         this.thePortObject = new GoPlayPortObject(this);
         this.theGameObject = new GoPlayGameObject(this);
         this.debug(true, "init__", "userName=" + this.linkStorageObject().userName() + " linkId=" + this.linkStorageObject().linkId() + " sessionId=" + this.sessionStorageObject().sessionId());
-        this.debug(true, "init__", "boardSize=" + this.storageObject().boardSize() + " stoneColor=" + this.storageObject().stoneColor() + " komi=" + this.storageObject().komi() + " handicap=" + this.storageObject().handicap());
+        this.debug(true, "init__", "boardSize=" + this.configStorageObject().boardSize() + " stoneColor=" + this.configStorageObject().stoneColor() + " komi=" + this.configStorageObject().komi() + " handicap=" + this.configStorageObject().handicap());
     };
 
     this.objectName = function () {
@@ -37,7 +37,7 @@ function GoPlayRootObject() {
         return this.theSessionStorageObject;
     };
 
-    this.ConfigStorageObject = function () {
+    this.configStorageObject = function () {
         return this.theConfigStorageObject;
     };
 
