@@ -19,6 +19,14 @@ function SessionStorage() {
         return this.theStorage;
     };
 
+    this.sessionId = function () {
+        return Number(this.storage().session_id);
+    };
+
+    this.setSessionId = function (val) {
+        this.storage().session_id = val;
+    };
+
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
             this.logit(str1_val, str2_val);

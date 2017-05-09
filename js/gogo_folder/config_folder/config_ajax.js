@@ -25,6 +25,14 @@ function ConfigAjaxObject(root_object_val) {
         return this.theAjaxUtilObject;
     };
 
+    this.linkStorageObject = function () {
+        return this.rootObject().linkStorageObject();
+    };
+
+    this.sessionStorageObject = function () {
+        return this.rootObject().sessionStorageObject();
+    };
+
     this.storageObject = function () {
         return this.rootObject().storageObject();
     };
@@ -61,8 +69,8 @@ function ConfigAjaxObject(root_object_val) {
     this.getNameList = function () {
         var output = JSON.stringify({
                         command: "get_name_list",
-                        my_name: this.storageObject().userName(),
-                        link_id: this.storageObject().linkId(),
+                        my_name: this.linkStorageObject().userName(),
+                        link_id: this.linkStorageObject().linkId(),
                         });
         this.debug(true, "getNameList", "output=" + output);
         this.ajaxUtilObject().transmitAjaxRequest(output);
@@ -72,8 +80,8 @@ function ConfigAjaxObject(root_object_val) {
         this.debug(true, "setupSessionResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         if (data) {
-            this.storageObject().setSessionId(data.session_id);
-            this.debug(true, "setupSessionResponse", "sessionId=" + this.storageObject().sessionId());
+            this.sessionStorageObject().setSessionId(data.session_id);
+            this.debug(true, "setupSessionResponse", "sessionId=" + this.sessionStorageObject().sessionId());
             window.open("http://127.0.0.1:8080/go_play.html", "_self")
         }
     };
@@ -81,8 +89,8 @@ function ConfigAjaxObject(root_object_val) {
     this.setupSession = function (link_val, topic_data_val, his_name_val) {
         var output = JSON.stringify({
                         command: "setup_session",
-                        my_name: this.storageObject().userName(),
-                        link_id: this.storageObject().linkId(),
+                        my_name: this.linkStorageObject().userName(),
+                        link_id: this.linkStorageObject().linkId(),
                         his_name: his_name_val,
                         topic_data: topic_data_val,
                         });

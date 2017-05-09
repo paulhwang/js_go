@@ -8,23 +8,23 @@ function ConfigRootObject() {
 
     this.init__ = function () {
         this.theLinkStorageObject = new LinkStorage();
-        this.theSessionStoragObject = new SessionStorage();
+        this.theSessionStorageObject = new SessionStorage();
         this.theStorageObject = new ConfigStorageObject();
         this.theAjaxObject = new ConfigAjaxObject(this);
         this.theHtmlObject = new ConfigHtmlObject(this);
-        this.debug(true, "init__", "userName=" + this.storageObject().userName() + " linkId=" + this.storageObject().linkId());
+        this.debug(true, "init__", "userName=" + this.linkStorageObject().userName() + " linkId=" + this.linkStorageObject().linkId());
     };
 
     this.objectName = function () {
         return "ConfigRootObject";
     };
 
-    this.linkStoragObject = function () {
-        return this.theLinkStoragObject;
+    this.linkStorageObject = function () {
+        return this.theLinkStorageObject;
     };
 
-    this.sessionStoragObject = function () {
-        return this.theSessionStoragObject;
+    this.sessionStorageObject = function () {
+        return this.theSessionStorageObject;
     };
 
     this.storageObject = function () {

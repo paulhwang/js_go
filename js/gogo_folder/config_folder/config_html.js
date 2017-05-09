@@ -20,6 +20,10 @@ function ConfigHtmlObject(root_object_val) {
         return this.theRootObject;
     };
 
+    this.linkStorageObject = function () {
+        return this.rootObject().linkStorageObject();
+    };
+
     this.storageObject = function () {
         return this.rootObject().storageObject();
     };
@@ -47,7 +51,7 @@ function ConfigHtmlObject(root_object_val) {
                             title: "go",
                             config: config,
                             });
-            this0.ajaxObject().setupSession(this0, topic_data, this0.storageObject().userName());
+            this0.ajaxObject().setupSession(this0, topic_data, this0.linkStorageObject().userName());
         });
     };
 
