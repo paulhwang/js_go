@@ -7,6 +7,8 @@ function ConfigRootObject() {
     "use strict";
 
     this.init__ = function () {
+        this.theLinkStorageObject = new LinkStorage();
+        this.theSessionStoragObject = new SessionStorage();
         this.theStorageObject = new ConfigStorageObject();
         this.theAjaxObject = new ConfigAjaxObject(this);
         this.theHtmlObject = new ConfigHtmlObject(this);
@@ -15,6 +17,14 @@ function ConfigRootObject() {
 
     this.objectName = function () {
         return "ConfigRootObject";
+    };
+
+    this.linkStoragObject = function () {
+        return this.theLinkStoragObject;
+    };
+
+    this.sessionStoragObject = function () {
+        return this.theSessionStoragObject;
     };
 
     this.storageObject = function () {

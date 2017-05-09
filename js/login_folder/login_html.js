@@ -20,8 +20,8 @@ function LoginHtmlObject(root_object_val) {
         return this.theRootObject;
     };
 
-    this.storageObject = function () {
-        return this.rootObject().storageObject();
+    this.linkStorageObject = function () {
+        return this.rootObject().linkStorageObject();
     };
 
     this.ajaxObject = function () {
@@ -31,10 +31,10 @@ function LoginHtmlObject(root_object_val) {
     this.setupHtmlInput = function () {
         var this0 = this;
         $(".login_section .login_button").on("click", function() {
-            this0.storageObject().setUserName($(".login_section .login_name").val());
-            this0.storageObject().setPassWord($(".login_section .login_password").val());
-            this0.debug(true, "setupHtmlInput", "userName=" + this0.storageObject().userName() + " passWord=" + this0.storageObject().passWord());
-            if (this0.storageObject().userName()) {
+            this0.linkStorageObject().setUserName($(".login_section .login_name").val());
+            this0.linkStorageObject().setPassWord($(".login_section .login_password").val());
+            this0.debug(true, "setupHtmlInput", "userName=" + this0.linkStorageObject().userName() + " passWord=" + this0.linkStorageObject().passWord());
+            if (this0.linkStorageObject().userName()) {
                 this0.ajaxObject().setupLink();
             }
         });

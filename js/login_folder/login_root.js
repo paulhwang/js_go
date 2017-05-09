@@ -7,18 +7,18 @@ function LoginRootObject() {
     "use strict";
 
     this.init__ = function () {
-        this.theStorageObject = new LinkStorage();
+        this.theLinkStorageObject = new LinkStorage();
         this.theAjaxObject = new LoginAjaxObject(this);
         this.theHtmlObject = new LoginHtmlObject(this);
-        this.debug(true, "init__", "userName=" + this.storageObject().userName() + " linkId=" + this.storageObject().linkId());
+        this.debug(true, "init__", "userName=" + this.linkStorageObject().userName() + " linkId=" + this.linkStorageObject().linkId());
     };
 
     this.objectName = function () {
         return "LoginRootObject";
     };
 
-    this.storageObject = function () {
-        return this.theStorageObject;
+    this.linkStorageObject = function () {
+        return this.theLinkStorageObject;
     };
 
     this.ajaxObject = function () {

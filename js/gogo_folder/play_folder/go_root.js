@@ -7,6 +7,8 @@ function GoPlayRootObject() {
     "use strict";
 
     this.init__ = function () {
+        this.theLinkStorageObject = new LinkStorage();
+        this.theSessionStorageObject = new SessionStorage();
         this.theStorageObject = new GoPlayStorageObject();
         this.theHtmlObject = new GoPlayHtmlObject(this);
         this.theInputObject = new GoPlayInputObject(this);
@@ -24,6 +26,14 @@ function GoPlayRootObject() {
 
     this.objectName = function () {
         return "GoPlayRootObject";
+    };
+
+    this.linkStorageObject = function () {
+        return this.theLinkStorageObject;
+    };
+
+    this.sessionStorageObject = function () {
+        return this.theSessionStorageObject;
     };
 
     this.storageObject = function () {

@@ -24,8 +24,8 @@ function LoginAjaxObject(root_object_val) {
         return this.theAjaxUtilObject;
     };
 
-    this.storageObject = function () {
-        return this.rootObject().storageObject();
+    this.linkStorageObject = function () {
+        return this.rootObject().linkStorageObject();
     };
 
     this.switchAjaxResponseData = function (json_response_val) {
@@ -33,7 +33,7 @@ function LoginAjaxObject(root_object_val) {
         if (response.command === "setup_link") {
             this.debug(true, "switchAjaxResponseData", "command=" + response.command + " data=" + response.data);
             var data = JSON.parse(response.data);
-            this.storageObject().setLinkId(data.link_id);
+            this.linkStorageObject().setLinkId(data.link_id);
             window.open("http://127.0.0.1:8080/go_config.html", "_self")
         } else {
             this.abend("switchAjaxResponseData", "not setup_link");
@@ -43,8 +43,8 @@ function LoginAjaxObject(root_object_val) {
     this.setupLink = function () {
         var output = JSON.stringify({
                         command: "setup_link",
-                        my_name: this.storageObject().userName(),
-                        password: this.storageObject().passWord(),
+                        my_name: this.linkStorageObject().userName(),
+                        password: this.linkStorageObject().passWord(),
                         });
         this.debug(true, "setupLink", "output=" + output);
         this.ajaxUtilObject().transmitAjaxRequest(output);
