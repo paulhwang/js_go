@@ -100,6 +100,7 @@ function SessionObject(link_object_val, session_id_val) {
     };
 
     this.receiveData = function (res_data_val) {
+        this.debug(false, "receiveData", res_data_val);
         if (res_data_val === null) {
             return;
         }

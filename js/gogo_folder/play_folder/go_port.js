@@ -47,8 +47,8 @@ function GoPlayPortObject(root_val) {
         return this.rootObject().boardObject();
     };
 
-    this.uiObject = function () {
-        return this.rootObject().uiObject();
+    this.displayObject = function () {
+        return this.rootObject().displayObject();
     };
 
     this.transmitMoveData = function (move_val) {
@@ -67,14 +67,14 @@ function GoPlayPortObject(root_val) {
     };
 
     this.receiveData = function (res_data_val) {
-        this.debug(false, "receiveData", "res_data_val=" + res_data_val);
+        this.debug(true, "receiveData", "res_data_val=" + res_data_val);
 
         var res_data = JSON.parse(res_data_val);
 
         if (res_data.board_data !== null) {
             var board_data = res_data.board_data.slice(this.GO_PROTOCOL_CODE_SIZE);
             this.boardObject().decodeBoard(board_data);
-            this.uiObject().drawBoard();
+            this.displayObject().drawBoard();
         }
 
         if (res_data.next_color !== null) {

@@ -98,6 +98,30 @@ function GoPlayGameObject(root_object_val) {
         this.theValidLastDeadInfo = val;
     };
 
+    this.blackScoreString = function () {
+        return this.theBlackScoreString;
+    }
+
+    this.setBlackScoreString = function (val) {
+        this.theBlackScoreString = val;
+    }
+
+    this.whiteScoreString = function () {
+        return this.theWhiteScoreString;
+    }
+
+    this.setWhiteScoreString = function (val) {
+        this.theWhiteScoreString = val;
+    }
+
+    this.finalScoreString = function () {
+        return this.theFinalScoreString;
+    }
+
+    this.setFinalScoreString = function (val) {
+        this.theFinalScoreString = val;
+    }
+
     this.enterGameFromUi = function (x_val, y_val) {
         this.debug(true, "enterGameFromUi", "(" + x_val + "," + y_val + ")");
 

@@ -10,8 +10,6 @@ function GoPlayRootObject() {
         this.theLinkStorageObject = new LinkStorageObject();
         this.theSessionStorageObject = new SessionStorageObject();
         this.theConfigStorageObject = new GoConfigStorageObject();
-        this.theLinkObject = new LinkObject(this, this.linkStorageObject().userName(), this.linkStorageObject().linkId());
-        this.theSessionObject = new SessionObject(this.linkObject(), this.sessionStorageObject().sessionId());
         this.theHtmlObject = new GoPlayHtmlObject(this);
         this.theInputObject = new GoPlayInputObject(this);
         this.theDisplayObject = new GoPlayDisplayObject(this);
@@ -20,6 +18,11 @@ function GoPlayRootObject() {
         this.theBoardObject = new GoPlayBoardObject(this);
         this.thePortObject = new GoPlayPortObject(this);
         this.theGameObject = new GoPlayGameObject(this);
+
+        this.theLinkObject = new LinkObject(this, this.linkStorageObject().userName(), this.linkStorageObject().linkId());
+        this.theSessionObject = this.linkObject().mallocSessionAndInsert(this.sessionStorageObject().sessionId());
+        this.sessionObject().setTopicObject(this.portObject());
+
         this.debug(true, "init__", "userName=" + this.linkStorageObject().userName() + " linkId=" + this.linkStorageObject().linkId() + " sessionId=" + this.sessionStorageObject().sessionId());
         this.debug(true, "init__", "boardSize=" + this.configStorageObject().boardSize() + " stoneColor=" + this.configStorageObject().stoneColor() + " komi=" + this.configStorageObject().komi() + " handicap=" + this.configStorageObject().handicap());
     };
