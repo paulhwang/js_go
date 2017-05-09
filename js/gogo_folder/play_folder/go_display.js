@@ -37,12 +37,24 @@ function GoPlayDisplayObject(root_object_val) {
         return this.rootObject().boardObject();
     };
 
+    this.gameObject = function () {
+        return this.rootObject().gameObject();
+    };
+
     this.boardSize = function () {
         return this.configStorageObject().boardSize();
     };
 
     this.canvasElement = function () {
         return this.htmlObject().canvasElement();
+    };
+
+    this.blackScoreElement = function () {
+        return this.theBlackScoreElement;
+    };
+
+    this.whiteScoreElement = function () {
+        return this.theWhiteScoreElement;
     };
 
     this.canvasContext = function () {
@@ -82,7 +94,7 @@ function GoPlayDisplayObject(root_object_val) {
             //////////////////this.drawLandMarks();
         }
         this.drawCandidateStone();
-        this.drawScore();
+        ////////////////////////////this.drawScore();
     };
 
     this.drawEmptyBoard = function () {
@@ -165,7 +177,6 @@ function GoPlayDisplayObject(root_object_val) {
         while (i < this.boardSize()) {
             j = 0;
             while (j < this.boardSize()) {
-                this.logit("jsdjdsfjdsd", this.boardObject().objectName());
                 if (this.boardObject().boardArray(i, j) === GO.BLACK_STONE()) {
                     paint = "black";
                 } else if (this.boardObject().boardArray(i, j) === GO.WHITE_STONE()) {
@@ -287,6 +298,12 @@ function GoPlayDisplayObject(root_object_val) {
         context.fillRect(arrow_len * 14.5, arrow_len + this.canvasElement().width, arrow_len * 2, arrow_len);
         context.fillStyle = "pink";
         context.fillRect(arrow_len * 16.5, arrow_len + this.canvasElement().width, arrow_len * 2, arrow_len);
+    };
+
+    this.drawScore = function () {
+        this.blackScoreElement().textContent = this.gameObject().blackScoreString();
+        this.whiteScoreElement().textContent = this.gameObject().whiteScoreString();
+        //this.finalScoreElement().textContent = this.gameObject().finalScoreString();
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
