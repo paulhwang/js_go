@@ -10,7 +10,6 @@ function GoPlayRootObject() {
         this.theLinkStorageObject = new LinkStorageObject();
         this.theSessionStorageObject = new SessionStorageObject();
         this.theConfigStorageObject = new GoConfigStorageObject();
-        this.theStorageObject = new GoPlayStorageObject();
         this.theHtmlObject = new GoPlayHtmlObject(this);
         this.theInputObject = new GoPlayInputObject(this);
         this.theDisplayObject = new GoPlayDisplayObject(this);
@@ -39,10 +38,6 @@ function GoPlayRootObject() {
 
     this.configStorageObject = function () {
         return this.theConfigStorageObject;
-    };
-
-    this.storageObject = function () {
-        return this.theStorageObject;
     };
 
     this.inputObject = function () {
