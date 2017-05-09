@@ -7,7 +7,7 @@ function LoginRootObject() {
     "use strict";
 
     this.init__ = function () {
-        this.theStorageObject = new LoginStorageObject();
+        this.theStorageObject = new LinkStorage();
         this.theAjaxObject = new LoginAjaxObject(this);
         this.theHtmlObject = new LoginHtmlObject(this);
         this.debug(true, "init__", "userName=" + this.storageObject().userName() + " linkId=" + this.storageObject().linkId());
