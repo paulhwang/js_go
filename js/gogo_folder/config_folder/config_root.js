@@ -9,7 +9,7 @@ function ConfigRootObject() {
     this.init__ = function () {
         this.theLinkStorageObject = new LinkStorage();
         this.theSessionStorageObject = new SessionStorage();
-        this.theStorageObject = new ConfigStorageObject();
+        this.theStorageObject = new GoConfigStorageObject();
         this.theAjaxObject = new ConfigAjaxObject(this);
         this.theHtmlObject = new ConfigHtmlObject(this);
         this.debug(true, "init__", "userName=" + this.linkStorageObject().userName() + " linkId=" + this.linkStorageObject().linkId());

@@ -38,6 +38,10 @@ function GoPlayConfigObject(root_val, config_val, initiater_val) {
         return this.rootObject().sessionStorageObject();
     };
 
+    this.configStorageObject = function () {
+        return this.rootObject().configStorageObject();
+    };
+
     this.storageObject = function () {
         return this.rootObject().storageObject();
     };

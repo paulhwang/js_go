@@ -3,7 +3,7 @@
   Written by Paul Hwang
 */
 
-function ConfigStorageObject() {
+function GoConfigStorageObject() {
     "use strict";
 
     this.init__ = function () {
@@ -13,7 +13,7 @@ function ConfigStorageObject() {
     };
 
     this.objectName = function () {
-        return "ConfigStorageObject";
+        return "GoConfigStorageObject";
     };
 
     this.storage = function () {
