@@ -19,22 +19,6 @@ function GoPlayStorageObject() {
         return this.theStorage;
     };
 
-    this.boardSize = function () {
-        return Number(this.storage().board_size);
-    };
-
-    this.stoneColor = function () {
-        return this.storage().stone_color;
-    };
-
-    this.komi = function () {
-        return Number(this.storage().komi);
-    };
-
-    this.handicap = function () {
-        return Number(this.storage().handicap);
-    };
-
     this.ajaxObject = function () {
         return this.theAjaxObject;
     };

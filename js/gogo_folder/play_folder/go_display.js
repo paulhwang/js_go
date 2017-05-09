@@ -21,8 +21,8 @@ function GoPlayDisplayObject(root_object_val) {
         return this.theRootObject;
     };
 
-    this.storageObject = function () {
-        return this.rootObject().storageObject();
+    this.configStorageObject = function () {
+        return this.rootObject().configStorageObject();
     };
 
     this.htmlObject = function () {
@@ -34,7 +34,7 @@ function GoPlayDisplayObject(root_object_val) {
     };
 
     this.boardSize = function () {
-        return this.storageObject().boardSize();
+        return this.configStorageObject().boardSize();
     };
 
     this.canvasElement = function () {

@@ -22,8 +22,8 @@ function GoPlayHtmlObject(root_object_val) {
         return this.theRootObject;
     };
 
-    this.storageObject = function () {
-        return this.rootObject().storageObject();
+    this.configStorageObject = function () {
+        return this.rootObject().configStorageObject();
     };
 
     this.ajaxObject = function () {
@@ -55,7 +55,7 @@ function GoPlayHtmlObject(root_object_val) {
     };
 
     this.getGridLength = function () {
-        return this.canvasElement().width / (this.storageObject().boardSize() + 1);
+        return this.canvasElement().width / (this.configStorageObject().boardSize() + 1);
     };
 
     this.getArrowUnitLength = function () {

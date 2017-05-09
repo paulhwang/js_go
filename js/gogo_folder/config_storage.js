@@ -21,7 +21,7 @@ function GoConfigStorageObject() {
     };
 
     this.boardSize = function () {
-        return this.storage().board_size;
+        return Number(this.storage().board_size);
     };
 
     this.stoneColor = function () {
