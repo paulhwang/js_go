@@ -74,6 +74,30 @@ function GoPlayGameObject(root_object_val) {
         this.theGameIsOver = false;
     };
 
+    this.lastDeadX = function () {
+        return this.theLastDeadX;
+    };
+
+    this.setLastDeadX = function (val) {
+        this.theLastDeadX = val;
+    };
+
+    this.lastDeadY = function () {
+        return this.theLastDeadY;
+    };
+
+    this.setLastDeadY = function (val) {
+        this.theLastDeadY = val;
+    };
+
+    this.validLastDeadInfo = function () {
+        return this.theValidLastDeadInfo;
+    };
+
+    this.setValidLastDeadInfo = function (val) {
+        this.theValidLastDeadInfo = val;
+    };
+
     this.enterGameFromUi = function (x_val, y_val) {
         this.debug(true, "enterGameFromUi", "(" + x_val + "," + y_val + ")");
 
