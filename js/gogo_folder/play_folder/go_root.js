@@ -10,12 +10,12 @@ function GoPlayRootObject() {
         this.theLinkStorageObject = new LinkStorageObject();
         this.theSessionStorageObject = new SessionStorageObject();
         this.theConfigStorageObject = new GoConfigStorageObject();
+        this.theLinkObject = new LinkObject(this, this.linkStorageObject().userName(), this.linkStorageObject().linkId());
+        this.theSessionObject = new SessionObject(this.linkObject(), this.sessionStorageObject().sessionId());
         this.theHtmlObject = new GoPlayHtmlObject(this);
         this.theInputObject = new GoPlayInputObject(this);
         this.theDisplayObject = new GoPlayDisplayObject(this);
-        this.theAjaxObject = new GoPlayAjaxObject(this);
-        this.theLinkObject = new LinkObject(this, "null", 0);
-        this.theSessionObject = new SessionObject(this.linkObject());
+        this.theAjaxObject = new AjaxObject(this);
         this.theConfigObject = new GoPlayConfigObject(this, this.configStorageObject().configInJson(), true);
         this.theBoardObject = new GoPlayBoardObject(this);
         this.thePortObject = new GoPlayPortObject(this);
