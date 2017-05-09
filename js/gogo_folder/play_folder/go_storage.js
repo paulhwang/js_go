@@ -19,18 +19,6 @@ function GoPlayStorageObject() {
         return this.theStorage;
     };
 
-    this.userName = function () {
-        return this.storage().user_name;
-    };
-
-    this.linkId = function () {
-        return this.storage().link_id;
-    };
-
-    this.sessionId = function () {
-        return this.storage().session_id;
-    };
-
     this.boardSize = function () {
         return Number(this.storage().board_size);
     };

@@ -20,7 +20,7 @@ function GoPlayRootObject() {
         this.theBoardObject = new GoPlayBoardObject(this);
         this.thePortObject = new GoPlayPortObject(this);
         this.theGameObject = new GoPlayGameObject(this);
-        this.debug(true, "init__", "userName=" + this.storageObject().userName() + " linkId=" + this.storageObject().linkId() + " sessionId=" + this.storageObject().sessionId());
+        this.debug(true, "init__", "userName=" + this.linkStorageObject().userName() + " linkId=" + this.linkStorageObject().linkId() + " sessionId=" + this.sessionStorageObject().sessionId());
         this.debug(true, "init__", "boardSize=" + this.storageObject().boardSize() + " stoneColor=" + this.storageObject().stoneColor() + " komi=" + this.storageObject().komi() + " handicap=" + this.storageObject().handicap());
     };
 
