@@ -7,8 +7,8 @@ function GoPlayRootObject() {
     "use strict";
 
     this.init__ = function () {
-        this.theLinkStorageObject = new LinkStorage();
-        this.theSessionStorageObject = new SessionStorage();
+        this.theLinkStorageObject = new LinkStorageObject();
+        this.theSessionStorageObject = new SessionStorageObject();
         this.theConfigStorageObject = new GoConfigStorageObject();
         this.theStorageObject = new GoPlayStorageObject();
         this.theHtmlObject = new GoPlayHtmlObject(this);

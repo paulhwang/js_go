@@ -3,7 +3,7 @@
   Written by Paul Hwang
 */
 
-function LinkStorage() {
+function LinkStorageObject() {
     "use strict";
 
     this.init__ = function () {
@@ -12,7 +12,7 @@ function LinkStorage() {
     };
 
     this.objectName = function () {
-        return "LinkStorage";
+        return "LinkStorageObject";
     };
 
     this.storage = function () {

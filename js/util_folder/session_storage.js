@@ -3,7 +3,7 @@
   Written by Paul Hwang
 */
 
-function SessionStorage() {
+function SessionStorageObject() {
     "use strict";
 
     this.init__ = function () {
@@ -12,7 +12,7 @@ function SessionStorage() {
     };
 
     this.objectName = function () {
-        return "SessionStorage";
+        return "SessionStorageObject";
     };
 
     this.storage = function () {

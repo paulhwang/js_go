@@ -7,8 +7,8 @@ function ConfigRootObject() {
     "use strict";
 
     this.init__ = function () {
-        this.theLinkStorageObject = new LinkStorage();
-        this.theSessionStorageObject = new SessionStorage();
+        this.theLinkStorageObject = new LinkStorageObject();
+        this.theSessionStorageObject = new SessionStorageObject();
         this.theStorageObject = new GoConfigStorageObject();
         this.theAjaxObject = new ConfigAjaxObject(this);
         this.theHtmlObject = new ConfigHtmlObject(this);
