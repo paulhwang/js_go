@@ -68,7 +68,7 @@ function GoPlayRootObject() {
         return this.theConfigObject;
     };
 
-    this.boradObject = function () {
+    this.boardObject = function () {
         return this.theBoardObject;
     };
 
