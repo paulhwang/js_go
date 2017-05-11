@@ -19,6 +19,14 @@ function SessionStorageObject() {
         return this.theStorage;
     };
 
+    this.hisName = function () {
+        return this.storage().his_name;
+    };
+
+    this.setHisName = function (val) {
+        this.storage().his_name = val;
+    };
+
     this.sessionId = function () {
         return Number(this.storage().session_id);
     };
