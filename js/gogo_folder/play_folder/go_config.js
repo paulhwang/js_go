@@ -120,10 +120,6 @@ function GoPlayConfigObject(root_val, config_val, initiater_val) {
         return this.theKomiPoint + 0.5;
     };
 
-    this.playBothSides = function () {
-        return (this.myName() === this.opponentName());
-    };
-
     this.isValidCoordinate = function (data_val) {
         return (0 <= coordinate_val) && (coordinate_val < board_size_val);
         if (data_val < 0) {
