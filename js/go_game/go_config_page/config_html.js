@@ -28,8 +28,8 @@ function ConfigHtmlObject(root_object_val) {
         return this.rootObject().sessionStorageObject();
     };
 
-    this.storageObject = function () {
-        return this.rootObject().storageObject();
+    this.configStorageObject = function () {
+        return this.rootObject().configStorageObject();
     };
 
     this.ajaxObject = function () {
@@ -41,16 +41,16 @@ function ConfigHtmlObject(root_object_val) {
         var this0 = this;
         $(".config_section .config_button").on("click", function() {
             this0.sessionStorageObject().setHisName($(".peer_name_paragraph select").val());
-            this0.storageObject().setBoardSize($(".config_section .go_config_section .board_size").val());
-            this0.storageObject().setStoneColor($(".config_section .go_config_section .stone_color").val());
-            this0.storageObject().setKomi($(".config_section .go_config_section .komi").val());
-            this0.storageObject().setHandicap($(".config_section .go_config_section .handicap").val());
-            this0.debug(true, "setupHtmlInput", "boardSize=" + this0.storageObject().boardSize() + " stoneColor=" + this0.storageObject().stoneColor() + " komi=" + this0.storageObject().komi() + " handicap=" + this0.storageObject().handicap());
+            this0.configStorageObject().setBoardSize($(".config_section .go_config_section .board_size").val());
+            this0.configStorageObject().setStoneColor($(".config_section .go_config_section .stone_color").val());
+            this0.configStorageObject().setKomi($(".config_section .go_config_section .komi").val());
+            this0.configStorageObject().setHandicap($(".config_section .go_config_section .handicap").val());
+            this0.debug(true, "setupHtmlInput", "boardSize=" + this0.configStorageObject().boardSize() + " stoneColor=" + this0.configStorageObject().stoneColor() + " komi=" + this0.configStorageObject().komi() + " handicap=" + this0.configStorageObject().handicap());
             var config = JSON.stringify({
-                            board_size: this0.storageObject().boardSize(),
-                            color: this0.storageObject().stoneColor(),
-                            komi: this0.storageObject().komi(),
-                            handicap: this0.storageObject().handicap(),
+                            board_size: this0.configStorageObject().boardSize(),
+                            color: this0.configStorageObject().stoneColor(),
+                            komi: this0.configStorageObject().komi(),
+                            handicap: this0.configStorageObject().handicap(),
                             });
             var topic_data = JSON.stringify({
                             title: "go",
@@ -62,8 +62,8 @@ function ConfigHtmlObject(root_object_val) {
 
     this.renderNameList = function () {
         var i = 0;
-        while (i < this.storageObject().nameListLength()) {
-            $('.peer_name_paragraph select').append($('<option>', {value:this.storageObject().nameListElement(i), text:this.storageObject().nameListElement(i)}));
+        while (i < this.configStorageObject().nameListLength()) {
+            $('.peer_name_paragraph select').append($('<option>', {value:this.configStorageObject().nameListElement(i), text:this.configStorageObject().nameListElement(i)}));
             i += 1;
         }
     };

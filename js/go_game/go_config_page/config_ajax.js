@@ -33,8 +33,8 @@ function ConfigAjaxObject(root_object_val) {
         return this.rootObject().sessionStorageObject();
     };
 
-    this.storageObject = function () {
-        return this.rootObject().storageObject();
+    this.configStorageObject = function () {
+        return this.rootObject().configStorageObject();
     };
 
     this.htmlObject = function () {
@@ -60,7 +60,7 @@ function ConfigAjaxObject(root_object_val) {
         var data = JSON.parse(input_val);
         if (data) {
             if (data.name_list) {
-                this.storageObject().setNameList(data.name_list);
+                this.configStorageObject().setNameList(data.name_list);
                 this.htmlObject().renderNameList();
             }
         }
