@@ -82,7 +82,7 @@ function ConfigAjaxObject(root_object_val) {
         if (data) {
             this.sessionStorageObject().setSessionId(data.session_id);
             this.debug(true, "setupSessionResponse", "sessionId=" + this.sessionStorageObject().sessionId());
-            window.open("http://127.0.0.1:8080/go_play.html", "_self")
+            window.open(this.rootObject().nextPage(), "_self")
         }
     };
 
