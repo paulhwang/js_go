@@ -71,9 +71,9 @@ function LinkStorageObject() {
         return "https://" + this.serverIpPort() + "/";
     };
 
-    this.setHttpInfo = function (val) {
-        this.linkStorageObject().setServerIp("127.0.0.1");
-        this.linkStorageObject().setServerPort("8080");
+    this.setHttpInfo = function () {
+        this.linkStorageObject().setServerIp(system.location.host);
+        this.linkStorageObject().setServerPort(system.location.port);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
