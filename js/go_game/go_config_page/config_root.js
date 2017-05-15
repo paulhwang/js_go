@@ -20,7 +20,7 @@ function ConfigRootObject() {
     };
 
     this.nextPage = function () {
-        return "http://" + this.linkStorageObject().serverIpPort() + "/go_act.html";
+        return this.linkStorageObject().serverHttpHeader() + "go_act.html";
     };
 
     this.linkStorageObject = function () {

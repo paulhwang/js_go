@@ -39,6 +39,14 @@ function LinkStorageObject() {
         return this.serverIp() + ":" + this.serverPort();
     };
 
+    this.serverHttpHeader = function () {
+        return "http://" + this.serverIpPort() + "/";
+    };
+
+    this.serverHttpsHeader = function () {
+        return "https://" + this.serverIpPort() + "/";
+    };
+
     this.userName = function () {
         return this.storage().user_name;
     };

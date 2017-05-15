@@ -19,7 +19,7 @@ function LoginRootObject() {
     };
 
     this.nextPage = function () {
-        return "http://" + this.linkStorageObject().serverIpPort() + "/go_config.html";
+        return this.linkStorageObject().serverHttpHeader() + "go_config.html";
     };
 
     this.linkStorageObject = function () {
