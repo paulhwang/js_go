@@ -20,7 +20,7 @@ function ConfigRootObject() {
     };
 
     this.nextPage = function () {
-        return "http://127.0.0.1:8080/go_act.html";
+        return "http://" + this.linkStorageObject().serverIpPort() + "/go_act.html";
     };
 
     this.linkStorageObject = function () {
