@@ -72,8 +72,8 @@ function LinkStorageObject() {
     };
 
     this.setHttpInfo = function () {
-        this.linkStorageObject().setServerIp(system.location.host);
-        this.linkStorageObject().setServerPort(system.location.port);
+        this.setServerIp(window.location.hostname);
+        this.setServerPort(window.location.port);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
