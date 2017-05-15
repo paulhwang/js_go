@@ -10,6 +10,7 @@ function LoginRootObject() {
         this.theLinkStorageObject = new LinkStorageObject();
         this.theAjaxObject = new LoginAjaxObject(this);
         this.theHtmlObject = new LoginHtmlObject(this);
+        this.setHttpInfo();
         this.debug(true, "init__", "userName=" + this.linkStorageObject().userName() + " linkId=" + this.linkStorageObject().linkId());
     };
 
@@ -17,20 +18,8 @@ function LoginRootObject() {
         return "LoginRootObject";
     };
 
-    this.serverIp = function () {
-        return "127.0.0.1";
-    };
-
-    this.serverPort = function () {
-        return "8080";
-    };
-
-    this.serverIpPort = function () {
-        return this.serverIp() + ":" + this.serverPort();
-    };
-
     this.nextPage = function () {
-        return "http://" + this.serverIpPort() + "/go_config.html";
+        return "http://" + this.linkStorageObject().serverIpPort() + "/go_config.html";
     };
 
     this.linkStorageObject = function () {
@@ -43,6 +32,11 @@ function LoginRootObject() {
 
     this.htmlObject = function () {
         return this.theHtmlObject;
+    };
+
+    this.setHttpInfo = function () {
+        this.linkStorageObject().setServerIp("127.0.0.1");
+        this.linkStorageObject().setServerPort("8080");
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

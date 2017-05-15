@@ -19,6 +19,26 @@ function LinkStorageObject() {
         return this.theStorage;
     };
 
+    this.serverIp = function () {
+        return this.storage().server_ip;
+    };
+
+    this.setServerIp = function (val) {
+        this.storage().server_ip = val;
+    };
+
+    this.serverPort = function () {
+        return this.storage().server_port;
+    };
+
+    this.setServerPort = function (val) {
+        this.storage().server_port = val;
+    };
+
+    this.serverIpPort = function () {
+        return this.serverIp() + ":" + this.serverPort();
+    };
+
     this.userName = function () {
         return this.storage().user_name;
     };
