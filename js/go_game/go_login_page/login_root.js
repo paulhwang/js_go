@@ -17,8 +17,20 @@ function LoginRootObject() {
         return "LoginRootObject";
     };
 
+    this.serverIp = function () {
+        return "127.0.0.1";
+    };
+
+    this.serverPort = function () {
+        return "8080";
+    };
+
+    this.serverIpPort = function () {
+        return this.serverIp() + ":" + this.serverPort();
+    };
+
     this.nextPage = function () {
-        return "http://127.0.0.1:8080/go_config.html";
+        return "http://" + this.serverIpPort() + "/go_config.html";
     };
 
     this.linkStorageObject = function () {
