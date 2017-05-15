@@ -17,6 +17,10 @@ function LoginRootObject() {
         return "LoginRootObject";
     };
 
+    this.nextPage = function () {
+        return "http://127.0.0.1:8080/go_config.html";
+    };
+
     this.linkStorageObject = function () {
         return this.theLinkStorageObject;
     };
