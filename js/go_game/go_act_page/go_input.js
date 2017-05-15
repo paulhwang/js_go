@@ -119,49 +119,49 @@ function GoPlayInputObject(root_object_val) {
 
             if ((event_x - this.canvasElement().getBoundingClientRect().left) < arrow_len * 2.5) {
                 this.gameObject().processDoubleBackwardMoveFromUi();
-                this.drawBoard();
+                this.displayObject().drawBoard();
                 return;
             }
             if ((event_x - this.canvasElement().getBoundingClientRect().left) < arrow_len * 4.5) {
                 this.gameObject().processBackwardMoveFromUi();
-                this.drawBoard();
+                this.displayObject().drawBoard();
                 return;
             }
             if ((event_x - this.canvasElement().getBoundingClientRect().left) < arrow_len * 6.5) {
                 this.gameObject().processForwardMoveFromUi();
-                this.drawBoard();
+                this.displayObject().drawBoard();
                 return;
             }
             if ((event_x - this.canvasElement().getBoundingClientRect().left) < arrow_len * 8.5) {
                 this.gameObject().processDoubleForwardMoveFromUi();
-                this.drawBoard();
+                this.displayObject().drawBoard();
                 return;
             }
             if ((event_x - this.canvasElement().getBoundingClientRect().left) < arrow_len * 10.5) {
                 if (this.gameObject().isMyTurn()) {
                     this.gameObject().processPassMoveFromUi();
-                    this.drawBoard();
+                    this.displayObject().drawBoard();
                 }
                 return;
             }
             if ((event_x - this.canvasElement().getBoundingClientRect().left) < arrow_len * 12.5) {
                 this.gameObject().processConfirmMoveFromUi();
-                this.drawBoard();
+                this.displayObject().drawBoard();
                 return;
             }
             if ((event_x - this.canvasElement().getBoundingClientRect().left) < arrow_len * 14.5) {
                 this.gameObject().processResignMoveFromUi();
-                this.drawBoard();
+                this.displayObject().drawBoard();
                 return;
             }
             if ((event_x - this.canvasElement().getBoundingClientRect().left) < arrow_len * 16.5) {
                 this.gameObject().processPlayAnotherGameMoveFromUi();
-                this.drawBoard();
+                this.displayObject().drawBoard();
                 return;
             }
             if ((event_x - this.canvasElement().getBoundingClientRect().left) < arrow_len * 18.5) {
                 this.gameObject().processBackToPlayMoveFromUi();
-                this.drawBoard();
+                this.displayObject().drawBoard();
                 return;
             }
             return;

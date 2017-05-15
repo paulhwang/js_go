@@ -151,6 +151,42 @@ function GoPlayGameObject(root_object_val) {
 
     };
 
+    this.processDoubleBackwardMoveFromUi = function () {
+        this.portObject().transmitSpecialMoveData(GO.DOUBLE_BACKWARD_MOVE());
+    };
+
+    this.processBackwardMoveFromUi = function () {
+        this.portObject().transmitSpecialMoveData(GO.BACKWARD_MOVE());
+    };
+
+    this.processForwardMoveFromUi = function () {
+        this.portObject().transmitSpecialMoveData(GO.FORWARD_MOVE());
+    };
+
+    this.processDoubleForwardMoveFromUi = function () {
+        this.portObject().transmitSpecialMoveData(GO.DOUBLE_FORWARD_MOVE());
+    };
+
+    this.processPassMoveFromUi = function () {
+        this.portObject().transmitSpecialMoveData(GO.PASS_MOVE());
+    };
+
+    this.processConfirmMoveFromUi = function () {
+        this.portObject().transmitSpecialMoveData(GO.CONFIRM_MOVE());
+    };
+
+    this.processResignMoveFromUi = function () {
+        this.portObject().transmitSpecialMoveData(GO.RESIGN_MOVE());
+    };
+
+    this.processPlayAnotherGameMoveFromUi = function () {
+        this.portObject().transmitSpecialMoveData(GO.PLAY_ANOTHER_GAME_MOVE());
+    };
+
+    this.processBackToPlayMoveFromUi = function () {
+        this.portObject().transmitSpecialMoveData(GO.BACK_TO_PLAY_MOVE());
+    };
+
     this.isValidMoveOnBoard = function (x_val, y_val) {
         if (this.boardObject().boardArray(x_val, y_val) !== GO.EMPTY_STONE()) {
             return false;
