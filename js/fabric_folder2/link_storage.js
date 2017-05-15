@@ -19,6 +19,30 @@ function LinkStorageObject() {
         return this.theStorage;
     };
 
+    this.userName = function () {
+        return this.storage().user_name;
+    };
+
+    this.setUserName = function (val) {
+        this.storage().user_name = val;
+    };
+
+    this.passWord = function () {
+        return this.thePassWord;
+    };
+
+    this.setPassWord = function (val) {
+        this.thePassWord = val;
+    };
+
+    this.linkId = function () {
+        return Number(this.storage().link_id);
+    };
+
+    this.setLinkId = function (val) {
+        this.storage().link_id = val;
+    };
+
     this.serverIp = function () {
         return this.storage().server_ip;
     };
@@ -47,28 +71,9 @@ function LinkStorageObject() {
         return "https://" + this.serverIpPort() + "/";
     };
 
-    this.userName = function () {
-        return this.storage().user_name;
-    };
-
-    this.setUserName = function (val) {
-        this.storage().user_name = val;
-    };
-
-    this.passWord = function () {
-        return this.thePassWord;
-    };
-
-    this.setPassWord = function (val) {
-        this.thePassWord = val;
-    };
-
-    this.linkId = function () {
-        return Number(this.storage().link_id);
-    };
-
-    this.setLinkId = function (val) {
-        this.storage().link_id = val;
+    this.setHttpInfo = function (val) {
+        this.linkStorageObject().setServerIp("127.0.0.1");
+        this.linkStorageObject().setServerPort("8080");
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

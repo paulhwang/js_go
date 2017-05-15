@@ -10,8 +10,9 @@ function LoginRootObject() {
         this.theLinkStorageObject = new LinkStorageObject();
         this.theAjaxObject = new LoginAjaxObject(this);
         this.theHtmlObject = new LoginHtmlObject(this);
-        this.setHttpInfo();
         this.debug(true, "init__", "userName=" + this.linkStorageObject().userName() + " linkId=" + this.linkStorageObject().linkId());
+
+        this.linkStorageObject().setHttpInfo();
     };
 
     this.objectName = function () {
@@ -32,11 +33,6 @@ function LoginRootObject() {
 
     this.htmlObject = function () {
         return this.theHtmlObject;
-    };
-
-    this.setHttpInfo = function () {
-        this.linkStorageObject().setServerIp("127.0.0.1");
-        this.linkStorageObject().setServerPort("8080");
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
