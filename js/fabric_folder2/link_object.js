@@ -14,7 +14,7 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
         this.theSessionIndexArray = [0];
         this.theSessionTableArray = [null];
         this.ajaxObject().getLinkData(this);
-        this.debug(false, "init__", "link_id=" + this.linkId());
+        this.debug(true, "init__", "linkId=" + this.linkId() + " myName=" + this.myName());
     };
 
     this.hisName = function () {//////////////////////
@@ -31,6 +31,14 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
 
     this.rootObject = function () {
         return this.theRootObject;
+    };
+
+    this.linkStorageObject = function () {
+        return this.rootObject().linkStorageObject();
+    };
+
+    this.sessionStorageObject = function () {
+        return this.rootObject().sessionStorageObject();
     };
 
     this.htmlObject = function () {
@@ -201,8 +209,8 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
         }, this.linkUpdateInterval(), this);
     };
 
-    this.getNameListResponse = function (input_val) {
-        this.debug(false, "getNameListResponse", "input_val=" + input_val);
+    this.getNameListResponse___ = function (input_val) {
+        this.debug(true, "getNameListResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         if (data) {
             if (data.name_list) {
@@ -210,6 +218,17 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
                 if (this.myName() !== "z") {
                     this.getConfigAndSetupSession();
                 }
+            }
+        }
+    };
+
+    this.getNameListResponse = function (input_val) {
+        this.debug(true, "getNameListResponse", "input_val=" + input_val);
+        var data = JSON.parse(input_val);
+        if (data) {
+            if (data.name_list) {
+                this.rootObject().configStorageObject().setNameList(data.name_list);////////////////
+                this.rootObject().htmlObject().renderNameList();////////////////////////////
             }
         }
     };
@@ -256,7 +275,7 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
         });
     };
 
-    this.setupSessionResponse = function (input_val) {
+    this.setupSessionResponse___ = function (input_val) {
         this.debug(false, "setupSessionResponse", "input_val=" + input_val);
         var data = JSON.parse(input_val);
         if (data) {
@@ -264,6 +283,16 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
             if (data.topic_data) {
                 session.appendTopicToSession(data.topic_data, data.his_name, true);
             }
+        }
+    };
+
+    this.setupSessionResponse = function (input_val) {
+        this.debug(true, "setupSessionResponse", "input_val=" + input_val);
+        var data = JSON.parse(input_val);
+        if (data) {
+            this.sessionStorageObject().setSessionId(data.session_id);
+            this.debug(true, "setupSessionResponse", "sessionId=" + this.sessionStorageObject().sessionId());
+            window.open(this.rootObject().nextPage(), "_self")
         }
     };
 
