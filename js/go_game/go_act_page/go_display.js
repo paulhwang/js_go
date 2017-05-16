@@ -49,16 +49,16 @@ function GoPlayDisplayObject(root_object_val) {
         return this.htmlObject().canvasElement();
     };
 
+    this.canvasContext = function () {
+        return this.htmlObject().canvasContext();
+    };
+
     this.blackScoreElement = function () {
-        return this.theBlackScoreElement;
+        return this.htmlObject().blackScoreElement();
     };
 
     this.whiteScoreElement = function () {
-        return this.theWhiteScoreElement;
-    };
-
-    this.canvasContext = function () {
-        return this.htmlObject().canvasContext();
+        return this.htmlObject().whiteScoreElement();
     };
 
     this.getGridLength = function () {
@@ -94,7 +94,7 @@ function GoPlayDisplayObject(root_object_val) {
             //////////////////this.drawLandMarks();
         }
         this.drawCandidateStone();
-        ////////////////////////////this.drawScore();
+        this.drawScore();
     };
 
     this.drawEmptyBoard = function () {
