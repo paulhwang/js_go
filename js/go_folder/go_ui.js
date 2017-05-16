@@ -249,7 +249,7 @@ function GoUiObject(container_val) {
         var micro_grid_len = grid_len / 8;
         var radius = 3.2 * micro_grid_len;
         var context = this.canvasContext();
-        var paint;
+        var paint = null;
         var i, j;
 
         i = 0;
@@ -261,31 +261,8 @@ function GoUiObject(container_val) {
                 } else if (this.boardObject().boardArray(i, j) === GO.WHITE_STONE()) {
                     paint = "white";
                 }
-
                 if (paint) {
                     this.drawOneStone(i, j, paint);
-                    /*
-                    context.beginPath();
-                    context.arc((i + 1) * grid_len, (j + 1) * grid_len, radius, 0, 2 * Math.PI, false);
-                    context.fillStyle = paint;
-                    context.fill();
-                    context.lineWidth = 1;
-                    context.strokeStyle = '#003300';
-                    context.stroke();
-                    */
-
-                    if (!this.gameObject().gameIsOver()) {
-                        this.drawCandidateStone(i, j);
-                        /*
-                        context.beginPath();
-                        context.arc((i + 1) * grid_len, (j + 1) * grid_len, radius / 2, 0, 2 * Math.PI, false);
-                        context.fillStyle = "red";
-                        context.fill();
-                        context.lineWidth = 1;
-                        context.strokeStyle = '#003300';
-                        context.stroke();
-                        */
-                    }
                     paint = null;
                 }
                 j += 1;
@@ -331,21 +308,6 @@ function GoUiObject(container_val) {
         context.beginPath();
         context.arc((x_val + 1) * grid_len, (y_val + 1) * grid_len, radius / 2, 0, 2 * Math.PI, false);
         context.fillStyle = paint_val;
-        context.fill();
-        context.lineWidth = 1;
-        context.strokeStyle = '#003300';
-        context.stroke();
-    }
-
-    this.drawCandidateStone = function (x_val, y_val) {
-        var grid_len = this.getGridLength();
-        var micro_grid_len = grid_len / 8;
-        var radius = 3.2 * micro_grid_len;
-        var context = this.canvasContext();
-        
-        context.beginPath();
-        context.arc((x_val + 1) * grid_len, (y_val + 1) * grid_len, radius / 2, 0, 2 * Math.PI, false);
-        context.fillStyle = "red";
         context.fill();
         context.lineWidth = 1;
         context.strokeStyle = '#003300';

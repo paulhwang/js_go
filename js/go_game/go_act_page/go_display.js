@@ -150,27 +150,12 @@ function GoPlayDisplayObject(root_object_val) {
         this.canvasContext().fillRect(0, 0, this.canvasElement().width, this.canvasElement().width);
     }
 
-    this.drawCandidateStone = function (x_val, y_val) {
-        var grid_len = this.getGridLength();
-        var micro_grid_len = grid_len / 8;
-        var radius = 3.2 * micro_grid_len;
-        var context = this.canvasContext();
-        
-        context.beginPath();
-        context.arc((x_val + 1) * grid_len, (y_val + 1) * grid_len, radius / 2, 0, 2 * Math.PI, false);
-        context.fillStyle = "red";
-        context.fill();
-        context.lineWidth = 1;
-        context.strokeStyle = '#003300';
-        context.stroke();
-    }
-
     this.drawStones = function () {
         var grid_len = this.getGridLength();
         var micro_grid_len = grid_len / 8;
         var radius = 3.2 * micro_grid_len;
         var context = this.canvasContext();
-        var paint;
+        var paint = null;
         var i, j;
 
         i = 0;
@@ -182,31 +167,8 @@ function GoPlayDisplayObject(root_object_val) {
                 } else if (this.boardObject().boardArray(i, j) === GO.WHITE_STONE()) {
                     paint = "white";
                 }
-
                 if (paint) {
                     this.drawOneStone(i, j, paint);
-                    /*
-                    context.beginPath();
-                    context.arc((i + 1) * grid_len, (j + 1) * grid_len, radius, 0, 2 * Math.PI, false);
-                    context.fillStyle = paint;
-                    context.fill();
-                    context.lineWidth = 1;
-                    context.strokeStyle = '#003300';
-                    context.stroke();
-                    */
-
-                    if (!this.gameObject().gameIsOver()) {
-                        this.drawCandidateStone(i, j);
-                        /*
-                        context.beginPath();
-                        context.arc((i + 1) * grid_len, (j + 1) * grid_len, radius / 2, 0, 2 * Math.PI, false);
-                        context.fillStyle = "red";
-                        context.fill();
-                        context.lineWidth = 1;
-                        context.strokeStyle = '#003300';
-                        context.stroke();
-                        */
-                    }
                     paint = null;
                 }
                 j += 1;
@@ -230,6 +192,47 @@ function GoPlayDisplayObject(root_object_val) {
         context.stroke();
      }
 
+    this.drawCandidateStone = function () {
+        if (!this.gameObject().isMyTurn() && !this.gameObject().gameIsOver()) {
+            return;
+        }
+
+        var grid_len = this.getGridLength();
+        var micro_grid_len = grid_len / 8;
+        var radius = 2 * micro_grid_len;
+        var context = this.canvasContext();
+        var paint;
+
+        //GO.goLog("GoUiObject.drawCandidateStone", "");
+
+        if (this.gameObject().nextColor() === GO.BLACK_STONE()) {
+            //GO.goLog("GoUiObject.drawMarkedStones", "black" + i + j);
+            paint = "black";
+            if (this.gameObject().gameIsOver()) {
+                paint = "gray";
+            }
+            context.beginPath();
+            context.arc((this.inputObject().lastMouseX() + 1) * grid_len, (this.inputObject().lastMouseY() + 1) * grid_len, radius, 0, 2 * Math.PI, false);
+            context.fillStyle = paint;
+            context.fill();
+            //context.lineWidth = 1;
+            context.strokeStyle = '#003300';
+            context.stroke();
+        } else {
+            //GO.goLog("GoUiObject.drawMarkedStones", "white");
+            paint = "white";
+            if (this.gameObject().gameIsOver()) {
+                paint = "gray";
+            }
+            context.beginPath();
+            context.arc((this.inputObject().lastMouseX() + 1) * grid_len, (this.inputObject().lastMouseY() + 1) * grid_len, radius, 0, 2 * Math.PI, false);
+            context.fillStyle = paint;
+            context.fill();
+            //context.lineWidth = 1;
+            context.strokeStyle = '#003300';
+            context.stroke();
+        }
+    };
 
     this.drawArrows = function () {
         var arrow_len = this.getArrowUnitLength();
