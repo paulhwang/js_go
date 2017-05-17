@@ -66,8 +66,8 @@ function ConfigHtmlObject(root_object_val) {
 
     this.renderNameList = function () {
         var i = 0;
-        while (i < this.configStorageObject().nameListLength()) {
-            $('.peer_name_paragraph select').append($('<option>', {value:this.configStorageObject().nameListElement(i), text:this.configStorageObject().nameListElement(i)}));
+        while (i < this.linkObject().nameListLength()) {
+            $('.peer_name_paragraph select').append($('<option>', {value:this.linkObject().nameListElement(i), text:this.linkObject().nameListElement(i)}));
             i += 1;
         }
     };

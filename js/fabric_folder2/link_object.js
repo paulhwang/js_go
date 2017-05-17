@@ -8,6 +8,7 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
 
     this.init__ = function (root_object_val, my_name_val, link_id_val) {
         this.theRootObject = root_object_val;
+        this.theNameList = ["Paul_Hwang", "Annie_Laurie", "Nicole Kidman"];
         this.theMyName = my_name_val;
         this.theLinkId = link_id_val;
         this.initSwitchTable();
@@ -227,7 +228,7 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
         var data = JSON.parse(input_val);
         if (data) {
             if (data.name_list) {
-                this.rootObject().configStorageObject().setNameList(data.name_list);////////////////
+                this.setNameList(data.name_list);
                 this.rootObject().htmlObject().renderNameList();////////////////////////////
             }
         }

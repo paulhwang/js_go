@@ -7,12 +7,12 @@ function ConfigRootObject() {
     "use strict";
 
     this.init__ = function () {
+        this.theAjaxObject = new AjaxObject(this);
         this.theLinkStorageObject = new LinkStorageObject();
+        this.theLinkObject = new LinkObject(this, this.linkStorageObject().userName(), this.linkStorageObject().linkId());
         this.theSessionStorageObject = new SessionStorageObject();
         this.theConfigStorageObject = new GoConfigStorageObject();
-        this.theAjaxObject = new AjaxObject(this);
         this.theHtmlObject = new ConfigHtmlObject(this);
-        this.theLinkObject = new LinkObject(this, this.linkStorageObject().userName(), this.linkStorageObject().linkId());
         this.debug(true, "init__", "userName=" + this.linkStorageObject().userName() + " linkId=" + this.linkStorageObject().linkId());
     };
 

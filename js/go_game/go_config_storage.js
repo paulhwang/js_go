@@ -8,7 +8,6 @@ function GoConfigStorageObject() {
 
     this.init__ = function () {
         this.theStorage = localStorage;
-        this.theNameList = ["Paul_Hwang", "Annie_Laurie"];
         this.debug(true, "init__", "");
     };
 
@@ -52,18 +51,6 @@ function GoConfigStorageObject() {
         this.storage().handicap = val;
     };
 
-    this.nameList = function () {
-        return this.theNameList;
-    };
-
-    this.setNameList = function (data_val) {
-        this.theNameList = data_val;
-    };
-
-    this.nameListLength = function () {
-        return this.nameList().length;
-    };
-
     this.configInJson = function () {
         return JSON.stringify({
                             board_size: this.boardSize(),
@@ -71,14 +58,6 @@ function GoConfigStorageObject() {
                             komi: this.komi(),
                             handicap: this.handicap(),
                             });
-    };
-
-    this.nameListElement = function (index_val) {
-        return this.nameList()[index_val];
-    };
-
-    this.setNameListElement = function (index_val, data_val) {
-        this.nameList()[index_val] = data_val;
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
