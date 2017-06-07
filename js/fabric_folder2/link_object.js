@@ -3,20 +3,20 @@
  * Written by Paul Hwang
  */
 
-function LinkObject(root_object_val, my_name_val, link_id_val) {
+function LinkObject(root_object_val, my_name_val, link_id_val, link_id_index_val) {
     "use strict";
 
-    this.init__ = function (root_object_val, my_name_val, link_id_val) {
+    this.init__ = function (root_object_val, my_name_val, link_id_val, link_id_index_val) {
         this.theRootObject = root_object_val;
-        this.theNameList = ["Paul_Hwang", "Annie_Laurie", "Nicole Kidman"];
+        this.theNameList = [];
         this.theMyName = my_name_val;
         this.theLinkId = link_id_val;
-        this.theLinkIdIndex = link_id_val;
+        this.theLinkIdIndex = link_id_index_val;
         this.initSwitchTable();
         this.theSessionIndexArray = [0];
         this.theSessionTableArray = [null];
         this.ajaxObject().getLinkData(this);
-        this.debug(true, "init__", "linkId=" + this.linkId() + " myName=" + this.myName());
+        this.debug(true, "init__", "linkId=" + this.linkId() + " linkIdIndex=" + this.linkIdIndex() + " myName=" + this.myName());
     };
 
     this.hisName = function () {//////////////////////
@@ -349,6 +349,6 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
         return ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(root_object_val, my_name_val, link_id_val);
+    this.init__(root_object_val, my_name_val, link_id_val, link_id_index_val);
 }
 
