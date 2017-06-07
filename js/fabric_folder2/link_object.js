@@ -11,6 +11,7 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
         this.theNameList = ["Paul_Hwang", "Annie_Laurie", "Nicole Kidman"];
         this.theMyName = my_name_val;
         this.theLinkId = link_id_val;
+        this.theLinkIdIndex = link_id_val;
         this.initSwitchTable();
         this.theSessionIndexArray = [0];
         this.theSessionTableArray = [null];
@@ -56,6 +57,10 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
 
     this.linkId = function () {
         return this.theLinkId;
+    };
+
+    this.linkIdIndex = function () {
+        return this.theLinkIdIndex;
     };
 
     this.sessionIndexArray = function () {

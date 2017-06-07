@@ -34,6 +34,7 @@ function LoginAjaxObject(root_object_val) {
             this.debug(true, "switchAjaxResponseData", "command=" + response.command + " data=" + response.data);
             var data = JSON.parse(response.data);
             this.linkStorageObject().setLinkId(data.link_id);
+            this.linkStorageObject().setLinkIdIndex(data.link_id_index);
             window.open(this.rootObject().nextPage(), "_self")
         } else {
             this.abend("switchAjaxResponseData", "not setup_link");

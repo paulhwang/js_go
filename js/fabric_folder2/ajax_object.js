@@ -100,6 +100,7 @@ function AjaxObject(root_object_val) {
                         command: "get_link_data",
                         my_name: link_val.myName(),
                         link_id: link_val.linkId(),
+                        link_id_index: link_val.linkIdIndex(),
                         });
         this.debug_(false, this.debugOutput(), "getLinkData", "output=" + output);
         this.transmitAjaxRequest(output);
@@ -110,6 +111,7 @@ function AjaxObject(root_object_val) {
                         command: "get_name_list",
                         my_name: link_val.myName(),
                         link_id: link_val.linkId(),
+                        link_id_index: link_val.linkIdIndex(),
                         });
         this.debug_(true, this.debugOutput(), "getNameList", "output=" + output);
         this.transmitAjaxRequest(output);
@@ -120,6 +122,7 @@ function AjaxObject(root_object_val) {
                         command: "setup_session",
                         my_name: link_val.myName(),
                         link_id: link_val.linkId(),
+                        link_id_index: link_val.linkIdIndex(),
                         his_name: his_name_val,
                         topic_data: topic_data_val,
                         });
@@ -133,6 +136,7 @@ function AjaxObject(root_object_val) {
                         command: "setup_session_reply",
                         my_name: link_val.myName(),
                         link_id: link_val.linkId(),
+                        link_id_index: link_val.linkIdIndex(),
                         session_id: data.session_id,
                         accept: "yes",
                         topic_data: data.topic_data,
@@ -145,6 +149,7 @@ function AjaxObject(root_object_val) {
         var output = JSON.stringify({
                         command: "get_session_data",
                         link_id: session_val.linkObject().linkId(),
+                        link_id_index: link_val.linkIdIndex(),
                         session_id: session_val.sessionId(),
                         });
         this.debug_(true, this.debugOutput(), "getSessionData", "output=" + output);
@@ -156,6 +161,7 @@ function AjaxObject(root_object_val) {
                         command: "put_session_data",
                         my_name: session_val.linkObject().myName(),
                         link_id: session_val.linkObject().linkId(),
+                        link_id_index: link_val.linkIdIndex(),
                         session_id: session_val.sessionId(),
                         his_name: session_val.hisName(),
                         xmt_seq: session_val.xmtSeq(),

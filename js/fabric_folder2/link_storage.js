@@ -43,6 +43,14 @@ function LinkStorageObject() {
         this.storage().link_id = val;
     };
 
+    this.linkIdIndex = function () {
+        return this.storage().link_id_index;
+    };
+
+    this.setLinkIdIndex = function (val) {
+        this.storage().link_id_index = val;
+    };
+
     this.serverIp = function () {
         return this.storage().server_ip;
     };

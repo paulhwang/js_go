@@ -10,7 +10,7 @@ function ConfigAjaxObject(root_object_val) {
         this.theRootObject = root_object_val;
         this.theAjaxUtilObject = new AjaxUtilObject(this, this.switchAjaxResponseData);
         this.getNameList();
-        this.debug(true, "init__", "");
+        this.debug(true, "init__", "=============================================");
     };
 
     this.objectName = function () {
@@ -71,6 +71,7 @@ function ConfigAjaxObject(root_object_val) {
                         command: "get_name_list",
                         my_name: this.linkStorageObject().userName(),
                         link_id: this.linkStorageObject().linkId(),
+                        link_id_index: this.linkStorageObject().linkIdIndex(),
                         });
         this.debug(true, "getNameList", "output=" + output);
         this.ajaxUtilObject().transmitAjaxRequest(output);
@@ -91,6 +92,7 @@ function ConfigAjaxObject(root_object_val) {
                         command: "setup_session",
                         my_name: this.linkStorageObject().userName(),
                         link_id: this.linkStorageObject().linkId(),
+                        link_id_index: this.linkStorageObject().linkIdIndex(),
                         his_name: his_name_val,
                         topic_data: topic_data_val,
                         });
