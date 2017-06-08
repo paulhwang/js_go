@@ -151,6 +151,7 @@ function AjaxObject(root_object_val) {
                         link_id: session_val.linkObject().linkId(),
                         link_id_index: link_val.linkIdIndex(),
                         session_id: session_val.sessionId(),
+                        session_id_index: session_val.sessionIdIndex(),
                         });
         this.debug_(true, this.debugOutput(), "getSessionData", "output=" + output);
         this.transmitAjaxRequest(output);
@@ -163,6 +164,7 @@ function AjaxObject(root_object_val) {
                         link_id: session_val.linkObject().linkId(),
                         link_id_index: session_val.linkObject().linkIdIndex(),
                         session_id: session_val.sessionId(),
+                        session_id_index: session_val.sessionIdIndex(),
                         his_name: session_val.hisName(),
                         xmt_seq: session_val.xmtSeq(),
                         data: data_val,

@@ -9,7 +9,7 @@ function GoPlayRootObject() {
     this.init__ = function () {
         this.theAjaxObject = new AjaxObject(this);
         this.theLinkStorageObject = new LinkStorageObject();
-        this.theLinkObject = new LinkObject(this, this.linkStorageObject().userName(), this.linkStorageObject().linkId());
+        this.theLinkObject = new LinkObject(this, this.linkStorageObject().userName(), this.linkStorageObject().linkId(), this.linkStorageObject().linkIdIndex());
         this.theSessionStorageObject = new SessionStorageObject();
         this.theConfigStorageObject = new GoConfigStorageObject();
         this.theHtmlObject = new GoPlayHtmlObject(this);
@@ -20,7 +20,7 @@ function GoPlayRootObject() {
         this.theInputObject = new GoPlayInputObject(this);
         this.theDisplayObject = new GoPlayDisplayObject(this);
 
-        this.theSessionObject = this.linkObject().mallocSessionAndInsert(this.sessionStorageObject().sessionId());
+        this.theSessionObject = this.linkObject().mallocSessionAndInsert(this.sessionStorageObject().sessionId(), this.sessionStorageObject().sessionIdIndex());
         this.sessionObject().setTopicObject(this.portObject());
 
         this.debug(true, "init__", "userName=" + this.linkStorageObject().userName() + " linkId=" + this.linkStorageObject().linkId() + " sessionId=" + this.sessionStorageObject().sessionId());

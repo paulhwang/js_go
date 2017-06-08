@@ -35,6 +35,14 @@ function SessionStorageObject() {
         this.storage().session_id = val;
     };
 
+    this.sessionIdIndex = function () {
+        return this.storage().session_id_index;
+    };
+
+    this.setSessionIdIndex = function (val) {
+        this.storage().session_id_index = val;
+    };
+
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
             this.logit(str1_val, str2_val);

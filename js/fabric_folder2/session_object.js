@@ -4,12 +4,13 @@
  * File name: SessionObject.js
  */
 
-function SessionObject(link_object_val, session_id_val) {
+function SessionObject(link_object_val, session_id_val, session_id_index_val) {
     "use strict";
 
-    this.init__ = function (link_object_val, session_id_val) {
+    this.init__ = function (link_object_val, session_id_val, session_id_index_val) {
         this.theLinkObject = link_object_val;
         this.theSessionId = session_id_val;
+        this.theSessionIdIndex = session_id_index_val;
         this.theXmtSeq = 0;
         this.theRcvSeq = 0;
         this.initSwitchTable();
@@ -26,6 +27,10 @@ function SessionObject(link_object_val, session_id_val) {
 
     this.sessionId = function () {
         return this.theSessionId;
+    };
+
+    this.sessionIdIndex = function () {
+        return this.theSessionIdIndex;
     };
 
     this.rootObject = function () {
@@ -146,6 +151,6 @@ function SessionObject(link_object_val, session_id_val) {
         return ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(link_object_val, session_id_val);
+    this.init__(link_object_val, session_id_val, session_id_index_val);
 }
 
