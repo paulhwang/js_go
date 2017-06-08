@@ -161,7 +161,7 @@ function AjaxObject(root_object_val) {
                         command: "put_session_data",
                         my_name: session_val.linkObject().myName(),
                         link_id: session_val.linkObject().linkId(),
-                        link_id_index: link_val.linkIdIndex(),
+                        link_id_index: session_val.linkObject().linkIdIndex(),
                         session_id: session_val.sessionId(),
                         his_name: session_val.hisName(),
                         xmt_seq: session_val.xmtSeq(),
