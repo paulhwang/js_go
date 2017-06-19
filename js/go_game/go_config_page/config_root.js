@@ -54,6 +54,10 @@ function ConfigRootObject() {
         }
     };
 
+    this.mallocLinkObject = function (name_val, id_val) {
+        /* nothing is done here */
+    };
+
     this.logit = function (str1_val, str2_val) {
         return LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
