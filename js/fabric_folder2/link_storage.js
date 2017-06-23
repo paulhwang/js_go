@@ -84,6 +84,13 @@ function LinkStorageObject() {
         this.setServerPort(window.location.port);
     };
 
+    this.resetLinkStorage = function () {
+        this.setLinkId(0);
+        this.setLinkIdIndex("");
+        this.setUserName("");
+        this.setPassWord("");
+    };
+
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
             this.logit(str1_val, str2_val);

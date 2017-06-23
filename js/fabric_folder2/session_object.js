@@ -104,11 +104,11 @@ function SessionObject(link_object_val, session_id_val, session_id_index_val) {
         this.ajaxObject().putSessionData(this, data_val);
     };
 
-    this.receiveData = function (res_data_val) {
+    this.receiveData = function (res_data_val, c_data_val) {
         if (res_data_val === null) {
             return;
         }
-        this.topicObject().receiveData(res_data_val);
+        this.topicObject().receiveData(res_data_val, c_data_val);
     };
 
     this.initSwitchTable = function () {

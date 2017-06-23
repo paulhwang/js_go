@@ -8,6 +8,7 @@ function LoginRootObject() {
 
     this.init__ = function () {
         this.theLinkStorageObject = new LinkStorageObject();
+        this.linkStorageObject().resetLinkStorage();
         this.theAjaxObject = new LoginAjaxObject(this);
         this.theHtmlObject = new LoginHtmlObject(this);
         this.debug(true, "init__", "userName=" + this.linkStorageObject().userName() + " linkId=" + this.linkStorageObject().linkId());

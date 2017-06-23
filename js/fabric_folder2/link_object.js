@@ -320,7 +320,7 @@ function LinkObject(root_object_val, my_name_val, link_id_val, link_id_index_val
         if (data) {
             var session = this.getSession(data.session_id);
             if (session) {
-                session.receiveData(data.res_data);
+                session.receiveData(data.res_data, data.c_data);
             }
         }
     };

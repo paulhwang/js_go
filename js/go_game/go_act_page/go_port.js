@@ -66,13 +66,14 @@ function GoPlayPortObject(root_val) {
         this.sessionObject().transmitData(data_val);
     };
 
-    this.receiveData = function (res_data_val) {
+    this.receiveData = function (res_data_val, c_data_val) {
         this.debug(true, "receiveData", "res_data_val=" + res_data_val);
 
         var res_data = JSON.parse(res_data_val);
 
         if (res_data.board_data !== null) {
             var board_data = res_data.board_data.slice(this.GO_PROTOCOL_CODE_SIZE);
+            board_data = c_data_val;
             this.debug(true, "receiveData", "board_data=" + board_data);
             this.boardObject().decodeBoard(board_data);
             this.displayObject().drawBoard();
