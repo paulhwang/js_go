@@ -86,22 +86,6 @@ function GoPlayGameObject(root_object_val) {
         this.theGameIsOver = false;
     };
 
-    this.blackCaptureStones = function () {
-        return this.theBlackCaptureStones;
-    };
-
-    this.whiteCaptureStones = function () {
-        return this.theWhiteCaptureStones;
-    };
-
-    this.setBlackCaptureStones = function (count_val) {
-        this.theBlackCaptureStones = count_val;
-    };
-
-    this.setWhiteCaptureStones = function (count_val) {
-        this.theWhiteCaptureStones = count_val;
-    };
-
     this.lastDeadX = function () {
         return this.theLastDeadX;
     };

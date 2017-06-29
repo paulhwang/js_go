@@ -95,11 +95,6 @@ function GoPlayPortObject(root_val) {
             this.gameObject().setValidLastDeadInfo(false);
         }
 
-        if (res_data.capture_count !== null) {
-            this.gameObject().setBlackCaptureStones(Number(res_data.capture_count.slice(0, 3)));
-            this.gameObject().setWhiteCaptureStones(Number(res_data.capture_count.slice(3, 6)));
-        }
-
         if (res_data.game_is_over === false) {
             this.gameObject().clearGameIsOver();
         } else if (res_data.game_is_over === true) {
