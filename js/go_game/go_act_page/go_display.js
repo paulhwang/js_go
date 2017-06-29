@@ -307,6 +307,8 @@ function GoPlayDisplayObject(root_object_val) {
         this.blackScoreElement().textContent = this.gameObject().blackScoreString();
         this.whiteScoreElement().textContent = this.gameObject().whiteScoreString();
         //this.finalScoreElement().textContent = this.gameObject().finalScoreString();
+        this.blackScoreElement().textContent = "Black: " + this.boardObject().blackCapturedStones();
+        this.whiteScoreElement().textContent = "White: " + this.boardObject().whiteCapturedStones();
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

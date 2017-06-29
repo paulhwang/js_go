@@ -36,6 +36,14 @@ function GoPlayBoardObject(root_val) {
         return this.configObject().boardSize();
     };
 
+    this.blackCapturedStones = function () {
+        return this.theBlackCapturedStones;
+    };
+
+    this.whiteCapturedStones = function () {
+        return this.theWhiteCapturedStones;
+    };
+
     this.boardArray = function (x_val, y_val) {
         return this.theBoardArray[x_val][y_val];
     };
@@ -120,6 +128,16 @@ function GoPlayBoardObject(root_val) {
             }
             i += 1;
         }
+
+        var count;
+        count  = (str_val.charAt(index++) - '0') * 100;
+        count += (str_val.charAt(index++) - '0') * 10;
+        count += (str_val.charAt(index++) - '0');
+        this.theBlackCapturedStones = count;
+        count  = (str_val.charAt(index++) - '0') * 100;
+        count += (str_val.charAt(index++) - '0') * 10;
+        count += (str_val.charAt(index++) - '0');
+        this.theWhiteCapturedStones = count;
     };
 
     this.compareBoards = function (board_val) {
