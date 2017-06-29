@@ -60,7 +60,19 @@ function ConfigHtmlObject(root_object_val) {
                             title: "go",
                             config: config,
                             });
-            this0.ajaxObject().setupSession(this0.linkObject(), topic_data, this0.linkStorageObject().userName());
+
+            var theme_data = "GO";
+            if (this0.configStorageObject().boardSize() < 10)
+                theme_data = theme_data + 0;
+            theme_data = theme_data + this0.configStorageObject().boardSize();
+            if (this0.configStorageObject().handicap() < 10)
+                theme_data = theme_data + 0;
+            theme_data = theme_data + this0.configStorageObject().handicap();
+            if (this0.configStorageObject().komi() < 10)
+                theme_data = theme_data + 0;
+            theme_data = theme_data + this0.configStorageObject().komi();
+
+            this0.ajaxObject().setupSession(this0.linkObject(), topic_data, theme_data, this0.linkStorageObject().userName());
         });
     };
 

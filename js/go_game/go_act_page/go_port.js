@@ -79,14 +79,6 @@ function GoPlayPortObject(root_val) {
             this.displayObject().drawBoard();
         }
 
-        if (res_data.next_color !== null) {
-            this.gameObject().setNextColor(res_data.next_color);
-        }
-
-        if (res_data.total_moves !== null) {
-            this.gameObject().setTotalMoves(res_data.total_moves);
-        }
-
         if (res_data.game_is_over === false) {
             this.gameObject().clearGameIsOver();
         } else if (res_data.game_is_over === true) {

@@ -117,13 +117,14 @@ function AjaxObject(root_object_val) {
         this.transmitAjaxRequest(output);
     };
 
-    this.setupSession = function (link_val, topic_data_val, his_name_val) {
+    this.setupSession = function (link_val, topic_data_val, theme_data_val, his_name_val) {
         var output = JSON.stringify({
                         command: "setup_session",
                         my_name: link_val.myName(),
                         link_id: link_val.linkId(),
                         link_id_index: link_val.linkIdIndex(),
                         his_name: his_name_val,
+                        theme_data: theme_data_val,
                         topic_data: topic_data_val,
                         });
         this.debug_(true, this.debugOutput(), "setupSession", "output=" + output);
