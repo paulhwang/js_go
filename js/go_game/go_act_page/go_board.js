@@ -143,16 +143,16 @@ function GoPlayBoardObject(root_val) {
         num += (str_val.charAt(index++) - '0');
         this.theWhiteCapturedStones = num;
 
-        num += (str_val.charAt(index++) - '0') * 10;
+        num  = (str_val.charAt(index++) - '0') * 10;
         num += (str_val.charAt(index++) - '0');
         this.gameObject().setLastDeadX(num);
-        num += (str_val.charAt(index++) - '0') * 10;
+        num  = (str_val.charAt(index++) - '0') * 10;
         num += (str_val.charAt(index++) - '0');
         this.gameObject().setLastDeadY(num);
         if (num != 19) {
-            //this.gameObject().setValidLastDeadInfo(true);
+            this.gameObject().setValidLastDeadInfo(true);
         } else {
-            //this.gameObject().setValidLastDeadInfo(false);
+            this.gameObject().setValidLastDeadInfo(false);
         }
     };
 

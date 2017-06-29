@@ -87,14 +87,6 @@ function GoPlayPortObject(root_val) {
             this.gameObject().setTotalMoves(res_data.total_moves);
         }
 
-        if (res_data.last_dead_stone !== null) {
-            this.gameObject().setValidLastDeadInfo(true);
-            this.gameObject().setLastDeadX(Number(res_data.last_dead_stone.slice(0, 2)));
-            this.gameObject().setLastDeadY(Number(res_data.last_dead_stone.slice(2, 4)));
-        } else {
-            this.gameObject().setValidLastDeadInfo(false);
-        }
-
         if (res_data.game_is_over === false) {
             this.gameObject().clearGameIsOver();
         } else if (res_data.game_is_over === true) {
