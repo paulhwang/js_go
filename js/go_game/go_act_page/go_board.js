@@ -32,6 +32,10 @@ function GoPlayBoardObject(root_val) {
         return this.rootObject().configObject();
     };
 
+    this.gameObject = function () {
+        return this.rootObject().gameObject();
+    };
+
     this.boardSize = function () {
         return this.configObject().boardSize();
     };
@@ -129,15 +133,27 @@ function GoPlayBoardObject(root_val) {
             i += 1;
         }
 
-        var count;
-        count  = (str_val.charAt(index++) - '0') * 100;
-        count += (str_val.charAt(index++) - '0') * 10;
-        count += (str_val.charAt(index++) - '0');
-        this.theBlackCapturedStones = count;
-        count  = (str_val.charAt(index++) - '0') * 100;
-        count += (str_val.charAt(index++) - '0') * 10;
-        count += (str_val.charAt(index++) - '0');
-        this.theWhiteCapturedStones = count;
+        var num;
+        num  = (str_val.charAt(index++) - '0') * 100;
+        num += (str_val.charAt(index++) - '0') * 10;
+        num += (str_val.charAt(index++) - '0');
+        this.theBlackCapturedStones = num;
+        num  = (str_val.charAt(index++) - '0') * 100;
+        num += (str_val.charAt(index++) - '0') * 10;
+        num += (str_val.charAt(index++) - '0');
+        this.theWhiteCapturedStones = num;
+
+        num += (str_val.charAt(index++) - '0') * 10;
+        num += (str_val.charAt(index++) - '0');
+        this.gameObject().setLastDeadX(num);
+        num += (str_val.charAt(index++) - '0') * 10;
+        num += (str_val.charAt(index++) - '0');
+        this.gameObject().setLastDeadY(num);
+        if (num != 19) {
+            //this.gameObject().setValidLastDeadInfo(true);
+        } else {
+            //this.gameObject().setValidLastDeadInfo(false);
+        }
     };
 
     this.compareBoards = function (board_val) {
