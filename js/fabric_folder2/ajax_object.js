@@ -112,6 +112,7 @@ function AjaxObject(root_object_val) {
                         my_name: link_val.myName(),
                         link_id: link_val.linkId(),
                         link_id_index: link_val.linkIdIndex(),
+                        name_list_tag: link_val.nameListTag(),
                         });
         this.debug_(true, this.debugOutput(), "getNameList", "output=" + output);
         this.transmitAjaxRequest(output);

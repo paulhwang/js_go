@@ -13,6 +13,7 @@ function LinkObject(root_object_val, my_name_val, link_id_val, link_id_index_val
         this.theLinkId = link_id_val;
         this.theLinkIdIndex = link_id_index_val;
         this.initSwitchTable();
+        this.theNameListTag = 0;
         this.theSessionIndexArray = [0];
         this.theSessionTableArray = [null];
         this.ajaxObject().getLinkData(this);
@@ -106,6 +107,14 @@ function LinkObject(root_object_val, my_name_val, link_id_val, link_id_index_val
         this.theLinkUpdateInterval = val;
     };
 
+    this.nameListTag = function () {
+        return this.theNameListTag;
+    };
+
+    this.setNameListTag = function (val) {
+        this.theNameListTag = val;
+    };
+
     this.nameList = function () {
         return this.theNameList;
     };
@@ -185,10 +194,10 @@ function LinkObject(root_object_val, my_name_val, link_id_val, link_id_index_val
         if (data) {
             this.setLinkUpdateInterval(data.interval);
 
-            if (data.name_list) {
-                this.debug(true, "getLinkDataResponse", "name_list=" + data.name_list);
-                this.ajaxObject().getNameList(this);
-            }
+            //if (data.name_list) {
+            //    this.debug(true, "getLinkDataResponse", "name_list=" + data.name_list);
+            //    this.ajaxObject().getNameList(this);
+            //}
 
             if (data.pending_session_data) {
                 this.debug(true, "getLinkDataResponse", "pending_session_data=" + data.pending_session_data);
@@ -207,6 +216,24 @@ function LinkObject(root_object_val, my_name_val, link_id_val, link_id_index_val
                 this.debug(true, "getLinkDataResponse", "pending_session_setup=" + data.pending_session_setup);
                 this.ajaxObject().setupSessionReply(this, data.pending_session_setup);
             }
+
+
+            if (data.c_data) {
+                var c_data = data.c_data;
+                var name_list_tag;
+                var index = 0;
+                name_list_tag  = (c_data.charAt(index++) - '0') * 100;
+                name_list_tag += (c_data.charAt(index++) - '0') *  10;
+                name_list_tag += (c_data.charAt(index++) - '0');
+                this.debug(true, "getLinkDataResponse==============", "c_data=" + c_data);
+                this.debug(true, "getLinkDataResponse==============", "name_list_tag=" + name_list_tag);
+                if (name_list_tag > this.nameListTag()) {
+                this.debug(true, "getLinkDataResponse==============!!!", "name_list_tag=" + this.nameListTag());
+                    this.ajaxObject().getNameList(this);
+                }
+                c_data = c_data.slice(3);
+            }
+
         }
 
         setTimeout(function(link_val) {
@@ -235,6 +262,18 @@ function LinkObject(root_object_val, my_name_val, link_id_val, link_id_index_val
             if (data.name_list) {
                 this.setNameList(data.name_list);
                 this.rootObject().htmlObject().renderNameList();////////////////////////////
+            }
+            if (data.c_name_list) {
+                var name_list_tag;
+                var index = 0;
+                name_list_tag  = (data.c_name_list.charAt(index++) - '0') * 100;
+                name_list_tag += (data.c_name_list.charAt(index++) - '0') * 10;
+                name_list_tag += (data.c_name_list.charAt(index++) - '0');
+                this.setNameListTag(name_list_tag);
+
+                var name_list = data.c_name_list.slice(3);
+                this.debug(true, "getNameListResponse", "name_list_tag=" + name_list_tag);
+                this.debug(true, "getNameListResponse", "name_list=" + name_list);
             }
         }
     };
