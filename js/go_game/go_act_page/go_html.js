@@ -34,6 +34,10 @@ function GoPlayHtmlObject(root_object_val) {
         return this.rootObject().inputObject();
     };
 
+    this.renderNameListFuncExist = function () {
+        return false;
+    };
+
     this.canvasWidth = function () {
         return this.theCanvasWidth;
     };

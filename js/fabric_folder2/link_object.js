@@ -260,8 +260,8 @@ function LinkObject(root_object_val, my_name_val, link_id_val, link_id_index_val
         var data = JSON.parse(input_val);
         if (data) {
             if (data.name_list) {
-                this.setNameList(data.name_list);
-                this.rootObject().htmlObject().renderNameList();////////////////////////////
+                //this.setNameList(data.name_list);
+                //this.rootObject().htmlObject().renderNameList();////////////////////////////
             }
             if (data.c_name_list) {
                 var name_list_tag;
@@ -274,6 +274,12 @@ function LinkObject(root_object_val, my_name_val, link_id_val, link_id_index_val
                 var name_list = data.c_name_list.slice(3);
                 this.debug(true, "getNameListResponse", "name_list_tag=" + name_list_tag);
                 this.debug(true, "getNameListResponse", "name_list=" + name_list);
+                var array = JSON.parse("[" + name_list + "]");
+                this.debug(true, "getNameListResponse", "array=" + array);
+                this.setNameList(array);
+                if (this.rootObject().htmlObject().renderNameListFuncExist()) {
+                    this.rootObject().htmlObject().renderNameList();////////////////////////////
+                }
             }
         }
     };

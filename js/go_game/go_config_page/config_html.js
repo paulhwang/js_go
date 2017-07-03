@@ -40,6 +40,10 @@ function ConfigHtmlObject(root_object_val) {
         return this.rootObject().linkObject();
     };
 
+    this.renderNameListFuncExist = function () {
+        return true;
+    };
+
     this.setupHtmlInputFunction = function () {
         this.renderNameList();
         var this0 = this;
@@ -72,7 +76,7 @@ function ConfigHtmlObject(root_object_val) {
                 theme_data = theme_data + 0;
             theme_data = theme_data + this0.configStorageObject().komi();
 
-            this0.ajaxObject().setupSession(this0.linkObject(), topic_data, theme_data, this0.linkStorageObject().userName());
+            this0.ajaxObject().setupSession(this0.linkObject(), topic_data, theme_data, this0.sessionStorageObject().hisName());
         });
     };
 
